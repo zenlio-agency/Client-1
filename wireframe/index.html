@@ -142,10 +142,11 @@ body.no-anno .anno,body.no-anno .anno-bar,body.no-anno .tag{display:none}
 .ph-line{display:block;height:8px;border-radius:4px;background:var(--fill-2)}
 
 /* ---------- nav ---------- */
-.nav{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-block:18px;border-bottom:1px solid var(--line)}
+.nav-shell{padding:14px clamp(12px,2.4cqi,40px) 0}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:10px 10px 10px clamp(14px,1.6cqi,22px);border:1px solid var(--line);border-radius:16px;background:var(--paper)}
 .logo{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:20px;letter-spacing:-.02em}
 .logo i{width:30px;height:30px;border:1.5px solid var(--ink);border-radius:8px;display:grid;place-items:center;font-style:normal;font-family:var(--mono);font-size:10px;font-weight:500}
-.nav-links{display:flex;gap:clamp(14px,2.1cqi,30px);font-size:14.5px}
+.nav-links{display:flex;gap:clamp(14px,2cqi,28px);font-size:14.5px}
 .nav-links a[aria-current]{text-decoration:underline;text-underline-offset:6px}
 .caret::after{content:" ▾";font-size:.75em}
 .nav-cta{display:flex;gap:8px}
@@ -158,30 +159,36 @@ body.no-anno .anno,body.no-anno .anno-bar,body.no-anno .tag{display:none}
 .mega-feat{border:1px solid var(--line);border-radius:var(--r-s);padding:14px;display:flex;flex-direction:column;gap:8px;font-size:13px}
 
 /* ---------- 01 hero ---------- */
-.hero{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(32px,4cqi,64px);align-items:center;padding-block:clamp(44px,6.5cqi,96px) clamp(40px,5cqi,80px)}
-.hero-copy{display:flex;flex-direction:column;gap:22px;align-items:flex-start;min-width:0}
+.hero{display:flex;flex-direction:column;gap:clamp(40px,5cqi,68px);padding-block:clamp(48px,6.5cqi,104px) clamp(44px,5cqi,76px)}
+.hero-copy{display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center}
 .badge{display:inline-flex;align-items:center;gap:10px;padding:5px 14px 5px 5px;border:1px solid var(--line);border-radius:999px;font-family:var(--mono);font-size:12px}
 .badge .pip{background:var(--ink);color:var(--paper);border-radius:999px;padding:2px 9px;font-size:11px}
-.hero-h1{display:flex;flex-direction:column;font-size:clamp(2.8rem,6.6cqi,6.4rem);line-height:.94;font-stretch:78%;font-weight:650;letter-spacing:-.028em}
+.hero-h1{display:flex;flex-wrap:wrap;justify-content:center;column-gap:.24em;font-size:clamp(2.5rem,12cqi,7rem);line-height:.95;font-stretch:78%;font-weight:650;letter-spacing:-.028em}
 .hero-h1 .w{color:transparent;-webkit-text-stroke:1.5px var(--ink);transition:color .45s ease}
 .hero-h1 .w.on{color:var(--ink)}
-.lede{font-size:clamp(1.02rem,1.35cqi,1.2rem);color:var(--ink-2);max-width:48ch}
-.cta-row{display:flex;flex-wrap:wrap;gap:10px}
+.lede{font-size:clamp(1.02rem,1.35cqi,1.2rem);color:var(--ink-2);max-width:54ch}
+.cta-row{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
 .hero-alt{font-size:14px;color:var(--ink-2)}
 .hero-alt a{color:var(--ink);font-weight:500;border-bottom:1px solid currentColor}
-.proof{display:flex;flex-wrap:wrap;align-items:center;gap:12px 14px;padding-top:18px;border-top:1px solid var(--line);width:100%}
+.proof{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px 14px}
 .proof p{font-size:13.5px;color:var(--ink-2)}
 .proof strong{color:var(--ink);font-weight:600}
-.hero-vis{padding:48px 26px 60px 30px;min-width:0}
-.hero-vis::before{content:"";position:absolute;inset:20px 0 26px 56px;border:1px dashed var(--line);border-radius:var(--r-l)}
-.console{position:relative;background:var(--paper);border:1.5px solid var(--ink);border-radius:var(--r-l);overflow:hidden;box-shadow:10px 10px 0 var(--fill-2)}
-.console-top{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);font-size:13px;font-weight:500}
-.win{display:inline-flex;gap:5px}.win i{width:8px;height:8px;border-radius:50%;border:1px solid var(--ink-3)}
-.console-tabs{display:flex;gap:4px;padding:10px 12px;border-bottom:1px solid var(--line);overflow-x:auto}
-.console-tabs button{border:1px solid transparent;background:none;padding:6px 12px;border-radius:999px;font-size:13px;white-space:nowrap}
-.console-tabs button[aria-selected="true"]{border-color:var(--ink);background:var(--ink);color:var(--paper)}
-.console-panel{padding:16px 18px 8px;min-height:184px}
-.cp-head{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+/* capability reel: replaces the reference's photo strip */
+.reel{overflow:hidden;padding-bottom:8px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+.reel-track{display:flex;width:max-content;padding-left:var(--gut)}
+.reel.ready .reel-track{animation:marq 80s linear infinite}
+.reel:hover .reel-track{animation-play-state:paused}
+.rc{flex:none;width:var(--w);margin:0 var(--gut) 0 0;display:flex;flex-direction:column;gap:10px}
+.rc-box{height:250px;display:flex;flex-direction:column;gap:8px;padding:16px 18px;border:1px solid var(--line);border-radius:var(--r-l);background:var(--paper);overflow:hidden;transition:border-color .4s,box-shadow .4s}
+.rc.on .rc-box{border-color:var(--ink);box-shadow:6px 6px 0 var(--fill-2)}
+.rc-top{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px;font-weight:600}
+.rc-top .mono{font-family:var(--mono);font-size:10.5px;font-weight:400;color:var(--ink-3)}
+.rc figcaption{display:flex;gap:10px;font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+.rc figcaption b{font-weight:500;color:var(--ink)}
+.rc-note{margin-top:auto;font-size:12.5px;color:var(--ink-2);line-height:1.4}
+.rc-foot{margin-top:auto;font-size:12.5px;color:var(--ink-3)}
+.rc-foot b{color:var(--ink);font-weight:600}
+.rc-box .ramp{height:auto;flex:1}
 .bars li,.roster li,.kpis li{display:grid;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--fill-2);font-size:13.5px}
 .bars li:last-child,.roster li:last-child,.kpis li:last-child{border-bottom:0}
 .bars li{grid-template-columns:minmax(0,8.5em) minmax(0,1fr) 3em}
@@ -193,16 +200,12 @@ body.no-anno .anno,body.no-anno .anno-bar,body.no-anno .tag{display:none}
 .kpis li{grid-template-columns:minmax(0,1fr) auto auto}
 .kpis s{color:var(--ink-3);font-family:var(--mono);font-size:12px}
 .kpis b{font-family:var(--mono);font-size:12px;font-weight:500;padding:2px 9px;border:1px solid var(--ink);border-radius:999px}
-.console-foot{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;padding:13px 18px;background:var(--fill);font-size:13px}
-.console-foot span{color:var(--ink-3)}
-.console-foot .mono{margin-left:auto;font-family:var(--mono);font-size:10.5px}
-.chip{position:absolute;z-index:2;display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--paper);border:1px solid var(--ink);border-radius:var(--r-m);font-size:12.5px;line-height:1.3;max-width:16em;box-shadow:4px 4px 0 var(--ink)}
-.chip-k{font-family:var(--mono);font-weight:500;font-size:13px;white-space:nowrap}
-.chip-a{top:0;left:0}
-.chip-b{right:0;bottom:20px}
-.chip .stack i{width:26px;height:26px;font-size:8.5px;margin-left:-8px}
-.chip .stack i:first-child{margin-left:0}
-.seal{position:absolute;z-index:2;top:2px;right:2px;width:76px;height:76px;border-radius:50%;border:1px dashed var(--ink);background:var(--paper);display:grid;place-items:center;text-align:center;font-family:var(--mono);font-size:9.5px;line-height:1.25;padding:8px}
+.ring-row{display:flex;align-items:center;gap:16px;margin-block:auto}
+.shores{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;margin-block:auto}
+.shore{display:flex;flex-direction:column;gap:4px}
+.shore:last-child{text-align:right}
+.shore .clock{font-size:15px}
+.shore-line{width:52px;height:1px;background:repeating-linear-gradient(90deg,var(--ink) 0 4px,transparent 4px 8px)}
 
 /* ---------- 02 trust ---------- */
 .logos{display:grid;grid-template-columns:minmax(0,15rem) minmax(0,1fr);border-block:1px solid var(--line)}
@@ -210,7 +213,8 @@ body.no-anno .anno,body.no-anno .anno-bar,body.no-anno .tag{display:none}
 .marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
 .track{display:flex;width:max-content;animation:marq 48s linear infinite}
 .marquee:hover .track{animation-play-state:paused}
-.cell{flex:none;width:clamp(132px,12.5cqi,178px);height:80px;display:grid;place-items:center;border-right:1px solid var(--line)}
+.cell{flex:none;width:clamp(150px,13.5cqi,196px);height:104px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border-right:1px solid var(--line)}
+.cell small{font-family:var(--mono);font-size:10.5px;color:var(--ink-2)}
 @keyframes marq{to{transform:translateX(-50%)}}
 .metrics-wrap{padding-block:26px 0}
 .metrics-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 24px;font-family:var(--mono);font-size:11.5px;color:var(--ink-2)}
@@ -220,6 +224,22 @@ body.no-anno .anno,body.no-anno .anno-bar,body.no-anno .tag{display:none}
 .metric:last-of-type{border-right:0}
 .m-l{font-weight:600;font-size:14.5px;line-height:1.3}
 .m-d{font-size:13px;color:var(--ink-3);line-height:1.4}
+.walls{display:flex;flex-direction:column;gap:28px;padding-block:clamp(48px,6cqi,88px) clamp(56px,7cqi,104px)}
+.walls-head{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:12px 56px;align-items:end}
+.walls-head h3{font-size:clamp(1.5rem,2.8cqi,2.4rem);line-height:1.05;font-stretch:84%;letter-spacing:-.02em}
+.walls-head p{color:var(--ink-2);max-width:46ch}
+.rows{border-bottom:1px solid var(--line);-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.row{overflow:hidden;border-top:1px solid var(--line)}
+.row-track{display:flex;width:max-content}
+.rows.ready .row-track{animation:marq 64s linear infinite}
+.rows.ready .row.rev .row-track{animation-direction:reverse}
+.rows.ready .row:nth-child(3) .row-track{animation-duration:78s}
+.rows:hover .row-track{animation-play-state:paused}
+.wall{flex:none;display:inline-flex;align-items:center;gap:12px;padding:16px 28px;border-right:1px solid var(--line);font-size:14.5px;white-space:nowrap}
+.wall::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--ink)}
+.wall b{font-family:var(--mono);font-size:10.5px;font-weight:500;padding:3px 9px;border:1px solid var(--ink);border-radius:999px}
+.wall b::before{content:"→ "}
+@media (prefers-reduced-motion: reduce){.reel,.row{overflow-x:auto}}
 
 /* ---------- 03 what we do ---------- */
 .pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-block:1.5px solid var(--ink)}
@@ -279,15 +299,17 @@ body.no-anno .anno,body.no-anno .anno-bar,body.no-anno .tag{display:none}
 .row-vis{display:flex;align-items:center;gap:14px}
 
 /* ---------- 05 why + how ---------- */
-.why{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,4cqi,64px);align-items:start}
-.why-l{display:flex;flex-direction:column;gap:18px;align-items:flex-start}
-.mission{display:flex;flex-direction:column;gap:8px;padding:18px 0;border-block:1px solid var(--line)}
-.mission p:last-child{font-size:clamp(1.05rem,1.4cqi,1.22rem);line-height:1.45}
-.why-rows{border-top:1.5px solid var(--ink)}
-.why-row{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr) auto;gap:8px 24px;padding-block:22px;border-bottom:1px solid var(--line);align-items:baseline}
-.why-row h3{font-size:1.15rem}
-.why-row p{font-size:14.5px;color:var(--ink-2)}
-.proofv{font-family:var(--mono);font-size:12px;padding:4px 10px;border:1px solid var(--ink);border-radius:999px;white-space:nowrap}
+.why2-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px 48px}
+.why2-head .l{display:flex;flex-direction:column;gap:16px;align-items:flex-start;max-width:56rem;min-width:0}
+.statement{font-size:clamp(1.6rem,3.1cqi,2.75rem);line-height:1.12;font-weight:600;font-stretch:88%;letter-spacing:-.02em}
+.statement em{font-style:normal;color:transparent;-webkit-text-stroke:1.2px var(--ink)}
+.why-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--gut);align-items:start;padding-bottom:48px}
+.wc{display:flex;flex-direction:column;gap:12px;min-height:400px;padding:clamp(18px,2cqi,26px);border:1px solid var(--line);border-radius:var(--r-l);background:var(--paper);min-width:0}
+.wc:nth-of-type(even){transform:translateY(48px)}
+.wc h3{font-size:clamp(1.15rem,1.6cqi,1.4rem);line-height:1.15}
+.wc-big{margin-top:auto;font-size:clamp(2.6rem,4.4cqi,3.8rem);line-height:.9;font-weight:650;font-stretch:76%;letter-spacing:-.03em}
+.wc-cap{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.wc p{padding-top:14px;border-top:1px solid var(--line);font-size:14px;color:var(--ink-2)}
 .process{border:1.5px solid var(--ink);border-radius:var(--r-l);padding:clamp(22px,3cqi,40px);display:flex;flex-direction:column;gap:34px}
 .process-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:12px 32px}
 .process-head .l{display:flex;flex-direction:column;gap:12px}
@@ -351,15 +373,29 @@ body.no-anno .anno,body.no-anno .anno-bar,body.no-anno .tag{display:none}
 .case-quote{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px 32px;align-items:end;padding:22px clamp(18px,2.4cqi,30px);border-top:1px solid var(--line)}
 .case-quote blockquote{font-size:clamp(1.05rem,1.5cqi,1.3rem);line-height:1.4;max-width:60ch}
 .case-quote cite{display:flex;align-items:center;gap:10px;margin-top:12px;font-style:normal;font-size:13px;color:var(--ink-2)}
-.results-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;align-items:baseline}
-.results{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gut)}
-.res{display:flex;flex-direction:column;gap:12px;padding:24px;border:1px solid var(--line);border-radius:var(--r-l);min-width:0}
-.res .num{font-size:clamp(2.4rem,4cqi,3.4rem)}
-.res p{font-size:14px;color:var(--ink-2)}
 .ba{display:grid;gap:8px;margin-top:auto;padding-top:8px}
 .ba div{display:grid;grid-template-columns:7.2em minmax(0,1fr);gap:10px;align-items:center;font-family:var(--mono);font-size:10.5px;color:var(--ink-3)}
 .ba b{height:10px;border-radius:2px;background:var(--fill-2);width:var(--v)}
 .ba .after b{background:var(--ink)}
+.rp-shell{padding:clamp(40px,5cqi,72px) clamp(8px,1.6cqi,24px) 0}
+.results-panel{display:flex;flex-direction:column;gap:clamp(32px,4.4cqi,60px);padding:clamp(32px,5.5cqi,88px) clamp(20px,3.6cqi,56px);border-radius:var(--r-l)}
+.results-panel .eyebrow{color:inherit;opacity:.72}
+.rp-head{display:flex;flex-direction:column;gap:18px}
+.rp-statement{max-width:36ch;font-size:clamp(1.35rem,2.5cqi,2.15rem);line-height:1.2;font-weight:600;letter-spacing:-.015em}
+.rp-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));row-gap:36px}
+.rp{display:flex;flex-direction:column;gap:6px;padding-inline:clamp(14px,2cqi,28px);border-left:1px solid var(--line-on-ink);min-width:0}
+.rp:first-child{padding-left:0;border-left:0}
+.rp-i{font-family:var(--mono);font-size:11px;opacity:.7}
+.rp-n{margin-block:8px 4px;font-size:clamp(2.6rem,5cqi,4.6rem);line-height:.95;font-weight:650;font-stretch:76%;letter-spacing:-.03em}
+.rp strong{font-size:15px;font-weight:600}
+.rp-d{font-size:13px;opacity:.7}
+.results-panel .ba div{color:inherit;opacity:.8}
+.results-panel .ba b{background:var(--line-on-ink)}
+.results-panel .ba .after b{background:var(--paper)}
+.rp-row{display:flex;flex-wrap:wrap;align-items:center;border-block:1px solid var(--line-on-ink)}
+.rp-row > *{padding:16px clamp(12px,1.6cqi,22px);font-size:14px}
+.rp-row span{margin-right:auto;padding-left:0;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.72}
+.rp-row a:hover{text-decoration:underline;text-underline-offset:4px}
 
 /* ---------- 08 careers ---------- */
 .careers{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,4cqi,64px);align-items:start}
@@ -475,15 +511,15 @@ body.no-anno .anno,body.no-anno .anno-bar,body.no-anno .tag{display:none}
   .nav-links{display:none}
   .burger{display:grid}
   .mega{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .hero{grid-template-columns:1fr}
-  .hero-vis{max-width:640px;width:100%}
   .bento{grid-template-columns:repeat(6,minmax(0,1fr));grid-template-areas:
     "gcc gcc gcc gcc gcc gcc"
     "cld cld cld dat dat dat"
     "tal tal tal dat dat dat"
     "app app app mob mob mob"
     "mgd mgd mgd cta cta cta"}
-  .why{grid-template-columns:1fr}
+  .why-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .rp-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .rp:nth-child(3){padding-left:0;border-left:0}
   .careers{grid-template-columns:1fr}
   .geo-grid{grid-template-columns:1fr}
   .foot-top{grid-template-columns:1fr}
@@ -493,11 +529,8 @@ body.no-anno .anno,body.no-anno .anno-bar,body.no-anno .tag{display:none}
   .nav-cta{display:none}
   .badge{border-radius:14px}
   .mega{grid-template-columns:1fr}
-  .sec-head{grid-template-columns:1fr}
-  .hero-vis{display:flex;flex-direction:column;gap:12px;padding:0}
-  .hero-vis::before,.seal{display:none}
-  .chip{position:static;box-shadow:none;max-width:none}
-  .console{box-shadow:6px 6px 0 var(--fill-2)}
+  .sec-head,.walls-head{grid-template-columns:1fr}
+  .rc-box{height:230px}
   .logos{grid-template-columns:1fr}
   .logos-label{border-right:0;border-bottom:1px solid var(--line);padding-block:14px}
   .metrics{grid-template-columns:1fr 1fr}
@@ -506,14 +539,17 @@ body.no-anno .anno,body.no-anno .anno-bar,body.no-anno .tag{display:none}
   .metric:nth-of-type(2),.metric:nth-of-type(4){padding-right:14px;border-right:1px solid var(--line)}
   .metric:nth-of-type(3),.metric:nth-of-type(5){padding-left:14px}
   .metric:nth-of-type(4),.metric:nth-of-type(5){border-bottom:0}
+  .wall{padding:13px 20px;font-size:13.5px}
   .pillars{grid-template-columns:1fr}
   .pillar{border-right:0;border-bottom:1px solid var(--line);padding-inline:4px}
   .pillar:last-of-type{border-bottom:0}
   .bento{grid-template-columns:1fr;grid-template-areas:"gcc" "cld" "dat" "tal" "app" "mob" "mgd" "cta"}
   .tile{min-height:0}
   .bot{grid-template-columns:1fr}
-  .why-row{grid-template-columns:1fr}
-  .proofv{justify-self:start}
+  .why-cards{grid-template-columns:1fr;padding-bottom:0}
+  .wc{min-height:0}
+  .wc:nth-of-type(even){transform:none}
+  .wc-big{margin-top:12px}
   .steps{grid-template-columns:1fr;gap:28px}
   .step{padding-top:0;padding-left:56px}
   .step::before{top:44px;bottom:-26px;left:19px;right:auto;width:1px;height:auto}
@@ -521,11 +557,12 @@ body.no-anno .anno,body.no-anno .anno-bar,body.no-anno .tag{display:none}
   .ind-grid{grid-template-columns:1fr}
   .ind-list{border-right:0;border-bottom:1px solid var(--line)}
   .ind-btn{padding-block:14px}
+  .rp .ba div{grid-template-columns:1fr;gap:4px}
+  .rp-row span{flex-basis:100%}
   .ccs{grid-template-columns:1fr}
   .ccs-col{border-right:0;border-bottom:1px solid var(--line)}
   .ccs-col:not(:last-child)::after{content:"↓";top:auto;bottom:-15px;right:auto;left:clamp(18px,2.4cqi,30px)}
   .case-quote{grid-template-columns:1fr}
-  .results{grid-template-columns:1fr}
   .search{grid-template-columns:1fr;border-radius:var(--r-m)}
   .search label{padding:8px 10px;border-right:0;border-bottom:1px solid var(--line)}
   .search label:nth-of-type(2){border-bottom:0}
@@ -546,7 +583,7 @@ body.no-anno .anno,body.no-anno .anno-bar,body.no-anno .tag{display:none}
 <header class="toolbar">
   <div class="tb-brand">
     <span class="tb-mark">M</span>
-    <div><strong>ManyaIT.com redesign</strong><span class="sub">Homepage wireframe · v0.1 · black &amp; white</span></div>
+    <div><strong>ManyaIT.com redesign</strong><span class="sub">Homepage wireframe · v0.2 · black &amp; white</span></div>
   </div>
   <div class="tb-controls">
     <div class="seg" role="group" aria-label="Artboard width">
@@ -565,7 +602,7 @@ body.no-anno .anno,body.no-anno .anno-bar,body.no-anno .tag{display:none}
       <option value="s04">04 Services</option>
       <option value="s05">05 Why us + How we work</option>
       <option value="s06">06 Industries</option>
-      <option value="s07">07 Case study + Results</option>
+      <option value="s07">07 Results + Case study</option>
       <option value="s08">08 Careers</option>
       <option value="s09">09 Insights</option>
       <option value="s10">10 Global presence</option>
@@ -591,26 +628,29 @@ body.no-anno .anno,body.no-anno .anno-bar,body.no-anno .tag{display:none}
         <div><dt>Fidelity</dt><dd>Mid-fi · B&amp;W · no imagery</dd></div>
         <div><dt>Breakpoints</dt><dd>1440 · 834 · 390</dd></div>
         <div><dt>Structure</dt><dd>Navbar + 13 sections</dd></div>
-        <div><dt>Version</dt><dd>v0.1 · 3 Oct 2026</dd></div>
+        <div><dt>Version</dt><dd>v0.2 · 3 Oct 2026</dd></div>
         <div><dt>Status</dt><dd>For client review</dd></div>
       </dl>
     </div>
 
     <div class="panel">
-      <p class="kicker">Reference mapping · what we borrow and how it changes</p>
+      <p class="kicker">Reference mapping · what each reference actually does, and how ours differs</p>
       <div class="ref-scroll">
         <table class="ref">
           <thead><tr><th>#</th><th>Section</th><th>Reference</th><th>Pattern kept</th><th>How ManyaIT’s version differs</th></tr></thead>
           <tbody>
-            <tr><td>01</td><td>Hero</td><td>Ref 2 · Hyrio</td><td>Split hero, bold headline, two CTAs, proof cards floating around a visual</td><td>No photo. The visual is a live “engagement console” whose tabs follow the three headline words. Floating cards carry delivery proof, not candidate counts.</td></tr>
-            <tr><td>02</td><td>Trust bars</td><td>Ref 1 · Hunt Club</td><td>Two stacked bars under the hero: client logos, then key numbers</td><td>Logos sit in hairline cells beside a fixed label and scroll slowly. Numbers become a ruled five-column ledger with a descriptor under each figure.</td></tr>
-            <tr><td>04</td><td>Services</td><td>Bento grid (brief)</td><td>Mixed-size tiles</td><td>12-column bento anchored by a Global Capability Centers tile, with filter chips that map tiles to the three practices and one inverted CTA tile.</td></tr>
-            <tr><td>05</td><td>Why choose us</td><td>Ref 2 · Hyrio</td><td>Mission statement plus reasons to choose</td><td>Reasons become ruled rows, each closed by a proof value, and sit directly above the four-stage process so “why” and “how” read together.</td></tr>
-            <tr><td>07</td><td>Results</td><td>Ref 2 · Hyrio</td><td>Large outcome numbers</td><td>Numbers are tied to a Challenge → Solution → Outcome case and shown as before/after bars instead of standalone counters.</td></tr>
+            <tr><td>00–01</td><td>Nav + Hero</td><td>Ref 2 · Hyrio</td><td>Borderless white nav bar floating inset on a tinted page. Centered stack: pill badge, big headline with one phrase in italic serif, two CTAs, avatar row with a rating. Under it, a full-width strip of photo cards with small UI widgets on top.</td><td>Same inset nav, drawn with a hairline. Same centered stack, but the three headline words switch between solid and outline instead of a serif phrase. The photo strip becomes a reel of live UI tiles (no photography), each captioned; tiles matching the active word are outlined.</td></tr>
+            <tr><td>02</td><td>Trust bar A</td><td>Ref 1 · Hunt Club</td><td>Hairline-topped logo marquee along the bottom of the photo hero, under a small uppercase label; each logo is captioned with the role filled.</td><td>On paper below the hero, with a fixed label column and ruled cells. Each caption names what ManyaIT delivered (cloud migration, GCC setup), never a hire.</td></tr>
+            <tr><td>02</td><td>Trust bar B</td><td>Ref 1 · Hunt Club</td><td>Headline, then four rows of client problem statements in hairline cells with a dot, scrolling in opposite directions.</td><td>Three rows. Each statement ends with the ManyaIT solution it maps to, so the bar reads problem → answer. The company metrics ledger sits between bars A and B.</td></tr>
+            <tr><td>04</td><td>Services</td><td>Your brief</td><td>Bento grid (neither reference uses one; Hyrio lists services beside a photo)</td><td>12-column bento anchored by a Global Capability Centers tile, with filter chips that map tiles to the three practices and one inverted CTA tile.</td></tr>
+            <tr><td>05</td><td>Why choose us</td><td>Ref 2 · Hyrio</td><td>Pill label, large left-aligned mission statement, three tall white cards (icon and title at top, empty middle, description at bottom). The next dark section slides up over them.</td><td>Four cards, staggered in height; the empty middle holds a proof figure; descriptions sit under a hairline. Reasons come from ManyaIT’s current site. The process panel keeps the slide-over motion.</td></tr>
+            <tr><td>07</td><td>Results</td><td>Ref 2 · Hyrio</td><td>Dark rounded panel inset from the edges: long statement, four figures split by hairlines with an (01) index, thin oversized numbers, then a ruled “trusted by growing teams” sector row.</td><td>Same panel shape, with heavy condensed figures, a before/after bar under each, a sector row that links to Section 06, and a Challenge → Solution → Outcome case study after it.</td></tr>
           </tbody>
         </table>
       </div>
     </div>
+
+    <p class="kicker">Sources · huntclub.com and hyrio.webflow.io (the published site behind the Webflow preview link), captured 3 Oct 2026 · current manyait.com for tagline, pillars and why-us points</p>
 
     <div class="legend" aria-label="Legend">
       <span><i class="sw solid"></i>Primary component</span>
@@ -631,25 +671,27 @@ body.no-anno .anno,body.no-anno .anno-bar,body.no-anno .tag{display:none}
 
       <!-- 00 NAVBAR -->
       <section class="blk" id="s00" aria-label="Navbar">
-        <div class="anno-bar"><span class="anno-num">00</span><span class="anno-title">Navbar</span><span class="anno-note"><b>Layout</b> logo left · 7 links centre · two CTAs right, business CTA last. <b>Behaviour</b> sticky; shrinks from 76 to 64 px with a hairline after 80 px of scroll. Solutions and Industries open mega-menus. Tablet: links collapse to a menu icon. Mobile: logo + menu icon only; both CTAs pinned to the bottom of the drawer.</span></div>
-        <nav class="nav wrap c" aria-label="Site">
-          <a class="logo" href="#s01"><i>LOGO</i>ManyaIT</a>
-          <ul class="nav-links">
-            <li><a href="#s01" aria-current="page">Home</a></li>
-            <li><a href="#s05">About</a></li>
-            <li><a class="caret" href="#s04">Solutions</a></li>
-            <li><a class="caret" href="#s06">Industries</a></li>
-            <li><a href="#s08">Careers</a></li>
-            <li><a href="#s09">Insights</a></li>
-            <li><a href="#s10">Contact</a></li>
-          </ul>
-          <div class="nav-cta">
-            <a class="btn ghost sm" href="#s08">Find a Job</a>
-            <a class="btn sm" href="#s12">Get Started</a>
-          </div>
-          <button class="burger" type="button" aria-label="Open menu"><span></span></button>
-          <span class="tag">sticky · condenses on scroll</span>
-        </nav>
+        <div class="anno-bar"><span class="anno-num">00</span><span class="anno-title">Navbar</span><span class="anno-note"><b>Ref 2 floating bar, reworked.</b> Hyrio floats a borderless white bar, inset from the page edges, on a tinted ground. Ours keeps the inset bar but draws it with a hairline on plain paper, carries all seven links, and puts both CTAs on the right with the business CTA last. <b>Behaviour</b> sticky; picks up a soft shadow once the page scrolls. Solutions and Industries open mega-menus. Tablet: links collapse to a menu icon. Mobile: logo + menu icon only; both CTAs pinned to the bottom of the drawer.</span></div>
+        <div class="nav-shell">
+          <nav class="nav c" aria-label="Site">
+            <a class="logo" href="#s01"><i>LOGO</i>ManyaIT</a>
+            <ul class="nav-links">
+              <li><a href="#s01" aria-current="page">Home</a></li>
+              <li><a href="#s05">About</a></li>
+              <li><a class="caret" href="#s04">Solutions</a></li>
+              <li><a class="caret" href="#s06">Industries</a></li>
+              <li><a href="#s08">Careers</a></li>
+              <li><a href="#s09">Insights</a></li>
+              <li><a href="#s10">Contact</a></li>
+            </ul>
+            <div class="nav-cta">
+              <a class="btn ghost sm" href="#s08">Find a Job</a>
+              <a class="btn sm" href="#s12">Get Started</a>
+            </div>
+            <button class="burger" type="button" aria-label="Open menu"><span></span></button>
+            <span class="tag">inset bar · sticky</span>
+          </nav>
+        </div>
         <div class="mega anno" aria-label="Solutions mega-menu state">
           <p class="mega-cap">State · “Solutions” mega-menu on hover / focus (desktop)</p>
           <div><h4>Technology Consulting</h4><ul><li>Cloud &amp; Infrastructure</li><li>Data, Analytics &amp; AI</li><li>Enterprise Applications</li></ul></div>
@@ -661,9 +703,9 @@ body.no-anno .anno,body.no-anno .anno-bar,body.no-anno .tag{display:none}
 
       <!-- 01 HERO -->
       <section class="blk" id="s01" aria-label="Hero">
-        <div class="anno-bar"><span class="anno-num">01</span><span class="anno-title">Hero</span><span class="anno-note"><b>Ref 2, reworked.</b> Split 7/5. The three headline words switch between solid and outline every 3.2 s and drive the console tabs on the right (▸ click a tab). No photography: the console is the visual. Proof cards float on the console edges; on mobile they drop into a stack under it.</span></div>
-        <div class="hero wrap">
-          <div class="hero-copy">
+        <div class="anno-bar"><span class="anno-num">01</span><span class="anno-title">Hero</span><span class="anno-note"><b>Ref 2 hero, reworked.</b> Kept: the centered stack (pill badge → large headline → two CTAs → avatar proof line) and a full-width strip running under it. Changed: Hyrio sets one phrase in italic serif; ours switches the three headline words between solid and outline every 3.2 s. Hyrio’s strip is photos with small UI widgets laid on top; ours is a slow reel of live UI tiles with captions and no photography, and the tiles matching the active word take a solid outline. The reel pauses on hover.</span></div>
+        <div class="hero">
+          <div class="hero-copy wrap">
             <p class="badge"><span class="pip">20+ yrs</span>Global capability partner · Dallas · Hyderabad</p>
             <h1 class="hero-h1" aria-label="Technology. Talent. Transformation.">
               <span class="w on" aria-hidden="true">Technology.</span>
@@ -675,81 +717,113 @@ body.no-anno .anno,body.no-anno .anno-bar,body.no-anno .tag{display:none}
               <a class="btn" href="#s12">Get Started →</a>
               <a class="btn ghost" href="#s04">Explore Solutions</a>
             </div>
-            <p class="hero-alt">Looking for your next role? <a href="#s08">Find a job →</a></p>
             <div class="proof">
               <span class="stack" aria-hidden="true"><i>AB</i><i>CD</i><i>EF</i><i>GH</i></span>
-              <p><strong>XX+ enterprises</strong> trust ManyaIT with their technology teams</p>
+              <p><strong>XX+ enterprises</strong> trust ManyaIT with their technology teams · X.X ★ client rating (TBC)</p>
             </div>
+            <p class="hero-alt">Looking for your next role? <a href="#s08">Find a job →</a></p>
           </div>
-
-          <div class="hero-vis c">
-            <div class="console">
-              <div class="console-top"><span class="win" aria-hidden="true"><i></i><i></i><i></i></span><span>Engagement overview</span></div>
-              <div class="console-tabs" role="tablist" aria-label="Engagement view">
-                <button type="button" role="tab" id="ct-0" aria-controls="cp-0" aria-selected="true">Technology</button>
-                <button type="button" role="tab" id="ct-1" aria-controls="cp-1" aria-selected="false" tabindex="-1">Talent</button>
-                <button type="button" role="tab" id="ct-2" aria-controls="cp-2" aria-selected="false" tabindex="-1">Transformation</button>
+          <div class="c">
+            <div class="reel" aria-label="Capability reel">
+              <div class="reel-track">
+                <figure class="rc" data-word="0" style="--w:400px">
+                  <div class="rc-box">
+                    <div class="rc-top"><span>Engagement overview</span><span class="mono">sample</span></div>
+                    <ul class="bars">
+                      <li><span>Cloud migration</span><b style="--v:78%"></b><em>78%</em></li>
+                      <li><span>Data platform</span><b style="--v:60%"></b><em>60%</em></li>
+                      <li><span>App modernization</span><b style="--v:35%"></b><em>35%</em></li>
+                    </ul>
+                    <p class="rc-foot">Next milestone · <b>Go-live, week 12</b></p>
+                  </div>
+                  <figcaption><b>Technology</b>Workstream tracking</figcaption>
+                </figure>
+                <figure class="rc" data-word="1" style="--w:330px">
+                  <div class="rc-box">
+                    <div class="rc-top"><span>Team build · Hyderabad pod</span></div>
+                    <ul class="roster">
+                      <li><span class="av">CE</span><span>Cloud engineers</span><em>12/12</em><i class="pill solid">Onboarded</i></li>
+                      <li><span class="av">DE</span><span>Data engineers</span><em>8/10</em><i class="pill">In review</i></li>
+                      <li><span class="av">QA</span><span>QA automation</span><em>3/6</em><i class="pill">Open</i></li>
+                    </ul>
+                  </div>
+                  <figcaption><b>Talent</b>Dedicated delivery pod</figcaption>
+                </figure>
+                <figure class="rc" data-word="2" style="--w:340px">
+                  <div class="rc-box">
+                    <div class="rc-top"><span>Before → after</span><span class="mono">sample</span></div>
+                    <ul class="kpis">
+                      <li><span>Release cycle</span><s>6 wks</s><b>1 wk</b></li>
+                      <li><span>Infrastructure cost</span><s>baseline</s><b>−XX%</b></li>
+                      <li><span>Platform uptime</span><s>XX.X%</s><b>XX.X%</b></li>
+                    </ul>
+                  </div>
+                  <figcaption><b>Transformation</b>Platform modernization</figcaption>
+                </figure>
+                <figure class="rc" data-word="0" style="--w:270px">
+                  <div class="rc-box">
+                    <div class="rc-top"><span>Managed services</span></div>
+                    <div class="ring-row"><span class="ring"><span>XX.X%<br>SLA</span></span><p class="rc-note">24×7 monitoring run from two time zones</p></div>
+                  </div>
+                  <figcaption><b>Technology</b>Run and support</figcaption>
+                </figure>
+                <figure class="rc" data-word="1" style="--w:340px">
+                  <div class="rc-box">
+                    <div class="rc-top"><span>Two shores, one team</span><span class="mono">live</span></div>
+                    <div class="shores">
+                      <div class="shore"><span class="kicker">Dallas</span><span class="clock" data-tz="America/Chicago" data-loc="en-US">--:--</span></div>
+                      <span class="shore-line" aria-hidden="true"></span>
+                      <div class="shore"><span class="kicker">Hyderabad</span><span class="clock" data-tz="Asia/Kolkata" data-loc="en-IN">--:--</span></div>
+                    </div>
+                    <p class="rc-note">Work hands over at the end of each day, so delivery keeps moving around the clock.</p>
+                  </div>
+                  <figcaption><b>Talent</b>Follow-the-sun delivery</figcaption>
+                </figure>
+                <figure class="rc" data-word="2" style="--w:320px">
+                  <div class="rc-box">
+                    <div class="rc-top"><span>Capability center ramp</span><span class="mono">illustrative</span></div>
+                    <div class="ramp" aria-hidden="true">
+                      <i class="b1" style="--h:10%"></i><i class="b1" style="--h:16%"></i><i class="b1" style="--h:24%"></i><i class="b1" style="--h:32%"></i>
+                      <i class="b2" style="--h:42%"></i><i class="b2" style="--h:52%"></i><i class="b2" style="--h:61%"></i><i class="b2" style="--h:70%"></i>
+                      <i style="--h:78%"></i><i style="--h:86%"></i><i style="--h:93%"></i><i style="--h:100%"></i>
+                    </div>
+                    <p class="rc-note">Build → Operate → Transfer over 18 months</p>
+                  </div>
+                  <figcaption><b>Transformation</b>GCC setup</figcaption>
+                </figure>
               </div>
-              <div class="console-panel" role="tabpanel" id="cp-0" aria-labelledby="ct-0">
-                <p class="cp-head">Active workstreams</p>
-                <ul class="bars">
-                  <li><span>Cloud migration</span><b style="--v:78%"></b><em>78%</em></li>
-                  <li><span>Data platform</span><b style="--v:60%"></b><em>60%</em></li>
-                  <li><span>App modernization</span><b style="--v:35%"></b><em>35%</em></li>
-                </ul>
-              </div>
-              <div class="console-panel" role="tabpanel" id="cp-1" aria-labelledby="ct-1" hidden>
-                <p class="cp-head">Team build · Hyderabad pod</p>
-                <ul class="roster">
-                  <li><span class="av">CE</span><span>Cloud engineers</span><em>12 / 12</em><i class="pill solid">Onboarded</i></li>
-                  <li><span class="av">DE</span><span>Data engineers</span><em>8 / 10</em><i class="pill">In review</i></li>
-                  <li><span class="av">QA</span><span>QA automation</span><em>3 / 6</em><i class="pill">Open</i></li>
-                </ul>
-              </div>
-              <div class="console-panel" role="tabpanel" id="cp-2" aria-labelledby="ct-2" hidden>
-                <p class="cp-head">Before → after</p>
-                <ul class="kpis">
-                  <li><span>Release cycle</span><s>6 wks</s><b>1 wk</b></li>
-                  <li><span>Infrastructure cost</span><s>baseline</s><b>−XX%</b></li>
-                  <li><span>Platform uptime</span><s>XX.X%</s><b>XX.X%</b></li>
-                </ul>
-              </div>
-              <div class="console-foot"><span>Next milestone</span><strong>Go-live · Week 12</strong><span class="mono">sample data</span></div>
             </div>
-            <div class="chip chip-a"><span class="chip-k">XX days</span><span>average time to a productive team</span></div>
-            <div class="chip chip-b"><span class="stack" aria-hidden="true"><i>AK</i><i>RS</i><i>MP</i></span><span><b>XX+</b> engineers on active programs</span></div>
-            <div class="seal" aria-label="Certification badge to be confirmed">CERT.<br>BADGE<br>(TBC)</div>
-            <span class="tag bl">visual = live UI, no photo</span>
+            <span class="tag">capability reel · auto-scroll · no photos</span>
           </div>
         </div>
       </section>
 
       <!-- 02 TRUST -->
       <section class="blk" id="s02" aria-label="Trust and company metrics">
-        <div class="anno-bar"><span class="anno-num">02</span><span class="anno-title">Trust / Company metrics</span><span class="anno-note"><b>Ref 1, reworked.</b> Bar A: fixed label + client logos in hairline cells, slow marquee that pauses on hover and stays still for reduced motion. Bar B: five-column metrics ledger; figures count up once when 40% in view. Logos to be supplied in mono versions.</span></div>
+        <div class="anno-bar"><span class="anno-num">02</span><span class="anno-title">Trust / Company metrics</span><span class="anno-note"><b>Ref 1 trust bars, reworked.</b> Hunt Club’s first bar runs client logos along the bottom of its photo hero, each captioned with the role it filled. Ours sits on paper with a fixed label column and ruled cells, and each caption names what ManyaIT delivered, never a hire. Hunt Club’s second bar is four rows of client problem statements scrolling in opposite directions; ours uses three rows and ends every statement with the ManyaIT answer, so it reads problem → solution. The company metrics ledger sits between the two bars. Rows pause on hover and stay still for reduced motion.</span></div>
         <div class="logos c">
-          <p class="logos-label">Trusted by technology teams at</p>
+          <p class="logos-label">Trusted by enterprises to deliver</p>
           <div class="marquee">
             <div class="track">
-              <span class="cell"><span class="lg"><i></i>CLIENT 01</span></span>
-              <span class="cell"><span class="lg"><i></i>CLIENT 02</span></span>
-              <span class="cell"><span class="lg"><i></i>CLIENT 03</span></span>
-              <span class="cell"><span class="lg"><i></i>CLIENT 04</span></span>
-              <span class="cell"><span class="lg"><i></i>CLIENT 05</span></span>
-              <span class="cell"><span class="lg"><i></i>CLIENT 06</span></span>
-              <span class="cell"><span class="lg"><i></i>CLIENT 07</span></span>
-              <span class="cell"><span class="lg"><i></i>CLIENT 08</span></span>
-              <span class="cell" aria-hidden="true"><span class="lg"><i></i>CLIENT 01</span></span>
-              <span class="cell" aria-hidden="true"><span class="lg"><i></i>CLIENT 02</span></span>
-              <span class="cell" aria-hidden="true"><span class="lg"><i></i>CLIENT 03</span></span>
-              <span class="cell" aria-hidden="true"><span class="lg"><i></i>CLIENT 04</span></span>
-              <span class="cell" aria-hidden="true"><span class="lg"><i></i>CLIENT 05</span></span>
-              <span class="cell" aria-hidden="true"><span class="lg"><i></i>CLIENT 06</span></span>
-              <span class="cell" aria-hidden="true"><span class="lg"><i></i>CLIENT 07</span></span>
-              <span class="cell" aria-hidden="true"><span class="lg"><i></i>CLIENT 08</span></span>
+              <span class="cell"><span class="lg"><i></i>CLIENT 01</span><small>Cloud migration</small></span>
+              <span class="cell"><span class="lg"><i></i>CLIENT 02</span><small>GCC setup</small></span>
+              <span class="cell"><span class="lg"><i></i>CLIENT 03</span><small>Data platform</small></span>
+              <span class="cell"><span class="lg"><i></i>CLIENT 04</span><small>SAP rollout</small></span>
+              <span class="cell"><span class="lg"><i></i>CLIENT 05</span><small>QA automation</small></span>
+              <span class="cell"><span class="lg"><i></i>CLIENT 06</span><small>24×7 support</small></span>
+              <span class="cell"><span class="lg"><i></i>CLIENT 07</span><small>Mobile app</small></span>
+              <span class="cell"><span class="lg"><i></i>CLIENT 08</span><small>Salesforce CRM</small></span>
+              <span class="cell" aria-hidden="true"><span class="lg"><i></i>CLIENT 01</span><small>Cloud migration</small></span>
+              <span class="cell" aria-hidden="true"><span class="lg"><i></i>CLIENT 02</span><small>GCC setup</small></span>
+              <span class="cell" aria-hidden="true"><span class="lg"><i></i>CLIENT 03</span><small>Data platform</small></span>
+              <span class="cell" aria-hidden="true"><span class="lg"><i></i>CLIENT 04</span><small>SAP rollout</small></span>
+              <span class="cell" aria-hidden="true"><span class="lg"><i></i>CLIENT 05</span><small>QA automation</small></span>
+              <span class="cell" aria-hidden="true"><span class="lg"><i></i>CLIENT 06</span><small>24×7 support</small></span>
+              <span class="cell" aria-hidden="true"><span class="lg"><i></i>CLIENT 07</span><small>Mobile app</small></span>
+              <span class="cell" aria-hidden="true"><span class="lg"><i></i>CLIENT 08</span><small>Salesforce CRM</small></span>
             </div>
           </div>
-          <span class="tag">Bar A · logo marquee</span>
+          <span class="tag">Bar A · logo + what we delivered</span>
         </div>
         <div class="wrap metrics-wrap c">
           <div class="metrics-head"><span>ManyaIT in numbers</span><span>XX = figure to confirm</span></div>
@@ -760,7 +834,34 @@ body.no-anno .anno,body.no-anno .anno-bar,body.no-anno .tag{display:none}
             <div class="metric"><span class="num">2</span><span class="m-l">Delivery hubs</span><span class="m-d">Dallas · Hyderabad</span></div>
             <div class="metric"><span class="num">XX%</span><span class="m-l">Client retention</span><span class="m-d">Clients renewing year on year</span></div>
           </div>
-          <span class="tag">Bar B · metrics ledger · count-up</span>
+          <span class="tag">company metrics · count-up on view</span>
+        </div>
+        <div class="wrap walls c">
+          <div class="walls-head">
+            <h3>Enterprise growth hits the same walls.</h3>
+            <p>We have seen each of these before, and every one maps to a way we help.</p>
+          </div>
+          <div class="rows">
+            <div class="row"><div class="row-track">
+              <span class="wall">We need a capability center in India, fast.<b>GCC setup</b></span>
+              <span class="wall">Our cloud bill doubled this year.<b>Cloud FinOps</b></span>
+              <span class="wall">Every release waits on the legacy platform.<b>Modernization</b></span>
+              <span class="wall">We can’t find data engineers fast enough.<b>Talent on demand</b></span>
+            </div></div>
+            <div class="row rev"><div class="row-track">
+              <span class="wall">Five vendors and no single owner.<b>One partner</b></span>
+              <span class="wall">Go-live is in 90 days.<b>Delivery pods</b></span>
+              <span class="wall">Our dashboards disagree with each other.<b>Data &amp; analytics</b></span>
+              <span class="wall">Support stops when the US logs off.<b>24×7 support</b></span>
+            </div></div>
+            <div class="row"><div class="row-track">
+              <span class="wall">The SAP rollout keeps slipping.<b>Enterprise apps</b></span>
+              <span class="wall">We want AI but don’t know where to start.<b>Data &amp; AI</b></span>
+              <span class="wall">Our mobile app reviews keep dropping.<b>Mobility</b></span>
+              <span class="wall">Every security review finds the same gaps.<b>Safe &amp; secure</b></span>
+            </div></div>
+          </div>
+          <span class="tag">Bar B · problem → solution rows</span>
         </div>
       </section>
 
@@ -896,21 +997,21 @@ body.no-anno .anno,body.no-anno .anno-bar,body.no-anno .tag{display:none}
 
       <!-- 05 WHY + HOW -->
       <section class="blk" id="s05" aria-label="Why ManyaIT and how we work">
-        <div class="anno-bar"><span class="anno-num">05</span><span class="anno-title">Why us + How we work</span><span class="anno-note"><b>Ref 2 “Why choose us”, reworked</b> and folded in here so the 13-section structure stays intact (can be split out if preferred). Reasons are ruled rows, each closed by a proof value. <b>Process</b> Understand → Strategize → Execute → Optimize; the rail fills stage by stage on scroll and becomes a vertical stepper on mobile.</span></div>
+        <div class="anno-bar"><span class="anno-num">05</span><span class="anno-title">Why us + How we work</span><span class="anno-note"><b>Ref 2 “Why choose us”, reworked.</b> Kept: a large left-aligned mission statement above a row of tall cards with the title at the top and the description at the bottom. Changed: four cards instead of three, staggered in height; the empty middle Hyrio leaves now holds a proof figure; descriptions sit under a hairline. The reasons come from ManyaIT’s current site (agile delivery, safe &amp; secure, 24/7 support) plus one accountable partner. <b>Motion</b> as in ref 2, the next panel (the process) slides up over the cards on scroll. Folded into 05 so the 13-section structure stays intact.</span></div>
         <div class="wrap sec">
-          <div class="why">
-            <div class="why-l">
+          <div class="why2-head">
+            <div class="l">
               <p class="eyebrow">Why ManyaIT</p>
-              <h2 class="h2">Why enterprises keep building with us.</h2>
-              <div class="mission"><p class="kicker">Our mission</p><p>Give every enterprise the technology and the people to change how it works, without juggling five vendors to do it.</p></div>
-              <a class="link" href="#s05">About ManyaIT →</a>
+              <h2 class="statement">To give enterprises the technology <em>and</em> the people to change how they work, from one accountable partner.</h2>
             </div>
-            <div class="c"><ul class="why-rows">
-              <li class="why-row"><h3>Two shores, one team</h3><p>Dallas and Hyderabad work as a single delivery unit, so progress continues around the clock.</p><span class="proofv">US + IN · 24 h cycle</span></li>
-              <li class="why-row"><h3>Weeks, not quarters</h3><p>A pre-vetted bench and a standard onboarding playbook get teams productive fast.</p><span class="proofv">XX-day ramp-up</span></li>
-              <li class="why-row"><h3>Vetted by engineers</h3><p>Every professional clears a technical review led by a practicing architect.</p><span class="proofv">X-stage review</span></li>
-              <li class="why-row"><h3>One accountable partner</h3><p>Strategy, people and delivery sit under one contract and one set of KPIs.</p><span class="proofv">1 contract · 1 SLA</span></li>
-            </ul><span class="tag">ref 2 · why choose us</span></div>
+            <a class="link" href="#s05">About ManyaIT →</a>
+          </div>
+          <div class="why-cards c">
+            <article class="wc"><span class="ico">AD</span><h3>Agile delivery</h3><span class="wc-big">2-wk</span><span class="wc-cap">sprint cadence (TBC)</span><p>Short sprints mean you see working software early and can change direction without starting over.</p></article>
+            <article class="wc"><span class="ico">SS</span><h3>Safe &amp; secure</h3><span class="wc-big">XX</span><span class="wc-cap">certifications (TBC)</span><p>Access controls, audited processes and data handling built for regulated industries.</p></article>
+            <article class="wc"><span class="ico">24</span><h3>24/7 support</h3><span class="wc-big">24×7</span><span class="wc-cap">follow-the-sun coverage</span><p>Dallas and Hyderabad hand work across time zones, so support never waits for morning.</p></article>
+            <article class="wc"><span class="ico">1P</span><h3>One accountable partner</h3><span class="wc-big">1</span><span class="wc-cap">contract · SLA · team</span><p>Strategy, people and delivery sit under one contract and one set of KPIs.</p></article>
+            <span class="tag">ref 2 tall cards · staggered</span>
           </div>
 
           <div class="process c">
@@ -967,8 +1068,26 @@ body.no-anno .anno,body.no-anno .anno-bar,body.no-anno .tag{display:none}
       </section>
 
       <!-- 07 CASE STUDY + RESULTS -->
-      <section class="blk" id="s07" aria-label="Case study and results">
-        <div class="anno-bar"><span class="anno-num">07</span><span class="anno-title">Case study + Results</span><span class="anno-note"><b>Ref 2 results, reworked.</b> One case per slide (3 total) laid out Challenge → Solution → Outcome, with the outcome column inverted. Results row below uses before/after bars instead of bare counters. Sample content: replace with an approved client story.</span></div>
+      <section class="blk" id="s07" aria-label="Results and case study">
+        <div class="anno-bar"><span class="anno-num">07</span><span class="anno-title">Results + Case study</span><span class="anno-note"><b>Ref 2 results, reworked.</b> Kept: a dark rounded panel inset from the page edges, a long statement, four figures split by hairlines with a small (01) index, and a ruled row of sectors at the bottom. Changed: heavy condensed figures instead of thin ones, a before/after bar under each figure, and the sector row links into Section 06. The panel then hands off to a Challenge → Solution → Outcome case study (one of three slides). Sample content throughout.</span></div>
+        <div class="rp-shell">
+          <div class="c">
+            <div class="results-panel inv">
+              <div class="rp-head">
+                <p class="eyebrow">Results</p>
+                <p class="rp-statement">From the first workshop to the hundredth release, we replace complexity with teams and systems that scale, and we measure every engagement the same way.</p>
+              </div>
+              <div class="rp-stats">
+                <div class="rp"><span class="rp-i">(01)</span><span class="rp-n">XX%</span><strong>Faster time to deploy</strong><span class="rp-d">Median across delivery programs</span><div class="ba"><div><span>Before</span><b style="--v:100%"></b></div><div class="after"><span>With ManyaIT</span><b style="--v:58%"></b></div></div></div>
+                <div class="rp"><span class="rp-i">(02)</span><span class="rp-n">XX%</span><strong>Lower delivery cost</strong><span class="rp-d">Against the client’s previous model</span><div class="ba"><div><span>Before</span><b style="--v:100%"></b></div><div class="after"><span>With ManyaIT</span><b style="--v:70%"></b></div></div></div>
+                <div class="rp"><span class="rp-i">(03)</span><span class="rp-n">XX wks</span><strong>Average team ramp-up</strong><span class="rp-d">From signed SOW to a productive team</span><div class="ba"><div><span>Typical</span><b style="--v:100%"></b></div><div class="after"><span>ManyaIT</span><b style="--v:45%"></b></div></div></div>
+                <div class="rp"><span class="rp-i">(04)</span><span class="rp-n">XX%</span><strong>Engagements renewed</strong><span class="rp-d">Clients who extend after year one</span><div class="ba"><div><span>Industry avg.</span><b style="--v:62%"></b></div><div class="after"><span>ManyaIT</span><b style="--v:92%"></b></div></div></div>
+              </div>
+              <div class="rp-row"><span>Proven across</span><a href="#s06">Healthcare</a><a href="#s06">Financial Services</a><a href="#s06">Technology</a><a href="#s06">Retail</a><a href="#s06">Manufacturing</a></div>
+            </div>
+            <span class="tag">ref 2 results panel · bars illustrative</span>
+          </div>
+        </div>
         <div class="wrap sec">
           <header class="sec-head">
             <div class="l"><p class="eyebrow">Case study</p><h2 class="h2">Outcomes our clients can measure.</h2></div>
@@ -999,17 +1118,6 @@ body.no-anno .anno,body.no-anno .anno-bar,body.no-anno .tag{display:none}
               </div>
             </article>
             <span class="tag">carousel · 3 cases</span>
-          </div>
-
-          <div class="results-head"><p class="kicker">Results across engagements</p><p class="kicker">bars illustrative · XX to confirm</p></div>
-          <div class="results c">
-            <div class="res"><span class="num">XX%</span><p>faster time to deploy</p>
-              <div class="ba"><div><span>Before</span><b style="--v:100%"></b></div><div class="after"><span>With ManyaIT</span><b style="--v:58%"></b></div></div></div>
-            <div class="res"><span class="num">XX%</span><p>lower total delivery cost</p>
-              <div class="ba"><div><span>Before</span><b style="--v:100%"></b></div><div class="after"><span>With ManyaIT</span><b style="--v:70%"></b></div></div></div>
-            <div class="res"><span class="num">XX%</span><p>of engagements renewed</p>
-              <div class="ba"><div><span>Industry avg.</span><b style="--v:62%"></b></div><div class="after"><span>ManyaIT</span><b style="--v:92%"></b></div></div></div>
-            <span class="tag">ref 2 · results</span>
           </div>
         </div>
       </section>
@@ -1144,7 +1252,7 @@ body.no-anno .anno,body.no-anno .anno-bar,body.no-anno .tag{display:none}
 
       <!-- 12 FINAL CTA -->
       <section class="blk" id="s12" aria-label="Final call to action">
-        <div class="anno-bar"><span class="anno-num">12</span><span class="anno-title">Final CTA</span><span class="anno-note"><b>Layout</b> full-bleed inverted band. Headline left; two audience doors right: enterprises (primary, solid) and professionals (outline). “IT” is boxed as the one typographic flourish on the page.</span></div>
+        <div class="anno-bar"><span class="anno-num">12</span><span class="anno-title">Final CTA</span><span class="anno-note"><b>Layout</b> full-bleed inverted band. Headline left; two audience doors right: enterprises (primary, solid) and professionals (outline). “IT” is boxed as the one typographic flourish, echoing ManyaIT’s current tagline “Make IT happen!”.</span></div>
         <div class="final inv">
           <div class="wrap final-grid">
             <div>
@@ -1161,7 +1269,7 @@ body.no-anno .anno,body.no-anno .anno-bar,body.no-anno .tag{display:none}
 
       <!-- 13 FOOTER -->
       <footer class="blk" id="s13" aria-label="Footer">
-        <div class="anno-bar"><span class="anno-num">13</span><span class="anno-title">Footer</span><span class="anno-note"><b>Layout</b> brand + newsletter left, four link columns right, outlined wordmark as the closing graphic, legal row last. Mobile: link columns become 2 × 2.</span></div>
+        <div class="anno-bar"><span class="anno-num">13</span><span class="anno-title">Footer</span><span class="anno-note"><b>Layout</b> brand + newsletter left, four link columns right, outlined wordmark as the closing graphic, legal row last. Ref 2 also closes on an oversized scrolling wordmark; ours stays still and outlined. Social links match the current site (LinkedIn, X, Facebook, YouTube). Mobile: link columns become 2 × 2.</span></div>
         <div class="wrap foot">
           <div class="foot-top">
             <div class="foot-brand">
@@ -1184,7 +1292,7 @@ body.no-anno .anno,body.no-anno .anno-bar,body.no-anno .tag{display:none}
           <div class="foot-bottom">
             <span>© 2026 ManyaIT Inc. All rights reserved.</span>
             <span class="legal"><a href="#s13">Privacy</a><a href="#s13">Terms</a><a href="#s13">Cookies</a><a href="#s13">Accessibility</a></span>
-            <span class="social"><a href="#s13" aria-label="LinkedIn">in</a><a href="#s13" aria-label="X">X</a><a href="#s13" aria-label="YouTube">▶</a></span>
+            <span class="social"><a href="#s13" aria-label="LinkedIn">in</a><a href="#s13" aria-label="X">X</a><a href="#s13" aria-label="Facebook">f</a><a href="#s13" aria-label="YouTube">▶</a></span>
           </div>
         </div>
       </footer>
@@ -1257,29 +1365,29 @@ body.no-anno .anno,body.no-anno .anno-bar,body.no-anno .tag{display:none}
     jump.value = '';
   });
 
-  /* Hero: headline words drive console tabs */
+  /* Loops: clone each reel/row once so the marquee wraps seamlessly */
+  function loop(trackSel, wrapSel){
+    document.querySelectorAll(trackSel).forEach(function(track){
+      Array.prototype.slice.call(track.children).forEach(function(n){
+        var c = n.cloneNode(true); c.setAttribute('aria-hidden', 'true'); track.appendChild(c);
+      });
+    });
+    document.querySelectorAll(wrapSel).forEach(function(w){ w.classList.add('ready'); });
+  }
+  loop('.reel-track', '.reel');
+  loop('.row-track', '.rows');
+
+  /* Hero: headline words cycle and outline the matching reel tiles */
   var words = document.querySelectorAll('.hero-h1 .w');
-  var tabs = document.querySelectorAll('.console-tabs [role="tab"]');
-  var panels = document.querySelectorAll('.console-panel');
-  var cur = 0, timer = null;
+  var tiles = document.querySelectorAll('.rc');
+  var cur = 0;
   function show(i){
     cur = i;
     words.forEach(function(w, j){ w.classList.toggle('on', j === i); });
-    tabs.forEach(function(t, j){ t.setAttribute('aria-selected', String(j === i)); t.tabIndex = j === i ? 0 : -1; });
-    panels.forEach(function(p, j){ p.hidden = j !== i; });
+    tiles.forEach(function(t){ t.classList.toggle('on', Number(t.getAttribute('data-word')) === i); });
   }
-  function stop(){ if(timer){ clearInterval(timer); timer = null; } }
-  tabs.forEach(function(t, j){
-    t.addEventListener('click', function(){ stop(); show(j); });
-    t.addEventListener('keydown', function(e){
-      if(e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
-      e.preventDefault(); stop();
-      var n = (j + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
-      show(n); tabs[n].focus();
-    });
-  });
   show(0);
-  if(!reduce) timer = setInterval(function(){ show((cur + 1) % words.length); }, 3200);
+  if(!reduce) setInterval(function(){ show((cur + 1) % words.length); }, 3200);
 
   /* Filter chips (services bento, insights) */
   function bindFilter(groupId, gridSel){
