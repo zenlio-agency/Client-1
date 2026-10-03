@@ -1,0 +1,257 @@
+---
+import Eyebrow from "@/components/typography/Eyebrow.astro";
+import Heading from "@/components/typography/Heading.astro";
+import Paragraph from "@/components/typography/Paragraph.astro";
+import Button from "@/components/Button.astro";
+import Icon from "@/components/media/Icon.astro";
+import Form from "@/components/form/Form.astro";
+import Input from "@/components/form/Input.astro";
+import Select from "@/components/form/Select.astro";
+import Textarea from "@/components/form/Textarea.astro";
+import arrow from "@/assets/icons/ui-arrow.svg";
+import { CAPABILITIES, INDUSTRIES, tbc } from "@/data/site.ts";
+
+interface Props {
+  /** Set to `false` to omit the component. */
+  render?: boolean;
+}
+
+const { render = true } = Astro.props;
+
+const topics = [
+  ...CAPABILITIES.map((cap) => ({ value: cap.id, label: cap.title })),
+  ...INDUSTRIES.map((industry) => ({
+    value: industry.id,
+    label: `${industry.title} programs`,
+  })),
+  { value: "careers", label: "Careers and the Talent Network" },
+  { value: "other", label: "Something else" },
+];
+
+const next = [
+  [
+    "An engagement lead reads your note",
+    "Every message goes to a person in Dallas, not a queue.",
+  ],
+  [
+    "We set up a 30-minute call",
+    "We listen first: your goals, your systems and your timelines.",
+  ],
+  [
+    "We map the first step together",
+    "You leave with a recommended starting point, whether or not we work together.",
+  ],
+];
+---
+
+{
+  render && (
+    <div class="contact_wrap">
+      <div class="contact_intro">
+        <Eyebrow data-reveal>Start a conversation</Eyebrow>
+        <Heading
+          tag="h1"
+          variant="h1"
+          maxWidth={16}
+          data-reveal
+          style="--reveal-order: 1"
+        >
+          Tell us what you want to build.
+        </Heading>
+        <Paragraph
+          variant="large"
+          maxWidth={44}
+          data-reveal
+          style="--reveal-order: 2"
+        >
+          <Fragment
+            set:html={tbc(
+              "Whether you're expanding a capability, modernizing a platform or building something new, an engagement lead will respond within [1] business day.",
+            )}
+          />
+        </Paragraph>
+        <ol class="contact_next" data-reveal style="--reveal-order: 3">
+          {next.map(([title, text], index) => (
+            <li>
+              <span class="contact_next_index">0{index + 1}</span>
+              <span class="contact_next_text">
+                <strong>{title}</strong>
+                <span>{text}</span>
+              </span>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <div class="contact_card" data-reveal style="--reveal-order: 2">
+        <Form
+          name="start-a-conversation"
+          successMessage="Thanks. This preview form isn't connected to an inbox yet, so nothing was sent. Once ManyaIT's inbox is connected, this is where your note will go."
+        >
+          <div class="contact_row">
+            <Input
+              label="Full name"
+              name="name"
+              autocomplete="name"
+              placeholder="Your name"
+              required
+            />
+            <Input
+              label="Work email"
+              variant="email"
+              name="email"
+              placeholder="name@company.com"
+              required
+            />
+          </div>
+          <Input
+            label="Company"
+            name="company"
+            autocomplete="organization"
+            placeholder="Company name"
+          />
+          <Select
+            label="What would you like to build?"
+            name="topic"
+            options={topics}
+            placeholder="Choose an area"
+            data-topic
+          />
+          <Textarea
+            label="Tell us a little more"
+            name="message"
+            placeholder="Your goals, the systems involved and any timelines"
+            minLines={4}
+          />
+          <div class="contact_submit">
+            <Button type="submit">
+              Start a Conversation
+              <Icon src={arrow} variant="small" class="button_icon" />
+            </Button>
+            <p class="contact_privacy text-style-small">
+              We use your details only to reply to this note.
+            </p>
+          </div>
+        </Form>
+      </div>
+    </div>
+  )
+}
+
+<script>
+  /* Arriving from a capability, industry or careers link preselects the
+     matching topic. */
+  const topic = new URLSearchParams(location.search).get("topic");
+  const select = document.querySelector<HTMLSelectElement>(
+    ".contact_wrap select",
+  );
+  if (
+    topic &&
+    select &&
+    [...select.options].some((option) => option.value === topic)
+  ) {
+    select.value = topic;
+  }
+</script>
+
+<style is:global>
+  @layer components {
+    :where(.contact_wrap) :where(.heading, .text) {
+      margin-block: 0;
+    }
+
+    .contact_wrap {
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-8) var(--section-space-small);
+      @media (width >= 64rem) {
+        grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+        align-items: start;
+      }
+    }
+
+    .contact_intro {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+      @media (width >= 64rem) {
+        position: sticky;
+        top: calc(var(--nav-height) + var(--space-6));
+      }
+    }
+
+    .contact_next {
+      display: flex;
+      flex-direction: column;
+      margin-top: var(--space-4);
+      border-top: var(--border-width) solid var(--border);
+      & li {
+        display: flex;
+        gap: var(--space-4);
+        padding-block: var(--space-4);
+        border-bottom: var(--border-width) solid var(--border);
+      }
+    }
+
+    .contact_next_index {
+      flex: none;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      place-items: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background-color: var(--accent-soft);
+      color: var(--accent-text);
+      font-family: var(--heading-family);
+      font-size: 0.72rem;
+      font-weight: var(--heading-bold);
+    }
+
+    .contact_next_text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      font-size: var(--text-small);
+      color: var(--text-body);
+      & strong {
+        font-family: var(--heading-family);
+        font-weight: var(--heading-bold);
+        color: var(--text);
+      }
+    }
+
+    .contact_card {
+      padding: var(--space-7) var(--space-6);
+      border-radius: var(--radius-main);
+      background-color: var(--background-2);
+      border: var(--border-width) solid var(--border);
+      box-shadow: var(--shadow-raised);
+      & .form_fields {
+        row-gap: var(--space-5);
+      }
+    }
+
+    .contact_row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-5);
+      @media (width >= 48rem) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .contact_submit {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-3) var(--space-5);
+      padding-top: var(--space-2);
+    }
+
+    .contact_privacy {
+      color: var(--text-2);
+    }
+  }
+</style>

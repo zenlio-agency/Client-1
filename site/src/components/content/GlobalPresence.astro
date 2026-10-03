@@ -1,0 +1,441 @@
+---
+import Eyebrow from "@/components/typography/Eyebrow.astro";
+import Heading from "@/components/typography/Heading.astro";
+import Paragraph from "@/components/typography/Paragraph.astro";
+import Button from "@/components/Button.astro";
+import ButtonWrapper from "@/components/wrapper/ButtonWrapper.astro";
+import Icon from "@/components/media/Icon.astro";
+import arrow from "@/assets/icons/ui-arrow.svg";
+import dots from "@/data/world-dots.json";
+import { HUBS, tbc } from "@/data/site.ts";
+
+interface Props {
+  /** Set to `false` to omit the component. */
+  render?: boolean;
+  /** Show the location and opportunity buttons beside the heading. */
+  actions?: boolean;
+}
+
+const { render = true, actions = true } = Astro.props;
+
+/* Same equirectangular grid the dot map was generated on. */
+const project = (lat: number, lon: number) => ({
+  x: (lon + 180) / dots.step,
+  y: (dots.north - lat) / dots.step,
+});
+
+const pins = HUBS.map((hub) => ({ ...hub, ...project(hub.lat, hub.lon) }));
+const [a, b] = pins;
+const arc = `M${a.x} ${a.y} Q${(a.x + b.x) / 2} ${Math.min(a.y, b.y) - 22} ${b.x} ${b.y}`;
+const pct = (value: number, of: number) =>
+  `${((value / of) * 100).toFixed(3)}%`;
+---
+
+{
+  render && (
+    <div class="presence_wrap">
+      <div class="presence_head">
+        <div class="presence_intro">
+          <Eyebrow data-reveal>Global presence</Eyebrow>
+          <Heading data-reveal style="--reveal-order: 1">
+            Two cities. One team.
+          </Heading>
+          <Paragraph
+            variant="large"
+            maxWidth={52}
+            data-reveal
+            style="--reveal-order: 2"
+          >
+            Client leadership in Dallas. Engineering depth in Hyderabad. One
+            plan, one standard of work, and a working day that hands over
+            instead of stopping.
+          </Paragraph>
+        </div>
+        <ButtonWrapper
+          render={actions}
+          marginTop="0"
+          data-reveal
+          style="--reveal-order: 3"
+        >
+          <Button element="link" href="/contact#locations">
+            Explore Locations
+            <Icon src={arrow} variant="small" class="button_icon" />
+          </Button>
+          <Button element="link" href="/#careers" emphasis="secondary">
+            View Opportunities
+          </Button>
+        </ButtonWrapper>
+      </div>
+
+      <figure class="presence_map" data-reveal>
+        <div class="presence_canvas">
+          <svg
+            class="presence_svg"
+            viewBox={`0 0 ${dots.width} ${dots.height + 1}`}
+            role="img"
+            aria-label="World map with ManyaIT hubs in Dallas, Texas and Hyderabad, India"
+          >
+            <path class="presence_dots" d={dots.path} />
+            <path class="presence_arc" d={arc} pathLength="1" />
+            <circle class="presence_traveler" r="0.7">
+              <animateMotion dur="5s" repeatCount="indefinite" path={arc} />
+            </circle>
+            {pins.map((pin) => (
+              <g
+                class="presence_pin"
+                transform={`translate(${pin.x} ${pin.y})`}
+              >
+                <circle class="presence_pin_ring" r="1.3" />
+                <circle class="presence_pin_dot" r="1.3" />
+              </g>
+            ))}
+          </svg>
+          {pins.map((pin, index) => (
+            <div
+              class:list={[
+                "presence_label",
+                index === 0 ? "is-west" : "is-east",
+              ]}
+              style={`left: ${pct(pin.x, dots.width)}; top: ${pct(pin.y, dots.height + 1)};`}
+            >
+              <span class="presence_label_city">{pin.short}</span>
+              <span class="presence_label_role">{pin.role}</span>
+              <span
+                class="presence_label_time"
+                data-clock={pin.timeZone}
+                data-locale={pin.locale}
+              >
+                --:--
+              </span>
+            </div>
+          ))}
+        </div>
+        <figcaption
+          class="presence_caption"
+          set:html={tbc("Serving enterprises in [X] countries.")}
+        />
+      </figure>
+
+      <ul class="presence_hubs">
+        {HUBS.map((hub, index) => (
+          <li
+            class="presence_hub"
+            id={hub.id}
+            data-reveal
+            style={`--reveal-order: ${index}`}
+          >
+            <div class="presence_hub_top">
+              <Heading tag="h3" variant="h4">
+                {hub.city}
+              </Heading>
+              <span class="presence_hub_role">{hub.role}</span>
+            </div>
+            <Paragraph variant="small">{hub.text}</Paragraph>
+            <dl class="presence_hub_details">
+              <div>
+                <dt>Address</dt>
+                <dd set:html={tbc(hub.address)} />
+              </div>
+              <div>
+                <dt>Phone</dt>
+                <dd set:html={tbc(hub.phone)} />
+              </div>
+              <div>
+                <dt>Email</dt>
+                <dd set:html={tbc(hub.email)} />
+              </div>
+              <div>
+                <dt>Local time</dt>
+                <dd data-clock={hub.timeZone} data-locale={hub.locale}>
+                  --:--
+                </dd>
+              </div>
+            </dl>
+            <Button
+              element="link"
+              href={hub.link.href}
+              emphasis="tertiary"
+              class="presence_hub_link"
+            >
+              {hub.link.label}
+              <Icon src={arrow} variant="small" class="button_icon" />
+            </Button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+<script>
+  const clocks = [
+    ...document.querySelectorAll<HTMLElement>(".presence_wrap [data-clock]"),
+  ];
+  const tick = () => {
+    for (const clock of clocks) {
+      try {
+        clock.textContent = new Intl.DateTimeFormat(
+          clock.dataset.locale || "en-US",
+          {
+            hour: "2-digit",
+            minute: "2-digit",
+            timeZone: clock.dataset.clock,
+            timeZoneName: "short",
+          },
+        )
+          .format(new Date())
+          /* en-IN writes "am"; match the US clock's "AM". */
+          .replace(/\b(am|pm)\b/, (period) => period.toUpperCase());
+      } catch {
+        /* An unknown zone leaves the placeholder in place. */
+      }
+    }
+  };
+  if (clocks.length) {
+    tick();
+    window.setInterval(tick, 30_000);
+  }
+</script>
+
+<style is:global>
+  @layer components {
+    /* Spacing here comes from gaps, so type margins step aside. */
+    :where(.presence_wrap) :where(.heading, .text) {
+      margin-block: 0;
+    }
+    .presence_wrap {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-7);
+    }
+
+    .presence_head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: var(--space-6);
+    }
+
+    .presence_intro {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .presence_map {
+      position: relative;
+      margin: 0;
+      padding: var(--space-6) var(--space-4) var(--space-7);
+      border-radius: var(--radius-main);
+      background-color: var(--background-2);
+      border: var(--border-width) solid var(--border);
+      overflow: clip;
+    }
+
+    /* Labels position against the map itself, not the padded frame. */
+    .presence_canvas {
+      position: relative;
+      @media (width < 48rem) {
+        margin-bottom: 3rem;
+      }
+    }
+
+    .presence_svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      overflow: visible;
+    }
+
+    .presence_dots {
+      fill: none;
+      stroke: color-mix(in srgb, var(--slate-300) 70%, var(--white));
+      stroke-width: 0.5;
+      stroke-linecap: round;
+    }
+
+    .presence_arc {
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 0.35;
+      stroke-linecap: round;
+      stroke-dasharray: 1;
+      stroke-dashoffset: 0;
+    }
+
+    .reveal-ready .presence_map:not(.is-revealed) .presence_arc {
+      stroke-dashoffset: 1;
+    }
+
+    .reveal-ready .presence_map .presence_arc {
+      transition: stroke-dashoffset 1.8s var(--reveal-ease) 0.3s;
+    }
+
+    .presence_traveler {
+      fill: var(--accent);
+      .reveal-ready .presence_map:not(.is-revealed) & {
+        opacity: 0;
+      }
+    }
+
+    .presence_pin_dot {
+      fill: var(--accent);
+      stroke: var(--background-2);
+      stroke-width: 0.5;
+    }
+
+    .presence_pin_ring {
+      fill: var(--accent);
+      opacity: 0.35;
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: presence-ring 2.4s var(--hover-ease) infinite;
+    }
+
+    @keyframes presence-ring {
+      0% {
+        scale: 1;
+        opacity: 0.4;
+      }
+      80%,
+      100% {
+        scale: 3.2;
+        opacity: 0;
+      }
+    }
+
+    .presence_label {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+      translate: calc(-100% - 1rem) -50%;
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--radius-small);
+      background-color: var(--background-2);
+      border: var(--border-width) solid var(--border);
+      box-shadow: var(--shadow-raised);
+      font-size: 0.72rem;
+      white-space: nowrap;
+      &.is-east {
+        translate: 1rem -50%;
+      }
+      @media (width < 48rem) {
+        &.is-west,
+        &.is-east {
+          translate: -50% 0.9rem;
+        }
+        .presence_label_role {
+          display: none;
+        }
+      }
+    }
+
+    .presence_label_city {
+      font-family: var(--heading-family);
+      font-size: 0.85rem;
+      font-weight: var(--heading-bold);
+      color: var(--text);
+    }
+
+    .presence_label_role {
+      color: var(--text-2);
+    }
+
+    .presence_label_time {
+      color: var(--accent);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .presence_caption {
+      margin-top: var(--space-4);
+      font-size: var(--text-small);
+      color: var(--text-2);
+      @media (width >= 48rem) {
+        position: absolute;
+        left: var(--space-5);
+        bottom: var(--space-4);
+        margin-top: 0;
+      }
+    }
+
+    .presence_hubs {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--site-gutter);
+      @media (width >= 48rem) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .presence_hub {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      padding: var(--space-6);
+      border-radius: var(--radius-main);
+      background-color: var(--background-2);
+      border: var(--border-width) solid var(--border);
+      scroll-margin-top: calc(var(--nav-height) + var(--space-5));
+    }
+
+    .presence_hub_top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-2);
+    }
+
+    .presence_hub_role {
+      padding: 0.3rem 0.75rem;
+      border-radius: var(--radius-round);
+      background-color: var(--accent-soft);
+      color: var(--accent-text);
+      font-family: var(--heading-family);
+      font-size: 0.75rem;
+      font-weight: var(--heading-medium);
+    }
+
+    .presence_hub_details {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-3) var(--space-5);
+      padding-top: var(--space-4);
+      border-top: var(--border-width) solid var(--divider);
+      & div {
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+        min-width: 0;
+      }
+      & dt {
+        font-size: 0.72rem;
+        color: var(--text-2);
+      }
+      & dd {
+        margin: 0;
+        font-size: var(--text-small);
+        color: var(--text);
+        overflow-wrap: anywhere;
+      }
+    }
+
+    .presence_hub_link {
+      align-self: flex-start;
+      margin-top: auto;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .presence_traveler {
+        display: none;
+      }
+      .presence_pin_ring {
+        animation: none;
+        opacity: 0;
+      }
+    }
+  }
+</style>

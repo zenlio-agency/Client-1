@@ -1,0 +1,208 @@
+---
+import Eyebrow from "@/components/typography/Eyebrow.astro";
+import Heading from "@/components/typography/Heading.astro";
+import Paragraph from "@/components/typography/Paragraph.astro";
+import { tbc } from "@/data/site.ts";
+
+interface Props {
+  /** Set to `false` to omit the component. */
+  render?: boolean;
+}
+
+const { render = true } = Astro.props;
+
+const cards = [
+  {
+    title: "Two cities, one team",
+    text: "Dallas leads the partnership and engagement governance in your time zone. Hyderabad engineers, tests, operates and improves the platforms. One plan, one standard of work.",
+    figure: "Dallas + Hyderabad",
+  },
+  {
+    title: "Dedicated capability",
+    text: "Your team is built for you and stays with you. It learns your systems, your domain and your controls, and runs them better every quarter.",
+    figure: "[XX]%",
+    caption: "of engineers on long-term dedicated teams",
+  },
+  {
+    title: "Long-term ownership",
+    text: "We own outcomes and service levels, not just tasks. The people who build your platform are the people who run and improve it.",
+    figure: "Build · Run · Improve",
+  },
+  {
+    title: "Scale with confidence",
+    text: "Start with a focused team on one platform. Expand into new functions, regions and use cases as results come in.",
+    figure: "Start focused. Grow with results.",
+  },
+];
+---
+
+{
+  render && (
+    <div class="why-cards_wrap">
+      <div class="why-cards_head">
+        <div class="why-cards_intro">
+          <Eyebrow data-reveal>Why ManyaIT</Eyebrow>
+          <Heading maxWidth={18} data-reveal style="--reveal-order: 1">
+            One team. Deep ownership. Built to scale.
+          </Heading>
+        </div>
+        <div class="why-cards_aside" data-reveal style="--reveal-order: 2">
+          <Paragraph variant="large" maxWidth={44}>
+            We build technology capability that becomes part of how your
+            enterprise works. Then we stay to run it and grow it.
+          </Paragraph>
+        </div>
+      </div>
+      <ol class="why-cards_list">
+        {cards.map((card, index) => (
+          <li
+            class="why-cards_card"
+            data-reveal
+            style={`--reveal-order: ${index}`}
+          >
+            <span class="why-cards_index">0{index + 1}</span>
+            <Heading tag="h3" variant="h5" class="why-cards_title">
+              {card.title}
+            </Heading>
+            <div class="why-cards_figure">
+              <span set:html={tbc(card.figure)} />
+              {card.caption && <small>{card.caption}</small>}
+            </div>
+            <Paragraph variant="small" class="why-cards_text">
+              {card.text}
+            </Paragraph>
+          </li>
+        ))}
+      </ol>
+    </div>
+  )
+}
+
+<style is:global>
+  @layer components {
+    /* Spacing here comes from gaps, so type margins step aside. */
+    :where(.why-cards_wrap) :where(.heading, .text) {
+      margin-block: 0;
+    }
+    .why-cards_wrap {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+    }
+
+    .why-cards_head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-5) var(--section-space-small);
+      align-items: end;
+      @media (width >= 64rem) {
+        grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      }
+    }
+
+    .why-cards_intro {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .why-cards_aside {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-4);
+    }
+
+    .why-cards_list {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--site-gutter);
+      align-items: start;
+      @media (width >= 48rem) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      @media (width >= 64rem) {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        padding-bottom: var(--space-8);
+      }
+    }
+
+    .why-cards_card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: var(--space-5);
+      @media (width >= 48rem) {
+        min-height: 26rem;
+      }
+      background-color: var(--background-2);
+      border: var(--border-width) solid var(--border);
+      border-radius: var(--radius-main);
+      transition:
+        border-color var(--hover-duration) var(--hover-ease),
+        box-shadow 400ms var(--reveal-ease),
+        translate 400ms var(--reveal-ease);
+      @media (width >= 64rem) {
+        &:nth-child(even) {
+          margin-top: var(--space-8);
+        }
+      }
+      @media (hover: hover) {
+        &:hover {
+          border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+          box-shadow: var(--shadow-float);
+          translate: 0 -0.25rem;
+          .why-cards_index {
+            background-color: var(--accent);
+            color: var(--white);
+          }
+        }
+      }
+    }
+
+    .why-cards_index {
+      align-self: flex-start;
+      padding: 0.3rem 0.6rem;
+      border-radius: var(--radius-round);
+      background-color: var(--background-3);
+      font-family: var(--heading-family);
+      font-size: 0.72rem;
+      font-weight: var(--heading-bold);
+      color: var(--text-2);
+      transition:
+        background-color var(--hover-duration) var(--hover-ease),
+        color var(--hover-duration) var(--hover-ease);
+    }
+
+    .why-cards_title {
+      margin-top: var(--space-4);
+    }
+
+    .why-cards_figure {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin-block: auto var(--space-5);
+      padding-top: var(--space-7);
+      font-family: var(--heading-family);
+      font-size: var(--h4);
+      font-weight: var(--heading-bold);
+      letter-spacing: var(--letter-spacing-snug);
+      line-height: 1.15;
+      color: var(--accent);
+      & small {
+        font-family: var(--primary-family);
+        font-size: var(--text-small);
+        font-weight: var(--primary-regular);
+        letter-spacing: 0;
+        color: var(--text-2);
+      }
+    }
+
+    .why-cards_text {
+      padding-top: var(--space-4);
+      border-top: var(--border-width) solid var(--divider);
+    }
+  }
+</style>

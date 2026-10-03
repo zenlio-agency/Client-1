@@ -1,0 +1,87 @@
+---
+import Layout from "@/layouts/BaseLayout.astro";
+import Section from "@/components/wrapper/Section.astro";
+import HeroHome from "@/components/content/HeroHome.astro";
+import TrustStrip from "@/components/content/TrustStrip.astro";
+import ChallengeRows from "@/components/content/ChallengeRows.astro";
+import WhyCards from "@/components/content/WhyCards.astro";
+import CapabilityBento from "@/components/content/CapabilityBento.astro";
+import ProcessSteps from "@/components/content/ProcessSteps.astro";
+import IndustryTabs from "@/components/content/IndustryTabs.astro";
+import ImpactCase from "@/components/content/ImpactCase.astro";
+import CareersHome from "@/components/content/CareersHome.astro";
+import InsightsGrid from "@/components/content/InsightsGrid.astro";
+import GlobalPresence from "@/components/content/GlobalPresence.astro";
+import EcosystemCards from "@/components/content/EcosystemCards.astro";
+import CtaFinal from "@/components/content/CtaFinal.astro";
+---
+
+<Layout
+  title="Data, SAP, AI and Digital Engineering"
+  description="ManyaIT builds, runs and scales dedicated technology capabilities across Data, SAP, AI and Digital Engineering, from Dallas and Hyderabad."
+>
+  {/* 01 Hero */}
+  <Section paddingTop="small" paddingBottom="small">
+    <HeroHome />
+  </Section>
+
+  {/* 02 Trust / scale strip */}
+  <Section theme="dark" paddingTop="small" paddingBottom="small">
+    <TrustStrip />
+  </Section>
+
+  {/* 02b Challenge rows */}
+  <Section>
+    <ChallengeRows />
+  </Section>
+
+  {/* 03 Why ManyaIT */}
+  <Section theme="tint" id="why">
+    <WhyCards />
+  </Section>
+
+  {/* 04 What we build */}
+  <Section id="capabilities">
+    <CapabilityBento />
+  </Section>
+
+  {/* 05 How we work */}
+  <Section theme="tint" id="how">
+    <ProcessSteps />
+  </Section>
+
+  {/* 06 Industries */}
+  <Section id="industries">
+    <IndustryTabs />
+  </Section>
+
+  {/* 07 Enterprise impact */}
+  <Section theme="tint" id="impact">
+    <ImpactCase />
+  </Section>
+
+  {/* 08 Careers */}
+  <Section id="careers">
+    <CareersHome />
+  </Section>
+
+  {/* 09 Insights */}
+  <Section theme="tint" id="insights">
+    <InsightsGrid />
+  </Section>
+
+  {/* 10 Global presence */}
+  <Section id="locations">
+    <GlobalPresence />
+  </Section>
+
+  {/* 11 Ecosystem: renders once verified companies are supplied */}
+  <Section theme="tint" id="ecosystem">
+    <EcosystemCards />
+  </Section>
+
+  {/* 12 Final CTA */}
+  <Section theme="dark" paddingTop="large">
+    <CtaFinal />
+  </Section>
+</Layout>

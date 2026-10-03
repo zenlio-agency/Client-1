@@ -2,6 +2,23 @@
 
 ManyaIT website redesign.
 
+| Folder       | What it is                                                     |
+| ------------ | -------------------------------------------------------------- |
+| `site/`      | The website, built with Astro and Lumos. See `site/README.md`. |
+| `content/`   | Homepage copy (`homepage-copy.md`).                            |
+| `wireframe/` | Black-and-white homepage wireframe.                            |
+
+## Site
+
+```sh
+cd site
+npm install
+npm run dev
+```
+
+Then open http://localhost:4321. `site/README.md` covers the structure, brand
+tokens, motion, and what has to be confirmed before launch.
+
 ## Wireframe
 
 `wireframe/index.html` is the black-and-white homepage wireframe (navbar + 13 sections). Open it in a browser; no build step is needed.

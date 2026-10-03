@@ -1,0 +1,287 @@
+---
+import Heading from "@/components/typography/Heading.astro";
+import Paragraph from "@/components/typography/Paragraph.astro";
+import Button from "@/components/Button.astro";
+import ButtonWrapper from "@/components/wrapper/ButtonWrapper.astro";
+import Icon from "@/components/media/Icon.astro";
+import CapabilityReel from "@/components/content/CapabilityReel.astro";
+import arrow from "@/assets/icons/ui-arrow.svg";
+import { CTA } from "@/data/site.ts";
+
+interface Props {
+  /** Set to `false` to omit the component. */
+  render?: boolean;
+}
+
+const { render = true } = Astro.props;
+
+const words = [
+  { key: "data", label: "Data" },
+  { key: "sap", label: "SAP" },
+  { key: "ai", label: "AI" },
+  { key: "digital", label: "Digital Engineering" },
+];
+---
+
+{
+  render && (
+    <div class="hero-home_wrap" data-hero>
+      <div class="hero-home_copy">
+        <div class="hero-home_badge" data-reveal style="--reveal-order: 0">
+          <span class="hero-home_pulse" aria-hidden="true" />
+          {words.map((word, index) => (
+            <Fragment>
+              {index > 0 && (
+                <span class="hero-home_sep" aria-hidden="true">
+                  ·
+                </span>
+              )}
+              <span
+                class:list={["hero-home_word", index === 0 && "is-active"]}
+                data-word={word.key}
+              >
+                {word.label}
+              </span>
+            </Fragment>
+          ))}
+        </div>
+        <Heading
+          tag="h1"
+          variant="display"
+          class="hero-home_title"
+          data-reveal
+          style="--reveal-order: 1"
+        >
+          Build the capabilities your enterprise{" "}
+          <span class="hero-home_mark">needs next.</span>
+        </Heading>
+        <Paragraph
+          variant="large"
+          maxWidth={62}
+          class="hero-home_lede"
+          data-reveal
+          style="--reveal-order: 2"
+        >
+          ManyaIT builds, runs and scales dedicated technology capabilities
+          across Data, SAP, AI and Digital Engineering. One team across Dallas
+          and Hyderabad, working as an extension of your own technology
+          organization.
+        </Paragraph>
+        <ul
+          class="hero-home_points text-style-small"
+          data-reveal
+          style="--reveal-order: 3"
+        >
+          <li>Dedicated teams</li>
+          <li>Long-term ownership</li>
+          <li>Enterprise-grade execution</li>
+        </ul>
+        <ButtonWrapper data-reveal style="--reveal-order: 4">
+          <Button element="link" href={CTA.primary.href}>
+            {CTA.primary.label}
+            <Icon src={arrow} variant="small" class="button_icon" />
+          </Button>
+          <Button element="link" href="/#capabilities" emphasis="secondary">
+            Explore Capabilities
+          </Button>
+        </ButtonWrapper>
+        <p
+          class="hero-home_alt text-style-small"
+          data-reveal
+          style="--reveal-order: 5"
+        >
+          Building your career?{" "}
+          <a href={CTA.secondary.href}>
+            {CTA.secondary.label}
+            <span aria-hidden="true"> →</span>
+          </a>
+        </p>
+      </div>
+      <CapabilityReel data-reveal style="--reveal-order: 5" />
+    </div>
+  )
+}
+
+<script>
+  /* The eyebrow walks through the four capability areas and outlines the
+     matching tiles in the reel. Still for reduced motion and hidden tabs. */
+  for (const hero of document.querySelectorAll<HTMLElement>("[data-hero]")) {
+    const words = [...hero.querySelectorAll<HTMLElement>("[data-word]")];
+    const tiles = [...hero.querySelectorAll<HTMLElement>("[data-cap]")];
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+    let index = 0;
+
+    const show = (next: number) => {
+      index = next;
+      const key = words[index]?.dataset.word;
+      words.forEach((word, i) =>
+        word.classList.toggle("is-active", i === index),
+      );
+      tiles.forEach((tile) =>
+        tile.classList.toggle("is-active", tile.dataset.cap === key),
+      );
+    };
+
+    show(0);
+    window.setInterval(() => {
+      if (reduced.matches || document.hidden) return;
+      show((index + 1) % words.length);
+    }, 2600);
+  }
+</script>
+
+<style is:global>
+  @layer components {
+    .section:has(> .container > .hero-home_wrap) {
+      background-image:
+        radial-gradient(
+          60rem 28rem at 50% -8rem,
+          var(--blue-50),
+          transparent 70%
+        ),
+        linear-gradient(to bottom, transparent 70%, var(--off-white));
+    }
+
+    .hero-home_wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--section-space-small);
+      width: 100%;
+    }
+
+    .hero-home_copy {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      --_alignment: center;
+      max-width: 60rem;
+    }
+
+    .hero-home_badge {
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 0.35rem 0.6rem;
+      padding: 0.45rem 0.95rem 0.45rem 0.75rem;
+      border: var(--border-width) solid var(--border);
+      border-radius: var(--radius-round);
+      background-color: var(--background-2);
+      font-family: var(--heading-family);
+      font-size: 0.75rem;
+      font-weight: var(--heading-bold);
+      letter-spacing: var(--letter-spacing-wide);
+      text-transform: uppercase;
+      color: var(--text-2);
+      box-shadow: var(--shadow-raised);
+    }
+
+    .hero-home_pulse {
+      position: relative;
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 50%;
+      background-color: var(--accent);
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background-color: var(--accent);
+        animation: hero-pulse 2.6s var(--hover-ease) infinite;
+      }
+    }
+
+    @keyframes hero-pulse {
+      0% {
+        scale: 1;
+        opacity: 0.6;
+      }
+      70%,
+      100% {
+        scale: 2.8;
+        opacity: 0;
+      }
+    }
+
+    .hero-home_sep {
+      color: var(--border);
+    }
+
+    .hero-home_word {
+      transition: color 400ms var(--hover-ease);
+      &.is-active {
+        color: var(--accent);
+      }
+    }
+
+    .hero-home_title {
+      margin-top: var(--space-6);
+      max-width: 22ch;
+    }
+
+    /* The palette's highlight: a soft blue band that draws in under the
+       phrase once the headline arrives. */
+    .hero-home_mark {
+      background-image: linear-gradient(var(--accent-soft), var(--accent-soft));
+      background-repeat: no-repeat;
+      background-position: 0 84%;
+      background-size: 100% 0.26em;
+      padding-inline: 0.04em;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+      color: var(--accent-text);
+    }
+
+    .reveal-ready .hero-home_title .hero-home_mark {
+      background-size: 0% 0.26em;
+      transition: background-size 1.1s var(--reveal-ease) 0.55s;
+    }
+
+    .reveal-ready .hero-home_title.is-revealed .hero-home_mark {
+      background-size: 100% 0.26em;
+    }
+
+    .hero-home_lede {
+      margin-top: var(--space-5);
+    }
+
+    .hero-home_points {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-1) var(--space-5);
+      margin-top: var(--space-5);
+      color: var(--text-2);
+      & li {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5em;
+        &::before {
+          content: "";
+          width: 0.35rem;
+          height: 0.35rem;
+          border-radius: 50%;
+          background-color: var(--accent);
+        }
+      }
+    }
+
+    .hero-home_alt {
+      margin-top: var(--space-5);
+      color: var(--text-2);
+      & a {
+        color: var(--link-text);
+        font-weight: var(--primary-bold);
+        transition: color var(--hover-duration) var(--hover-ease);
+        @media (hover: hover) {
+          &:hover {
+            color: var(--link-text-hover);
+          }
+        }
+      }
+    }
+  }
+</style>
