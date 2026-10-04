@@ -39,13 +39,15 @@ const stats = [
 
 <style is:global>
   @layer components {
+    /* A compact strip: tight padding and gaps so it reads as a summary
+       under the statement, not a second hero. */
     .trust-strip_wrap {
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: var(--space-6);
-      padding: var(--space-6) var(--space-5);
-      border-radius: 1.75rem;
+      gap: var(--space-4);
+      padding: var(--space-4) var(--space-4) var(--space-5);
+      border-radius: 1.5rem;
       overflow: clip;
       background-image: radial-gradient(
         circle at 100% 0%,
@@ -53,14 +55,14 @@ const stats = [
         transparent 55%
       );
       @media (width >= 64rem) {
-        padding: var(--space-8) var(--space-7) var(--space-7);
+        padding: var(--space-5) var(--space-6) var(--space-6);
       }
     }
 
     .trust-strip_list {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: var(--space-6) 0;
+      gap: var(--space-5) 0;
       @media (width >= 64rem) {
         grid-template-columns: repeat(4, minmax(0, 1fr));
       }
@@ -77,22 +79,21 @@ const stats = [
       }
     }
 
+    /* Figures scale with the viewport up to 3.25rem (52px). */
     .trust-strip_value {
       font-family: var(--display-family);
-      font-size: var(--h3);
+      font-size: clamp(1.75rem, 1rem + 2.2vw, 3.25rem);
       font-weight: 700;
       letter-spacing: var(--letter-spacing-tight);
       line-height: 1;
       color: var(--text);
       white-space: nowrap;
-      @media (width >= 48rem) {
-        font-size: var(--h2);
-      }
     }
 
     .trust-strip_label {
-      max-width: 22ch;
+      max-width: 24ch;
       font-size: var(--text-small);
+      line-height: 1.45;
       color: var(--text-body);
     }
   }

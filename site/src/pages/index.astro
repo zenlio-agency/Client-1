@@ -11,7 +11,6 @@ import CareersHome from "@/components/content/CareersHome.astro";
 import InsightsGrid from "@/components/content/InsightsGrid.astro";
 import GlobalPresence from "@/components/content/GlobalPresence.astro";
 import EcosystemCards from "@/components/content/EcosystemCards.astro";
-import CtaFinal from "@/components/content/CtaFinal.astro";
 ---
 
 <Layout
@@ -59,13 +58,8 @@ import CtaFinal from "@/components/content/CtaFinal.astro";
     <GlobalPresence />
   </Section>
 
-  {/* Ecosystem: renders once verified companies are supplied */}
+  {/* Other companies, closing the page above the footer */}
   <Section theme="tint" id="ecosystem">
     <EcosystemCards />
-  </Section>
-
-  {/* Final CTA */}
-  <Section theme="dark" paddingTop="large">
-    <CtaFinal />
   </Section>
 </Layout>

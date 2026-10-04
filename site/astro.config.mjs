@@ -37,7 +37,16 @@ export default defineConfig({
           {
             weight: "200 800",
             style: "normal",
-            src: ["./src/assets/fonts/plus-jakarta-sans-latin-wght-normal.woff2"],
+            src: [
+              "./src/assets/fonts/plus-jakarta-sans-latin-wght-normal.woff2",
+            ],
+          },
+          {
+            weight: "200 800",
+            style: "italic",
+            src: [
+              "./src/assets/fonts/plus-jakarta-sans-latin-wght-italic.woff2",
+            ],
           },
         ],
       },

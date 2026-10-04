@@ -7,7 +7,9 @@ import ButtonWrapper from "@/components/wrapper/ButtonWrapper.astro";
 import Icon from "@/components/media/Icon.astro";
 import arrow from "@/assets/icons/ui-arrow.svg";
 import arrowUp from "@/assets/icons/ui-arrow-up-right.svg";
+import PhotoTile from "@/components/item/PhotoTile.astro";
 import { CAPABILITIES, tbc } from "@/data/site.ts";
+import { CAREERS_POINT_PHOTOS } from "@/data/photos.ts";
 
 interface Props {
   /** Set to `false` to omit the component. */
@@ -112,11 +114,18 @@ const roles = [
         <ul class="careers_points">
           {points.map((point, index) => (
             <li data-reveal style={`--reveal-order: ${index}`}>
-              <span class="careers_points_index">0{index + 1}</span>
-              <Heading tag="h3" variant="h6">
-                {point.title}
-              </Heading>
-              <Paragraph variant="small">{point.text}</Paragraph>
+              <PhotoTile
+                photo={CAREERS_POINT_PHOTOS[index]}
+                class="careers_points_tile"
+              >
+                <span class="photo-tile_eyebrow" slot="top">
+                  0{index + 1}
+                </span>
+                <h3 class="photo-tile_title is-small">{point.title}</h3>
+                <p class="photo-tile_text" slot="reveal">
+                  {point.text}
+                </p>
+              </PhotoTile>
             </li>
           ))}
         </ul>
@@ -279,23 +288,11 @@ const roles = [
       @media (width >= 30rem) {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
-      & li {
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-2);
-        padding: var(--space-5);
-        border-radius: var(--radius-main);
-        background-color: var(--background-2);
-        border: var(--border-width) solid var(--border);
-      }
     }
 
-    .careers_points_index {
-      margin-bottom: var(--space-2);
-      font-family: var(--heading-family);
-      font-size: 0.72rem;
-      font-weight: var(--heading-bold);
-      color: var(--accent);
+    .careers_points_tile {
+      height: 100%;
+      min-height: 14rem;
     }
 
     .careers_finder {

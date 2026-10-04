@@ -4,8 +4,10 @@ import Heading from "@/components/typography/Heading.astro";
 import Paragraph from "@/components/typography/Paragraph.astro";
 import Button from "@/components/Button.astro";
 import Icon from "@/components/media/Icon.astro";
+import PhotoTile from "@/components/item/PhotoTile.astro";
 import arrow from "@/assets/icons/ui-arrow.svg";
 import { CAPABILITIES, CTA } from "@/data/site.ts";
+import { CAPABILITY_PHOTOS } from "@/data/photos.ts";
 
 interface Props {
   /** Set to `false` to omit the component. */
@@ -38,77 +40,46 @@ const { render = true } = Astro.props;
 
       <div class="bento_grid">
         {CAPABILITIES.map((cap, index) => (
-          <article
-            class:list={["bento_tile", index === 0 && "is-wide"]}
+          <PhotoTile
+            href={`${CTA.primary.href}?topic=${cap.id}`}
+            photo={CAPABILITY_PHOTOS[cap.id]}
+            class={`bento_tile is-${cap.id}`}
             id={cap.id}
             data-reveal
             style={`--reveal-order: ${index % 3}`}
           >
-            <div class="bento_body">
-              <span class="bento_icon">
-                <Icon src={cap.icon} />
+            <span class="photo-tile_icon" slot="top">
+              <Icon src={cap.icon} variant="small" />
+            </span>
+            <h3 class:list={["photo-tile_title", index === 0 && "is-large"]}>
+              {cap.title}
+            </h3>
+            <Fragment slot="reveal">
+              <p class="photo-tile_text">{cap.line}</p>
+              <span class="photo-tile_more">
+                Talk to us
+                <Icon src={arrow} variant="small" />
               </span>
-              <div class="bento_text">
-                <Heading tag="h3" variant="h5" class="bento_title">
-                  {cap.title}
-                </Heading>
-                <Paragraph variant="small" class="bento_line">
-                  {cap.line}
-                </Paragraph>
-              </div>
-            </div>
-            {index === 0 && (
-              <div class="bento_flow" aria-hidden="true">
-                <div class="bento_flow_col">
-                  <span>ERP</span>
-                  <span>CRM</span>
-                  <span>IoT</span>
-                </div>
-                <div class="bento_flow_link">
-                  <i />
-                  <i />
-                </div>
-                <div class="bento_flow_col is-core">
-                  <span>Lakehouse</span>
-                </div>
-                <div class="bento_flow_link">
-                  <i />
-                  <i />
-                </div>
-                <div class="bento_flow_col is-out">
-                  <span>BI</span>
-                  <span>AI</span>
-                </div>
-              </div>
-            )}
-          </article>
+            </Fragment>
+          </PhotoTile>
         ))}
 
-        <article
-          class="bento_tile is-wide is-cta theme-brand"
+        <PhotoTile
+          tone="brand"
+          class="bento_tile is-cta"
           data-reveal
           style="--reveal-order: 2"
         >
-          <Heading tag="h3" variant="h4">
-            Need a team fast?
-          </Heading>
-          <Paragraph maxWidth={38}>
+          <h3 class="photo-tile_title is-large">Need a team fast?</h3>
+          <p class="photo-tile_text bento_cta_text">
             Share the skills you need. We'll have the right people ready in
             weeks.
-          </Paragraph>
-          <Button
-            element="link"
-            href={CTA.primary.href}
-            class="bento_cta_button"
-          >
+          </p>
+          <Button element="link" href={CTA.primary.href} emphasis="secondary">
             {CTA.primary.label}
             <Icon src={arrow} variant="small" class="button_icon" />
           </Button>
-          <svg class="bento_cta_mark" viewBox="0 0 190 120" aria-hidden="true">
-            <path d="M0 0 161 119.5H135L24 37.6v58.9L0 119.5Z" />
-            <path d="M189.5 0v119.5H167V36l-57.6 34.7-13.7-9.7Z" />
-          </svg>
-        </article>
+        </PhotoTile>
       </div>
     </div>
   )
@@ -120,12 +91,11 @@ const { render = true } = Astro.props;
     :where(.bento_wrap) :where(.heading, .text) {
       margin-block: 0;
     }
-
     .bento_wrap {
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: var(--space-7);
+      gap: var(--space-8);
     }
 
     .bento_head {
@@ -144,208 +114,59 @@ const { render = true } = Astro.props;
       gap: var(--space-4);
     }
 
+    /* Photo mosaic: Data leads as a large square, the rest fill around it. */
     .bento_grid {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
+      grid-auto-rows: 17rem;
       gap: var(--site-gutter);
       @media (width >= 48rem) {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-rows: 15rem;
+        grid-template-areas:
+          "data data"
+          "sap ai"
+          "flow code"
+          "cta cta";
       }
       @media (width >= 64rem) {
         grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-template-areas:
+          "data data sap sap"
+          "data data ai flow"
+          "code code cta cta";
+      }
+      /* Areas only exist from 48rem; on phones the tiles simply stack. */
+      @media (width >= 48rem) {
+        & > .is-cap-data {
+          grid-area: data;
+        }
+        & > .is-cap-sap {
+          grid-area: sap;
+        }
+        & > .is-cap-ai {
+          grid-area: ai;
+        }
+        & > .is-cap-flow {
+          grid-area: flow;
+        }
+        & > .is-cap-code {
+          grid-area: code;
+        }
+        & > .is-cta {
+          grid-area: cta;
+        }
       }
     }
 
     .bento_tile {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-4);
-      padding: var(--space-5);
-      background-color: var(--background-2);
-      border: var(--border-width) solid var(--border);
-      border-radius: var(--radius-main);
-      overflow: clip;
+      min-height: 0;
       scroll-margin-top: calc(var(--nav-height) + var(--space-5));
-      transition:
-        border-color var(--hover-duration) var(--hover-ease),
-        box-shadow 400ms var(--reveal-ease),
-        translate 400ms var(--reveal-ease);
-      @media (width >= 48rem) {
-        min-height: 15rem;
-        &.is-wide {
-          grid-column: span 2;
-        }
-      }
-      @media (hover: hover) {
-        &:not(.is-cta):hover {
-          border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
-          box-shadow: var(--shadow-float);
-          translate: 0 -0.25rem;
-          .bento_icon {
-            background-color: var(--accent);
-            color: var(--white);
-          }
-        }
-      }
-      &:target {
-        border-color: var(--accent);
-        box-shadow: 0 0 0 0.25rem var(--accent-soft);
-      }
-      &.is-wide:not(.is-cta) {
-        background-image: radial-gradient(
-          circle at 100% 0%,
-          var(--blue-50),
-          transparent 60%
-        );
-        @media (width >= 48rem) {
-          display: grid;
-          grid-template-columns: minmax(0, 1fr) auto;
-          align-items: stretch;
-          gap: var(--space-5);
-        }
-      }
     }
 
-    .bento_body {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: var(--space-6);
-    }
-
-    .bento_icon {
-      display: grid;
-      place-items: center;
-      width: 2.75rem;
-      height: 2.75rem;
-      border-radius: var(--radius-medium);
-      background-color: var(--accent-soft);
-      color: var(--accent-text);
-      transition:
-        background-color var(--hover-duration) var(--hover-ease),
-        color var(--hover-duration) var(--hover-ease);
-    }
-
-    .bento_text {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-2);
-    }
-
-    .bento_line {
-      max-width: 34ch;
-    }
-
-    /* Wide data tile: sources flowing into one platform, then out to
-       decisions. */
-    .bento_flow {
-      align-self: center;
-      display: grid;
-      grid-template-columns: auto 1.75rem auto 1.75rem auto;
-      align-items: center;
-      gap: var(--space-2);
-      padding: var(--space-3);
-      border: var(--border-width) dashed var(--border);
-      border-radius: var(--radius-medium);
-      background-color: color-mix(
-        in srgb,
-        var(--background-2) 70%,
-        transparent
-      );
-      font-size: 0.72rem;
-    }
-
-    .bento_flow_col {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      & span {
-        padding: 0.3rem 0.6rem;
-        border-radius: var(--radius-small);
-        background-color: var(--background-3);
-        color: var(--text-body);
-        text-align: center;
-        white-space: nowrap;
-      }
-      &.is-core span {
-        padding-block: 0.6rem;
-        background-color: var(--accent);
-        color: var(--white);
-        font-weight: var(--primary-medium);
-      }
-      &.is-out span {
-        background-color: var(--accent-soft);
-        color: var(--accent-text);
-      }
-    }
-
-    .bento_flow_link {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 0.9rem;
-      & i {
-        position: relative;
-        display: block;
-        height: var(--border-width);
-        background-color: var(--border);
-        &::after {
-          content: "";
-          position: absolute;
-          top: -0.15rem;
-          left: 0;
-          width: 0.35rem;
-          height: 0.35rem;
-          border-radius: 50%;
-          background-color: var(--accent);
-          animation: bento-flow 2.4s var(--hover-ease) infinite;
-        }
-        &:nth-child(2)::after {
-          animation-delay: 1.2s;
-        }
-      }
-    }
-
-    @keyframes bento-flow {
-      0% {
-        left: 0;
-        opacity: 0;
-      }
-      15%,
-      85% {
-        opacity: 1;
-      }
-      100% {
-        left: calc(100% - 0.35rem);
-        opacity: 0;
-      }
-    }
-
-    .is-cta {
-      justify-content: flex-end;
-      border-color: transparent;
-    }
-
-    .bento_cta_button {
-      align-self: flex-start;
-      margin-top: var(--space-2);
-    }
-
-    .bento_cta_mark {
-      position: absolute;
-      top: var(--space-5);
-      right: var(--space-5);
-      width: 5.5rem;
-      fill: color-mix(in srgb, var(--white) 18%, transparent);
-      transition: translate 600ms var(--reveal-ease);
-      @media (width < 48rem) {
-        display: none;
-      }
-      .is-cta:hover & {
-        translate: 0 -0.25rem;
-      }
+    .bento_cta_text {
+      margin-bottom: var(--space-2);
+      font-size: var(--text-main);
     }
   }
 </style>

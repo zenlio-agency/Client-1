@@ -1,0 +1,5 @@
+# Keep LF line endings on every platform (the code is formatted with Prettier).
+* text=auto eol=lf
+*.woff2 binary
+*.jpg binary
+*.png binary

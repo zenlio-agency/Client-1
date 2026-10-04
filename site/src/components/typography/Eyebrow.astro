@@ -40,38 +40,48 @@ const content = await slotContent(Astro.slots);
 
 <style is:global>
   @layer components {
+    /* Pill label: a Manya Blue dot and the section name. White on light
+       sections, a faint glass pill on dark ones. */
     .eyebrow_wrap {
+      --_dot: var(--blue-500);
       display: inline-flex;
+      /* Hugs its text even inside stretching flex columns. */
+      width: fit-content;
       align-items: center;
       justify-content: var(--_alignment, start);
-      gap: 0.75em;
-      color: var(--accent);
+      gap: 0.6rem;
+      padding: 0.45rem 1rem 0.45rem 0.8rem;
+      border: var(--border-width) solid var(--border);
+      border-radius: var(--radius-round);
+      background-color: var(--background-2);
+      color: var(--text);
+      .theme-dark & {
+        --_dot: var(--blue-400);
+      }
 
       .eyebrow_text {
-        font-family: var(--heading-family);
-        font-size: 0.78rem;
-        font-weight: var(--heading-bold);
-        letter-spacing: var(--letter-spacing-wide);
-        text-transform: uppercase;
+        font-family: var(--primary-family);
+        font-size: var(--text-small);
+        font-weight: var(--primary-regular);
         line-height: 1.2;
       }
 
       &.tag {
+        border-color: transparent;
         background-color: var(--accent-soft);
         color: var(--accent-text);
         padding: 0.4em 0.85em;
-        border-radius: var(--radius-round);
         .eyebrow_text {
           font-size: 0.75rem;
           letter-spacing: 0.04em;
-          text-transform: none;
         }
       }
       .eyebrow_marker {
         flex: none;
-        width: 1.5rem;
-        height: var(--border-width);
-        background-color: currentcolor;
+        width: 0.45rem;
+        height: 0.45rem;
+        border-radius: 50%;
+        background-color: var(--_dot);
       }
     }
   }

@@ -2,57 +2,68 @@
 import Eyebrow from "@/components/typography/Eyebrow.astro";
 import Heading from "@/components/typography/Heading.astro";
 import Paragraph from "@/components/typography/Paragraph.astro";
-
-type Company = {
-  /** Company name. */
-  name: string;
-  /** What it builds and for whom. */
-  line: string;
-  /** Verified relationship to ManyaIT. */
-  relationship: "Subsidiary" | "Sister company" | "Partner";
-  /** Website. */
-  href: string;
-};
+import PhotoTile from "@/components/item/PhotoTile.astro";
+import { ECOSYSTEM, tbc } from "@/data/site.ts";
 
 interface Props {
   /** Set to `false` to omit the component. */
   render?: boolean;
-  /**
-   * Affiliated companies, each confirmed in writing. With none, the section
-   * renders nothing rather than showing invented names.
-   */
-  companies?: Company[];
+  /** Companies to show, each confirmed in writing. Defaults to `ECOSYSTEM`. */
+  companies?: typeof ECOSYSTEM;
 }
 
-const { render = true, companies = [] } = Astro.props;
+const { render = true, companies = ECOSYSTEM } = Astro.props;
 ---
 
 {
   render && companies.length > 0 && (
     <div class="ecosystem_wrap">
-      <Eyebrow>The ManyaIT ecosystem</Eyebrow>
-      <Heading maxWidth={22}>
-        More capabilities. One connected ecosystem.
-      </Heading>
-      <Paragraph variant="large" maxWidth={52}>
-        {companies.map((c) => c.name).join(", ")} share ManyaIT's standards of
-        engineering and ownership, so enterprises can add capabilities without
-        adding complexity.
-      </Paragraph>
+      <div class="ecosystem_head">
+        <div class="ecosystem_intro">
+          <Eyebrow data-reveal>The ManyaIT ecosystem</Eyebrow>
+          <Heading maxWidth={20} data-reveal style="--reveal-order: 1">
+            More capabilities. One connected ecosystem.
+          </Heading>
+        </div>
+        <Paragraph
+          variant="large"
+          maxWidth={44}
+          data-reveal
+          style="--reveal-order: 2"
+        >
+          Companies that share ManyaIT's standards of engineering and ownership,
+          so enterprises can add capabilities without adding complexity.
+        </Paragraph>
+      </div>
       <ul class="ecosystem_list">
-        {companies.map((company) => (
-          <li>
-            <a
-              class="ecosystem_card"
+        {companies.map((company, index) => (
+          <li data-reveal style={`--reveal-order: ${index}`}>
+            <PhotoTile
               href={company.href}
-              target="_blank"
-              rel="noopener"
+              target={company.href ? "_blank" : undefined}
+              rel={company.href ? "noopener" : undefined}
+              class="ecosystem_tile"
             >
-              <span class="ecosystem_relationship">{company.relationship}</span>
-              <span class="ecosystem_name">{company.name}</span>
-              <span class="ecosystem_line">{company.line}</span>
-              <span class="ecosystem_visit">Visit site ↗</span>
-            </a>
+              <span class="ecosystem_logo" slot="top">
+                {company.logo ? (
+                  <img src={company.logo} alt="" loading="lazy" />
+                ) : (
+                  <span set:html={tbc("[Logo]")} />
+                )}
+              </span>
+              <span
+                class="photo-tile_eyebrow ecosystem_relationship"
+                set:html={tbc(company.relationship)}
+              />
+              <span
+                class="photo-tile_title is-small"
+                set:html={tbc(company.name)}
+              />
+              <span class="photo-tile_text" set:html={tbc(company.line)} />
+              {company.href && (
+                <span class="photo-tile_more">Visit site ↗</span>
+              )}
+            </PhotoTile>
           </li>
         ))}
       </ul>
@@ -70,15 +81,30 @@ const { render = true, companies = [] } = Astro.props;
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: var(--space-5);
+      gap: var(--space-8);
+    }
+
+    .ecosystem_head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-5) var(--section-space-small);
+      align-items: end;
+      @media (width >= 64rem) {
+        grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      }
+    }
+
+    .ecosystem_intro {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
     }
 
     .ecosystem_list {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
       gap: var(--site-gutter);
-      margin-top: var(--space-4);
-      @media (width >= 48rem) {
+      @media (width >= 30rem) {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
       @media (width >= 64rem) {
@@ -86,37 +112,35 @@ const { render = true, companies = [] } = Astro.props;
       }
     }
 
-    .ecosystem_card {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-2);
+    /* Ink tiles in the photo-tile shape; the logo sits top-left. */
+    .ecosystem_tile {
       height: 100%;
-      padding: var(--space-5);
-      border-radius: var(--radius-main);
-      background-color: var(--background-2);
-      border: var(--border-width) solid var(--border);
+      min-height: 17rem;
+      & > .photo-tile_content {
+        height: 100%;
+      }
+    }
+
+    .ecosystem_logo {
+      display: grid;
+      place-items: center;
+      height: 3.5rem;
+      margin-bottom: auto;
+      padding-inline: var(--space-4);
+      border-radius: var(--radius-medium);
+      background-color: rgb(255 255 255 / 0.12);
+      border: var(--border-width) solid rgb(255 255 255 / 0.18);
+      font-family: var(--heading-family);
+      font-size: 0.8rem;
+      color: rgb(255 255 255 / 0.75);
+      & img {
+        max-height: 2rem;
+        width: auto;
+      }
     }
 
     .ecosystem_relationship {
-      font-size: 0.75rem;
-      color: var(--accent);
-    }
-
-    .ecosystem_name {
-      font-family: var(--heading-family);
-      font-weight: var(--heading-bold);
-      color: var(--text);
-    }
-
-    .ecosystem_line {
-      font-size: var(--text-small);
-      color: var(--text-body);
-    }
-
-    .ecosystem_visit {
-      margin-top: auto;
-      font-size: var(--text-small);
-      color: var(--link-text);
+      margin-top: var(--space-6);
     }
   }
 </style>

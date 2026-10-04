@@ -2,7 +2,9 @@
 import Eyebrow from "@/components/typography/Eyebrow.astro";
 import Heading from "@/components/typography/Heading.astro";
 import Paragraph from "@/components/typography/Paragraph.astro";
+import PhotoTile from "@/components/item/PhotoTile.astro";
 import { tbc } from "@/data/site.ts";
+import { INSIGHT_PHOTOS } from "@/data/photos.ts";
 
 interface Props {
   /** Set to `false` to omit the component. */
@@ -104,35 +106,35 @@ const slug = (text: string) => text.toLowerCase().replace(/[^a-z0-9]+/g, "-");
       <div class="insights_grid">
         {articles.map((article, index) => (
           <article
-            class:list={["insights_card", article.featured && "is-featured"]}
+            class:list={["insights_item", article.featured && "is-featured"]}
             data-category={slug(article.category)}
             data-reveal
             style={`--reveal-order: ${index % 3}`}
           >
-            <div
-              class:list={["insights_cover", `is-${slug(article.category)}`]}
-              aria-hidden="true"
-            >
-              {article.featured && <span class="insights_cover_word">AI</span>}
-            </div>
-            <div class="insights_body">
-              <div class="insights_meta">
-                <span class="insights_category">{article.category}</span>
-                <span>{article.type}</span>
-                <span set:html={tbc("[X] min read")} />
-              </div>
-              <Heading
-                tag="h3"
-                variant={article.featured ? "h4" : "h6"}
-                class="insights_title"
+            <PhotoTile photo={INSIGHT_PHOTOS[index]} class="insights_tile">
+              {/* Small tiles keep just the category so the line never wraps. */}
+              <span class="photo-tile_eyebrow insights_meta" slot="top">
+                <span>{article.category}</span>
+                {article.featured && (
+                  <Fragment>
+                    <span>{article.type}</span>
+                    <span set:html={tbc("[X] min read")} />
+                  </Fragment>
+                )}
+              </span>
+              <h3
+                class:list={[
+                  "photo-tile_title",
+                  article.featured ? "is-large" : "is-small",
+                ]}
               >
                 {article.title}
-              </Heading>
-              <Paragraph variant="small" class="insights_summary">
-                {article.summary}
-              </Paragraph>
-              <span class="insights_soon">Coming soon</span>
-            </div>
+              </h3>
+              <Fragment slot="reveal">
+                <p class="photo-tile_text">{article.summary}</p>
+                <span class="insights_soon">Coming soon</span>
+              </Fragment>
+            </PhotoTile>
           </article>
         ))}
       </div>
@@ -229,12 +231,15 @@ const slug = (text: string) => text.toLowerCase().replace(/[^a-z0-9]+/g, "-");
       }
     }
 
+    /* Photo tiles; the featured story takes a 2 × 2 block on desktop. */
     .insights_grid {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
+      grid-auto-rows: 17rem;
       gap: var(--site-gutter);
       @media (width >= 48rem) {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-rows: 16rem;
       }
       @media (width >= 64rem) {
         grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -245,135 +250,33 @@ const slug = (text: string) => text.toLowerCase().replace(/[^a-z0-9]+/g, "-");
       }
     }
 
-    .insights_card {
-      display: flex;
-      flex-direction: column;
-      background-color: var(--background-2);
-      border: var(--border-width) solid var(--border);
-      border-radius: var(--radius-main);
-      overflow: clip;
-      transition:
-        border-color var(--hover-duration) var(--hover-ease),
-        box-shadow 400ms var(--reveal-ease),
-        translate 400ms var(--reveal-ease);
-      &[hidden] {
-        display: none;
-      }
-      @media (hover: hover) {
-        &:hover {
-          border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
-          box-shadow: var(--shadow-float);
-          translate: 0 -0.25rem;
-        }
-      }
+    .insights_item[hidden] {
+      display: none;
     }
 
-    .insights_cover {
-      position: relative;
-      height: 6rem;
-      overflow: clip;
-      background-color: var(--blue-50);
-      .is-featured > & {
-        height: auto;
-        min-height: 14rem;
-        flex: 1;
-      }
-      &.is-ai {
-        background-color: var(--blue-500);
-        background-image:
-          radial-gradient(
-            circle at 85% 30%,
-            transparent 0 18%,
-            rgb(255 255 255 / 0.12) 18% 18.5%,
-            transparent 18.5% 30%,
-            rgb(255 255 255 / 0.1) 30% 30.5%,
-            transparent 30.5% 44%,
-            rgb(255 255 255 / 0.08) 44% 44.5%,
-            transparent 44.5%
-          ),
-          linear-gradient(135deg, var(--blue-500), var(--blue-800));
-      }
-      &.is-data {
-        background-image: radial-gradient(
-          var(--blue-300) 0.09rem,
-          transparent 0.1rem
-        );
-        background-size: 0.9rem 0.9rem;
-      }
-      &.is-sap {
-        background-color: var(--section-tint);
-        background-image: repeating-linear-gradient(
-          to bottom,
-          transparent 0 0.9rem,
-          var(--blue-200) 0.9rem 1rem
-        );
-      }
-      &.is-enterprise-technology {
-        background-color: var(--ink-black);
-        background-image: repeating-linear-gradient(
-          135deg,
-          transparent 0 0.8rem,
-          rgb(145 160 242 / 0.35) 0.8rem 0.85rem
-        );
-      }
-      &.is-digital-engineering {
-        background-image:
-          linear-gradient(var(--blue-100) 0.0625rem, transparent 0.0625rem),
-          linear-gradient(
-            90deg,
-            var(--blue-100) 0.0625rem,
-            transparent 0.0625rem
-          );
-        background-size: 1.25rem 1.25rem;
-      }
-    }
-
-    .insights_cover_word {
-      position: absolute;
-      left: var(--space-6);
-      bottom: var(--space-4);
-      font-family: var(--heading-family);
-      font-size: clamp(5rem, 10vw, 9rem);
-      font-weight: var(--heading-bold);
-      line-height: 0.8;
-      letter-spacing: var(--letter-spacing-tight);
-      color: rgb(255 255 255 / 0.92);
-    }
-
-    .insights_body {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-3);
-      padding: var(--space-5);
-      .is-featured > & {
-        padding: var(--space-6);
-      }
+    .insights_tile {
+      height: 100%;
+      min-height: 0;
     }
 
     .insights_meta {
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
-      gap: 0.35rem 0.75rem;
-      font-size: 0.75rem;
-      color: var(--text-2);
-    }
-
-    .insights_category {
-      padding: 0.2rem 0.6rem;
-      border-radius: var(--radius-round);
-      background-color: var(--accent-soft);
-      color: var(--accent-text);
-      font-weight: var(--primary-medium);
+      gap: 0.25rem 0.75rem;
+      & > span + span::before {
+        content: "·";
+        margin-right: 0.75rem;
+        color: rgb(255 255 255 / 0.5);
+      }
     }
 
     .insights_soon {
-      align-self: flex-start;
-      margin-top: auto;
-      font-family: var(--heading-family);
+      margin-top: var(--space-1);
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-round);
+      background-color: rgb(255 255 255 / 0.14);
       font-size: 0.75rem;
-      font-weight: var(--heading-medium);
-      color: var(--text-2);
+      font-weight: var(--primary-medium);
     }
   }
 </style>
