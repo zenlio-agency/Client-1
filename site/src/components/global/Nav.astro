@@ -141,14 +141,6 @@ const MENUS: Record<string, Menu> = {
           </nav>
 
           <div class="nav_actions">
-            <Button
-              element="link"
-              href={CTA.secondary.href}
-              emphasis="secondary"
-              class="nav_secondary"
-            >
-              {CTA.secondary.label}
-            </Button>
             <Button element="link" href={CTA.primary.href}>
               {CTA.primary.label}
             </Button>
@@ -278,13 +270,6 @@ const MENUS: Record<string, Menu> = {
               )}
             </ul>
             <div class="nav_mobile_actions">
-              <Button
-                element="link"
-                href={CTA.secondary.href}
-                emphasis="secondary"
-              >
-                {CTA.secondary.label}
-              </Button>
               <Button element="link" href={CTA.primary.href}>
                 {CTA.primary.label}
               </Button>
@@ -890,13 +875,6 @@ const MENUS: Record<string, Menu> = {
 
       .nav_mega {
         display: grid;
-      }
-    }
-
-    /* Six pill links plus both buttons need the full 1440px bar. */
-    @media (64rem <= width < 90rem) {
-      .nav_actions .nav_secondary {
-        display: none;
       }
     }
   }
