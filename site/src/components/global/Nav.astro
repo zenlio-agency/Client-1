@@ -8,6 +8,7 @@ import linkedin from "@/assets/icons/social-linkedin.svg";
 import x from "@/assets/icons/social-x.svg";
 import facebook from "@/assets/icons/social-facebook.svg";
 import youtube from "@/assets/icons/social-youtube.svg";
+import instagram from "@/assets/icons/social-instagram.svg";
 import {
   CAPABILITIES,
   INDUSTRIES,
@@ -29,7 +30,7 @@ interface Props {
 const { render = true, overlap = false } = Astro.props;
 const path = Astro.url.pathname.replace(/\/+$/, "") || "/";
 
-const icons = { linkedin, x, facebook, youtube };
+const icons = { linkedin, x, facebook, youtube, instagram };
 
 type MenuLink = { label: string; href: string };
 type Menu = {
@@ -206,7 +207,16 @@ const MENUS: Record<string, Menu> = {
                   <ul class="nav_socials">
                     {SOCIAL.map((item) => (
                       <li>
-                        <a href={item.href} aria-label={item.label}>
+                        <a
+                          href={item.href}
+                          aria-label={
+                            item.href === "#"
+                              ? item.label
+                              : `${item.label} (opens in a new tab)`
+                          }
+                          target={item.href === "#" ? undefined : "_blank"}
+                          rel={item.href === "#" ? undefined : "noopener"}
+                        >
                           <Icon src={icons[item.icon]} variant="small" />
                         </a>
                       </li>
