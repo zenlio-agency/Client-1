@@ -1,7 +1,8 @@
 ---
+import { readFileSync } from "node:fs";
 import Heading from "@/components/typography/Heading.astro";
 import Button from "@/components/Button.astro";
-import { CLIENT_LOGOS, tbc } from "@/data/site.ts";
+import { CLIENT_LOGO_ROWS, tbc } from "@/data/site.ts";
 
 interface Props {
   /** Set to `false` to omit the component. */
@@ -10,14 +11,34 @@ interface Props {
 
 const { render = true } = Astro.props;
 
-/* Two rows moving in opposite directions. Each panel repeats its logos until
-   it is wider than a large screen, so the loop never shows a gap. */
-const half = Math.ceil(CLIENT_LOGOS.length / 2);
-const rows = [CLIENT_LOGOS.slice(0, half), CLIENT_LOGOS.slice(half)].filter(
-  (row) => row.length,
-);
-const fill = (row: (typeof rows)[number]) =>
-  Array.from({ length: Math.ceil(10 / row.length) }, () => row).flat();
+/* One row per entry, moving in alternate directions. Each panel repeats its
+   logos until it is wider than a large screen, so the loop never shows a
+   gap. */
+const rows = CLIENT_LOGO_ROWS.filter((row) => row.logos.length);
+const fill = (logos: (typeof rows)[number]["logos"]) =>
+  Array.from({ length: Math.ceil(12 / logos.length) }, () => logos).flat();
+
+/* Logos of very different shapes read as the same size when they cover about
+   the same area, so each height comes from the SVG's own aspect ratio. A file
+   that can't be read keeps the default height. */
+const AREA = 14.5;
+const heightOf = (src?: string) => {
+  try {
+    const svg = readFileSync(`${process.cwd()}/public${src}`, "utf8");
+    const box = svg
+      .match(/viewBox="([^"]+)"/)?.[1]
+      .split(/[\s,]+/)
+      .map(Number);
+    if (!box || !box[2] || !box[3]) return undefined;
+    const rem = Math.min(
+      Math.max(Math.sqrt(AREA / (box[2] / box[3])), 1.1),
+      2.75,
+    );
+    return `--_logo-height: ${rem.toFixed(2)}rem`;
+  } catch {
+    return undefined;
+  }
+};
 ---
 
 {
@@ -51,14 +72,15 @@ const fill = (row: (typeof rows)[number]) =>
               {[0, 1].map((copy) => (
                 <ul
                   class="client-logos_panel"
+                  aria-label={copy === 0 ? row.label : undefined}
                   aria-hidden={copy === 1 ? "true" : undefined}
                   inert={copy === 1}
                 >
-                  {fill(row).map((logo, i) => (
+                  {fill(row.logos).map((logo, i) => (
                     <li
                       class="client-logos_tile"
                       aria-hidden={
-                        copy === 0 && i >= row.length ? "true" : undefined
+                        copy === 0 && i >= row.logos.length ? "true" : undefined
                       }
                     >
                       {logo.src ? (
@@ -66,6 +88,7 @@ const fill = (row: (typeof rows)[number]) =>
                           class="client-logos_img"
                           src={logo.src}
                           alt={logo.name}
+                          style={heightOf(logo.src)}
                           loading="lazy"
                           decoding="async"
                         />
@@ -182,24 +205,20 @@ const fill = (row: (typeof rows)[number]) =>
       gap: var(--_gap);
     }
 
+    /* Logos sit straight on the section, with no card behind them. */
     .client-logos_tile {
       flex: none;
       display: grid;
       place-items: center;
-      width: 12rem;
-      height: 5rem;
-      padding: var(--space-4) var(--space-5);
-      background-color: var(--white);
-      border: var(--border-width) solid var(--border);
-      border-radius: var(--radius-main);
+      height: 4.5rem;
+      padding-inline: var(--space-5);
     }
 
     .client-logos_img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
+      width: auto;
+      height: var(--_logo-height, 2.25rem);
       filter: grayscale(1);
-      opacity: 0.7;
+      opacity: 0.6;
       transition:
         filter var(--hover-duration) var(--hover-ease),
         opacity var(--hover-duration) var(--hover-ease);
