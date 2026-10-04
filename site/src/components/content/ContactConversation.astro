@@ -10,8 +10,16 @@ import Select from "@/components/form/Select.astro";
 import Textarea from "@/components/form/Textarea.astro";
 import Fieldset from "@/components/form/Fieldset.astro";
 import Choice from "@/components/form/Choice.astro";
+import SocialLinks from "@/components/global/SocialLinks.astro";
 import arrow from "@/assets/icons/ui-arrow.svg";
-import { CAPABILITIES, INDUSTRIES, CTA, tbc } from "@/data/site.ts";
+import {
+  CAPABILITIES,
+  INDUSTRIES,
+  CTA,
+  HUBS,
+  COMPANY_CONTACT,
+  tbc,
+} from "@/data/site.ts";
 import { LEGAL } from "@/data/legal.ts";
 
 interface Props {
@@ -59,6 +67,25 @@ const next = [
     "We map the first step together",
     "You leave with a recommended starting point, whether or not we work together.",
   ],
+];
+
+/* Ways to reach the company without the form, shown beside it. */
+const direct = [
+  {
+    label: "Email",
+    value: COMPANY_CONTACT.email,
+    href: `mailto:${COMPANY_CONTACT.email}`,
+  },
+  {
+    label: "Careers",
+    value: COMPANY_CONTACT.careersEmail,
+    href: `mailto:${COMPANY_CONTACT.careersEmail}`,
+  },
+  {
+    label: "Call",
+    value: COMPANY_CONTACT.phone,
+    href: `tel:${COMPANY_CONTACT.phone.replace(/[^+\d]/g, "")}`,
+  },
 ];
 ---
 
@@ -211,6 +238,40 @@ const next = [
           </div>
         </Form>
       </div>
+
+      <div class="contact_direct" data-reveal style="--reveal-order: 4">
+        <p class="contact_direct_title">Prefer to reach us directly?</p>
+        <div class="contact_direct_grid">
+          <dl class="contact_direct_list">
+            {direct.map((item) => (
+              <div>
+                <dt>{item.label}</dt>
+                <dd>
+                  <a href={item.href}>{item.value}</a>
+                </dd>
+              </div>
+            ))}
+          </dl>
+          <dl class="contact_direct_list">
+            {HUBS.map((hub) => (
+              <div>
+                <dt>
+                  {hub.short} · {hub.role}
+                </dt>
+                <dd>
+                  <address class="contact_direct_address">
+                    {hub.address}
+                  </address>
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <div class="contact_direct_social">
+          <span class="contact_direct_label">Follow ManyaIT</span>
+          <SocialLinks />
+        </div>
+      </div>
     </div>
   )
 }
@@ -276,25 +337,28 @@ const next = [
       margin-block: 0;
     }
 
+    /* The intro and the direct details share the left column, beside the
+       form. On narrow screens the form comes straight after the intro and
+       the details follow it. */
     .contact_wrap {
       width: 100%;
       display: grid;
       grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: "intro" "form" "direct";
       gap: var(--space-8) var(--section-space-small);
       @media (width >= 64rem) {
         grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+        grid-template-rows: auto 1fr;
+        grid-template-areas: "intro form" "direct form";
         align-items: start;
       }
     }
 
     .contact_intro {
+      grid-area: intro;
       display: flex;
       flex-direction: column;
       gap: var(--space-5);
-      @media (width >= 64rem) {
-        position: sticky;
-        top: calc(var(--nav-height) + var(--space-6));
-      }
     }
 
     .contact_next {
@@ -338,7 +402,102 @@ const next = [
       }
     }
 
+    /* Email, phone, addresses and social profiles, for anyone who'd rather
+       not use the form. */
+    .contact_direct {
+      grid-area: direct;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+      padding: var(--space-5) var(--space-6);
+      border: var(--border-width) solid var(--border);
+      border-radius: var(--radius-main);
+      background-color: var(--background-2);
+      & p {
+        margin-block: 0;
+      }
+    }
+
+    .contact_direct_title {
+      font-family: var(--display-family);
+      font-size: var(--h6);
+      font-weight: var(--heading-bold);
+      color: var(--text);
+    }
+
+    .contact_direct_grid {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    /* Email, careers and phone sit in a row; the addresses run full width
+       below them. */
+    .contact_direct_list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+      gap: var(--space-4) var(--space-5);
+      & + & {
+        padding-top: var(--space-4);
+        border-top: var(--border-width) solid var(--divider);
+        grid-template-columns: minmax(0, 1fr);
+      }
+      & div {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+      }
+      & dt {
+        font-family: var(--heading-family);
+        font-size: 0.72rem;
+        font-weight: var(--heading-bold);
+        letter-spacing: var(--letter-spacing-wide);
+        text-transform: uppercase;
+        color: var(--text-2);
+      }
+      & dd {
+        font-size: var(--text-small);
+        line-height: 1.55;
+        color: var(--text-body);
+      }
+      & a {
+        color: var(--link-text);
+        text-decoration: none;
+        @media (hover: hover) {
+          &:hover {
+            text-decoration: underline;
+            text-underline-offset: 0.2em;
+          }
+        }
+      }
+    }
+
+    .contact_direct_address {
+      font-style: normal;
+      white-space: pre-line;
+    }
+
+    .contact_direct_social {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+      padding-top: var(--space-4);
+      border-top: var(--border-width) solid var(--divider);
+    }
+
+    .contact_direct_label {
+      font-family: var(--heading-family);
+      font-size: 0.72rem;
+      font-weight: var(--heading-bold);
+      letter-spacing: var(--letter-spacing-wide);
+      text-transform: uppercase;
+      color: var(--text-2);
+    }
+
     .contact_card {
+      grid-area: form;
       display: flex;
       flex-direction: column;
       gap: var(--space-5);

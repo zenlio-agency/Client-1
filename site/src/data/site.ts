@@ -163,8 +163,8 @@ export const HUBS = [
     text: "Where partnerships start. Our Dallas team works in your time zone to shape the right team for each goal and keep it on track across North America.",
     /* Line breaks render where the address is shown (white-space: pre-line). */
     address: "8668 John Hickman Pkwy #903\nFrisco, Texas 75034",
-    phone: "[Phone]",
-    email: "[Email]",
+    phone: "+1 682-500-9839",
+    email: "info@manyait.com",
     timeZone: "America/Chicago",
     locale: "en-US",
     lat: 33.15,
@@ -259,12 +259,25 @@ export const CTA = {
   secondary: { label: "Explore Opportunities", href: "/careers" },
 } as const;
 
+/** Social profiles. `#` marks a profile whose address is still to come. */
 export const SOCIAL = [
   { label: "LinkedIn", href: "#", icon: "linkedin" },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/manyait_inc/",
+    icon: "instagram",
+  },
   { label: "X", href: "#", icon: "x" },
   { label: "Facebook", href: "#", icon: "facebook" },
   { label: "YouTube", href: "#", icon: "youtube" },
 ] as const;
+
+/** The company's own email addresses and phone, as published on manyait.com. */
+export const COMPANY_CONTACT = {
+  email: "info@manyait.com",
+  careersEmail: "hr@manyait.com",
+  phone: "+1 682-500-9839",
+} as const;
 
 /** Wraps `[placeholder]` runs in a marked span so they read as unconfirmed. */
 export const tbc = (text: string) =>

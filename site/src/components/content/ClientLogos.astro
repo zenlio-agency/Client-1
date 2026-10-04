@@ -74,7 +74,6 @@ const heightOf = (src?: string) => {
                   class="client-logos_panel"
                   aria-label={copy === 0 ? row.label : undefined}
                   aria-hidden={copy === 1 ? "true" : undefined}
-                  inert={copy === 1}
                 >
                   {fill(row.logos).map((logo, i) => (
                     <li
@@ -187,9 +186,10 @@ const heightOf = (src?: string) => {
       .client-logos_wrap[data-state="playing"] & {
         animation-play-state: running;
       }
+      /* Only the row under the pointer stops; the other keeps moving. */
       .client-logos_wrap[data-state="playing"]
-        .client-logos_rows:is(:hover, :focus-within)
-        & {
+        .client-logos_row:is(:hover, :focus-within)
+        > & {
         animation-play-state: paused;
       }
     }

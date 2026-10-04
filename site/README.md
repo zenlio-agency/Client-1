@@ -200,8 +200,10 @@ The open items:
   partnerships; check each list reflects the teams ManyaIT can field. The
   healthcare FAQ says business associate agreements are put in place where
   needed; confirm that holds.
-- **Hub details.** Street address, phone and email for Dallas and Hyderabad
-  (`HUBS` in `src/data/site.ts`).
+- **Hub details.** The Dallas phone and email, and the company email,
+  careers email and phone shown beside the contact form (`COMPANY_CONTACT`),
+  come from the contact page on manyait.com. Hyderabad's phone and email are
+  still placeholders (`HUBS` in `src/data/site.ts`).
 - **Client logos.** `CLIENT_LOGO_ROWS` in `src/data/site.ts` sets the two
   marquee rows: banking and financial services first, then telecom,
   healthcare and energy. The files in `public/logos/` are the companies'
@@ -230,7 +232,9 @@ The open items:
   third-party request appears that the Cookie Notice doesn't mention.
 - **Insights.** The five articles are marked "Coming soon" and do not link
   anywhere yet.
-- **Links.** Social profiles (`SOCIAL`) are `#`.
+- **Links.** In `SOCIAL`, Instagram links to the account on manyait.com;
+  LinkedIn, X, Facebook and YouTube are `#` until their addresses arrive.
+  The footer, the menu and the contact section all read from `SOCIAL`.
 - **Domain.** `SITE_URL` in `src/consts.ts` is `https://manyait.com`.
   Sitemap and canonical URLs use it.
 
