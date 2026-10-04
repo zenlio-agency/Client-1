@@ -39,12 +39,14 @@ const stats = [
 
 <style is:global>
   @layer components {
+    /* Padding trimmed and type scaled up so the figures, not the empty
+       space, fill the card (content was under half its height). */
     .trust-strip_wrap {
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: var(--space-6);
-      padding: var(--space-6) var(--space-5);
+      gap: var(--space-5);
+      padding: var(--space-5);
       border-radius: 1.75rem;
       overflow: clip;
       background-image: radial-gradient(
@@ -53,7 +55,7 @@ const stats = [
         transparent 55%
       );
       @media (width >= 64rem) {
-        padding: var(--space-8) var(--space-7) var(--space-7);
+        padding: var(--space-6) var(--space-6) var(--space-7);
       }
     }
 
@@ -69,7 +71,7 @@ const stats = [
     .trust-strip_item {
       display: flex;
       flex-direction: column;
-      gap: var(--space-2);
+      gap: var(--space-3);
       padding-inline: var(--space-4) var(--space-2);
       border-left: var(--border-width) solid var(--border);
       @media (width >= 48rem) {
@@ -77,22 +79,21 @@ const stats = [
       }
     }
 
+    /* Figures scale with the viewport up to 4rem (64px). */
     .trust-strip_value {
       font-family: var(--display-family);
-      font-size: var(--h3);
+      font-size: clamp(2rem, 1.1rem + 2.8vw, 4rem);
       font-weight: 700;
       letter-spacing: var(--letter-spacing-tight);
       line-height: 1;
       color: var(--text);
       white-space: nowrap;
-      @media (width >= 48rem) {
-        font-size: var(--h2);
-      }
     }
 
     .trust-strip_label {
       max-width: 22ch;
-      font-size: var(--text-small);
+      font-size: var(--text-main);
+      line-height: 1.45;
       color: var(--text-body);
     }
   }

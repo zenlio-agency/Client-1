@@ -91,36 +91,32 @@ const words = statement.split(" ");
       margin-block: 0;
     }
 
-    /* Centered composition with a clear hierarchy: the heading is the
-       headline (display size, bold, ink, blue accent); the statement sits at
-       body scale, about half its size, in the softer body color. */
+    /* One left edge for the label, heading, statement and the stats card
+       below. Hierarchy: heading bold and ink with a blue accent; statement
+       lighter, regular weight, a little over half the heading size. */
     .why-cards_wrap {
       width: 100%;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: var(--space-7);
-      text-align: center;
-      --_alignment: center;
+      align-items: flex-start;
+      gap: var(--space-6);
     }
 
-    /* The label and heading sit on the left like the other sections. */
     .why-cards_intro {
-      align-self: stretch;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       gap: var(--space-5);
-      text-align: left;
-      --_alignment: start;
     }
 
+    /* About two thirds of the container on desktop: wide enough to hold the
+       section, short enough (~60 characters a line) to read comfortably. */
     .why-cards_statement {
-      max-width: 54ch;
+      max-width: min(52rem, 100%);
       font-family: var(--primary-family);
-      font-size: clamp(1.125rem, 0.9rem + 0.9vw, 1.5rem);
+      font-size: clamp(1.25rem, 0.95rem + 1vw, 1.75rem);
       font-weight: var(--primary-regular);
-      line-height: 1.65;
+      line-height: 1.55;
       text-wrap: pretty;
       color: var(--text-body);
     }
