@@ -4,8 +4,10 @@ import Heading from "@/components/typography/Heading.astro";
 import Paragraph from "@/components/typography/Paragraph.astro";
 import Button from "@/components/Button.astro";
 import Icon from "@/components/media/Icon.astro";
+import PhotoTile from "@/components/item/PhotoTile.astro";
 import arrow from "@/assets/icons/ui-arrow.svg";
 import { INDUSTRIES } from "@/data/site.ts";
+import { INDUSTRY_PHOTOS } from "@/data/photos.ts";
 
 interface Props {
   /** Set to `false` to omit the component. */
@@ -44,18 +46,23 @@ const { render = true } = Astro.props;
             data-reveal
             style={`--reveal-order: ${index}`}
           >
-            <a class="industry-cards_card" href={`/industries#${industry.id}`}>
-              <span class="industry-cards_index">0{index + 1}</span>
-              <Heading tag="h3" variant="h5" class="industry-cards_title">
-                {industry.title}
-              </Heading>
-              <Paragraph variant="small" class="industry-cards_text">
-                {industry.summary}
-              </Paragraph>
-              <span class="industry-cards_arrow" aria-hidden="true">
-                <Icon src={arrow} variant="small" />
+            <PhotoTile
+              href={`/industries#${industry.id}`}
+              photo={INDUSTRY_PHOTOS[industry.id]}
+              class="industry-cards_tile"
+            >
+              <span class="photo-tile_eyebrow" slot="top">
+                0{index + 1}
               </span>
-            </a>
+              <h3 class="photo-tile_title is-small">{industry.title}</h3>
+              <Fragment slot="reveal">
+                <p class="photo-tile_text">{industry.summary}</p>
+                <span class="photo-tile_more">
+                  Learn more
+                  <Icon src={arrow} variant="small" />
+                </span>
+              </Fragment>
+            </PhotoTile>
           </li>
         ))}
       </ul>
@@ -95,11 +102,12 @@ const { render = true } = Astro.props;
       gap: var(--space-4);
     }
 
+    /* Portrait photo tiles: two across, four from 80rem. */
     .industry-cards_list {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
       gap: var(--site-gutter);
-      @media (width >= 48rem) {
+      @media (width >= 30rem) {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
       @media (width >= 80rem) {
@@ -108,74 +116,13 @@ const { render = true } = Astro.props;
     }
 
     .industry-cards_item {
-      display: flex;
       scroll-margin-top: calc(var(--nav-height) + var(--space-5));
     }
 
-    .industry-cards_card {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-3);
-      padding: var(--space-5);
-      @media (width >= 48rem) {
-        min-height: 13rem;
-      }
-      background-color: var(--background-2);
-      border: var(--border-width) solid var(--border);
-      border-radius: var(--radius-main);
-      transition:
-        border-color var(--hover-duration) var(--hover-ease),
-        box-shadow 400ms var(--reveal-ease),
-        translate 400ms var(--reveal-ease);
-      @media (hover: hover) {
-        &:hover {
-          border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
-          box-shadow: var(--shadow-float);
-          translate: 0 -0.25rem;
-          .industry-cards_arrow {
-            background-color: var(--accent);
-            border-color: var(--accent);
-            color: var(--white);
-            & .icon {
-              translate: 0.15rem 0;
-            }
-          }
-        }
-      }
-      .industry-cards_item:target > & {
-        border-color: var(--accent);
-        box-shadow: 0 0 0 0.25rem var(--accent-soft);
-      }
-    }
-
-    .industry-cards_index {
-      font-family: var(--heading-family);
-      font-size: 0.72rem;
-      font-weight: var(--heading-bold);
-      color: var(--accent);
-    }
-
-    .industry-cards_title {
-      margin-top: var(--space-3);
-    }
-
-    .industry-cards_arrow {
-      align-self: flex-start;
-      display: grid;
-      place-items: center;
-      width: 2.25rem;
-      height: 2.25rem;
-      margin-top: auto;
-      border: var(--border-width) solid var(--border);
-      border-radius: 50%;
-      color: var(--text);
-      transition:
-        background-color var(--hover-duration) var(--hover-ease),
-        border-color var(--hover-duration) var(--hover-ease),
-        color var(--hover-duration) var(--hover-ease);
-      & .icon {
-        transition: translate var(--hover-duration) var(--hover-ease);
+    .industry-cards_tile {
+      aspect-ratio: 3 / 4;
+      @media (30rem <= width < 80rem) {
+        aspect-ratio: 4 / 3;
       }
     }
   }

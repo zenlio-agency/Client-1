@@ -97,8 +97,8 @@
   --max-width-main: 80rem;
   --max-width-full: 100%;
 
-  /* Nav */
-  --nav-height: 4.5rem;
+  /* Nav: 0.75rem gap above the floating card + 4rem bar + its border */
+  --nav-height: calc(4.75rem + var(--border-width) * 2);
 
   /* Typography styles */
   --display: clamp(var(--display-min) / 16 * 1rem, ((var(--display-min) - ((var(--display-max) - var(--display-min)) / (var(--viewport-max) - var(--viewport-min)) * var(--viewport-min))) / 16 * 1rem + ((var(--display-max) - var(--display-min)) / (var(--viewport-max) - var(--viewport-min))) * 100vw), var(--display-max) / 16 * 1rem);

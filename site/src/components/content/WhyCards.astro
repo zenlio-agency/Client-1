@@ -1,7 +1,6 @@
 ---
 import Eyebrow from "@/components/typography/Eyebrow.astro";
 import Heading from "@/components/typography/Heading.astro";
-import Paragraph from "@/components/typography/Paragraph.astro";
 
 interface Props {
   /** Set to `false` to omit the component. */
@@ -10,71 +9,80 @@ interface Props {
 
 const { render = true } = Astro.props;
 
-const cards = [
-  {
-    title: "Talent that fits",
-    figure: "Right skills. Right fit.",
-    text: "Specialists matched to your stack, your domain and the way your teams work.",
-  },
-  {
-    title: "Ready in weeks",
-    figure: "Weeks, not quarters",
-    text: "Go from a skills brief to a productive team without the long ramp-up.",
-  },
-  {
-    title: "Your center, your way",
-    figure: "Build · Operate · Transfer",
-    text: "We set up and run your GCC with you, then hand it over when you're ready.",
-  },
-  {
-    title: "Scale on demand",
-    figure: "Grow with your roadmap",
-    text: "Add new skills or expand teams as priorities shift, without starting over.",
-  },
-];
+/* Split into words so each one can light up as the reader scrolls. */
+const statement =
+  "We bring the specialists, the setup and the support your Global Capability Center needs to grow without slowing down. Vetted, AI-ready engineers matched to your stack. Teams live in weeks, not quarters. And a clear path to build, operate and transfer, so the capability you scale is always yours.";
+const words = statement.split(" ");
 ---
 
 {
   render && (
     <div class="why-cards_wrap">
-      <div class="why-cards_head">
-        <div class="why-cards_intro">
-          <Eyebrow data-reveal>Why ManyaIT</Eyebrow>
-          <Heading maxWidth={20} data-reveal style="--reveal-order: 1">
-            The right people. Ready faster. Built to stay.
-          </Heading>
-        </div>
-        <Paragraph
-          variant="large"
-          maxWidth={44}
+      <div class="why-cards_intro">
+        <Eyebrow data-reveal>Why ManyaIT</Eyebrow>
+        <Heading
+          class="heading-accent"
+          maxWidth={22}
           data-reveal
-          style="--reveal-order: 2"
+          style="--reveal-order: 1"
         >
-          We bring the specialists, the setup and the support your Global
-          Capability Center (GCC) needs to grow without slowing down.
-        </Paragraph>
+          The right people. Ready faster. <strong>Built to stay.</strong>
+        </Heading>
       </div>
-      <ol class="why-cards_list">
-        {cards.map((card, index) => (
-          <li
-            class="why-cards_card"
-            data-reveal
-            style={`--reveal-order: ${index}`}
-          >
-            <span class="why-cards_index">0{index + 1}</span>
-            <Heading tag="h3" variant="h5" class="why-cards_title">
-              {card.title}
-            </Heading>
-            <p class="why-cards_figure">{card.figure}</p>
-            <Paragraph variant="small" class="why-cards_text">
-              {card.text}
-            </Paragraph>
-          </li>
+      <p class="why-cards_statement" data-scroll-words>
+        {words.map((word) => (
+          <Fragment>
+            <span class="why-cards_word">{word}</span>{" "}
+          </Fragment>
         ))}
-      </ol>
+      </p>
     </div>
   )
 }
+
+<script>
+  /* Scroll-synced fade: words darken one after another as the statement
+     moves up the screen, with a soft trail of half-lit words at the edge.
+     Still for reduced motion; without JS every word shows at full strength. */
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+
+  for (const block of document.querySelectorAll<HTMLElement>(
+    "[data-scroll-words]",
+  )) {
+    if (reduced.matches) break;
+    const words = [...block.querySelectorAll<HTMLElement>(".why-cards_word")];
+    const trail = 6;
+    let queued = false;
+
+    const update = () => {
+      queued = false;
+      const box = block.getBoundingClientRect();
+      const start = window.innerHeight * 0.85;
+      const end = window.innerHeight * 0.35;
+      /* 0 when the top reaches 85% of the screen, 1 when the bottom
+         reaches 35%. */
+      const progress = Math.min(
+        Math.max((start - box.top) / (start - end + box.height), 0),
+        1,
+      );
+      const lit = progress * (words.length + trail);
+      words.forEach((word, index) => {
+        const amount = Math.min(Math.max((lit - index) / trail, 0), 1);
+        word.style.opacity = String(0.16 + amount * 0.84);
+      });
+    };
+
+    const queue = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", queue, { passive: true });
+    window.addEventListener("resize", queue);
+  }
+</script>
 
 <style is:global>
   @layer components {
@@ -83,102 +91,42 @@ const cards = [
       margin-block: 0;
     }
 
+    /* Centered composition with a clear hierarchy: the heading is the
+       headline (display size, bold, ink, blue accent); the statement sits at
+       body scale, about half its size, in the softer body color. */
     .why-cards_wrap {
       width: 100%;
       display: flex;
       flex-direction: column;
+      align-items: center;
       gap: var(--space-7);
+      text-align: center;
+      --_alignment: center;
     }
 
-    .why-cards_head {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: var(--space-5) var(--section-space-small);
-      align-items: end;
-      @media (width >= 64rem) {
-        grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-      }
-    }
-
+    /* The label and heading sit on the left like the other sections. */
     .why-cards_intro {
+      align-self: stretch;
       display: flex;
       flex-direction: column;
-      gap: var(--space-4);
+      align-items: flex-start;
+      gap: var(--space-5);
+      text-align: left;
+      --_alignment: start;
     }
 
-    .why-cards_list {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: var(--site-gutter);
-      @media (width >= 48rem) {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-      @media (width >= 64rem) {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-      }
+    .why-cards_statement {
+      max-width: 54ch;
+      font-family: var(--primary-family);
+      font-size: clamp(1.125rem, 0.9rem + 0.9vw, 1.5rem);
+      font-weight: var(--primary-regular);
+      line-height: 1.65;
+      text-wrap: pretty;
+      color: var(--text-body);
     }
 
-    .why-cards_card {
-      display: flex;
-      flex-direction: column;
-      padding: var(--space-5);
-      background-color: var(--background-2);
-      border: var(--border-width) solid var(--border);
-      border-radius: var(--radius-main);
-      transition:
-        border-color var(--hover-duration) var(--hover-ease),
-        box-shadow 400ms var(--reveal-ease),
-        translate 400ms var(--reveal-ease);
-      @media (width >= 48rem) {
-        min-height: 19rem;
-      }
-      @media (hover: hover) {
-        &:hover {
-          border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
-          box-shadow: var(--shadow-float);
-          translate: 0 -0.25rem;
-          .why-cards_index {
-            background-color: var(--accent);
-            color: var(--white);
-          }
-        }
-      }
-    }
-
-    .why-cards_index {
-      align-self: flex-start;
-      padding: 0.3rem 0.6rem;
-      border-radius: var(--radius-round);
-      background-color: var(--background-3);
-      font-family: var(--heading-family);
-      font-size: 0.72rem;
-      font-weight: var(--heading-bold);
-      color: var(--text-2);
-      transition:
-        background-color var(--hover-duration) var(--hover-ease),
-        color var(--hover-duration) var(--hover-ease);
-    }
-
-    .why-cards_title {
-      margin-top: var(--space-4);
-    }
-
-    .why-cards_figure {
-      margin-block: auto var(--space-4);
-      padding-top: var(--space-6);
-      font-family: var(--display-family);
-      font-size: var(--h5);
-      font-weight: 700;
-      letter-spacing: var(--letter-spacing-snug);
-      line-height: 1.2;
-      color: var(--accent);
-      --_trim-top: var(--display-family-trim-top);
-      --_trim-bottom: var(--display-family-trim-bottom);
-    }
-
-    .why-cards_text {
-      padding-top: var(--space-4);
-      border-top: var(--border-width) solid var(--divider);
+    .why-cards_word {
+      transition: opacity 150ms linear;
     }
   }
 </style>

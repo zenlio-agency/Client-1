@@ -130,13 +130,14 @@ export const HUBS = [
     short: "Dallas",
     role: "Client & Leadership Hub",
     text: "Where partnerships start. Our Dallas team works in your time zone to shape the right team for each goal and keep it on track across North America.",
-    address: "[Street address, Dallas, TX]",
+    /* Line breaks render where the address is shown (white-space: pre-line). */
+    address: "8668 John Hickman Pkwy #903\nFrisco, Texas 75034",
     phone: "[Phone]",
     email: "[Email]",
     timeZone: "America/Chicago",
     locale: "en-US",
-    lat: 32.78,
-    lon: -96.8,
+    lat: 33.15,
+    lon: -96.82,
     link: { label: "Explore Dallas", href: "/contact#dallas" },
   },
   {
@@ -145,16 +146,35 @@ export const HUBS = [
     short: "Hyderabad",
     role: "Engineering & Talent Hub",
     text: "Home to our engineering talent. Hyderabad teams build, run and improve platforms for enterprises worldwide, working as part of each enterprise's own technology organization.",
-    address: "[Street address, Hyderabad, Telangana]",
+    address:
+      "6E(608), 6th Floor, Business Square\nH.No. 1-98/3/5/23, 24, 25, 26 and 27\nJubilee Enclave, Sy No. 66 & 67\nMadhapur, Hyderabad - 500 081",
     phone: "[Phone]",
     email: "[Email]",
     timeZone: "Asia/Kolkata",
     locale: "en-IN",
-    lat: 17.39,
-    lon: 78.49,
+    lat: 17.45,
+    lon: 78.39,
     link: { label: "View opportunities in Hyderabad", href: "/careers" },
   },
 ] as const;
+
+/**
+ * Other companies shown at the foot of the homepage. Each needs written
+ * confirmation before launch. `logo` is a path under `public/` and `href`
+ * the company's site; both are optional. Until real entries arrive each
+ * slot shows placeholders.
+ */
+export const ECOSYSTEM: {
+  name: string;
+  line: string;
+  relationship: string;
+  logo?: string;
+  href?: string;
+}[] = Array.from({ length: 4 }, (_, index) => ({
+  name: `[Company ${String(index + 1).padStart(2, "0")}]`,
+  line: "[One line on what it does and for whom]",
+  relationship: "[Relationship]",
+}));
 
 /** Main navigation. Items with `menu` open a panel. */
 export const NAV = [
