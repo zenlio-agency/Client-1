@@ -155,16 +155,21 @@ The open items:
   needed; confirm that holds.
 - **Hub details.** Street address, phone and email for Dallas and Hyderabad
   (`HUBS` in `src/data/site.ts`).
-- **Client logos.** `CLIENT_LOGOS` in `src/data/site.ts` lists twelve
-  placeholder tiles. For each logo cleared for use, add the file to
-  `public/logos/` and set `src` (for example `"/logos/acme.svg"`) and `name`.
-  Logos show in greyscale and turn to full colour on hover.
+- **Client logos.** `CLIENT_LOGO_ROWS` in `src/data/site.ts` sets the two
+  marquee rows: banking and financial services first, then telecom,
+  healthcare and energy. The files in `public/logos/` are the companies'
+  official logos from Wikimedia Commons. Logos are trademarks, so get written
+  permission from each company before launch and remove any that can't be
+  cleared. To add one, put the file in `public/logos/` and add its `name` and
+  `src` to a row. Logos show in grey and turn to full colour on hover.
 - **Ecosystem.** `EcosystemCards` renders nothing until `companies` is given
   confirmed affiliates.
-- **Forms.** The contact form, the newsletter field and the role finder are
-  not connected to anything, and each one says so when used. Give the contact
-  `Form` an `action` endpoint, connect the newsletter in `Footer.astro`, and
-  replace the sample roles in `CareersOpenings` with the live job feed.
+- **Forms.** The contact form (on `/contact` and at the foot of the homepage,
+  both from `ContactConversation`) and the role finder are not connected to
+  anything, and each one says so when used. Give the contact `Form` an
+  `action` endpoint, which covers both pages, and replace the sample roles in
+  `CareersOpenings` with the live job feed. The form's consent line links to
+  the Privacy and Terms pages, which don't exist yet.
 - **Insights.** The five articles are marked "Coming soon" and do not link
   anywhere yet.
 - **Links.** Social profiles (`SOCIAL`), Privacy, Terms, Cookies and
