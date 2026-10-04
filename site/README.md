@@ -162,8 +162,11 @@ The open items:
   permission from each company before launch and remove any that can't be
   cleared. To add one, put the file in `public/logos/` and add its `name` and
   `src` to a row. Logos show in grey and turn to full colour on hover.
-- **Ecosystem.** `EcosystemCards` renders nothing until `companies` is given
-  confirmed affiliates.
+- **Ecosystem.** The homepage band shows one company, Siri Data Analytics
+  (`ECOSYSTEM` in `src/data/site.ts`), with the logo from its website in
+  `public/logos/`. Confirm the listing, its one-line description and the
+  logo in writing before launch. To add a company, add an entry to
+  `ECOSYSTEM`; cards stack in the right-hand column.
 - **Forms.** The contact form (on `/contact` and at the foot of the homepage,
   both from `ContactConversation`) and the role finder are not connected to
   anything, and each one says so when used. Give the contact `Form` an
