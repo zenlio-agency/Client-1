@@ -189,14 +189,7 @@ const MENUS: Record<string, Menu> = {
                     </div>
                   ))}
                   <a class="nav_feature theme-dark" href={menu.feature.href}>
-                    <svg
-                      class="nav_feature_mark"
-                      viewBox="0 0 190 120"
-                      aria-hidden="true"
-                    >
-                      <path d="M0 0 161 119.5H135L24 37.6v58.9L0 119.5Z" />
-                      <path d="M189.5 0v119.5H167V36l-57.6 34.7-13.7-9.7Z" />
-                    </svg>
+                    <Logo markOnly class="nav_feature_logo" />
                     <span class="nav_feature_caption">
                       <span class="nav_feature_label">
                         {menu.feature.label}
@@ -697,7 +690,8 @@ const MENUS: Record<string, Menu> = {
       min-height: 16rem;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
+      justify-content: space-between;
+      gap: var(--space-5);
       padding: var(--space-5);
       border-radius: 1rem;
       overflow: clip;
@@ -716,9 +710,6 @@ const MENUS: Record<string, Menu> = {
       color: var(--text);
       @media (hover: hover) {
         &:hover {
-          .nav_feature_mark {
-            translate: 0 -0.25rem;
-          }
           .nav_feature_arrow {
             translate: 0.25rem 0;
           }
@@ -726,13 +717,9 @@ const MENUS: Record<string, Menu> = {
       }
     }
 
-    .nav_feature_mark {
-      position: absolute;
-      top: var(--space-5);
-      left: var(--space-5);
-      width: 5rem;
-      fill: color-mix(in srgb, var(--white) 22%, transparent);
-      transition: translate 600ms var(--reveal-ease);
+    /* The navbar mark in its dark-background colours, as in the footer. */
+    .nav_feature_logo {
+      font-size: 1.5rem;
     }
 
     .nav_feature_caption {

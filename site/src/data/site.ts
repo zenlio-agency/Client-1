@@ -52,22 +52,38 @@ export const CAPABILITIES = [
 ] as const;
 
 /**
- * Client logos for the trust marquee. Add `src`, a file in `public/logos/`,
- * once each logo is cleared for use; until then the tile shows a placeholder.
+ * Client logos for the trust marquee, one scrolling row per entry. `src` is
+ * a file in `public/logos/`; a logo without one shows a placeholder. Each
+ * logo needs written permission from the company before launch.
  */
-export const CLIENT_LOGOS: { name: string; src?: string }[] = [
-  { name: "Client logo 01" },
-  { name: "Client logo 02" },
-  { name: "Client logo 03" },
-  { name: "Client logo 04" },
-  { name: "Client logo 05" },
-  { name: "Client logo 06" },
-  { name: "Client logo 07" },
-  { name: "Client logo 08" },
-  { name: "Client logo 09" },
-  { name: "Client logo 10" },
-  { name: "Client logo 11" },
-  { name: "Client logo 12" },
+export const CLIENT_LOGO_ROWS: {
+  label: string;
+  logos: { name: string; src?: string }[];
+}[] = [
+  {
+    label: "Banking & Financial Services",
+    logos: [
+      { name: "American Express", src: "/logos/american-express.svg" },
+      { name: "JPMorgan Chase", src: "/logos/jpmorgan-chase.svg" },
+      { name: "Bank of America", src: "/logos/bank-of-america.svg" },
+      { name: "Citi", src: "/logos/citi.svg" },
+      { name: "Goldman Sachs", src: "/logos/goldman-sachs.svg" },
+    ],
+  },
+  {
+    label: "Telecommunications, Healthcare and Energy",
+    logos: [
+      { name: "AT&T", src: "/logos/att.svg" },
+      { name: "UnitedHealthcare", src: "/logos/unitedhealthcare.svg" },
+      { name: "ExxonMobil", src: "/logos/exxonmobil.svg" },
+      { name: "Verizon", src: "/logos/verizon.svg" },
+      { name: "CVS Health", src: "/logos/cvs-health.svg" },
+      { name: "Chevron", src: "/logos/chevron.svg" },
+      { name: "Vodafone", src: "/logos/vodafone.svg" },
+      { name: "Johnson & Johnson", src: "/logos/johnson-johnson.svg" },
+      { name: "Schneider Electric", src: "/logos/schneider-electric.svg" },
+    ],
+  },
 ];
 
 /**
