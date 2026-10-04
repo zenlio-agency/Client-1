@@ -1,0 +1,133 @@
+---
+import Layout from "@/layouts/BaseLayout.astro";
+import Section from "@/components/wrapper/Section.astro";
+import HeroDetail from "@/components/content/HeroDetail.astro";
+import ProblemRows from "@/components/content/ProblemRows.astro";
+import FeatureGrid from "@/components/content/FeatureGrid.astro";
+import TrustStrip from "@/components/content/TrustStrip.astro";
+import ChipGroups from "@/components/content/ChipGroups.astro";
+import FaqList from "@/components/content/FaqList.astro";
+import RelatedTiles from "@/components/content/RelatedTiles.astro";
+import CtaFinal from "@/components/content/CtaFinal.astro";
+import {
+  CAPABILITIES,
+  INDUSTRIES,
+  CTA,
+  capabilityHref,
+  industryHref,
+} from "@/data/site.ts";
+import { INDUSTRY_PAGES } from "@/data/industry-pages.ts";
+import { INDUSTRY_PHOTOS } from "@/data/photos.ts";
+
+export function getStaticPaths() {
+  return INDUSTRIES.map((industry) => ({
+    params: { slug: industry.slug },
+    props: { industry },
+  }));
+}
+
+type Props = { industry: (typeof INDUSTRIES)[number] };
+
+const { industry } = Astro.props;
+const page = INDUSTRY_PAGES[industry.id];
+const contact = `${CTA.primary.href}?topic=${industry.id}`;
+---
+
+<Layout title={industry.title} description={page.description}>
+  {/* Hero */}
+  <Section paddingTop="small">
+    <HeroDetail
+      crumbs={[
+        { label: "Home", href: "/" },
+        { label: "Industries", href: "/industries" },
+        { label: industry.title },
+      ]}
+      eyebrow={industry.title}
+      title={industry.hero}
+      lede={page.lede}
+      points={page.points}
+      primary={{ label: `Talk to us about ${industry.short}`, href: contact }}
+      secondary={{ label: "All industries", href: "/industries" }}
+      photo={INDUSTRY_PHOTOS[industry.id]}
+    />
+  </Section>
+
+  {/* Pressures */}
+  <Section theme="tint">
+    <ProblemRows
+      eyebrow="The pressure"
+      heading={page.problems.heading}
+      rows={page.problems.rows}
+    />
+  </Section>
+
+  {/* What we build, with the outcomes to expect */}
+  <Section>
+    <FeatureGrid
+      eyebrow="What we build"
+      heading={page.offerings.heading}
+      intro={page.offerings.intro}
+      items={page.offerings.items}
+      numbered
+    />
+    <TrustStrip label="Outcomes to expect" stats={page.outcomes} />
+  </Section>
+
+  {/* Capabilities in this industry */}
+  <Section theme="tint">
+    <FeatureGrid
+      variant="rows"
+      eyebrow="Capabilities"
+      heading={`What our teams bring to ${industry.short}`}
+      link={{ label: "All capabilities", href: "/capabilities" }}
+      items={CAPABILITIES.map((cap) => ({
+        title: cap.title,
+        text: page.capabilities[cap.id],
+        href: capabilityHref(cap),
+        icon: cap.icon,
+      }))}
+      linkLabel="Explore the capability"
+    />
+  </Section>
+
+  {/* Systems and standards */}
+  <Section>
+    <ChipGroups
+      eyebrow="Sector knowledge"
+      heading="Systems and standards our teams know"
+      intro={page.stack.intro}
+      groups={page.stack.groups}
+    />
+  </Section>
+
+  {/* FAQ */}
+  <Section theme="tint">
+    <FaqList
+      heading={`${industry.short}, answered`}
+      items={page.faq}
+      link={{ label: "Talk to us about your sector", href: contact }}
+    />
+  </Section>
+
+  {/* Other industries */}
+  <Section>
+    <RelatedTiles
+      eyebrow="Keep exploring"
+      heading="Other industries"
+      link={{ label: "All industries", href: "/industries" }}
+      items={INDUSTRIES.filter((other) => other.id !== industry.id).map(
+        (other) => ({
+          title: other.title,
+          text: other.summary,
+          href: industryHref(other),
+          photo: INDUSTRY_PHOTOS[other.id],
+        }),
+      )}
+    />
+  </Section>
+
+  {/* Final CTA */}
+  <Section theme="dark" paddingTop="large">
+    <CtaFinal />
+  </Section>
+</Layout>

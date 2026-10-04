@@ -8,7 +8,15 @@ import linkedin from "@/assets/icons/social-linkedin.svg";
 import x from "@/assets/icons/social-x.svg";
 import facebook from "@/assets/icons/social-facebook.svg";
 import youtube from "@/assets/icons/social-youtube.svg";
-import { CAPABILITIES, INDUSTRIES, NAV, CTA, SOCIAL } from "@/data/site.ts";
+import {
+  CAPABILITIES,
+  INDUSTRIES,
+  NAV,
+  CTA,
+  SOCIAL,
+  capabilityHref,
+  industryHref,
+} from "@/data/site.ts";
 import { SITE_NAME } from "@/consts.ts";
 
 interface Props {
@@ -34,7 +42,7 @@ type Menu = {
 const capLinks = (ids: string[]) =>
   CAPABILITIES.filter((cap) => ids.includes(cap.id)).map((cap) => ({
     label: cap.title,
-    href: `/#${cap.id}`,
+    href: capabilityHref(cap),
   }));
 
 /* Each panel opens inside the bar: link columns, small footer links under
@@ -52,8 +60,8 @@ const MENUS: Record<string, Menu> = {
       },
     ],
     footerLinks: [
-      { label: "All capabilities", href: "/#capabilities" },
-      { label: "Why ManyaIT", href: "/#why" },
+      { label: "All capabilities", href: "/capabilities" },
+      { label: "Why ManyaIT", href: "/about" },
     ],
     showSocials: true,
     feature: {
@@ -69,15 +77,15 @@ const MENUS: Record<string, Menu> = {
         eyebrow: "Industries",
         links: INDUSTRIES.map((industry) => ({
           label: industry.title,
-          href: `/industries#${industry.id}`,
+          href: industryHref(industry),
         })),
       },
       {
         eyebrow: "Explore",
         links: [
           { label: "All industries", href: "/industries" },
-          { label: "Global presence", href: "/#locations" },
-          { label: "Insights", href: "/#insights" },
+          { label: "Global presence", href: "/locations" },
+          { label: "Insights", href: "/insights" },
         ],
       },
     ],

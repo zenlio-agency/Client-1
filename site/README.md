@@ -44,11 +44,15 @@ Lumos conventions (layers, themes, `_wrap` components, `rem` only) are in
 
 ```
 src/
-  pages/            index, industries, careers, contact and 404 (no CSS)
+  pages/            index, about, careers, contact, insights, locations, 404,
+                    capabilities/ and industries/ (index and [slug]) (no CSS)
   components/
     global/         Nav (mega menu and mobile drawer), Footer, Logo
     content/        one component per section, listed below
-  data/site.ts      capabilities, client logos, industries, hubs, nav, CTAs
+  data/site.ts      capabilities, client logos, industries, hubs, nav, CTAs,
+                    the shared team steps and the page-link helpers
+  data/capability-pages.ts, data/industry-pages.ts
+                    copy for each capability and industry page
   styles/base.css   brand tokens, type scale, themes, motion
   assets/           fonts, logo mark and icons
 public/             favicon, social share image and logos/ for client logos
@@ -70,10 +74,28 @@ public/             favicon, social share image and logos/ for client logos
 | —   | `/careers` (roles and finder) | `CareersOpenings`            |       |
 | —   | `/contact`                    | `ContactConversation`        |       |
 
-Capability and industry copy comes from `src/data/site.ts`, so the nav, the
-bento, the industry cards and page, the footer and the contact form's topic
-list all stay in step. Industry cards keep each industry's `id`, so the nav's
-`/#industry-…` links still land on the homepage.
+### Inner pages
+
+Every page the nav and footer link to has its own route. They share a set of
+section components, so a new page is mostly copy.
+
+| Page                        | Sections                                                                                                                                                              |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/capabilities`             | `HeroDetail`, `FeatureGrid` (rows), `ProcessSteps`, `TrustStrip`, `FaqList`, `CtaFinal`                                                                               |
+| `/capabilities/[slug]` (×5) | `HeroDetail`, `ProblemRows`, `FeatureGrid` + `TrustStrip` (outcomes), `ChipGroups`, `FeatureGrid` (industries), `ProcessSteps`, `FaqList`, `RelatedTiles`, `CtaFinal` |
+| `/industries/[slug]` (×4)   | `HeroDetail`, `ProblemRows`, `FeatureGrid` + `TrustStrip` (outcomes), `FeatureGrid` (rows of capabilities), `ChipGroups`, `FaqList`, `RelatedTiles`, `CtaFinal`       |
+| `/about`                    | `HeroDetail`, `StorySplit`, `FeatureGrid` (mission, values), `TrustStrip`, `ProcessSteps`, `GlobalPresence`, `FaqList`, `CtaFinal`                                    |
+| `/careers`                  | `CareersOpenings`, `StorySplit`, `FeatureGrid` (benefits, tracks), `ProcessSteps`, `FaqList`, `GlobalPresence`, `CtaFinal`                                            |
+| `/locations`                | `HeroDetail`, `HubCards`, `GlobalPresence`, `ProcessSteps`, `FaqList`, `CtaFinal`                                                                                     |
+| `/insights`                 | `HeroDetail`, `InsightsGrid`, `FeatureGrid` (topics), `CtaFinal`                                                                                                      |
+
+Capability and industry names, lines and slugs come from `src/data/site.ts`,
+so the nav, the bento, the industry cards and pages, the footer and the
+contact form's topic list all stay in step. Each page's longer copy lives in
+`src/data/capability-pages.ts` or `src/data/industry-pages.ts`, keyed by the
+same `id`. `capabilityHref` and `industryHref` build the page links, and
+`TEAM_STEPS` holds the four steps from skills brief to Build-Operate-Transfer
+shown on the About and capability pages.
 
 ## Brand
 
@@ -111,14 +133,22 @@ Anything in square brackets is a placeholder. Each one goes through `tbc()` in
 
 ```sh
 npm run build
-grep -ohE 'class="tbc"[^>]*>[^<]+' dist/index.html dist/*/index.html \
+find dist -name '*.html' -exec grep -ohE 'class="tbc"[^>]*>[^<]+' {} + \
   | sed 's/.*>//' | sort | uniq -c
 ```
 
 The open items:
 
 - **Figures.** Years, enterprises served, talent network size, weeks to a
-  productive team, countries, industry percentages and the reply time.
+  productive team, countries, industry percentages and the reply time. Each
+  capability and industry page also has four "Outcomes to expect" figures.
+- **Inner-page facts.** On the About page, the founding year and early
+  milestones. On the careers page, health and wellbeing benefits, the length
+  of the joining process and the careers email. The platforms, tools and
+  standards listed on each capability and industry page describe skills, not
+  partnerships; check each list reflects the teams ManyaIT can field. The
+  healthcare FAQ says business associate agreements are put in place where
+  needed; confirm that holds.
 - **Hub details.** Street address, phone and email for Dallas and Hyderabad
   (`HUBS` in `src/data/site.ts`).
 - **Client logos.** `CLIENT_LOGOS` in `src/data/site.ts` lists twelve
@@ -163,6 +193,6 @@ To check a build for the banned words:
 
 ```sh
 npm run build
-grep -oiE "recruit|staffing|staff aug|\bhir(e|ed|ing)\b|placement|headhunt|outsourc|consult|agency|contractor|engagement|\bbench\b|\bresources?\b|manpower|vendor" \
-  dist/index.html dist/*/index.html | sort | uniq -c
+find dist -name '*.html' -exec grep -oiE "recruit|staffing|staff aug|\bhir(e|ed|ing)\b|placement|headhunt|outsourc|consult|agency|contractor|engagement|\bbench\b|\bresources?\b|manpower|vendor" {} + \
+  | sort | uniq -c
 ```

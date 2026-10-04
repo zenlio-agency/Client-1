@@ -1,0 +1,167 @@
+---
+import Layout from "@/layouts/BaseLayout.astro";
+import Section from "@/components/wrapper/Section.astro";
+import HeroDetail from "@/components/content/HeroDetail.astro";
+import StorySplit from "@/components/content/StorySplit.astro";
+import FeatureGrid from "@/components/content/FeatureGrid.astro";
+import TrustStrip from "@/components/content/TrustStrip.astro";
+import ProcessSteps from "@/components/content/ProcessSteps.astro";
+import GlobalPresence from "@/components/content/GlobalPresence.astro";
+import FaqList from "@/components/content/FaqList.astro";
+import CtaFinal from "@/components/content/CtaFinal.astro";
+import { CTA, TEAM_STEPS } from "@/data/site.ts";
+import { ABOUT_PHOTOS } from "@/data/photos.ts";
+---
+
+<Layout
+  title="About"
+  description="ManyaIT is a technology and talent partner for global enterprises, with a Client & Leadership Hub in Dallas and an Engineering & Talent Hub in Hyderabad."
+>
+  {/* Hero */}
+  <Section paddingTop="small">
+    <HeroDetail
+      crumbs={[{ label: "Home", href: "/" }, { label: "About" }]}
+      eyebrow="About ManyaIT"
+      title="Technology & talent partners for enterprises that build."
+      lede="ManyaIT helps global enterprises build and scale their capability centers with AI-ready engineering teams. Client leadership in Dallas, engineering depth in Hyderabad, and one standard of work across both."
+      points={[
+        "Matched to your stack",
+        "Productive from week one",
+        "Built to stay",
+      ]}
+      primary={CTA.primary}
+      secondary={{ label: "Explore capabilities", href: "/capabilities" }}
+      photo={ABOUT_PHOTOS.hero}
+    />
+  </Section>
+
+  {/* Story */}
+  <Section theme="tint" id="story">
+    <StorySplit
+      eyebrow="Our story"
+      heading="From IT services to capability partner."
+      paragraphs={[
+        "ManyaIT began as a technology solutions firm headquartered in Dallas, Texas, with an engineering office in Hyderabad, India. [Founding year and early milestones to confirm.]",
+        "Years of work in mobility, cloud and big data taught us what enterprise programs need to succeed: the right people, close to the work, who stay long enough to own it.",
+        "Today that lesson shapes everything we do. Enterprises come to us to build and grow their Global Capability Centers, with specialists in data, SAP, AI and digital engineering who are matched to their stack and productive from week one. We measure ourselves by what those teams change for the business, and by how long they stay.",
+      ]}
+      points={[
+        { title: "Dallas, Texas", text: "Client & Leadership Hub" },
+        { title: "Hyderabad, India", text: "Engineering & Talent Hub" },
+      ]}
+      photo={ABOUT_PHOTOS.story}
+      reverse
+    />
+  </Section>
+
+  {/* Mission and vision */}
+  <Section id="why">
+    <FeatureGrid
+      eyebrow="Why we exist"
+      heading="The right people. Ready faster. Built to stay."
+      intro="Capability centers succeed or stall on their teams. We exist to make the team the easy part."
+      columns={2}
+      items={[
+        {
+          title: "Our mission",
+          text: "Help enterprises build technology capability that lasts, with teams that are ready faster, work as part of their organization and get better every quarter.",
+        },
+        {
+          title: "Our vision",
+          text: "To be the first call for any enterprise building a capability center, known for teams that stay and platforms that hold up.",
+        },
+      ]}
+    />
+    <TrustStrip />
+  </Section>
+
+  {/* Values */}
+  <Section theme="tint" id="values">
+    <FeatureGrid
+      eyebrow="What we believe"
+      heading="Six habits behind every team"
+      intro="They shape who joins ManyaIT, how we work with each enterprise and what we expect of ourselves."
+      numbered
+      items={[
+        {
+          title: "Ownership over activity",
+          text: "We judge work by what it changes for the business, not by hours logged or tickets closed.",
+        },
+        {
+          title: "Continuity by design",
+          text: "Teams that stay learn your systems, your domain and your controls. We plan for tenure, not rotation.",
+        },
+        {
+          title: "Candor, early",
+          text: "We say what we see, including the bad news, while there is still time to act on it.",
+        },
+        {
+          title: "Craft and curiosity",
+          text: "We keep learning the platforms we work on, and we share what we learn across teams.",
+        },
+        {
+          title: "Security as a habit",
+          text: "Your data, your code and your customers' trust are protected in every sprint, not only at audit time.",
+        },
+        {
+          title: "Two cities, one team",
+          text: "Dallas and Hyderabad work to one plan and one standard, so the working day hands over instead of stopping.",
+        },
+      ]}
+    />
+  </Section>
+
+  {/* Model */}
+  <Section theme="dark" id="model">
+    <ProcessSteps
+      eyebrow="How we work"
+      heading="Build, operate, and transfer when you're ready"
+      intro="A clear path from the first skills brief to a capability you fully own, at the pace that suits your enterprise."
+      steps={TEAM_STEPS}
+    />
+  </Section>
+
+  {/* Locations */}
+  <Section id="locations">
+    <GlobalPresence />
+  </Section>
+
+  {/* FAQ */}
+  <Section theme="tint">
+    <FaqList
+      heading="About ManyaIT, answered"
+      items={[
+        {
+          question: "What does ManyaIT do?",
+          answer:
+            "We help global enterprises build and scale technology capability, usually inside a Global Capability Center. That means AI-ready teams in data, SAP, AI, automation and digital engineering, plus the setup and support that keep them productive.",
+        },
+        {
+          question: "What is a Global Capability Center?",
+          answer:
+            "A Global Capability Center, or GCC, is an enterprise's own technology and operations center in another country. It gives the enterprise direct control of its talent, its knowledge and its costs.",
+        },
+        {
+          question: "What does Build-Operate-Transfer mean?",
+          answer:
+            "We build the team and its ways of working, operate it with you until it runs smoothly, then move it into your own capability center, people and knowledge included. You decide the timing.",
+        },
+        {
+          question: "Where are you based?",
+          answer:
+            "Our Client & Leadership Hub is in Dallas, Texas, and our Engineering & Talent Hub is in Hyderabad, India. Teams work across both, with daily overlap in North American hours.",
+        },
+        {
+          question: "Which industries do you work in?",
+          answer:
+            "Banking and financial services, telecommunications, healthcare and energy. Our specialists know the rules, systems and pressures of each sector.",
+        },
+      ]}
+    />
+  </Section>
+
+  {/* Final CTA */}
+  <Section theme="dark" paddingTop="large">
+    <CtaFinal />
+  </Section>
+</Layout>

@@ -13,6 +13,8 @@ import {
   HUBS,
   SOCIAL,
   CTA,
+  capabilityHref,
+  industryHref,
   tbc,
 } from "@/data/site.ts";
 import { SITE_NAME } from "@/consts.ts";
@@ -26,10 +28,10 @@ const { render = true } = Astro.props;
 const icons = { linkedin, x, facebook, youtube };
 
 const company = [
-  { label: "About", href: "/#why" },
+  { label: "About", href: "/about" },
   { label: "Careers", href: "/careers" },
-  { label: "Insights", href: "/#insights" },
-  { label: "Locations", href: "/#locations" },
+  { label: "Insights", href: "/insights" },
+  { label: "Locations", href: "/locations" },
   { label: "Contact", href: "/contact" },
 ];
 const legal = ["Privacy", "Terms", "Cookies", "Accessibility"];
@@ -79,7 +81,7 @@ const legal = ["Privacy", "Terms", "Cookies", "Accessibility"];
               <ul>
                 {CAPABILITIES.map((cap) => (
                   <li>
-                    <a class="footer_link" href={`/#${cap.id}`}>
+                    <a class="footer_link" href={capabilityHref(cap)}>
                       {cap.title}
                     </a>
                   </li>
@@ -91,7 +93,7 @@ const legal = ["Privacy", "Terms", "Cookies", "Accessibility"];
               <ul>
                 {INDUSTRIES.map((industry) => (
                   <li>
-                    <a class="footer_link" href={`/#${industry.id}`}>
+                    <a class="footer_link" href={industryHref(industry)}>
                       {industry.title}
                     </a>
                   </li>
