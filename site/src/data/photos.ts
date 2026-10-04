@@ -42,3 +42,15 @@ export const CAREERS_POINT_PHOTOS = [
   unsplash("photo-1531482615713-2afd69097998", 900),
   unsplash("photo-1552664730-d307ca884978", 900),
 ];
+
+/** The About page: hero, then the story section. */
+export const ABOUT_PHOTOS = {
+  hero: unsplash("photo-1542744173-8e7e53415bb0"),
+  story: unsplash("photo-1521737604893-d14cc237f11d"),
+};
+
+/** The careers page's "Life at ManyaIT" section. */
+export const CAREERS_LIFE_PHOTO = unsplash("photo-1551434678-e076c223a692");
+
+/** The Locations page hero. */
+export const LOCATIONS_PHOTO = unsplash("photo-1497215728101-856f4ea42174");

@@ -6,7 +6,7 @@ import Button from "@/components/Button.astro";
 import Icon from "@/components/media/Icon.astro";
 import PhotoTile from "@/components/item/PhotoTile.astro";
 import arrow from "@/assets/icons/ui-arrow.svg";
-import { CAPABILITIES, CTA } from "@/data/site.ts";
+import { CAPABILITIES, CTA, capabilityHref } from "@/data/site.ts";
 import { CAPABILITY_PHOTOS } from "@/data/photos.ts";
 
 interface Props {
@@ -41,7 +41,7 @@ const { render = true } = Astro.props;
       <div class="bento_grid">
         {CAPABILITIES.map((cap, index) => (
           <PhotoTile
-            href={`${CTA.primary.href}?topic=${cap.id}`}
+            href={capabilityHref(cap)}
             photo={CAPABILITY_PHOTOS[cap.id]}
             class={`bento_tile is-${cap.id}`}
             id={cap.id}
@@ -57,7 +57,7 @@ const { render = true } = Astro.props;
             <Fragment slot="reveal">
               <p class="photo-tile_text">{cap.line}</p>
               <span class="photo-tile_more">
-                Talk to us
+                Explore
                 <Icon src={arrow} variant="small" />
               </span>
             </Fragment>

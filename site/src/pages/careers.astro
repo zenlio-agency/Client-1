@@ -2,7 +2,28 @@
 import Layout from "@/layouts/BaseLayout.astro";
 import Section from "@/components/wrapper/Section.astro";
 import CareersOpenings from "@/components/content/CareersOpenings.astro";
+import StorySplit from "@/components/content/StorySplit.astro";
+import FeatureGrid from "@/components/content/FeatureGrid.astro";
+import ProcessSteps from "@/components/content/ProcessSteps.astro";
+import FaqList from "@/components/content/FaqList.astro";
 import GlobalPresence from "@/components/content/GlobalPresence.astro";
+import CtaFinal from "@/components/content/CtaFinal.astro";
+import { CAPABILITIES, capabilityHref } from "@/data/site.ts";
+import { CAREERS_LIFE_PHOTO } from "@/data/photos.ts";
+
+/* One line per career track, keyed by capability id. */
+const tracks: Record<string, string> = {
+  "cap-data":
+    "Build the platforms and pipelines every decision runs on, as a data engineer, analytics engineer, architect or BI developer.",
+  "cap-sap":
+    "Work on S/4HANA moves, BTP extensions and SAP data, as a functional lead, ABAP or BTP developer, or integration specialist.",
+  "cap-ai":
+    "Ship GenAI and machine learning to production, not just demos, as an ML engineer, GenAI engineer, data scientist or MLOps engineer.",
+  "cap-flow":
+    "Build agents and workflows that finish real work, as an automation engineer, agent developer or process analyst.",
+  "cap-code":
+    "Design, build and run web, mobile and cloud products, as a full-stack, Java, mobile, platform or QA engineer.",
+};
 ---
 
 <Layout
@@ -14,8 +35,163 @@ import GlobalPresence from "@/components/content/GlobalPresence.astro";
     <CareersOpenings />
   </Section>
 
+  {/* Life at ManyaIT */}
+  <Section theme="tint" id="life">
+    <StorySplit
+      eyebrow="Life at ManyaIT"
+      heading="Work that stays with you."
+      paragraphs={[
+        "At ManyaIT you join a dedicated team inside an enterprise's capability center. You learn one business deeply, own real systems and see your work used by millions of people.",
+        "Hyderabad teams work side by side with colleagues in Dallas and with the enterprises they build for. Questions go straight to the people who own the outcome, not through layers.",
+        "Because teams are built to stay, you get time to master a platform, grow into a lead role and see the results of your work over years, not sprints.",
+      ]}
+      points={[
+        {
+          title: "Real enterprise platforms",
+          text: "Banking, telecom, healthcare and energy",
+        },
+        { title: "Two hubs, one team", text: "Dallas and Hyderabad" },
+      ]}
+      photo={CAREERS_LIFE_PHOTO}
+    />
+  </Section>
+
+  {/* Growth and benefits */}
+  <Section id="benefits">
+    <FeatureGrid
+      eyebrow="Growth and benefits"
+      heading="Built for long careers, not short stints."
+      intro="Everything here is designed around one idea: the longer you stay, the more you should grow."
+      numbered
+      items={[
+        {
+          title: "Paid certifications",
+          text: "Exam fees and study time for the SAP, cloud and AI certifications that matter to your track.",
+        },
+        {
+          title: "A mentor from day one",
+          text: "A senior engineer to learn from in your first year, and regular career conversations after that.",
+        },
+        {
+          title: "A growth plan in 90 days",
+          text: "The certifications to earn, the skills to build and the role to grow into, agreed with your lead.",
+        },
+        {
+          title: "Promotion from within",
+          text: "New leads and architects come from our own teams first.",
+        },
+        {
+          title: "Flexible ways of working",
+          text: "Hybrid and on-site roles, set per team and listed on every opening.",
+        },
+        {
+          title: "Health and wellbeing",
+          text: "[Medical cover and wellbeing benefits to confirm.]",
+        },
+      ]}
+    />
+  </Section>
+
+  {/* Career tracks */}
+  <Section theme="tint" id="tracks">
+    <FeatureGrid
+      eyebrow="Career tracks"
+      heading="Find the team that fits your craft."
+      intro="Every track works on real enterprise platforms, with a clear path from engineer to lead and architect."
+      items={[
+        ...CAPABILITIES.map((cap) => ({
+          title: cap.title,
+          text: tracks[cap.id],
+          href: capabilityHref(cap),
+          icon: cap.icon,
+        })),
+        {
+          title: "Client Partnership",
+          text: "Shape teams with enterprise leaders from Dallas, as a client partner or solution architect.",
+        },
+      ]}
+      linkLabel="See the work"
+    />
+  </Section>
+
+  {/* How to join */}
+  <Section theme="dark" id="process">
+    <ProcessSteps
+      eyebrow="Joining ManyaIT"
+      heading="A clear process, start to finish."
+      intro="Four steps, honest feedback at each one, and no fees at any stage."
+      steps={[
+        {
+          title: "Apply or join the network",
+          text: "Apply for an opening, or join the Talent Network and we'll reach out when a team that fits you opens up.",
+        },
+        {
+          title: "Meet our people team",
+          text: "A short conversation about your experience, the work you enjoy and where you want to grow.",
+        },
+        {
+          title: "Technical conversation",
+          text: "A practical session with engineers from the team you'd join, built around real problems rather than trick questions.",
+        },
+        {
+          title: "Offer and onboarding",
+          text: "Meet your lead, receive your offer and start with a mentor, a growth plan and a clear first project.",
+        },
+      ]}
+    />
+  </Section>
+
+  {/* FAQ */}
+  <Section id="faq">
+    <FaqList
+      heading="Careers, answered"
+      intro="Still curious? Our people team is happy to help."
+      link={{
+        label: "Join the Talent Network",
+        href: "/contact?topic=careers",
+      }}
+      items={[
+        {
+          question: "Does ManyaIT charge a fee to apply?",
+          answer:
+            "Never. ManyaIT does not charge a fee at any stage. If anyone asks you for money in our name, report it to [careers email].",
+        },
+        {
+          question: "Do I need experience in a specific industry?",
+          answer:
+            "No. Strong engineering fundamentals matter most. You'll learn the industry alongside your team, with mentors who know it well.",
+        },
+        {
+          question: "Are roles remote, hybrid or on-site?",
+          answer:
+            "It depends on the team and the enterprise you work with. Every opening lists its working mode.",
+        },
+        {
+          question: "What is the Talent Network?",
+          answer:
+            "A way to stay on our radar without applying for a specific role. Share your profile and skills, and our people team will reach out when a matching team opens.",
+        },
+        {
+          question: "Can I apply for more than one role?",
+          answer:
+            "Yes. Apply for the roles that fit, or join the Talent Network and we'll match your profile to openings as they come up.",
+        },
+        {
+          question: "How long does the process take?",
+          answer:
+            "Usually [X] weeks from application to offer. We keep you updated at every step.",
+        },
+      ]}
+    />
+  </Section>
+
   {/* Locations */}
   <Section theme="tint" id="locations">
     <GlobalPresence />
+  </Section>
+
+  {/* Final CTA */}
+  <Section theme="dark" paddingTop="large">
+    <CtaFinal />
   </Section>
 </Layout>

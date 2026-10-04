@@ -1,0 +1,100 @@
+---
+import Layout from "@/layouts/BaseLayout.astro";
+import Section from "@/components/wrapper/Section.astro";
+import HeroDetail from "@/components/content/HeroDetail.astro";
+import FeatureGrid from "@/components/content/FeatureGrid.astro";
+import TrustStrip from "@/components/content/TrustStrip.astro";
+import ProcessSteps from "@/components/content/ProcessSteps.astro";
+import FaqList from "@/components/content/FaqList.astro";
+import CtaFinal from "@/components/content/CtaFinal.astro";
+import { CAPABILITIES, CTA, TEAM_STEPS, capabilityHref } from "@/data/site.ts";
+import { CAPABILITY_PHOTOS } from "@/data/photos.ts";
+---
+
+<Layout
+  title="Capabilities"
+  description="Data, SAP, AI, automation and product engineering teams that join your capability center, matched to your stack and productive from week one."
+>
+  {/* Hero */}
+  <Section paddingTop="small">
+    <HeroDetail
+      crumbs={[{ label: "Home", href: "/" }, { label: "Capabilities" }]}
+      eyebrow="Capabilities"
+      title="Expertise across the modern enterprise stack."
+      lede="Five capability areas, one way of working. Each team is matched to your stack, joins your capability center and stays to run and improve what it builds."
+      points={[
+        "Matched to your stack",
+        "Teams live in weeks",
+        "Build-Operate-Transfer",
+      ]}
+      primary={{ label: "Share your skills brief", href: CTA.primary.href }}
+      secondary={{ label: "Why ManyaIT", href: "/about" }}
+      photo={CAPABILITY_PHOTOS["cap-data"]}
+    />
+  </Section>
+
+  {/* The five capabilities */}
+  <Section theme="tint">
+    <FeatureGrid
+      variant="rows"
+      eyebrow="Choose a capability"
+      heading="Specialist teams for the platforms that matter most"
+      intro="Start with one capability, or combine them. Data feeds AI, SAP feeds data, and one team can carry the work across all three."
+      items={CAPABILITIES.map((cap) => ({
+        title: cap.title,
+        text: cap.line,
+        href: capabilityHref(cap),
+        icon: cap.icon,
+      }))}
+      linkLabel="Explore"
+    />
+  </Section>
+
+  {/* How the team comes together, with the company figures */}
+  <Section theme="dark">
+    <ProcessSteps
+      eyebrow="How it works"
+      heading="From skills brief to a team that ships"
+      intro="Every capability follows the same path, whether it starts with three specialists or a full engineering hub."
+      steps={TEAM_STEPS}
+    />
+  </Section>
+
+  <Section paddingBottom="small">
+    <TrustStrip />
+  </Section>
+
+  {/* FAQ */}
+  <Section>
+    <FaqList
+      heading="Capabilities, answered"
+      items={[
+        {
+          question: "Can one team cover more than one capability?",
+          answer:
+            "Yes. Many teams combine data engineering with AI, or SAP with data. We shape the team around the outcome, then add specialists as the scope grows.",
+        },
+        {
+          question: "Do your teams work on our existing platforms?",
+          answer:
+            "Almost always. Teams join your repositories, tools and controls, learn what is already there and build on it rather than starting over.",
+        },
+        {
+          question: "How fast can a team start?",
+          answer:
+            "Most teams are live within [X] weeks of an agreed skills brief. A smaller starting team can begin sooner while the rest joins.",
+        },
+        {
+          question: "What does Build-Operate-Transfer mean?",
+          answer:
+            "We build the team and its ways of working, operate it with you until it runs smoothly, then move it into your own capability center when you're ready. You choose the timing.",
+        },
+      ]}
+    />
+  </Section>
+
+  {/* Final CTA */}
+  <Section theme="dark" paddingTop="large">
+    <CtaFinal />
+  </Section>
+</Layout>

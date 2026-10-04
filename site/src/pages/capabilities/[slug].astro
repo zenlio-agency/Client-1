@@ -1,0 +1,146 @@
+---
+import Layout from "@/layouts/BaseLayout.astro";
+import Section from "@/components/wrapper/Section.astro";
+import HeroDetail from "@/components/content/HeroDetail.astro";
+import ProblemRows from "@/components/content/ProblemRows.astro";
+import FeatureGrid from "@/components/content/FeatureGrid.astro";
+import TrustStrip from "@/components/content/TrustStrip.astro";
+import ChipGroups from "@/components/content/ChipGroups.astro";
+import ProcessSteps from "@/components/content/ProcessSteps.astro";
+import FaqList from "@/components/content/FaqList.astro";
+import RelatedTiles from "@/components/content/RelatedTiles.astro";
+import CtaFinal from "@/components/content/CtaFinal.astro";
+import {
+  CAPABILITIES,
+  INDUSTRIES,
+  CTA,
+  TEAM_STEPS,
+  capabilityHref,
+  industryHref,
+} from "@/data/site.ts";
+import { CAPABILITY_PAGES } from "@/data/capability-pages.ts";
+import { CAPABILITY_PHOTOS } from "@/data/photos.ts";
+
+export function getStaticPaths() {
+  return CAPABILITIES.map((cap) => ({
+    params: { slug: cap.slug },
+    props: { cap },
+  }));
+}
+
+type Props = { cap: (typeof CAPABILITIES)[number] };
+
+const { cap } = Astro.props;
+const page = CAPABILITY_PAGES[cap.id];
+const contact = `${CTA.primary.href}?topic=${cap.id}`;
+---
+
+<Layout title={cap.title} description={page.description}>
+  {/* Hero */}
+  <Section paddingTop="small">
+    <HeroDetail
+      crumbs={[
+        { label: "Home", href: "/" },
+        { label: "Capabilities", href: "/capabilities" },
+        { label: cap.title },
+      ]}
+      eyebrow={cap.title}
+      title={page.title}
+      lede={page.lede}
+      points={page.points}
+      primary={{ label: "Share your skills brief", href: contact }}
+      secondary={{ label: "All capabilities", href: "/capabilities" }}
+      photo={CAPABILITY_PHOTOS[cap.id]}
+      icon={cap.icon}
+    />
+  </Section>
+
+  {/* Challenges */}
+  <Section theme="tint">
+    <ProblemRows
+      eyebrow="Sound familiar?"
+      heading={page.problems.heading}
+      rows={page.problems.rows}
+    />
+  </Section>
+
+  {/* What the team delivers, with the outcomes to expect */}
+  <Section>
+    <FeatureGrid
+      eyebrow="What we build"
+      heading={page.offerings.heading}
+      intro={page.offerings.intro}
+      items={page.offerings.items}
+      numbered
+    />
+    <TrustStrip label="Outcomes to expect" stats={page.outcomes} />
+  </Section>
+
+  {/* Roles and stack */}
+  <Section theme="tint">
+    <ChipGroups
+      eyebrow="Your team"
+      heading="The people and the stack"
+      intro={page.stack.intro}
+      groups={page.stack.groups}
+    />
+  </Section>
+
+  {/* By industry */}
+  <Section>
+    <FeatureGrid
+      eyebrow="Industries"
+      heading={`${cap.title} in your industry`}
+      link={{ label: "All industries", href: "/industries" }}
+      items={INDUSTRIES.map((industry) => ({
+        title: industry.title,
+        text: page.industries[industry.id],
+        href: industryHref(industry),
+      }))}
+      columns={4}
+      linkLabel="Explore the industry"
+    />
+  </Section>
+
+  {/* How the team comes together */}
+  <Section theme="dark">
+    <ProcessSteps
+      eyebrow="How it works"
+      heading="From skills brief to a team that ships"
+      intro="Start with one focused team. Grow it as results come in, or move it into your own capability center when you're ready."
+      steps={TEAM_STEPS}
+    />
+  </Section>
+
+  {/* FAQ */}
+  <Section>
+    <FaqList
+      heading={`${cap.title}, answered`}
+      items={page.faq}
+      link={{ label: "Ask us directly", href: contact }}
+    />
+  </Section>
+
+  {/* Other capabilities */}
+  <Section theme="tint">
+    <RelatedTiles
+      eyebrow="Keep exploring"
+      heading="Other capabilities"
+      link={{ label: "All capabilities", href: "/capabilities" }}
+      items={CAPABILITIES.filter((other) => other.id !== cap.id).map(
+        (other) => ({
+          title: other.title,
+          text: other.line,
+          href: capabilityHref(other),
+          photo: CAPABILITY_PHOTOS[other.id],
+          icon: other.icon,
+        }),
+      )}
+    />
+  </Section>
+
+  {/* Final CTA */}
+  <Section theme="dark" paddingTop="large">
+    <CtaFinal />
+  </Section>
+</Layout>

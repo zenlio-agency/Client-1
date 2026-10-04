@@ -4,10 +4,14 @@ import capAi from "@/assets/icons/cap-ai.svg";
 import capFlow from "@/assets/icons/cap-flow.svg";
 import capCode from "@/assets/icons/cap-code.svg";
 
-/** The five capability areas, in the order used everywhere on the site. */
+/**
+ * The five capability areas, in the order used everywhere on the site.
+ * `slug` names each one's page under `/capabilities/`.
+ */
 export const CAPABILITIES = [
   {
     id: "cap-data",
+    slug: "data-analytics",
     key: "data",
     title: "Data & Analytics",
     line: "Data engineers who turn scattered data into decisions.",
@@ -15,6 +19,7 @@ export const CAPABILITIES = [
   },
   {
     id: "cap-sap",
+    slug: "sap-enterprise-data",
     key: "sap",
     title: "SAP & Enterprise Data",
     line: "S/4HANA, BTP and clean-core specialists.",
@@ -22,6 +27,7 @@ export const CAPABILITIES = [
   },
   {
     id: "cap-ai",
+    slug: "applied-ai",
     key: "ai",
     title: "Applied AI",
     line: "GenAI and ML talent that ships to production.",
@@ -29,6 +35,7 @@ export const CAPABILITIES = [
   },
   {
     id: "cap-flow",
+    slug: "agentic-ai-automation",
     key: "ai",
     title: "Agentic AI & Automation",
     line: "Builders of AI agents that get real work done.",
@@ -36,6 +43,7 @@ export const CAPABILITIES = [
   },
   {
     id: "cap-code",
+    slug: "digital-product-engineering",
     key: "digital",
     title: "Digital Product Engineering",
     line: "Cloud-native product teams, from web to mobile.",
@@ -62,10 +70,14 @@ export const CLIENT_LOGOS: { name: string; src?: string }[] = [
   { name: "Client logo 12" },
 ];
 
-/** The four industries in scope. `id` doubles as the deep-link hash. */
+/**
+ * The four industries in scope. `id` doubles as the deep-link hash and
+ * `slug` names each one's page under `/industries/`.
+ */
 export const INDUSTRIES = [
   {
     id: "industry-banking",
+    slug: "banking-financial-services",
     title: "Banking & Financial Services",
     short: "Banking & FS",
     summary: "Specialists in core banking, payments, risk and compliance.",
@@ -80,6 +92,7 @@ export const INDUSTRIES = [
   },
   {
     id: "industry-telecom",
+    slug: "telecommunications",
     title: "Telecommunications",
     short: "Telecom",
     summary: "Engineers for OSS/BSS, billing and network data.",
@@ -94,6 +107,7 @@ export const INDUSTRIES = [
   },
   {
     id: "industry-healthcare",
+    slug: "healthcare",
     title: "Healthcare",
     short: "Healthcare",
     summary: "Teams fluent in health data, claims and HIPAA.",
@@ -108,6 +122,7 @@ export const INDUSTRIES = [
   },
   {
     id: "industry-energy",
+    slug: "energy",
     title: "Energy",
     short: "Energy",
     summary: "Experts in SAP asset management and field operations.",
@@ -138,7 +153,7 @@ export const HUBS = [
     locale: "en-US",
     lat: 33.15,
     lon: -96.82,
-    link: { label: "Explore Dallas", href: "/contact#dallas" },
+    link: { label: "Talk to our Dallas team", href: "/contact" },
   },
   {
     id: "hyderabad",
@@ -178,13 +193,46 @@ export const ECOSYSTEM: {
 
 /** Main navigation. Items with `menu` open a panel. */
 export const NAV = [
-  { label: "About", href: "/#why" },
-  { label: "Capabilities", href: "/#capabilities", menu: "capabilities" },
-  { label: "Industries", href: "/#industries", menu: "industries" },
+  { label: "About", href: "/about" },
+  { label: "Capabilities", href: "/capabilities", menu: "capabilities" },
+  { label: "Industries", href: "/industries", menu: "industries" },
   { label: "Careers", href: "/careers" },
-  { label: "Insights", href: "/#insights" },
+  { label: "Insights", href: "/insights" },
   { label: "Contact", href: "/contact" },
 ] as const;
+
+/**
+ * How a team comes together, from skills brief to Build-Operate-Transfer.
+ * Shown on the About page and every capability page.
+ */
+export const TEAM_STEPS = [
+  {
+    title: "Shape the brief",
+    text: "Share a skills brief: the platforms, roles and outcomes you need. We turn it into a team plan with a start date.",
+    note: "Skills brief to team plan",
+  },
+  {
+    title: "Build the team",
+    text: "We bring together specialists matched to your stack and assess them on problems from your domain. You meet everyone before they start.",
+    note: "Teams live in weeks",
+  },
+  {
+    title: "Operate together",
+    text: "The team works inside your tools and controls, ships from its first sprint and reports against the measures you set.",
+    note: "Productive from week one",
+  },
+  {
+    title: "Scale or transfer",
+    text: "Grow the team as results come in. When you're ready, the capability moves into your own center, people and knowledge included.",
+    note: "The capability stays yours",
+  },
+];
+
+/** Page path for a capability or an industry. */
+export const capabilityHref = (cap: { slug: string }) =>
+  `/capabilities/${cap.slug}`;
+export const industryHref = (industry: { slug: string }) =>
+  `/industries/${industry.slug}`;
 
 export const CTA = {
   primary: { label: "Start a Conversation", href: "/contact" },
