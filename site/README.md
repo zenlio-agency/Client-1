@@ -112,9 +112,11 @@ so there are no requests to Google Fonts.
 
 - Sections fade and rise into view as they scroll in, in a short stagger.
 - Pages cross-fade with native view transitions, and the nav stays still.
-- The capability reel lifts one capability's tiles at a time. It sits at the
-  fold, so it fades in on load rather than on scroll, and the hero copy is
-  sized so the top quarter of its cards always shows above the fold.
+- The hero reel scrolls five captioned photos (`src/assets/photos/reel-*`)
+  and lifts one at a time. It sits at the fold, so it fades in on load rather
+  than on scroll, and the hero copy is sized so the top quarter of its cards
+  always shows above the fold. To change a photo, replace the file and keep
+  its name, or edit the `photos` list in `CapabilityReel.astro`.
 - The reel and the two client-logo rows scroll as marquees. They pause on
   hover and have a pause button.
 - The data tile in the capabilities grid shows data flowing into a lakehouse
@@ -142,6 +144,8 @@ The open items:
 - **Figures.** Years, enterprises served, talent network size, weeks to a
   productive team, countries, industry percentages and the reply time. Each
   capability and industry page also has four "Outcomes to expect" figures.
+- **Hero photos.** The five reel photos in `src/assets/photos/` were
+  supplied for the redesign; confirm the licence covers use on the live site.
 - **Inner-page facts.** On the About page, the founding year and early
   milestones. On the careers page, health and wellbeing benefits, the length
   of the joining process and the careers email. The platforms, tools and
