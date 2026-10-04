@@ -13,6 +13,7 @@ import {
   capabilityHref,
   industryHref,
 } from "@/data/site.ts";
+import { LEGAL_LINKS } from "@/data/legal.ts";
 import { SITE_NAME } from "@/consts.ts";
 
 interface Props {
@@ -30,7 +31,6 @@ const company = [
   { label: "Locations", href: "/locations" },
   { label: "Contact", href: "/contact" },
 ];
-const legal = ["Privacy", "Terms", "Cookies", "Accessibility"];
 ---
 
 {
@@ -106,11 +106,11 @@ const legal = ["Privacy", "Terms", "Cookies", "Accessibility"];
             &copy; <span data-year>{new Date().getFullYear()}</span> {SITE_NAME}{" "}
             Inc. All rights reserved.
           </p>
-          <ul class="footer_legal text-style-small">
-            {legal.map((label) => (
+          <ul class="footer_legal">
+            {LEGAL_LINKS.map((link) => (
               <li>
-                <a class="footer_link" href="#">
-                  {label}
+                <a class="footer_link" href={link.href}>
+                  {link.label}
                 </a>
               </li>
             ))}
@@ -255,10 +255,13 @@ const legal = ["Privacy", "Terms", "Cookies", "Accessibility"];
       color: var(--text-2);
     }
 
+    /* Sized here rather than with a text-style class, whose leading-trim
+       pseudo-elements would become flex items and indent the first link. */
     .footer_legal {
       display: flex;
       flex-wrap: wrap;
       gap: var(--space-2) var(--space-5);
+      font-size: var(--text-small);
     }
 
     .footer_social {

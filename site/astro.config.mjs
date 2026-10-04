@@ -6,6 +6,15 @@ import { isNoindexRoute } from "./src/utils/seo.ts";
 
 export default defineConfig({
   site: SITE_URL,
+  /* The addresses people guess for the legal pages. */
+  redirects: {
+    "/privacy": "/legal/privacy",
+    "/privacy-policy": "/legal/privacy",
+    "/terms": "/legal/terms",
+    "/terms-of-use": "/legal/terms",
+    "/cookie-policy": "/legal/cookies",
+    "/accessibility": "/legal/accessibility",
+  },
   integrations: [
     sitemap({
       filter: (page) => !isNoindexRoute(new URL(page).pathname),

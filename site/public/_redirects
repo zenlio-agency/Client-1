@@ -1,0 +1,8 @@
+# Permanent redirects for Cloudflare. Astro also writes a page at each
+# address that forwards the browser, for hosts that ignore this file.
+/privacy /legal/privacy 301
+/privacy-policy /legal/privacy 301
+/terms /legal/terms 301
+/terms-of-use /legal/terms 301
+/cookie-policy /legal/cookies 301
+/accessibility /legal/accessibility 301

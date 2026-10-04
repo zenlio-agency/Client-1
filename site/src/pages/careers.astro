@@ -9,6 +9,7 @@ import FaqList from "@/components/content/FaqList.astro";
 import GlobalPresence from "@/components/content/GlobalPresence.astro";
 import CtaFinal from "@/components/content/CtaFinal.astro";
 import { CAPABILITIES, capabilityHref } from "@/data/site.ts";
+import { LEGAL, mailLink } from "@/data/legal.ts";
 import { CAREERS_LIFE_PHOTO } from "@/data/photos.ts";
 
 /* One line per career track, keyed by capability id. */
@@ -153,8 +154,7 @@ const tracks: Record<string, string> = {
       items={[
         {
           question: "Does ManyaIT charge a fee to apply?",
-          answer:
-            "Never. ManyaIT does not charge a fee at any stage. If anyone asks you for money in our name, report it to [careers email].",
+          answer: `Never. ManyaIT does not charge a fee at any stage. If anyone asks you for money in our name, report it to ${mailLink(LEGAL.careersEmail)}. Our <a href="/legal/job-offer-fraud">Job Offer Fraud Notice</a> explains how to check an offer.`,
         },
         {
           question: "Do I need experience in a specific industry?",
@@ -168,8 +168,7 @@ const tracks: Record<string, string> = {
         },
         {
           question: "What is the Talent Network?",
-          answer:
-            "A way to stay on our radar without applying for a specific role. Share your profile and skills, and our people team will reach out when a matching team opens.",
+          answer: `A way to stay on our radar without applying for a specific role. Share your profile and skills, and our people team will reach out when a matching team opens. We keep your profile for ${LEGAL.talentRetention} unless you renew it; our <a href="/legal/applicant-privacy">Applicant Privacy Notice</a> has the details.`,
         },
         {
           question: "Can I apply for more than one role?",
