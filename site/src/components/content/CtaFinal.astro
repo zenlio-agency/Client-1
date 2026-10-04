@@ -1,0 +1,235 @@
+---
+import Eyebrow from "@/components/typography/Eyebrow.astro";
+import Heading from "@/components/typography/Heading.astro";
+import Paragraph from "@/components/typography/Paragraph.astro";
+import Icon from "@/components/media/Icon.astro";
+import arrow from "@/assets/icons/ui-arrow.svg";
+import { CTA, tbc } from "@/data/site.ts";
+
+interface Props {
+  /** Set to `false` to omit the component. */
+  render?: boolean;
+}
+
+const { render = true } = Astro.props;
+---
+
+{
+  render && (
+    <div class="cta-final_wrap">
+      <svg class="cta-final_mark" viewBox="0 0 190 120" aria-hidden="true">
+        <path
+          class="cta-final_body"
+          d="M0 0 161 119.5H135L24 37.6v58.9L0 119.5Z"
+        />
+        <path
+          class="cta-final_flag"
+          d="M189.5 0v119.5H167V36l-57.6 34.7-13.7-9.7Z"
+        />
+      </svg>
+      <div class="cta-final_copy">
+        <Eyebrow data-reveal>Make IT happen!</Eyebrow>
+        <Heading variant="display" data-reveal style="--reveal-order: 1">
+          Build what’s next.
+        </Heading>
+        <Paragraph
+          variant="large"
+          maxWidth={46}
+          data-reveal
+          style="--reveal-order: 2"
+        >
+          Whether you're expanding a capability, modernizing a platform or
+          building something new, let's start here.
+        </Paragraph>
+      </div>
+      <div class="cta-final_doors">
+        <a
+          class="cta-final_door is-primary"
+          href={CTA.primary.href}
+          data-reveal
+          style="--reveal-order: 2"
+        >
+          <span class="cta-final_door_label">For enterprises</span>
+          <span class="cta-final_door_title">{CTA.primary.label}</span>
+          <span
+            class="cta-final_door_text"
+            set:html={tbc(
+              "Tell us what you want to build. An engagement lead will respond within [1] business day.",
+            )}
+          />
+          <span class="cta-final_door_go">
+            <Icon src={arrow} />
+          </span>
+        </a>
+        <a
+          class="cta-final_door"
+          href={CTA.secondary.href}
+          data-reveal
+          style="--reveal-order: 3"
+        >
+          <span class="cta-final_door_label">
+            For engineers and specialists
+          </span>
+          <span class="cta-final_door_title">{CTA.secondary.label}</span>
+          <span class="cta-final_door_text">
+            Build systems that matter, in Dallas or Hyderabad.
+          </span>
+          <span class="cta-final_door_go">
+            <Icon src={arrow} />
+          </span>
+        </a>
+      </div>
+    </div>
+  )
+}
+
+<style is:global>
+  @layer components {
+    /* Spacing here comes from gaps, so type margins step aside. */
+    :where(.cta-final_wrap) :where(.heading, .text) {
+      margin-block: 0;
+    }
+    .section:has(> .container > .cta-final_wrap) {
+      overflow: clip;
+    }
+
+    .cta-final_wrap {
+      position: relative;
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-8);
+      align-items: end;
+      @media (width >= 64rem) {
+        grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      }
+    }
+
+    .cta-final_mark {
+      position: absolute;
+      right: -8rem;
+      bottom: -9rem;
+      width: min(40rem, 70%);
+      opacity: 0.05;
+      pointer-events: none;
+      @media (width < 48rem) {
+        display: none;
+      }
+      .cta-final_body {
+        fill: var(--white);
+      }
+      .cta-final_flag {
+        fill: var(--blue-400);
+        opacity: 1;
+      }
+    }
+
+    .cta-final_copy {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+    }
+
+    .cta-final_doors {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .cta-final_door {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.25rem var(--space-4);
+      padding: var(--space-5) var(--space-5) var(--space-5) var(--space-6);
+      border: var(--border-width) solid var(--border);
+      border-radius: var(--radius-main);
+      color: var(--text);
+      transition:
+        background-color var(--hover-duration) var(--hover-ease),
+        border-color var(--hover-duration) var(--hover-ease),
+        color var(--hover-duration) var(--hover-ease),
+        translate 400ms var(--reveal-ease);
+      & > :not(.cta-final_door_go) {
+        grid-column: 1;
+      }
+      &.is-primary {
+        background-color: var(--white);
+        border-color: var(--white);
+        color: var(--ink-black);
+        .cta-final_door_label {
+          color: var(--blue-500);
+        }
+        .cta-final_door_text {
+          color: var(--slate-600);
+        }
+        .cta-final_door_go {
+          background-color: var(--blue-500);
+          border-color: var(--blue-500);
+          color: var(--white);
+        }
+        .tbc {
+          text-decoration-color: var(--blue-500);
+        }
+      }
+      @media (hover: hover) {
+        &:hover {
+          translate: 0 -0.2rem;
+          .cta-final_door_go {
+            rotate: -45deg;
+          }
+        }
+        &:not(.is-primary) {
+          background-color: color-mix(
+            in srgb,
+            var(--background) 70%,
+            transparent
+          );
+          -webkit-backdrop-filter: blur(0.5rem);
+          backdrop-filter: blur(0.5rem);
+        }
+        &:not(.is-primary):hover {
+          background-color: var(--background-2);
+          border-color: color-mix(in srgb, var(--white) 30%, transparent);
+        }
+      }
+    }
+
+    .cta-final_door_label {
+      font-family: var(--heading-family);
+      font-size: 0.72rem;
+      font-weight: var(--heading-bold);
+      letter-spacing: var(--letter-spacing-wide);
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .cta-final_door_title {
+      font-family: var(--heading-family);
+      font-size: var(--h5);
+      font-weight: var(--heading-bold);
+      letter-spacing: var(--letter-spacing-snug);
+    }
+
+    .cta-final_door_text {
+      font-size: var(--text-small);
+      color: var(--text-body);
+    }
+
+    .cta-final_door_go {
+      grid-column: 2;
+      grid-row: 1 / span 3;
+      align-self: center;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      place-items: center;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      border: var(--border-width) solid var(--border);
+      transition: rotate 400ms var(--reveal-ease);
+    }
+  }
+</style>

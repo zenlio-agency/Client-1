@@ -1,0 +1,70 @@
+---
+import Icon from "@/components/media/Icon.astro";
+import mark from "@/assets/logo/logo-icon.svg";
+
+interface Props {
+  /** Set to `false` to omit the component. */
+  render?: boolean;
+  /** Show the mark alone, without the wordmark. */
+  markOnly?: boolean;
+  class?: string;
+}
+
+const { render = true, markOnly = false, class: className } = Astro.props;
+---
+
+{
+  render && (
+    <span class:list={["logo_wrap", className]}>
+      <Icon src={mark} variant="full-width" class="logo_mark" />
+      {!markOnly && (
+        <span class="logo_word" aria-hidden="true">
+          Manya <span class="logo_it">IT</span>
+        </span>
+      )}
+    </span>
+  )
+}
+
+<style is:global>
+  @layer components {
+    .logo_wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7em;
+      color: var(--text);
+
+      .logo_mark {
+        width: 2.15em;
+        aspect-ratio: 190 / 120;
+        .logo_body {
+          fill: currentcolor;
+        }
+        .logo_flag {
+          fill: var(--logo-flag);
+          transition: translate 600ms var(--reveal-ease);
+        }
+      }
+
+      .logo_word {
+        font-family: var(--heading-family);
+        font-size: 0.95em;
+        font-weight: var(--heading-bold);
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        white-space: nowrap;
+        line-height: 1;
+      }
+
+      .logo_it {
+        color: var(--logo-flag);
+      }
+    }
+
+    @media (hover: hover) {
+      a:hover > .logo_wrap .logo_flag {
+        translate: 0 -0.06em;
+      }
+    }
+  }
+</style>

@@ -1,0 +1,122 @@
+---
+import Eyebrow from "@/components/typography/Eyebrow.astro";
+import Heading from "@/components/typography/Heading.astro";
+import Paragraph from "@/components/typography/Paragraph.astro";
+
+type Company = {
+  /** Company name. */
+  name: string;
+  /** What it builds and for whom. */
+  line: string;
+  /** Verified relationship to ManyaIT. */
+  relationship: "Subsidiary" | "Sister company" | "Partner";
+  /** Website. */
+  href: string;
+};
+
+interface Props {
+  /** Set to `false` to omit the component. */
+  render?: boolean;
+  /**
+   * Affiliated companies, each confirmed in writing. With none, the section
+   * renders nothing rather than showing invented names.
+   */
+  companies?: Company[];
+}
+
+const { render = true, companies = [] } = Astro.props;
+---
+
+{
+  render && companies.length > 0 && (
+    <div class="ecosystem_wrap">
+      <Eyebrow>The ManyaIT ecosystem</Eyebrow>
+      <Heading maxWidth={22}>
+        More capabilities. One connected ecosystem.
+      </Heading>
+      <Paragraph variant="large" maxWidth={52}>
+        {companies.map((c) => c.name).join(", ")} share ManyaIT's standards of
+        engineering and ownership, so enterprises can add capabilities without
+        adding complexity.
+      </Paragraph>
+      <ul class="ecosystem_list">
+        {companies.map((company) => (
+          <li>
+            <a
+              class="ecosystem_card"
+              href={company.href}
+              target="_blank"
+              rel="noopener"
+            >
+              <span class="ecosystem_relationship">{company.relationship}</span>
+              <span class="ecosystem_name">{company.name}</span>
+              <span class="ecosystem_line">{company.line}</span>
+              <span class="ecosystem_visit">Visit site ↗</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+<style is:global>
+  @layer components {
+    /* Spacing here comes from gaps, so type margins step aside. */
+    :where(.ecosystem_wrap) :where(.heading, .text) {
+      margin-block: 0;
+    }
+    .ecosystem_wrap {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+    }
+
+    .ecosystem_list {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--site-gutter);
+      margin-top: var(--space-4);
+      @media (width >= 48rem) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      @media (width >= 64rem) {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    .ecosystem_card {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      height: 100%;
+      padding: var(--space-5);
+      border-radius: var(--radius-main);
+      background-color: var(--background-2);
+      border: var(--border-width) solid var(--border);
+    }
+
+    .ecosystem_relationship {
+      font-size: 0.75rem;
+      color: var(--accent);
+    }
+
+    .ecosystem_name {
+      font-family: var(--heading-family);
+      font-weight: var(--heading-bold);
+      color: var(--text);
+    }
+
+    .ecosystem_line {
+      font-size: var(--text-small);
+      color: var(--text-body);
+    }
+
+    .ecosystem_visit {
+      margin-top: auto;
+      font-size: var(--text-small);
+      color: var(--link-text);
+    }
+  }
+</style>

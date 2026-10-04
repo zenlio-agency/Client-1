@@ -1,0 +1,146 @@
+---
+import Eyebrow from "@/components/typography/Eyebrow.astro";
+import { tbc } from "@/data/site.ts";
+
+interface Props {
+  /** Set to `false` to omit the component. */
+  render?: boolean;
+  /**
+   * Client logos with written permission to display. The bar stays hidden
+   * until at least one is supplied.
+   */
+  logos?: { name: string; src: string; delivered: string }[];
+}
+
+const { render = true, logos = [] } = Astro.props;
+
+const stats = [
+  { value: "[XX]+", label: "Years building enterprise technology" },
+  { value: "[XX]+", label: "Enterprise programs delivered" },
+  { value: "[XX]+", label: "Technology professionals" },
+  { value: "2 hubs", label: "Dallas + Hyderabad · One team" },
+];
+---
+
+{
+  render && (
+    <div class="trust-strip_wrap">
+      <Eyebrow data-reveal>ManyaIT at a glance</Eyebrow>
+      <ul class="trust-strip_list">
+        {stats.map((stat, index) => (
+          <li
+            class="trust-strip_item"
+            data-reveal
+            style={`--reveal-order: ${index}`}
+          >
+            <span class="trust-strip_value" set:html={tbc(stat.value)} />
+            <span class="trust-strip_label">{stat.label}</span>
+          </li>
+        ))}
+      </ul>
+      {logos.length > 0 && (
+        <div class="trust-strip_logos">
+          <p class="trust-strip_logos_label">
+            Trusted by enterprise technology teams
+          </p>
+          <ul class="trust-strip_logos_list">
+            {logos.map((logo) => (
+              <li>
+                <img src={logo.src} alt={logo.name} loading="lazy" />
+                <span>{logo.delivered}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  )
+}
+
+<style is:global>
+  @layer components {
+    /* Spacing here comes from gaps, so type margins step aside. */
+    :where(.trust-strip_wrap) :where(.heading, .text) {
+      margin-block: 0;
+    }
+    .trust-strip_wrap {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+
+    .trust-strip_list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      border-top: var(--border-width) solid var(--border);
+      @media (width >= 64rem) {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    .trust-strip_item {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      padding: var(--space-6) var(--space-5) var(--space-2) 0;
+      &:nth-child(even) {
+        padding-left: var(--space-5);
+        border-left: var(--border-width) solid var(--border);
+      }
+      @media (width >= 64rem) {
+        &:not(:first-child) {
+          padding-left: var(--space-6);
+          border-left: var(--border-width) solid var(--border);
+        }
+      }
+    }
+
+    .trust-strip_value {
+      font-family: var(--heading-family);
+      font-size: var(--h2);
+      font-weight: var(--heading-bold);
+      letter-spacing: var(--letter-spacing-tight);
+      line-height: 1;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .trust-strip_label {
+      max-width: 22ch;
+      font-size: var(--text-small);
+      color: var(--text-body);
+    }
+
+    .trust-strip_logos {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-4);
+      padding-top: var(--space-6);
+      border-top: var(--border-width) solid var(--border);
+    }
+
+    .trust-strip_logos_label {
+      font-size: var(--text-small);
+      color: var(--text-2);
+    }
+
+    .trust-strip_logos_list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-6);
+      & li {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-1);
+        font-size: 0.75rem;
+        color: var(--text-2);
+      }
+      & img {
+        height: 2rem;
+        width: auto;
+        filter: grayscale(1) brightness(1.8);
+      }
+    }
+  }
+</style>

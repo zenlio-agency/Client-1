@@ -1,0 +1,776 @@
+---
+import Icon from "@/components/media/Icon.astro";
+import Button from "@/components/Button.astro";
+import Logo from "@/components/global/Logo.astro";
+import chevron from "@/assets/icons/ui-chevron.svg";
+import arrow from "@/assets/icons/ui-arrow.svg";
+import { CAPABILITIES, INDUSTRIES, NAV, CTA } from "@/data/site.ts";
+import { SITE_NAME } from "@/consts.ts";
+
+interface Props {
+  /** Set to `false` to omit the component. */
+  render?: boolean;
+  /** Fix the nav over the page. */
+  overlap?: boolean;
+}
+
+const { render = true, overlap = false } = Astro.props;
+const path = Astro.url.pathname.replace(/\/+$/, "") || "/";
+---
+
+{
+  render && (
+    <header class:list={["nav_wrap", overlap && "overlap"]} data-nav>
+      <div class="nav_inner">
+        <a class="nav_logo" href="/" aria-label={`${SITE_NAME} home`}>
+          <Logo />
+        </a>
+        <button
+          class="nav_toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+        >
+          <span class="nav_toggle_label">Menu</span>
+          <span class="nav_toggle_icon" aria-hidden="true" />
+        </button>
+        <nav class="nav_menu" id="nav-menu" aria-label="Main">
+          <div class="nav_menu_inner">
+            <ul class="nav_links">
+              {NAV.map((item) =>
+                "menu" in item ? (
+                  <li class="nav_item" data-dropdown>
+                    <button
+                      class="nav_link nav_trigger"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls={`menu-${item.menu}`}
+                    >
+                      {item.label}
+                      <Icon src={chevron} variant="small" class="nav_chevron" />
+                    </button>
+                    <div
+                      class:list={["nav_panel", `is-${item.menu}`]}
+                      id={`menu-${item.menu}`}
+                    >
+                      <div class="nav_panel_inner">
+                        {item.menu === "capabilities" ? (
+                          <Fragment>
+                            <ul class="nav_panel_list">
+                              {CAPABILITIES.map((cap) => (
+                                <li>
+                                  <a
+                                    class="nav_panel_link"
+                                    href={`/#${cap.id}`}
+                                  >
+                                    <span class="nav_panel_icon">
+                                      <Icon src={cap.icon} />
+                                    </span>
+                                    <span class="nav_panel_text">
+                                      <span class="nav_panel_title">
+                                        {cap.title}
+                                      </span>
+                                      <span class="nav_panel_line">
+                                        {cap.line}
+                                      </span>
+                                    </span>
+                                  </a>
+                                </li>
+                              ))}
+                            </ul>
+                            <a class="nav_feature theme-dark" href="/#how">
+                              <span class="nav_feature_label">How we work</span>
+                              <span class="nav_feature_title">
+                                Discover, Build, Run, Scale
+                              </span>
+                              <span class="nav_feature_text">
+                                Every capability follows the same path, whether
+                                it starts with one platform or a full
+                                engineering hub.
+                              </span>
+                              <span
+                                class="nav_feature_steps"
+                                aria-hidden="true"
+                              >
+                                <span />
+                                <span />
+                                <span />
+                                <span />
+                              </span>
+                              <Icon src={arrow} class="nav_feature_arrow" />
+                            </a>
+                          </Fragment>
+                        ) : (
+                          <ul class="nav_panel_list">
+                            {INDUSTRIES.map((industry) => (
+                              <li>
+                                <a
+                                  class="nav_panel_link"
+                                  href={`/#${industry.id}`}
+                                >
+                                  <span class="nav_panel_text">
+                                    <span class="nav_panel_title">
+                                      {industry.title}
+                                    </span>
+                                    <span class="nav_panel_line">
+                                      {industry.hero}
+                                    </span>
+                                  </span>
+                                </a>
+                              </li>
+                            ))}
+                            <li>
+                              <a class="nav_panel_more" href={item.href}>
+                                All industries
+                                <Icon src={arrow} variant="small" />
+                              </a>
+                            </li>
+                          </ul>
+                        )}
+                      </div>
+                    </div>
+                  </li>
+                ) : (
+                  <li class="nav_item">
+                    <a
+                      class="nav_link"
+                      href={item.href}
+                      aria-current={path === item.href ? "page" : undefined}
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                ),
+              )}
+            </ul>
+            <div class="nav_actions">
+              <Button
+                element="link"
+                href={CTA.secondary.href}
+                emphasis="secondary"
+                class="nav_secondary"
+              >
+                {CTA.secondary.label}
+              </Button>
+              <Button element="link" href={CTA.primary.href}>
+                {CTA.primary.label}
+              </Button>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+  )
+}
+
+{/* No-JS fallback */}
+<noscript>
+  <style>
+    .nav_toggle {
+      display: none;
+    }
+    .nav_menu {
+      grid-template-rows: 1fr;
+      visibility: visible;
+    }
+    .nav_menu_inner {
+      opacity: 1;
+    }
+    .nav_item:is(:hover, :focus-within) .nav_panel {
+      visibility: visible;
+      opacity: 1;
+      translate: 0 0;
+    }
+  </style>
+</noscript>
+
+<script>
+  const nav = document.querySelector<HTMLElement>("[data-nav]");
+  const toggle = nav?.querySelector<HTMLButtonElement>(".nav_toggle");
+  const desktop = matchMedia("(width >= 64rem)");
+
+  if (nav && toggle) {
+    const root = document.documentElement;
+    const items = [...nav.querySelectorAll<HTMLElement>("[data-dropdown]")];
+
+    const setOpen = (open: boolean) => {
+      nav.classList.toggle("open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+      root.classList.toggle("nav-locked", open && !desktop.matches);
+    };
+
+    const setPanel = (item: HTMLElement, open: boolean) => {
+      item.classList.toggle("is-open", open);
+      item
+        .querySelector(".nav_trigger")
+        ?.setAttribute("aria-expanded", String(open));
+    };
+
+    const closePanels = (except?: HTMLElement) =>
+      items.forEach((item) => item !== except && setPanel(item, false));
+
+    toggle.addEventListener("click", () => {
+      setOpen(toggle.getAttribute("aria-expanded") !== "true");
+    });
+
+    for (const item of items) {
+      const trigger = item.querySelector<HTMLButtonElement>(".nav_trigger");
+      let timer: number | undefined;
+
+      trigger?.addEventListener("click", (event) => {
+        /* Hover has already opened it for a mouse, so a click keeps it open
+           rather than toggling it shut. Keyboard and touch still toggle. */
+        const hovering = desktop.matches && event.pointerType === "mouse";
+        const open = hovering || !item.classList.contains("is-open");
+        closePanels(item);
+        setPanel(item, open);
+      });
+
+      /* Hover opens on desktop, with a short grace period on the way out so
+         a diagonal move toward the panel doesn't close it. */
+      item.addEventListener("pointerenter", (event) => {
+        if (!desktop.matches || event.pointerType !== "mouse") return;
+        window.clearTimeout(timer);
+        closePanels(item);
+        setPanel(item, true);
+      });
+      item.addEventListener("pointerleave", (event) => {
+        if (!desktop.matches || event.pointerType !== "mouse") return;
+        timer = window.setTimeout(() => setPanel(item, false), 140);
+      });
+      item.addEventListener("focusout", (event) => {
+        if (!desktop.matches) return;
+        const next = event.relatedTarget;
+        if (!(next instanceof Node) || !item.contains(next)) {
+          setPanel(item, false);
+        }
+      });
+    }
+
+    nav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        setOpen(false);
+        closePanels();
+      });
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      const open = items.find((item) => item.classList.contains("is-open"));
+      if (open) {
+        setPanel(open, false);
+        open.querySelector<HTMLButtonElement>(".nav_trigger")?.focus();
+      } else if (nav.classList.contains("open")) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      const target = event.target;
+      if (!(target instanceof Node) || nav.contains(target)) return;
+      closePanels();
+      setOpen(false);
+    });
+
+    desktop.addEventListener("change", () => {
+      setOpen(false);
+      closePanels();
+    });
+
+    /* A hairline and a frosted ground once the page moves under the bar. */
+    const onScroll = () =>
+      nav.classList.toggle("is-scrolled", window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+</script>
+
+<style is:global>
+  @layer components {
+    .nav_wrap {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      padding-inline: var(--site-margin);
+      background-color: color-mix(in srgb, var(--background) 86%, transparent);
+      -webkit-backdrop-filter: blur(1rem) saturate(1.4);
+      backdrop-filter: blur(1rem) saturate(1.4);
+      color: var(--text);
+      border-bottom: var(--border-width) solid transparent;
+      transition:
+        border-color var(--hover-duration) var(--hover-ease),
+        box-shadow var(--hover-duration) var(--hover-ease);
+      view-transition-name: site-nav;
+
+      &.is-scrolled {
+        border-bottom-color: var(--border);
+        box-shadow: 0 0.5rem 1.5rem -1rem rgb(13 15 13 / 0.12);
+      }
+
+      &.overlap {
+        position: fixed;
+        inset-inline: 0;
+      }
+    }
+
+    .nav-locked {
+      overflow: hidden;
+    }
+
+    .nav_inner {
+      width: 100%;
+      max-width: var(--max-width-main);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0 var(--space-6);
+    }
+
+    .nav_logo,
+    .nav_toggle {
+      min-height: var(--nav-height);
+    }
+
+    .nav_logo {
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+      flex: none;
+    }
+
+    .nav_toggle {
+      --_icon-width: 1.25rem;
+      --_bar-gap: 0.4rem;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding-inline: var(--space-2);
+      margin-right: calc(var(--space-2) * -1);
+      font-family: var(--heading-family);
+      font-size: var(--text-small);
+      font-weight: var(--heading-medium);
+      color: inherit;
+      border-radius: var(--radius-small);
+    }
+
+    .nav_toggle_icon {
+      position: relative;
+      display: block;
+      width: var(--_icon-width);
+      height: calc(var(--_bar-gap) + var(--border-width) * 1.5);
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        inset-inline: 0;
+        height: calc(var(--border-width) * 1.5);
+        background-color: currentcolor;
+        transition: transform var(--open-duration) var(--open-ease);
+      }
+      &::before {
+        top: 0;
+      }
+      &::after {
+        top: var(--_bar-gap);
+      }
+    }
+
+    .nav_wrap.open .nav_toggle_icon {
+      &::before {
+        transform: translateY(calc(var(--_bar-gap) / 2)) rotate(45deg);
+      }
+      &::after {
+        transform: translateY(calc(var(--_bar-gap) / -2)) rotate(-45deg);
+      }
+    }
+
+    /* Mobile drawer */
+    .nav_menu {
+      position: absolute;
+      top: 100%;
+      inset-inline: 0;
+      display: grid;
+      grid-template-rows: 0fr;
+      visibility: hidden;
+      max-height: calc(100svh - var(--nav-height));
+      overflow-x: clip;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      background-color: var(--background);
+      border-bottom: var(--border-width) solid var(--border);
+      transition:
+        grid-template-rows 360ms var(--reveal-ease),
+        visibility 360ms var(--reveal-ease);
+    }
+
+    .nav_menu_inner {
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity 280ms var(--hover-ease);
+    }
+
+    .nav_wrap.open .nav_menu {
+      grid-template-rows: 1fr;
+      visibility: visible;
+    }
+
+    .nav_wrap.open .nav_menu_inner {
+      opacity: 1;
+      overflow-y: auto;
+    }
+
+    .nav_links {
+      display: flex;
+      flex-direction: column;
+      padding: var(--space-2) var(--site-margin) 0;
+      font-family: var(--heading-family);
+      font-size: var(--text-large);
+      font-weight: var(--heading-medium);
+      & > li + li {
+        border-top: var(--border-width) solid var(--divider);
+      }
+    }
+
+    .nav_link {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.4em;
+      padding-block: var(--space-3);
+      color: var(--text);
+      transition: color var(--hover-duration) var(--hover-ease);
+      @media (hover: hover) {
+        &:hover {
+          color: var(--accent);
+        }
+      }
+    }
+
+    .nav_chevron {
+      transition: rotate 300ms var(--reveal-ease);
+      .is-open > .nav_trigger & {
+        rotate: 180deg;
+      }
+    }
+
+    .nav_panel {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 360ms var(--reveal-ease);
+      .is-open > & {
+        grid-template-rows: 1fr;
+      }
+    }
+
+    .nav_panel_inner {
+      overflow: hidden;
+      min-height: 0;
+    }
+
+    .nav_panel_list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+      padding-bottom: var(--space-3);
+    }
+
+    .nav_panel_link {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      padding: var(--space-2);
+      margin-inline: calc(var(--space-2) * -1);
+      border-radius: var(--radius-medium);
+      transition: background-color var(--hover-duration) var(--hover-ease);
+      @media (hover: hover) {
+        &:hover {
+          background-color: var(--background-3);
+          .nav_panel_icon {
+            background-color: var(--accent);
+            color: var(--white);
+          }
+        }
+      }
+    }
+
+    .nav_panel_icon {
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: var(--radius-small);
+      background-color: var(--accent-soft);
+      color: var(--accent-text);
+      font-size: 0.85rem;
+      transition:
+        background-color var(--hover-duration) var(--hover-ease),
+        color var(--hover-duration) var(--hover-ease);
+    }
+
+    .nav_panel_text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .nav_panel_title {
+      font-size: var(--text-small);
+      font-weight: var(--heading-bold);
+      color: var(--text);
+    }
+
+    .nav_panel_line {
+      font-family: var(--primary-family);
+      font-size: 0.85rem;
+      font-weight: var(--primary-regular);
+      color: var(--text-2);
+      line-height: 1.4;
+    }
+
+    .nav_panel_more {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4em;
+      padding-block: var(--space-2);
+      font-size: var(--text-small);
+      color: var(--accent);
+    }
+
+    .nav_feature {
+      display: none;
+    }
+
+    .nav_actions {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      padding: var(--space-5) var(--site-margin) var(--space-6);
+      & > .button_wrap {
+        width: 100%;
+      }
+    }
+
+    /* Desktop bar */
+    @media (width >= 64rem) {
+      .nav_toggle {
+        display: none;
+      }
+
+      .nav_menu {
+        position: static;
+        display: block;
+        flex: 1;
+        visibility: visible;
+        max-height: none;
+        overflow: visible;
+        background-color: transparent;
+        border-bottom: 0;
+      }
+
+      .nav_menu_inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-5);
+        overflow: visible;
+        opacity: 1;
+      }
+
+      .nav_links {
+        flex-direction: row;
+        align-items: center;
+        margin-inline: auto;
+        padding: 0;
+        gap: clamp(1rem, 2vw, 2rem);
+        font-size: var(--text-small);
+        & > li + li {
+          border-top: 0;
+        }
+      }
+
+      .nav_item {
+        position: relative;
+      }
+
+      .nav_link {
+        width: auto;
+        padding-block: var(--space-2);
+        color: var(--text-body);
+        &[aria-current="page"],
+        .is-open > & {
+          color: var(--text);
+        }
+        &::after {
+          content: "";
+          position: absolute;
+          inset-inline: 0;
+          bottom: 0.15rem;
+          height: calc(var(--border-width) * 1.5);
+          background-color: var(--accent);
+          scale: 0 1;
+          transform-origin: left;
+          transition: scale 360ms var(--reveal-ease);
+        }
+        &[aria-current="page"]::after {
+          scale: 1 1;
+        }
+      }
+
+      .nav_panel {
+        position: absolute;
+        top: calc(100% + var(--space-3));
+        left: 50%;
+        translate: -50% -0.5rem;
+        display: block;
+        visibility: hidden;
+        opacity: 0;
+        width: max-content;
+        padding: var(--space-2);
+        background-color: var(--background-2);
+        border: var(--border-width) solid var(--border);
+        border-radius: var(--radius-main);
+        box-shadow: var(--shadow-float);
+        transition:
+          opacity 220ms var(--hover-ease),
+          translate 360ms var(--reveal-ease),
+          visibility 220ms var(--hover-ease);
+        /* Bridges the gap so the pointer can travel from trigger to panel. */
+        &::before {
+          content: "";
+          position: absolute;
+          inset-inline: 0;
+          bottom: 100%;
+          height: var(--space-3);
+        }
+        .is-open > & {
+          visibility: visible;
+          opacity: 1;
+          translate: -50% 0;
+        }
+        &.is-capabilities {
+          left: -2rem;
+          translate: 0 -0.5rem;
+          .is-open > & {
+            translate: 0 0;
+          }
+        }
+      }
+
+      .nav_panel_inner {
+        overflow: visible;
+        display: flex;
+        gap: var(--space-2);
+      }
+
+      .nav_panel_list {
+        width: 22rem;
+        padding: 0;
+        gap: 0;
+      }
+
+      .nav_panel_link {
+        margin: 0;
+        padding: var(--space-3);
+      }
+
+      .nav_panel_more {
+        padding: var(--space-3);
+      }
+
+      .nav_feature {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+        width: 15rem;
+        padding: var(--space-5);
+        border-radius: var(--radius-medium);
+        overflow: clip;
+        transition: background-color var(--hover-duration) var(--hover-ease);
+        @media (hover: hover) {
+          &:hover .nav_feature_arrow {
+            translate: 0.25rem 0;
+          }
+        }
+      }
+
+      .nav_feature_label {
+        font-size: 0.72rem;
+        letter-spacing: var(--letter-spacing-wide);
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+
+      .nav_feature_title {
+        font-size: var(--text-large);
+        font-weight: var(--heading-bold);
+        line-height: 1.25;
+        color: var(--text);
+      }
+
+      .nav_feature_text {
+        margin-top: var(--space-1);
+        font-family: var(--primary-family);
+        font-size: var(--text-small);
+        line-height: 1.5;
+        color: var(--text-2);
+      }
+
+      .nav_feature_steps {
+        display: flex;
+        gap: 0.35rem;
+        margin-top: auto;
+        padding-top: var(--space-6);
+        & > span {
+          flex: 1;
+          height: 0.25rem;
+          border-radius: var(--radius-round);
+          background-color: var(--border);
+        }
+        & > span:first-child {
+          background-color: var(--accent);
+        }
+      }
+
+      .nav_feature_arrow {
+        position: absolute;
+        top: var(--space-5);
+        right: var(--space-5);
+        width: 1.1rem;
+        color: var(--text);
+        transition: translate var(--hover-duration) var(--hover-ease);
+      }
+
+      .nav_actions {
+        flex-direction: row;
+        flex: none;
+        padding: 0;
+        & > .button_wrap {
+          width: auto;
+        }
+      }
+
+      @media (hover: hover) {
+        .nav_link:hover {
+          color: var(--text);
+          &::after {
+            scale: 1 1;
+          }
+        }
+      }
+    }
+
+    @media (width < 80rem) {
+      .nav_actions .nav_secondary {
+        @media (width >= 64rem) {
+          display: none;
+        }
+      }
+    }
+  }
+</style>
