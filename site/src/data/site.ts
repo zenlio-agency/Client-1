@@ -191,21 +191,25 @@ export const HUBS = [
 
 /**
  * Other companies shown at the foot of the homepage. Each needs written
- * confirmation before launch. `logo` is a path under `public/` and `href`
- * the company's site; both are optional. Until real entries arrive each
- * slot shows placeholders.
+ * confirmation before launch. `focus` is the label over the card, `logo` a
+ * path under `public/` (the name shows instead when it's missing) and
+ * `href` the company's site.
  */
 export const ECOSYSTEM: {
   name: string;
+  focus: string;
   line: string;
-  relationship: string;
   logo?: string;
   href?: string;
-}[] = Array.from({ length: 4 }, (_, index) => ({
-  name: `[Company ${String(index + 1).padStart(2, "0")}]`,
-  line: "[One line on what it does and for whom]",
-  relationship: "[Relationship]",
-}));
+}[] = [
+  {
+    name: "Siri Data Analytics",
+    focus: "Data & analytics",
+    line: "Advanced analytics, cloud and AI for banking, retail, energy, insurance and utilities.",
+    logo: "/logos/siri-data-analytics.webp",
+    href: "https://siridataanalytics.com/",
+  },
+];
 
 /** Main navigation. Items with `menu` open a panel. */
 export const NAV = [
