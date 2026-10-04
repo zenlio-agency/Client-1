@@ -5,7 +5,7 @@ ManyaIT website redesign.
 | Folder       | What it is                                                     |
 | ------------ | -------------------------------------------------------------- |
 | `site/`      | The website, built with Astro and Lumos. See `site/README.md`. |
-| `content/`   | Homepage copy (`homepage-copy.md`).                            |
+| `content/`   | Homepage copy (`homepage-copy.md`) and the legal pack design (`legal-pack.md`). |
 | `wireframe/` | Black-and-white homepage wireframe.                            |
 
 ## Site
