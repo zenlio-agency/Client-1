@@ -1,9 +1,9 @@
 # ManyaIT website
 
 The ManyaIT marketing site, built with [Astro](https://astro.build) on the
-[Lumos for Astro](https://lumosframework.com) framework. It turns the
-wireframe in `../wireframe` and the copy in `../content/homepage-copy.md` into
-a working site in the ManyaIT palette.
+[Lumos for Astro](https://lumosframework.com) framework, in the ManyaIT
+palette. ManyaIT is positioned as a GCC (Global Capability Center) technology
+and talent partner: "Technology & Talent Partners".
 
 ## Run it
 
@@ -44,35 +44,36 @@ Lumos conventions (layers, themes, `_wrap` components, `rem` only) are in
 
 ```
 src/
-  pages/            index, contact and 404 (pages carry no CSS)
+  pages/            index, industries, careers, contact and 404 (no CSS)
   components/
     global/         Nav (mega menu and mobile drawer), Footer, Logo
-    content/        one component per homepage section, listed below
-  data/site.ts      capabilities, industries, hubs, nav, CTAs, social links
+    content/        one component per section, listed below
+  data/site.ts      capabilities, client logos, industries, hubs, nav, CTAs
   styles/base.css   brand tokens, type scale, themes, motion
-  assets/           logo mark and icons
-public/             favicon and social share image
+  assets/           fonts, logo mark and icons
+public/             favicon, social share image and logos/ for client logos
 ```
 
-| #   | Section                  | Component                    |
-| --- | ------------------------ | ---------------------------- |
-| 01  | Hero and capability reel | `HeroHome`, `CapabilityReel` |
-| 02  | At a glance (trust bar)  | `TrustStrip`                 |
-| 03  | Challenges we solve      | `ChallengeRows`              |
-| 04  | Why ManyaIT              | `WhyCards`                   |
-| 05  | Capabilities (bento)     | `CapabilityBento`            |
-| 06  | How we work              | `ProcessSteps`               |
-| 07  | Industries               | `IndustryTabs`               |
-| 08  | Enterprise impact        | `ImpactCase`                 |
-| 09  | Careers                  | `CareersHome`                |
-| 10  | Insights                 | `InsightsGrid`               |
-| 11  | Global presence          | `GlobalPresence`             |
-| 12  | Ecosystem                | `EcosystemCards`             |
-| 13  | Final call to action     | `CtaFinal`                   |
-| —   | Contact page             | `ContactConversation`        |
+| #   | Section                       | Component                    | Theme |
+| --- | ----------------------------- | ---------------------------- | ----- |
+| 01  | Hero and capability reel      | `HeroHome`, `CapabilityReel` | light |
+| 02  | Client logos                  | `ClientLogos`                | light |
+| 03  | Why ManyaIT, with stats panel | `WhyCards`, `TrustStrip`     | tint  |
+| 04  | Capabilities (bento)          | `CapabilityBento`            | light |
+| 05  | Industries                    | `IndustryCards`              | tint  |
+| 06  | Careers teaser                | `CareersHome`                | light |
+| 07  | Insights                      | `InsightsGrid`               | tint  |
+| 08  | Global presence               | `GlobalPresence`             | light |
+| 09  | Ecosystem                     | `EcosystemCards`             | tint  |
+| 10  | Final call to action          | `CtaFinal`                   | dark  |
+| —   | `/industries`                 | `IndustryDetail`             |       |
+| —   | `/careers` (roles and finder) | `CareersOpenings`            |       |
+| —   | `/contact`                    | `ContactConversation`        |       |
 
 Capability and industry copy comes from `src/data/site.ts`, so the nav, the
-bento, the dialogs, the tabs and the contact form's topic list all stay in step.
+bento, the industry cards and page, the footer and the contact form's topic
+list all stay in step. Industry cards keep each industry's `id`, so the nav's
+`/#industry-…` links still land on the homepage.
 
 ## Brand
 
@@ -80,20 +81,24 @@ The palette comes from the ManyaIT logo directions: Ink Black `#0D0F0D`, Manya
 Blue `#2340E6` with its 50–900 ramp, slate text greys, and the success, warning
 and error pairs. They are tokens in `src/styles/base.css`, and the four themes
 (`light`, `tint`, `dark`, `brand`) map them onto backgrounds, text, borders and
-buttons. Headings and UI use Poppins 400/500/600 and body text uses Inter.
-Both are self-hosted, so there are no requests to Google Fonts.
+buttons. Every heading uses Plus Jakarta Sans (the `--display-family` token,
+with its own leading-trim values), UI text such as buttons, labels and the nav
+uses Poppins 400/500/600, and body text uses Inter. All three are self-hosted,
+so there are no requests to Google Fonts.
 
 ## Motion
 
 - Sections fade and rise into view as they scroll in, in a short stagger.
 - Pages cross-fade with native view transitions, and the nav stays still.
-- The hero badge cycles Data, SAP, AI and Digital Engineering, and lights the
-  matching tile in the capability reel.
-- The reel and challenge rows scroll as marquees. They pause on hover and
-  have a pause button.
-- The How we work rail fills as you scroll (scroll-driven animation).
+- The capability reel lifts one capability's tiles at a time. It sits at the
+  fold, so it fades in on load rather than on scroll, and the hero copy is
+  sized so the top quarter of its cards always shows above the fold.
+- The reel and the two client-logo rows scroll as marquees. They pause on
+  hover and have a pause button.
+- The data tile in the capabilities grid shows data flowing into a lakehouse
+  and out to BI and AI.
 - The map draws the Dallas to Hyderabad arc, with a dot travelling along it.
-- Capability dialogs and the mega menu open with short transitions.
+- The mega menu opens with a short transition.
 
 With `prefers-reduced-motion: reduce`, nothing moves: reveals are off and the
 marquees start paused. Without JavaScript, all content still shows.
@@ -106,27 +111,26 @@ Anything in square brackets is a placeholder. Each one goes through `tbc()` in
 
 ```sh
 npm run build
-grep -ohE 'class="tbc"[^>]*>[^<]+' dist/index.html dist/contact/index.html \
+grep -ohE 'class="tbc"[^>]*>[^<]+' dist/index.html dist/*/index.html \
   | sed 's/.*>//' | sort | uniq -c
 ```
 
 The open items:
 
-- **Figures.** Years, programs, team size, countries, impact percentages and
-  the reply time on the contact page.
+- **Figures.** Years, enterprises served, talent network size, weeks to a
+  productive team, countries, industry percentages and the reply time.
 - **Hub details.** Street address, phone and email for Dallas and Hyderabad
   (`HUBS` in `src/data/site.ts`).
-- **Case study.** Industry, story, outcome and an approved sponsor quote
-  (`ImpactCase`). Until one is approved for publication, pass `approved={false}`
-  and the section shows a "what an engagement looks like" walkthrough instead.
-- **Client logos.** `TrustStrip` shows a logo bar only when it is given
-  `logos`. It is hidden until logos are cleared for use.
+- **Client logos.** `CLIENT_LOGOS` in `src/data/site.ts` lists twelve
+  placeholder tiles. For each logo cleared for use, add the file to
+  `public/logos/` and set `src` (for example `"/logos/acme.svg"`) and `name`.
+  Logos show in greyscale and turn to full colour on hover.
 - **Ecosystem.** `EcosystemCards` renders nothing until `companies` is given
   confirmed affiliates.
 - **Forms.** The contact form, the newsletter field and the role finder are
   not connected to anything, and each one says so when used. Give the contact
   `Form` an `action` endpoint, connect the newsletter in `Footer.astro`, and
-  replace the sample roles in `CareersHome` with the live job feed.
+  replace the sample roles in `CareersOpenings` with the live job feed.
 - **Insights.** The five articles are marked "Coming soon" and do not link
   anywhere yet.
 - **Links.** Social profiles (`SOCIAL`), Privacy, Terms, Cookies and
@@ -136,13 +140,29 @@ The open items:
 
 ## Copy rules
 
-The copy follows the master prompt in `../content/homepage-copy.md`:
+These apply to every word on the site:
 
-- ManyaIT builds and runs capabilities; it does not supply people.
-- Hiring and outsourcing vocabulary stays off the public site.
+- ManyaIT is a GCC (Global Capability Center) technology and talent partner.
+  Tagline: "Technology & Talent Partners".
+- Imply, never state, that ManyaIT provides vetted tech talent and builds
+  teams. Use: talent, specialists, teams, capability center, AI-ready, vetted,
+  matched to your stack, productive from week one, teams live in weeks,
+  flexible scale, scale on demand, Build-Operate-Transfer, skills brief.
+- Never use: recruiting/recruitment, staffing, staff augmentation,
+  hire/hiring, placement, headhunting, outsourcing, consulting/consultants,
+  agency, contractor, engagement/engagement lead, bench, resources, manpower,
+  vendor.
+- The hero does not lead with the service list or with locations.
+- One idea per card, one line per tile.
 - Dallas is the Client & Leadership Hub and Hyderabad the Engineering &
-  Delivery Hub: "Two cities. One team."
+  Talent Hub.
 - No client, number, certification or affiliate goes live until it is
   confirmed.
 
-Check new copy against that list before publishing.
+To check a build for the banned words:
+
+```sh
+npm run build
+grep -oiE "recruit|staffing|staff aug|\bhir(e|ed|ing)\b|placement|headhunt|outsourc|consult|agency|contractor|engagement|\bbench\b|\bresources?\b|manpower|vendor" \
+  dist/index.html dist/*/index.html | sort | uniq -c
+```

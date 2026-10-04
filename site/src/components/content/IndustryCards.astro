@@ -1,0 +1,182 @@
+---
+import Eyebrow from "@/components/typography/Eyebrow.astro";
+import Heading from "@/components/typography/Heading.astro";
+import Paragraph from "@/components/typography/Paragraph.astro";
+import Button from "@/components/Button.astro";
+import Icon from "@/components/media/Icon.astro";
+import arrow from "@/assets/icons/ui-arrow.svg";
+import { INDUSTRIES } from "@/data/site.ts";
+
+interface Props {
+  /** Set to `false` to omit the component. */
+  render?: boolean;
+}
+
+const { render = true } = Astro.props;
+---
+
+{
+  render && (
+    <div class="industry-cards_wrap">
+      <div class="industry-cards_head">
+        <div class="industry-cards_intro">
+          <Eyebrow data-reveal>Industries</Eyebrow>
+          <Heading maxWidth={20} data-reveal style="--reveal-order: 1">
+            Talent that already knows your industry.
+          </Heading>
+        </div>
+        <div class="industry-cards_aside" data-reveal style="--reveal-order: 2">
+          <Paragraph variant="large" maxWidth={44}>
+            Specialists who speak the language of your sector, its rules and its
+            systems.
+          </Paragraph>
+          <Button element="link" href="/industries" emphasis="secondary">
+            Explore Industries
+          </Button>
+        </div>
+      </div>
+
+      <ul class="industry-cards_list">
+        {INDUSTRIES.map((industry, index) => (
+          <li
+            class="industry-cards_item"
+            id={industry.id}
+            data-reveal
+            style={`--reveal-order: ${index}`}
+          >
+            <a class="industry-cards_card" href={`/industries#${industry.id}`}>
+              <span class="industry-cards_index">0{index + 1}</span>
+              <Heading tag="h3" variant="h5" class="industry-cards_title">
+                {industry.title}
+              </Heading>
+              <Paragraph variant="small" class="industry-cards_text">
+                {industry.summary}
+              </Paragraph>
+              <span class="industry-cards_arrow" aria-hidden="true">
+                <Icon src={arrow} variant="small" />
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+<style is:global>
+  @layer components {
+    /* Spacing here comes from gaps, so type margins step aside. */
+    :where(.industry-cards_wrap) :where(.heading, .text) {
+      margin-block: 0;
+    }
+
+    .industry-cards_wrap {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-7);
+    }
+
+    .industry-cards_head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-5) var(--section-space-small);
+      align-items: end;
+      @media (width >= 64rem) {
+        grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      }
+    }
+
+    .industry-cards_intro,
+    .industry-cards_aside {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-4);
+    }
+
+    .industry-cards_list {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--site-gutter);
+      @media (width >= 48rem) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      @media (width >= 80rem) {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    .industry-cards_item {
+      display: flex;
+      scroll-margin-top: calc(var(--nav-height) + var(--space-5));
+    }
+
+    .industry-cards_card {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      padding: var(--space-5);
+      @media (width >= 48rem) {
+        min-height: 13rem;
+      }
+      background-color: var(--background-2);
+      border: var(--border-width) solid var(--border);
+      border-radius: var(--radius-main);
+      transition:
+        border-color var(--hover-duration) var(--hover-ease),
+        box-shadow 400ms var(--reveal-ease),
+        translate 400ms var(--reveal-ease);
+      @media (hover: hover) {
+        &:hover {
+          border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+          box-shadow: var(--shadow-float);
+          translate: 0 -0.25rem;
+          .industry-cards_arrow {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: var(--white);
+            & .icon {
+              translate: 0.15rem 0;
+            }
+          }
+        }
+      }
+      .industry-cards_item:target > & {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 0.25rem var(--accent-soft);
+      }
+    }
+
+    .industry-cards_index {
+      font-family: var(--heading-family);
+      font-size: 0.72rem;
+      font-weight: var(--heading-bold);
+      color: var(--accent);
+    }
+
+    .industry-cards_title {
+      margin-top: var(--space-3);
+    }
+
+    .industry-cards_arrow {
+      align-self: flex-start;
+      display: grid;
+      place-items: center;
+      width: 2.25rem;
+      height: 2.25rem;
+      margin-top: auto;
+      border: var(--border-width) solid var(--border);
+      border-radius: 50%;
+      color: var(--text);
+      transition:
+        background-color var(--hover-duration) var(--hover-ease),
+        border-color var(--hover-duration) var(--hover-ease),
+        color var(--hover-duration) var(--hover-ease);
+      & .icon {
+        transition: translate var(--hover-duration) var(--hover-ease);
+      }
+    }
+  }
+</style>

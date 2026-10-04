@@ -3,11 +3,8 @@ import Eyebrow from "@/components/typography/Eyebrow.astro";
 import Heading from "@/components/typography/Heading.astro";
 import Paragraph from "@/components/typography/Paragraph.astro";
 import Button from "@/components/Button.astro";
-import ButtonWrapper from "@/components/wrapper/ButtonWrapper.astro";
 import Icon from "@/components/media/Icon.astro";
 import arrow from "@/assets/icons/ui-arrow.svg";
-import arrowUp from "@/assets/icons/ui-arrow-up-right.svg";
-import { CAPABILITIES, tbc } from "@/data/site.ts";
 
 interface Props {
   /** Set to `false` to omit the component. */
@@ -15,458 +12,84 @@ interface Props {
 }
 
 const { render = true } = Astro.props;
-
-const points = [
-  {
-    title: "Real enterprise work",
-    text: "Banking platforms, telecom networks, healthcare data and energy operations. Systems millions of people rely on.",
-  },
-  {
-    title: "Long-term ownership",
-    text: "You join a dedicated team, learn one business deeply and own its systems.",
-  },
-  {
-    title: "Learning & growth",
-    text: "Paid certifications on SAP, cloud and AI platforms, and new leads and architects promoted from within.",
-  },
-  {
-    title: "Dallas + Hyderabad",
-    text: "Daily overlap with decision-makers, so you work with the people who own the outcome, not through layers.",
-  },
-];
-
-const teams = [...CAPABILITIES.map((cap) => cap.title), "Client Partnership"];
-
-const roles = [
-  {
-    title: "Senior Java Engineer",
-    team: "Digital Product Engineering",
-    location: "Hyderabad",
-    experience: "5–8 yrs",
-    mode: "Hybrid",
-  },
-  {
-    title: "SAP S/4HANA Functional Lead",
-    team: "SAP & Enterprise Data",
-    location: "Hyderabad",
-    experience: "4–7 yrs",
-    mode: "Hybrid",
-  },
-  {
-    title: "AI Automation Engineer",
-    team: "Autonomous AI Workflows",
-    location: "Hyderabad",
-    experience: "3–6 yrs",
-    mode: "On-site",
-  },
-  {
-    title: "Engagement Manager",
-    team: "Client Partnership",
-    location: "Dallas",
-    experience: "8+ yrs",
-    mode: "On-site",
-  },
-];
 ---
 
 {
   render && (
-    <div class="careers_wrap">
-      <div class="careers_top">
-        <div class="careers_intro">
-          <Eyebrow data-reveal>Careers</Eyebrow>
-          <Heading data-reveal style="--reveal-order: 1">
-            Build systems that matter.
-          </Heading>
-          <Paragraph
-            variant="large"
-            maxWidth={48}
-            data-reveal
-            style="--reveal-order: 2"
-          >
-            Join teams working on real enterprise platforms across Dallas and
-            Hyderabad. You own the work, learn the business and see the impact
-            over years, not sprints.
-          </Paragraph>
-          <Paragraph maxWidth={52} data-reveal style="--reveal-order: 3">
-            <Fragment
-              set:html={tbc(
-                "Every ManyaITian gets a growth plan in their first 90 days, with the certifications to earn, a mentor to learn from and a role to grow into. [Program name, e.g. ManyaIT Ascend]",
-              )}
-            />
-          </Paragraph>
-          <ButtonWrapper data-reveal style="--reveal-order: 4">
-            <Button element="link" href="#roles">
-              Explore Opportunities
-              <Icon src={arrow} variant="small" class="button_icon" />
-            </Button>
-            <Button
-              element="link"
-              href="/contact?topic=careers"
-              emphasis="secondary"
-            >
-              Join the Talent Network
-            </Button>
-          </ButtonWrapper>
-        </div>
-        <ul class="careers_points">
-          {points.map((point, index) => (
-            <li data-reveal style={`--reveal-order: ${index}`}>
-              <span class="careers_points_index">0{index + 1}</span>
-              <Heading tag="h3" variant="h6">
-                {point.title}
-              </Heading>
-              <Paragraph variant="small">{point.text}</Paragraph>
-            </li>
-          ))}
-        </ul>
+    <div class="careers-home_wrap" data-reveal>
+      <div class="careers-home_copy">
+        <Eyebrow>Careers</Eyebrow>
+        <Heading maxWidth={18}>Build systems that matter.</Heading>
+        <Paragraph variant="large" maxWidth={46}>
+          Work on enterprise platforms millions of people rely on, with mentors,
+          certifications and a clear path to grow.
+        </Paragraph>
       </div>
-
-      <div class="careers_finder" id="roles" data-roles data-reveal>
-        <div class="careers_finder_head">
-          <Heading tag="h3" variant="h4">
-            Find your role
-          </Heading>
-          <span class="careers_finder_note">
-            Sample openings · live roles connect at launch
-          </span>
-        </div>
-        <form class="careers_filters" role="search" aria-label="Find your role">
-          <label class="careers_field is-search">
-            <span class="sr-only">Role or skill</span>
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <>
-                <circle cx="11" cy="11" r="6.5" />
-                <path d="m16 16 4 4" />
-              </>
-            </svg>
-            <input
-              type="search"
-              name="q"
-              placeholder="Role or skill, e.g. Data engineer"
-              autocomplete="off"
-            />
-          </label>
-          <label class="careers_field">
-            <span class="sr-only">Location</span>
-            <select name="location">
-              <option value="">All locations</option>
-              <option>Dallas</option>
-              <option>Hyderabad</option>
-              <option>Remote</option>
-            </select>
-          </label>
-          <label class="careers_field">
-            <span class="sr-only">Team</span>
-            <select name="team">
-              <option value="">All teams</option>
-              {teams.map((team) => (
-                <option>{team}</option>
-              ))}
-            </select>
-          </label>
-        </form>
-        <ul class="careers_roles" aria-live="polite">
-          {roles.map((role) => (
-            <li
-              class="careers_role"
-              data-text={`${role.title} ${role.team}`.toLowerCase()}
-              data-location={role.location}
-              data-team={role.team}
-            >
-              <a class="careers_role_link" href="/contact?topic=careers">
-                <span class="careers_role_main">
-                  <span class="careers_role_title">{role.title}</span>
-                  <span class="careers_role_team">{role.team}</span>
-                </span>
-                <span class="careers_role_meta">
-                  <span>{role.location}</span>
-                  <span>{role.experience}</span>
-                  <span>{role.mode}</span>
-                </span>
-                <span class="careers_role_go">
-                  <Icon src={arrowUp} variant="small" />
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
-        <p class="careers_empty" hidden>
-          No roles match right now. Join the Talent Network and we'll reach out
-          when one opens.
-        </p>
-        <p
-          class="careers_trust text-style-small"
-          set:html={tbc(
-            "ManyaIT never charges a fee at any stage. Report any payment request to [careers email].",
-          )}
-        />
-      </div>
+      <Button element="link" href="/careers" class="careers-home_button">
+        Explore Careers
+        <Icon src={arrow} variant="small" class="button_icon" />
+      </Button>
+      <svg class="careers-home_mark" viewBox="0 0 190 120" aria-hidden="true">
+        <path d="M0 0 161 119.5H135L24 37.6v58.9L0 119.5Z" />
+        <path d="M189.5 0v119.5H167V36l-57.6 34.7-13.7-9.7Z" />
+      </svg>
     </div>
   )
 }
 
-<script>
-  for (const finder of document.querySelectorAll<HTMLElement>("[data-roles]")) {
-    const form = finder.querySelector<HTMLFormElement>("form");
-    const roles = [...finder.querySelectorAll<HTMLElement>(".careers_role")];
-    const empty = finder.querySelector<HTMLElement>(".careers_empty");
-    if (!form) continue;
-
-    const filter = () => {
-      const data = new FormData(form);
-      const query = String(data.get("q") ?? "")
-        .trim()
-        .toLowerCase();
-      const location = String(data.get("location") ?? "");
-      const team = String(data.get("team") ?? "");
-      let shown = 0;
-      for (const role of roles) {
-        const match =
-          (!query || (role.dataset.text ?? "").includes(query)) &&
-          (!location || role.dataset.location === location) &&
-          (!team || role.dataset.team === team);
-        role.hidden = !match;
-        if (match) shown++;
-      }
-      if (empty) empty.hidden = shown > 0;
-    };
-
-    form.addEventListener("input", filter);
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      filter();
-    });
-  }
-</script>
-
 <style is:global>
   @layer components {
     /* Spacing here comes from gaps, so type margins step aside. */
-    :where(.careers_wrap) :where(.heading, .text) {
+    :where(.careers-home_wrap) :where(.heading, .text) {
       margin-block: 0;
     }
-    .careers_wrap {
+
+    .careers-home_wrap {
+      position: relative;
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: var(--space-8);
-    }
-
-    .careers_top {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: var(--space-8) var(--section-space-small);
+      align-items: flex-start;
+      gap: var(--space-6);
+      padding: var(--space-7) var(--space-6);
+      border: var(--border-width) solid var(--border);
+      border-radius: 1.75rem;
+      background-color: var(--background-2);
+      background-image: radial-gradient(
+        circle at 100% 100%,
+        var(--blue-50),
+        transparent 55%
+      );
+      overflow: clip;
       @media (width >= 64rem) {
-        grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
-        align-items: end;
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: space-between;
+        padding: var(--space-8) var(--space-7);
       }
     }
 
-    .careers_intro {
+    .careers-home_copy {
+      position: relative;
       display: flex;
       flex-direction: column;
       gap: var(--space-4);
-      & .button-wrapper {
-        margin-top: var(--space-3);
-      }
     }
 
-    .careers_points {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: var(--site-gutter);
-      @media (width >= 30rem) {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-      & li {
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-2);
-        padding: var(--space-5);
-        border-radius: var(--radius-main);
-        background-color: var(--background-2);
-        border: var(--border-width) solid var(--border);
-      }
-    }
-
-    .careers_points_index {
-      margin-bottom: var(--space-2);
-      font-family: var(--heading-family);
-      font-size: 0.72rem;
-      font-weight: var(--heading-bold);
-      color: var(--accent);
-    }
-
-    .careers_finder {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-5);
-      padding: var(--space-6);
-      border-radius: var(--radius-main);
-      background-color: var(--background-2);
-      border: var(--border-width) solid var(--border);
-      scroll-margin-top: calc(var(--nav-height) + var(--space-5));
-    }
-
-    .careers_finder_head {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: var(--space-2) var(--space-5);
-    }
-
-    .careers_finder_note {
-      font-size: var(--text-small);
-      color: var(--text-2);
-    }
-
-    .careers_filters {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: var(--space-2);
-      @media (width >= 48rem) {
-        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
-      }
-    }
-
-    .careers_field {
+    .careers-home_button {
       position: relative;
-      display: flex;
-      align-items: center;
-      & input,
-      & select {
-        width: 100%;
-        min-height: 3rem;
-        padding: 0 1rem;
-        border: var(--border-width) solid var(--border);
-        border-radius: var(--radius-small);
-        background-color: var(--background);
-        color: var(--text);
-        transition: border-color var(--hover-duration) var(--hover-ease);
-        &::placeholder {
-          color: var(--slate-400);
-        }
-        &:focus-visible {
-          outline: none;
-          border-color: var(--accent);
-          box-shadow: 0 0 0 0.2rem var(--accent-soft);
-        }
-      }
-      &.is-search input {
-        padding-left: 2.75rem;
-      }
-      & svg {
-        position: absolute;
-        left: 1rem;
-        width: 1.1rem;
-        fill: none;
-        stroke: var(--text-2);
-        stroke-width: 1.8;
-        stroke-linecap: round;
-        pointer-events: none;
-      }
+      flex: none;
     }
 
-    .careers_roles {
-      display: flex;
-      flex-direction: column;
-      border-top: var(--border-width) solid var(--divider);
-    }
-
-    .careers_role {
-      border-bottom: var(--border-width) solid var(--divider);
-      &[hidden] {
+    .careers-home_mark {
+      position: absolute;
+      top: var(--space-6);
+      right: var(--space-6);
+      width: 6rem;
+      fill: var(--accent-soft);
+      @media (width < 48rem) {
         display: none;
       }
-    }
-
-    .careers_role_link {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      align-items: center;
-      gap: var(--space-2) var(--space-5);
-      padding: var(--space-4) var(--space-2);
-      border-radius: var(--radius-small);
-      transition:
-        background-color var(--hover-duration) var(--hover-ease),
-        padding var(--hover-duration) var(--hover-ease);
-      @media (width >= 48rem) {
-        grid-template-columns: minmax(0, 1fr) auto auto;
-      }
-      @media (hover: hover) {
-        &:hover {
-          background-color: var(--background-3);
-          padding-inline: var(--space-4);
-          .careers_role_go {
-            background-color: var(--accent);
-            border-color: var(--accent);
-            color: var(--white);
-          }
-        }
-      }
-    }
-
-    .careers_role_main {
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
-    }
-
-    .careers_role_title {
-      font-family: var(--heading-family);
-      font-weight: var(--heading-bold);
-      color: var(--text);
-    }
-
-    .careers_role_team {
-      font-size: var(--text-small);
-      color: var(--text-2);
-    }
-
-    .careers_role_meta {
-      display: none;
-      gap: var(--space-2);
-      font-size: 0.78rem;
-      @media (width >= 48rem) {
-        display: flex;
-      }
-      & span {
-        padding: 0.25rem 0.65rem;
-        border-radius: var(--radius-round);
-        background-color: var(--background-3);
-        color: var(--text-body);
-      }
-    }
-
-    .careers_role_go {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      place-items: center;
-      width: 2.5rem;
-      height: 2.5rem;
-      border-radius: 50%;
-      border: var(--border-width) solid var(--border);
-      color: var(--text);
-      transition:
-        background-color var(--hover-duration) var(--hover-ease),
-        border-color var(--hover-duration) var(--hover-ease),
-        color var(--hover-duration) var(--hover-ease);
-    }
-
-    .careers_empty {
-      padding: var(--space-5);
-      border-radius: var(--radius-small);
-      background-color: var(--background-3);
-      color: var(--text-body);
-      &[hidden] {
-        display: none;
-      }
-    }
-
-    .careers_trust {
-      color: var(--text-2);
     }
   }
 </style>

@@ -235,6 +235,25 @@ const chartArea = `${chartLine} L100 50 L0 50 Z`;
     toggle?.addEventListener("click", () =>
       setPlaying(reel.dataset.state !== "playing"),
     );
+
+    /* One capability at a time lifts out of the reel, walking through the
+       tiles' data-cap keys. Still for reduced motion and hidden tabs. */
+    const tiles = [...reel.querySelectorAll<HTMLElement>("[data-cap]")];
+    const keys = [...new Set(tiles.map((tile) => tile.dataset.cap))];
+    let index = 0;
+    const show = (next: number) => {
+      index = next;
+      tiles.forEach((tile) =>
+        tile.classList.toggle("is-active", tile.dataset.cap === keys[index]),
+      );
+    };
+    if (keys.length) {
+      show(0);
+      window.setInterval(() => {
+        if (reduced.matches || document.hidden) return;
+        show((index + 1) % keys.length);
+      }, 2600);
+    }
   }
 
   /* Live local time for any element carrying data-clock. */

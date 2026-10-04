@@ -10,146 +10,57 @@ export const CAPABILITIES = [
     id: "cap-data",
     key: "data",
     title: "Data & Analytics",
-    line: "Turn every data point into a decision.",
-    description:
-      "Modern data platforms that bring your data into one trusted place. Leaders get live dashboards, teams get self-serve insight, and AI gets clean, governed data.",
-    tags: [
-      "Lakehouse & real-time pipelines",
-      "Self-serve BI",
-      "AI-ready data products",
-    ],
+    line: "Data engineers who turn scattered data into decisions.",
     icon: capData,
-    headline: "From scattered data to real-time decisions",
-    deliver: [
-      "Modern data platforms on the cloud: lakehouse, warehouse and real-time pipelines",
-      "Data engineering: ingestion, transformation and orchestration at scale",
-      "BI and self-serve analytics: executive dashboards, KPI scorecards and embedded reports",
-      "Predictive analytics: forecasting, demand planning and risk models",
-      "Data governance and quality: catalogs, lineage, access control and compliance",
-      "AI-ready data: feature stores and data products that feed your AI initiatives",
-    ],
-    outcomes: [
-      "One version of the truth across functions",
-      "Faster reporting cycles, from weeks to near real time",
-      "Decisions backed by evidence, not instinct",
-    ],
   },
   {
     id: "cap-sap",
     key: "sap",
     title: "SAP & Enterprise Data",
-    line: "Modernize your core. Unlock what's inside it.",
-    description:
-      "Move to SAP S/4HANA, keep the core clean and connect SAP data to planning, finance and operations, so your ERP becomes a live source of insight.",
-    tags: [
-      "SAP S/4HANA & RISE with SAP",
-      "SAP BTP clean-core extensions",
-      "Datasphere & SAP Analytics Cloud",
-    ],
+    line: "S/4HANA, BTP and clean-core specialists.",
     icon: capSap,
-    headline: "A modern SAP core, connected to everything",
-    deliver: [
-      "SAP S/4HANA transformation: greenfield, brownfield and selective data migration",
-      "RISE with SAP and SAP cloud migration",
-      "SAP Business Technology Platform (BTP): clean-core extensions, apps and workflows",
-      "SAP data and analytics: Datasphere, BW/4HANA and SAP Analytics Cloud",
-      "Master data management and data quality across SAP and non-SAP systems",
-      "Integration with CRM, e-commerce and cloud platforms through APIs and SAP Integration Suite",
-      "Ongoing SAP run, upgrades and continuous improvement",
-    ],
-    outcomes: [
-      "A lean, upgrade-ready SAP core",
-      "Real-time visibility into finance, supply chain and operations",
-      "SAP data ready for analytics and AI",
-    ],
   },
   {
     id: "cap-ai",
     key: "ai",
     title: "Applied AI",
-    line: "From AI pilots to AI in production.",
-    description:
-      "Generative AI and machine learning built on your own data, run securely at enterprise scale and measured against a business outcome.",
-    tags: [
-      "Copilots & knowledge assistants",
-      "Document intelligence",
-      "MLOps & LLMOps",
-    ],
+    line: "GenAI and ML talent that ships to production.",
     icon: capAi,
-    headline: "AI that works inside your business, not beside it",
-    deliver: [
-      "AI use-case discovery and value roadmaps",
-      "Generative AI applications: copilots, knowledge assistants and enterprise search on your own data",
-      "Document intelligence: reading, classifying and extracting data from invoices, contracts and forms",
-      "Machine learning models for forecasting, personalization, fraud and quality",
-      "MLOps and LLMOps: deployment, monitoring and continuous improvement",
-      "Responsible AI: governance, security, privacy and cost control",
-    ],
-    outcomes: [
-      "AI that moves past the pilot stage and reaches real users",
-      "Faster answers for teams, grounded in company knowledge",
-      "Clear return on every AI investment",
-    ],
   },
   {
     id: "cap-flow",
     key: "ai",
-    title: "Autonomous AI Workflows",
-    line: "AI that doesn't just answer. It gets work done.",
-    description:
-      "AI assistants that complete multi-step work across ERP, CRM and ticketing systems, and hand off to a person when judgment is needed.",
-    tags: [
-      "Human-in-the-loop approvals",
-      "Guardrails & audit trails",
-      "RPA to AI workflows",
-    ],
+    title: "Agentic AI & Automation",
+    line: "Builders of AI agents that get real work done.",
     icon: capFlow,
-    headline: "AI assistants that plan, act and follow through",
-    deliver: [
-      "AI assistants for finance, HR, IT and customer operations",
-      "End-to-end process automation that connects ERP, CRM and ticketing systems",
-      "Teams of specialised AI assistants that hand work to one another",
-      "Human-in-the-loop approvals for sensitive actions",
-      "Guardrails, audit trails and performance monitoring for every action taken",
-      "Upgrades from traditional RPA bots to AI-driven workflows",
-    ],
-    outcomes: [
-      "Faster turnaround on everyday requests, day and night",
-      "Less manual effort on repetitive, rules-based work",
-      "Full visibility into what each assistant did and why",
-    ],
   },
   {
     id: "cap-code",
     key: "digital",
     title: "Digital Product Engineering",
-    line: "Build modern software, faster.",
-    description:
-      "Cloud-native applications and platforms, from first release to millions of users, with AI-assisted engineering and DevSecOps built in.",
-    tags: [
-      "Web & mobile",
-      "Legacy modernization",
-      "Platform engineering & CI/CD",
-    ],
+    line: "Cloud-native product teams, from web to mobile.",
     icon: capCode,
-    headline:
-      "Software built to scale, from first release to millions of users",
-    deliver: [
-      "Custom web and mobile applications",
-      "Cloud-native platforms and microservices on AWS, Azure and Google Cloud",
-      "Legacy modernization: re-platforming and re-architecting older systems",
-      "APIs and system integration",
-      "DevSecOps, CI/CD and platform engineering",
-      "Quality engineering and test automation",
-      "AI-assisted development for faster, more consistent delivery",
-    ],
-    outcomes: [
-      "Faster releases with fewer defects",
-      "Applications that scale with demand",
-      "Lower cost of running and changing your software",
-    ],
   },
 ] as const;
+
+/**
+ * Client logos for the trust marquee. Add `src`, a file in `public/logos/`,
+ * once each logo is cleared for use; until then the tile shows a placeholder.
+ */
+export const CLIENT_LOGOS: { name: string; src?: string }[] = [
+  { name: "Client logo 01" },
+  { name: "Client logo 02" },
+  { name: "Client logo 03" },
+  { name: "Client logo 04" },
+  { name: "Client logo 05" },
+  { name: "Client logo 06" },
+  { name: "Client logo 07" },
+  { name: "Client logo 08" },
+  { name: "Client logo 09" },
+  { name: "Client logo 10" },
+  { name: "Client logo 11" },
+  { name: "Client logo 12" },
+];
 
 /** The four industries in scope. `id` doubles as the deep-link hash. */
 export const INDUSTRIES = [
@@ -157,6 +68,7 @@ export const INDUSTRIES = [
     id: "industry-banking",
     title: "Banking & Financial Services",
     short: "Banking & FS",
+    summary: "Specialists in core banking, payments, risk and compliance.",
     hero: "Modernize core banking without slowing the business.",
     challenge:
       "Decades-old core systems, real-time customer expectations, and every change through audit and risk review.",
@@ -170,6 +82,7 @@ export const INDUSTRIES = [
     id: "industry-telecom",
     title: "Telecommunications",
     short: "Telecom",
+    summary: "Engineers for OSS/BSS, billing and network data.",
     hero: "Keep networks and customers connected.",
     challenge:
       "Huge data volumes, complex billing and constant network change, where every outage is public.",
@@ -183,6 +96,7 @@ export const INDUSTRIES = [
     id: "industry-healthcare",
     title: "Healthcare",
     short: "Healthcare",
+    summary: "Teams fluent in health data, claims and HIPAA.",
     hero: "Technology that serves patients and protects their data.",
     challenge:
       "Fragmented records, rising admin cost and strict privacy rules such as HIPAA.",
@@ -196,6 +110,7 @@ export const INDUSTRIES = [
     id: "industry-energy",
     title: "Energy",
     short: "Energy",
+    summary: "Experts in SAP asset management and field operations.",
     hero: "Digital operations for a sector in transition.",
     challenge:
       "Ageing assets, safety rules and the shift to renewables, with data split across field and enterprise systems.",
@@ -214,7 +129,7 @@ export const HUBS = [
     city: "Dallas, Texas",
     short: "Dallas",
     role: "Client & Leadership Hub",
-    text: "Where client partnerships start. Our Dallas team leads solution design, account leadership and engagement governance for enterprises across North America.",
+    text: "Where partnerships start. Our Dallas team works in your time zone to shape the right team for each goal and keep it on track across North America.",
     address: "[Street address, Dallas, TX]",
     phone: "[Phone]",
     email: "[Email]",
@@ -228,8 +143,8 @@ export const HUBS = [
     id: "hyderabad",
     city: "Hyderabad, India",
     short: "Hyderabad",
-    role: "Engineering & Delivery Hub",
-    text: "Where the work is built and run. Our Hyderabad teams engineer, test, operate and continuously improve platforms for enterprises worldwide, as a true extension of each enterprise's own technology organization.",
+    role: "Engineering & Talent Hub",
+    text: "Home to our engineering talent. Hyderabad teams build, run and improve platforms for enterprises worldwide, working as part of each enterprise's own technology organization.",
     address: "[Street address, Hyderabad, Telangana]",
     phone: "[Phone]",
     email: "[Email]",
@@ -237,7 +152,7 @@ export const HUBS = [
     locale: "en-IN",
     lat: 17.39,
     lon: 78.49,
-    link: { label: "View opportunities in Hyderabad", href: "/#careers" },
+    link: { label: "View opportunities in Hyderabad", href: "/careers" },
   },
 ] as const;
 
@@ -246,14 +161,14 @@ export const NAV = [
   { label: "About", href: "/#why" },
   { label: "Capabilities", href: "/#capabilities", menu: "capabilities" },
   { label: "Industries", href: "/#industries", menu: "industries" },
-  { label: "Careers", href: "/#careers" },
+  { label: "Careers", href: "/careers" },
   { label: "Insights", href: "/#insights" },
   { label: "Contact", href: "/contact" },
 ] as const;
 
 export const CTA = {
   primary: { label: "Start a Conversation", href: "/contact" },
-  secondary: { label: "Explore Opportunities", href: "/#careers" },
+  secondary: { label: "Explore Opportunities", href: "/careers" },
 } as const;
 
 export const SOCIAL = [
