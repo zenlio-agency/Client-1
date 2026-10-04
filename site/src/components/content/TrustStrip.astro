@@ -39,15 +39,15 @@ const stats = [
 
 <style is:global>
   @layer components {
-    /* Padding trimmed and type scaled up so the figures, not the empty
-       space, fill the card (content was under half its height). */
+    /* A compact strip: tight padding and gaps so it reads as a summary
+       under the statement, not a second hero. */
     .trust-strip_wrap {
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: var(--space-5);
-      padding: var(--space-5);
-      border-radius: 1.75rem;
+      gap: var(--space-4);
+      padding: var(--space-4) var(--space-4) var(--space-5);
+      border-radius: 1.5rem;
       overflow: clip;
       background-image: radial-gradient(
         circle at 100% 0%,
@@ -55,14 +55,14 @@ const stats = [
         transparent 55%
       );
       @media (width >= 64rem) {
-        padding: var(--space-6) var(--space-6) var(--space-7);
+        padding: var(--space-5) var(--space-6) var(--space-6);
       }
     }
 
     .trust-strip_list {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: var(--space-6) 0;
+      gap: var(--space-5) 0;
       @media (width >= 64rem) {
         grid-template-columns: repeat(4, minmax(0, 1fr));
       }
@@ -71,7 +71,7 @@ const stats = [
     .trust-strip_item {
       display: flex;
       flex-direction: column;
-      gap: var(--space-3);
+      gap: var(--space-2);
       padding-inline: var(--space-4) var(--space-2);
       border-left: var(--border-width) solid var(--border);
       @media (width >= 48rem) {
@@ -79,10 +79,10 @@ const stats = [
       }
     }
 
-    /* Figures scale with the viewport up to 4rem (64px). */
+    /* Figures scale with the viewport up to 3.25rem (52px). */
     .trust-strip_value {
       font-family: var(--display-family);
-      font-size: clamp(2rem, 1.1rem + 2.8vw, 4rem);
+      font-size: clamp(1.75rem, 1rem + 2.2vw, 3.25rem);
       font-weight: 700;
       letter-spacing: var(--letter-spacing-tight);
       line-height: 1;
@@ -91,8 +91,8 @@ const stats = [
     }
 
     .trust-strip_label {
-      max-width: 22ch;
-      font-size: var(--text-main);
+      max-width: 24ch;
+      font-size: var(--text-small);
       line-height: 1.45;
       color: var(--text-body);
     }
