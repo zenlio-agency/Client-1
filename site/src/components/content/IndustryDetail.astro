@@ -1,0 +1,255 @@
+---
+import Eyebrow from "@/components/typography/Eyebrow.astro";
+import Heading from "@/components/typography/Heading.astro";
+import Paragraph from "@/components/typography/Paragraph.astro";
+import Button from "@/components/Button.astro";
+import Icon from "@/components/media/Icon.astro";
+import arrow from "@/assets/icons/ui-arrow.svg";
+import { INDUSTRIES, CTA, tbc } from "@/data/site.ts";
+
+interface Props {
+  /** Set to `false` to omit the component. */
+  render?: boolean;
+}
+
+const { render = true } = Astro.props;
+---
+
+{
+  render && (
+    <div class="industry-detail_wrap">
+      <div class="industry-detail_head">
+        <Eyebrow data-reveal>Industries</Eyebrow>
+        <Heading
+          tag="h1"
+          variant="h1"
+          maxWidth={20}
+          data-reveal
+          style="--reveal-order: 1"
+        >
+          Talent that already knows your industry.
+        </Heading>
+        <Paragraph
+          variant="large"
+          maxWidth={48}
+          data-reveal
+          style="--reveal-order: 2"
+        >
+          Specialists who speak the language of your sector, its rules and its
+          systems.
+        </Paragraph>
+        <ul
+          class="industry-detail_jump"
+          aria-label="Industries on this page"
+          data-reveal
+          style="--reveal-order: 3"
+        >
+          {INDUSTRIES.map((industry) => (
+            <li>
+              <a href={`#${industry.id}`}>{industry.title}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <ol class="industry-detail_list">
+        {INDUSTRIES.map((industry, index) => (
+          <li class="industry-detail_item" id={industry.id} data-reveal>
+            <div class="industry-detail_side">
+              <span class="industry-detail_index">0{index + 1}</span>
+              <Heading tag="h2" variant="h3">
+                {industry.title}
+              </Heading>
+              <Paragraph maxWidth={40}>{industry.summary}</Paragraph>
+            </div>
+            <div class="industry-detail_body">
+              <Heading tag="h3" variant="h4">
+                {industry.hero}
+              </Heading>
+              <dl class="industry-detail_facts">
+                <div>
+                  <dt>The challenge</dt>
+                  <dd>{industry.challenge}</dd>
+                </div>
+                <div>
+                  <dt>What our teams build</dt>
+                  <dd>{industry.build}</dd>
+                </div>
+              </dl>
+              <div class="industry-detail_outcome">
+                <span
+                  class="industry-detail_metric"
+                  set:html={tbc(industry.metric)}
+                />
+                <span>
+                  <strong>{industry.outcome}</strong>
+                  <span>{industry.metricLabel}</span>
+                </span>
+              </div>
+              <Button
+                element="link"
+                href={`${CTA.primary.href}?topic=${industry.id}`}
+                emphasis="tertiary"
+                class="industry-detail_link"
+              >
+                Talk to us about {industry.short}
+                <Icon src={arrow} variant="small" class="button_icon" />
+              </Button>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  )
+}
+
+<style is:global>
+  @layer components {
+    /* Spacing here comes from gaps, so type margins step aside. */
+    :where(.industry-detail_wrap) :where(.heading, .text) {
+      margin-block: 0;
+    }
+
+    .industry-detail_wrap {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+    }
+
+    .industry-detail_head {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-4);
+    }
+
+    .industry-detail_jump {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-top: var(--space-2);
+      & a {
+        display: inline-block;
+        padding: 0.45rem 0.9rem;
+        border: var(--border-width) solid var(--border);
+        border-radius: var(--radius-round);
+        background-color: var(--background-2);
+        font-family: var(--heading-family);
+        font-size: var(--text-small);
+        font-weight: var(--heading-medium);
+        color: var(--text);
+        text-decoration: none;
+        transition:
+          border-color var(--hover-duration) var(--hover-ease),
+          color var(--hover-duration) var(--hover-ease);
+        @media (hover: hover) {
+          &:hover {
+            border-color: var(--accent);
+            color: var(--accent-text);
+          }
+        }
+      }
+    }
+
+    .industry-detail_list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--site-gutter);
+    }
+
+    .industry-detail_item {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-6) var(--section-space-small);
+      padding: var(--space-6);
+      border: var(--border-width) solid var(--border);
+      border-radius: var(--radius-main);
+      background-color: var(--background-2);
+      scroll-margin-top: calc(var(--nav-height) + var(--space-5));
+      @media (width >= 64rem) {
+        grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+        padding: var(--space-7);
+      }
+      &:target {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 0.25rem var(--accent-soft);
+      }
+    }
+
+    .industry-detail_side,
+    .industry-detail_body {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-4);
+    }
+
+    .industry-detail_index {
+      font-family: var(--heading-family);
+      font-size: 0.72rem;
+      font-weight: var(--heading-bold);
+      color: var(--accent);
+    }
+
+    .industry-detail_facts {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-5);
+      padding-top: var(--space-5);
+      border-top: var(--border-width) solid var(--divider);
+      @media (width >= 48rem) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      & div {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+      }
+      & dt {
+        font-family: var(--heading-family);
+        font-size: 0.72rem;
+        font-weight: var(--heading-bold);
+        letter-spacing: var(--letter-spacing-wide);
+        text-transform: uppercase;
+        color: var(--text-2);
+      }
+      & dd {
+        margin: 0;
+        font-size: var(--text-small);
+        color: var(--text-body);
+      }
+    }
+
+    .industry-detail_outcome {
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+      gap: var(--space-5);
+      padding: var(--space-4) var(--space-5);
+      border-radius: var(--radius-medium);
+      background-color: var(--background-3);
+      & > span:last-child {
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+        font-size: var(--text-small);
+        color: var(--text-2);
+      }
+      & strong {
+        color: var(--text);
+        font-weight: var(--primary-bold);
+      }
+    }
+
+    .industry-detail_metric {
+      flex: none;
+      font-family: var(--display-family);
+      font-size: var(--h3);
+      font-weight: 700;
+      letter-spacing: var(--letter-spacing-tight);
+      color: var(--accent);
+      white-space: nowrap;
+    }
+  }
+</style>

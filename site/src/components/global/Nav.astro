@@ -78,15 +78,14 @@ const path = Astro.url.pathname.replace(/\/+$/, "") || "/";
                                 </li>
                               ))}
                             </ul>
-                            <a class="nav_feature theme-dark" href="/#how">
-                              <span class="nav_feature_label">How we work</span>
+                            <a class="nav_feature theme-dark" href="/contact">
+                              <span class="nav_feature_label">Get started</span>
                               <span class="nav_feature_title">
-                                Discover, Build, Run, Scale
+                                Teams ready in weeks
                               </span>
                               <span class="nav_feature_text">
-                                Every capability follows the same path, whether
-                                it starts with one platform or a full
-                                engineering hub.
+                                Share the skills you need and we'll shape the
+                                team around your roadmap.
                               </span>
                               <span
                                 class="nav_feature_steps"
@@ -113,14 +112,14 @@ const path = Astro.url.pathname.replace(/\/+$/, "") || "/";
                                       {industry.title}
                                     </span>
                                     <span class="nav_panel_line">
-                                      {industry.hero}
+                                      {industry.summary}
                                     </span>
                                   </span>
                                 </a>
                               </li>
                             ))}
                             <li>
-                              <a class="nav_panel_more" href={item.href}>
+                              <a class="nav_panel_more" href="/industries">
                                 All industries
                                 <Icon src={arrow} variant="small" />
                               </a>

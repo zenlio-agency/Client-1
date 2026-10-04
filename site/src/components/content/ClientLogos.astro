@@ -1,0 +1,228 @@
+---
+import Heading from "@/components/typography/Heading.astro";
+import Button from "@/components/Button.astro";
+import { CLIENT_LOGOS, tbc } from "@/data/site.ts";
+
+interface Props {
+  /** Set to `false` to omit the component. */
+  render?: boolean;
+}
+
+const { render = true } = Astro.props;
+
+/* Two rows moving in opposite directions. Each panel repeats its logos until
+   it is wider than a large screen, so the loop never shows a gap. */
+const half = Math.ceil(CLIENT_LOGOS.length / 2);
+const rows = [CLIENT_LOGOS.slice(0, half), CLIENT_LOGOS.slice(half)].filter(
+  (row) => row.length,
+);
+const fill = (row: (typeof rows)[number]) =>
+  Array.from({ length: Math.ceil(10 / row.length) }, () => row).flat();
+---
+
+{
+  render && rows.length > 0 && (
+    <div class="client-logos_wrap" data-logos>
+      <div class="client-logos_head">
+        <Heading
+          tag="h2"
+          variant="h3"
+          class="heading-accent"
+          maxWidth={30}
+          data-reveal
+        >
+          Trusted by global enterprises. <strong>Powered by our talent.</strong>
+        </Heading>
+        <Button
+          variant="play"
+          emphasis="secondary"
+          pressed={true}
+          label="Pause"
+          class="client-logos_toggle"
+          data-logos-toggle
+        />
+      </div>
+      <div class="client-logos_rows" data-reveal style="--reveal-order: 1">
+        {rows.map((row, index) => (
+          <div
+            class:list={["client-logos_row", index % 2 === 1 && "is-reverse"]}
+          >
+            <div class="client-logos_track">
+              {[0, 1].map((copy) => (
+                <ul
+                  class="client-logos_panel"
+                  aria-hidden={copy === 1 ? "true" : undefined}
+                  inert={copy === 1}
+                >
+                  {fill(row).map((logo, i) => (
+                    <li
+                      class="client-logos_tile"
+                      aria-hidden={
+                        copy === 0 && i >= row.length ? "true" : undefined
+                      }
+                    >
+                      {logo.src ? (
+                        <img
+                          class="client-logos_img"
+                          src={logo.src}
+                          alt={logo.name}
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      ) : (
+                        <span
+                          class="client-logos_placeholder"
+                          set:html={tbc(`[${logo.name}]`)}
+                        />
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+<script>
+  for (const block of document.querySelectorAll<HTMLElement>("[data-logos]")) {
+    const toggle = block.querySelector<HTMLButtonElement>(
+      "[data-logos-toggle]",
+    );
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+    const setPlaying = (playing: boolean) => {
+      block.dataset.state = playing ? "playing" : "paused";
+      toggle?.setAttribute("aria-pressed", String(playing));
+      toggle?.setAttribute("aria-label", playing ? "Pause" : "Play");
+    };
+    setPlaying(!reduced.matches);
+    toggle?.addEventListener("click", () =>
+      setPlaying(block.dataset.state !== "playing"),
+    );
+  }
+</script>
+
+<style is:global>
+  @layer components {
+    /* Spacing here comes from gaps, so type margins step aside. */
+    :where(.client-logos_wrap) :where(.heading, .text) {
+      margin-block: 0;
+    }
+
+    .client-logos_wrap {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+
+    .client-logos_head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: var(--space-5);
+    }
+
+    .client-logos_toggle {
+      flex: none;
+      font-size: 0.75rem;
+    }
+
+    .client-logos_rows {
+      --_gap: var(--space-3);
+      width: 100vw;
+      margin-inline: calc(50% - 50vw);
+      display: flex;
+      flex-direction: column;
+      gap: var(--_gap);
+      mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 8%,
+        black 92%,
+        transparent
+      );
+    }
+
+    .client-logos_row {
+      overflow: clip;
+    }
+
+    .client-logos_track {
+      display: flex;
+      width: max-content;
+      gap: var(--_gap);
+      animation: client-logos-scroll 60s linear infinite;
+      animation-play-state: paused;
+      .is-reverse > & {
+        animation-direction: reverse;
+        animation-duration: 66s;
+      }
+      .client-logos_wrap[data-state="playing"] & {
+        animation-play-state: running;
+      }
+      .client-logos_wrap[data-state="playing"]
+        .client-logos_rows:is(:hover, :focus-within)
+        & {
+        animation-play-state: paused;
+      }
+    }
+
+    @keyframes client-logos-scroll {
+      to {
+        translate: calc(-50% - var(--_gap) / 2) 0;
+      }
+    }
+
+    .client-logos_panel {
+      display: flex;
+      gap: var(--_gap);
+    }
+
+    .client-logos_tile {
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: 12rem;
+      height: 5rem;
+      padding: var(--space-4) var(--space-5);
+      background-color: var(--white);
+      border: var(--border-width) solid var(--border);
+      border-radius: var(--radius-main);
+    }
+
+    .client-logos_img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      filter: grayscale(1);
+      opacity: 0.7;
+      transition:
+        filter var(--hover-duration) var(--hover-ease),
+        opacity var(--hover-duration) var(--hover-ease);
+      @media (hover: hover) {
+        .client-logos_tile:hover > & {
+          filter: none;
+          opacity: 1;
+        }
+      }
+    }
+
+    .client-logos_placeholder {
+      font-family: var(--heading-family);
+      font-size: var(--text-small);
+      font-weight: var(--heading-medium);
+      color: var(--text-2);
+      white-space: nowrap;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .client-logos_row {
+        overflow-x: auto;
+      }
+    }
+  }
+</style>

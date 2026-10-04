@@ -28,6 +28,21 @@ export default defineConfig({
       },
     },
     {
+      name: "Plus Jakarta Sans",
+      cssVariable: "--font-plus-jakarta",
+      provider: fontProviders.local(),
+      fallbacks: ["system-ui", "sans-serif"],
+      options: {
+        variants: [
+          {
+            weight: "200 800",
+            style: "normal",
+            src: ["./src/assets/fonts/plus-jakarta-sans-latin-wght-normal.woff2"],
+          },
+        ],
+      },
+    },
+    {
       name: "Poppins",
       cssVariable: "--font-poppins",
       provider: fontProviders.local(),
