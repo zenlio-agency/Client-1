@@ -45,7 +45,9 @@ Lumos conventions (layers, themes, `_wrap` components, `rem` only) are in
 ```
 src/
   pages/            index, about, careers, contact, insights, locations, 404,
-                    capabilities/ and industries/ (index and [slug]) (no CSS)
+                    capabilities/ and industries/ (index and [slug]),
+                    legal/ (hub, [slug] and privacy-requests) (no CSS)
+  content/legal/    one Markdown file per policy (see "Legal pages")
   components/
     global/         Nav (mega menu and mobile drawer), Footer, Logo
     content/        one component per section, listed below
@@ -53,9 +55,12 @@ src/
                     the shared team steps and the page-link helpers
   data/capability-pages.ts, data/industry-pages.ts
                     copy for each capability and industry page
+  data/legal.ts     facts every legal page shares, and the footer's legal links
+  data/photos.ts    which photo each tile uses
   styles/base.css   brand tokens, type scale, themes, motion
   assets/           fonts, logo mark and icons
-public/             favicon, social share image and logos/ for client logos
+public/             favicon, social share image, logos/ for client logos,
+                    images/ for photos, and _redirects
 ```
 
 | #   | Section                       | Component                    | Theme |
@@ -88,6 +93,9 @@ section components, so a new page is mostly copy.
 | `/careers`                  | `CareersOpenings`, `StorySplit`, `FeatureGrid` (benefits, tracks), `ProcessSteps`, `FaqList`, `GlobalPresence`, `CtaFinal`                                            |
 | `/locations`                | `HeroDetail`, `HubCards`, `GlobalPresence`, `ProcessSteps`, `FaqList`, `CtaFinal`                                                                                     |
 | `/insights`                 | `HeroDetail`, `InsightsGrid`, `FeatureGrid` (topics), `CtaFinal`                                                                                                      |
+| `/legal`                    | `LegalHub`, `LegalStrip`                                                                                                                                              |
+| `/legal/[slug]` (×6)        | `LegalDocument` (with `LegalHeader`, `LegalToc`, `LegalBody`), `LegalStrip`                                                                                           |
+| `/legal/privacy-requests`   | `LegalHeader`, `PrivacyRequestForm`                                                                                                                                   |
 
 Capability and industry names, lines and slugs come from `src/data/site.ts`,
 so the nav, the bento, the industry cards and pages, the footer and the
@@ -96,6 +104,42 @@ contact form's topic list all stay in step. Each page's longer copy lives in
 same `id`. `capabilityHref` and `industryHref` build the page links, and
 `TEAM_STEPS` holds the four steps from skills brief to Build-Operate-Transfer
 shown on the About and capability pages.
+
+## Legal pages
+
+The legal pack lives under `/legal`: a hub, six policies and a privacy
+request form. The footer links to each one, and the addresses people guess
+(`/privacy`, `/privacy-policy`, `/terms`, `/terms-of-use`, `/cookie-policy`,
+`/accessibility`) redirect to them. The redirects are in `astro.config.mjs`,
+which writes a forwarding page at each address, and in `public/_redirects`,
+which Cloudflare serves as permanent (301) redirects. Keep the two lists the
+same.
+
+| Page                      | File                                              |
+| ------------------------- | ------------------------------------------------- |
+| Privacy Notice            | `src/content/legal/privacy.md`                    |
+| Terms of Use              | `src/content/legal/terms.md`                      |
+| Cookie Notice             | `src/content/legal/cookies.md`                    |
+| Accessibility Statement   | `src/content/legal/accessibility.md`              |
+| Applicant Privacy Notice  | `src/content/legal/applicant-privacy.md`          |
+| Job Offer Fraud Notice    | `src/content/legal/job-offer-fraud.md`            |
+| Privacy requests (a form) | `src/components/content/PrivacyRequestForm.astro` |
+
+Each Markdown file's front matter sets the title, the hub summary, the
+"At a glance" bullets, the dates, the version, which contact card closes the
+page and the change log (schema in `src/content.config.ts`). Each `##`
+heading becomes a numbered section in the "On this page" list, with a stable
+link such as `/legal/privacy#your-rights`. Forms and emails point at these
+links, so rename a heading only with care.
+
+Facts that appear on more than one page (company names, addresses, emails,
+the Grievance Officer, response times) live once in `LEGAL` in
+`src/data/legal.ts`. In the Markdown they are written as `{{key}}` tokens,
+listed in `LEGAL_TOKENS`, and an unknown token fails the build.
+
+To update a policy: edit the text, set `updated` (as `YYYY-MM-DD`), bump
+`version`, and add a line at the top of `changes`. Legal pages have no scroll
+reveals, and they print without the nav, footer or contents list.
 
 ## Brand
 
@@ -146,6 +190,9 @@ The open items:
   capability and industry page also has four "Outcomes to expect" figures.
 - **Hero photos.** The five reel photos in `src/assets/photos/` were
   supplied for the redesign; confirm the licence covers use on the live site.
+  The other photos, in `public/images/`, are free Unsplash photos saved as
+  WebP so no page loads anything from another company's servers. Replace
+  them with ManyaIT's own photography when it's ready.
 - **Inner-page facts.** On the About page, the founding year and early
   milestones. On the careers page, health and wellbeing benefits, the length
   of the joining process and the careers email. The platforms, tools and
@@ -171,12 +218,19 @@ The open items:
   both from `ContactConversation`) and the role finder are not connected to
   anything, and each one says so when used. Give the contact `Form` an
   `action` endpoint, which covers both pages, and replace the sample roles in
-  `CareersOpenings` with the live job feed. The form's consent line links to
-  the Privacy and Terms pages, which don't exist yet.
+  `CareersOpenings` with the live job feed. The privacy request form on
+  `/legal/privacy-requests` needs an endpoint too.
+- **Legal pages.** The six policies are drafts written from the legal pack
+  design. Counsel in the US and India must write or approve the final
+  wording before launch. The open facts are in `LEGAL` in
+  `src/data/legal.ts` (entity names, CIN, emails, the Grievance Officer) and
+  in brackets in each Markdown file (dates, versions, retention periods,
+  governing law, which tools receive form data, and Cloudflare's cookies).
+  Before release, load the site in a fresh browser and confirm no cookie or
+  third-party request appears that the Cookie Notice doesn't mention.
 - **Insights.** The five articles are marked "Coming soon" and do not link
   anywhere yet.
-- **Links.** Social profiles (`SOCIAL`), Privacy, Terms, Cookies and
-  Accessibility are `#`.
+- **Links.** Social profiles (`SOCIAL`) are `#`.
 - **Domain.** `SITE_URL` in `src/consts.ts` is `https://manyait.com`.
   Sitemap and canonical URLs use it.
 
@@ -200,6 +254,12 @@ These apply to every word on the site:
   Talent Hub.
 - No client, number, certification or affiliate goes live until it is
   confirmed.
+
+On legal pages, use "service providers" for vendors and contractors,
+"sub-processors" for subcontractors of data, "professional advisers" for
+consultants, "applicants" and "applications" for candidates and recruiting,
+and "project" or "relationship" for engagement. Terms the law defines, such
+as "sale", "share", "controller" and "Data Fiduciary", stay as written.
 
 To check a build for the banned words:
 

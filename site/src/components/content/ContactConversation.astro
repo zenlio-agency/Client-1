@@ -12,6 +12,7 @@ import Fieldset from "@/components/form/Fieldset.astro";
 import Choice from "@/components/form/Choice.astro";
 import arrow from "@/assets/icons/ui-arrow.svg";
 import { CAPABILITIES, INDUSTRIES, CTA, tbc } from "@/data/site.ts";
+import { LEGAL } from "@/data/legal.ts";
 
 interface Props {
   /** Set to `false` to omit the component. */
@@ -172,6 +173,8 @@ const next = [
               required
             />
           </div>
+          {/* The request and marketing are separate choices, and the
+              marketing box is never ticked for you. */}
           <div class="contact_consent">
             <Choice
               label="I agree to ManyaIT contacting me about this request."
@@ -179,16 +182,32 @@ const next = [
               value="yes"
               required
             />
-            <p class="contact_legal text-style-small">
-              Read our <a href="#">Privacy Policy</a> and <a href="#">Terms</a>{" "}
-              to see how we handle your details.
-            </p>
+            <Choice
+              label="Also send me occasional ManyaIT news and insights by email."
+              name="marketing"
+              value="yes"
+            />
           </div>
           <div class="contact_submit">
             <Button type="submit">
               {CTA.primary.label}
               <Icon src={arrow} variant="small" class="button_icon" />
             </Button>
+            <p class="contact_notice text-style-small" data-notice="general">
+              We use your details to reply to your message. See our{" "}
+              <a href="/legal/privacy">Privacy Notice</a>.
+            </p>
+            <p
+              class="contact_notice text-style-small"
+              data-notice="careers"
+              hidden
+            >
+              <Fragment
+                set:html={tbc(
+                  `We'll keep your details for ${LEGAL.talentRetention} to match you with roles. See our <a href="/legal/applicant-privacy">Applicant Privacy Notice</a>.`,
+                )}
+              />
+            </p>
           </div>
         </Form>
       </div>
@@ -212,6 +231,22 @@ const next = [
     boxes.forEach((box) => box.addEventListener("change", sync));
     sync();
 
+    /* People exploring careers see the applicant notice instead of the
+       general one. */
+    const role = contact.querySelector<HTMLSelectElement>("select[data-role]");
+    const notices = [...contact.querySelectorAll<HTMLElement>("[data-notice]")];
+    const syncNotice = () => {
+      const kind = role?.value === "careers" ? "careers" : "general";
+      for (const notice of notices) {
+        notice.hidden = notice.dataset.notice !== kind;
+      }
+    };
+    role?.addEventListener("change", syncNotice);
+    syncNotice();
+    contact
+      .querySelector("form")
+      ?.addEventListener("reset", () => requestAnimationFrame(syncNotice));
+
     /* Arriving from a capability, industry or careers link preselects the
        matching answer. */
     const topic = new URLSearchParams(location.search).get("topic");
@@ -220,7 +255,6 @@ const next = [
     const industry = contact.querySelector<HTMLSelectElement>(
       "select[data-industry]",
     );
-    const role = contact.querySelector<HTMLSelectElement>("select[data-role]");
     if (area) {
       area.checked = true;
       sync();
@@ -231,6 +265,7 @@ const next = [
       industry.value = topic;
     } else if (role && topic === "careers") {
       role.value = "careers";
+      syncNotice();
     }
   }
 </script>
@@ -356,13 +391,17 @@ const next = [
     .contact_consent {
       display: flex;
       flex-direction: column;
-      gap: var(--space-1);
+      gap: var(--space-3);
       padding-top: var(--space-4);
       border-top: var(--border-width) solid var(--divider);
     }
 
-    .contact_legal {
+    .contact_notice {
+      margin-block: 0;
       color: var(--text-2);
+      &[hidden] {
+        display: none;
+      }
       & a {
         color: var(--link-text);
         text-decoration: underline;
@@ -372,6 +411,9 @@ const next = [
 
     .contact_submit {
       display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-3);
     }
   }
 </style>

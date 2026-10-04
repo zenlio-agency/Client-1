@@ -9,6 +9,7 @@ import arrow from "@/assets/icons/ui-arrow.svg";
 import arrowUp from "@/assets/icons/ui-arrow-up-right.svg";
 import PhotoTile from "@/components/item/PhotoTile.astro";
 import { CAPABILITIES, tbc } from "@/data/site.ts";
+import { LEGAL, mailLink } from "@/data/legal.ts";
 import { CAREERS_POINT_PHOTOS } from "@/data/photos.ts";
 
 interface Props {
@@ -207,7 +208,7 @@ const roles = [
         <p
           class="careers_trust text-style-small"
           set:html={tbc(
-            "ManyaIT never charges a fee at any stage. Report any payment request to [careers email].",
+            `ManyaIT never charges a fee at any stage. Report any payment request to ${mailLink(LEGAL.careersEmail)}, and see <a href="/legal/job-offer-fraud">how to spot a fake offer</a>. Our <a href="/legal/applicant-privacy">Applicant Privacy Notice</a> explains how we handle your details.`,
           )}
         />
       </div>
@@ -464,6 +465,11 @@ const roles = [
 
     .careers_trust {
       color: var(--text-2);
+      & a {
+        color: var(--link-text);
+        text-decoration: underline;
+        text-underline-offset: 0.2em;
+      }
     }
   }
 </style>
