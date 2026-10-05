@@ -14,7 +14,7 @@
     "typegen": "sanity schema extract --force && sanity typegen generate",
     "validate": "sanity schema validate",
     "check": "tsc --noEmit",
-    "seed": "sanity dataset import seed --dataset production --missing"
+    "seed": "sanity datasets import seed/production.ndjson --dataset production --missing"
   },
   "dependencies": {
     "@sanity/icons": "^5.2.3",
