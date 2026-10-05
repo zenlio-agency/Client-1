@@ -186,6 +186,12 @@ pages build exactly as before.
   into the build with the editor's crop and hotspot.
 - Rich text: `portableTextToHtml()` gives the same HTML Astro makes from
   Markdown, so `ArticleText`, `RichText` and `FaqList` take it unchanged.
+- `npm run seed:build` (after `npm run build`) regenerates
+  `studio/seed/production.ndjson`, the import of today's content, from the
+  data files, the Markdown articles and the page files. Copy typed into
+  component markup lives in `scripts/seed/page-copy.mjs`. It stops if any
+  word doesn't match the built pages, an image is missing or a claim is
+  marked confirmed. `npm run seed` in `studio/` imports it.
 - `npm run build` ends with `scripts/check-dist.mjs`, which fails the build
   if any page links to Sanity or contains the read token.
 
