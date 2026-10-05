@@ -6,10 +6,12 @@ import { isNoindexRoute } from "./src/utils/seo.ts";
 import { SANITY_DATASET, SANITY_PROJECT_ID } from "./src/sanity/config.ts";
 import { defineConfig } from 'astro/config';
 
+// https://astro.build
 export default defineConfig({
   site: 'https://github.io',
-  base: '/Client-1', // Replace with your exact GitHub repository name
+  base: '/Client-1',
 });
+
 
 
 export default defineConfig({
