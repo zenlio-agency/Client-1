@@ -3,20 +3,15 @@ import { defineConfig, fontProviders } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import { SITE_URL } from "./src/consts.ts";
 import { isNoindexRoute } from "./src/utils/seo.ts";
-import { SANITY_DATASET, SANITY_PROJECT_ID } from "./src/sanity/config.ts";
-import { defineConfig } from 'astro/config';
-
-const SITE_URL = 'https://manyait.com';
-
-export default defineConfig({
-  site: SITE_URL,
-});
-
-
+import {
+  SANITY_DATASET,
+  SANITY_PROJECT_ID,
+} from "./src/sanity/config.ts";
 
 export default defineConfig({
   site: SITE_URL,
-  /* The addresses people guess for the legal pages. */
+
+  /* Legal page redirects */
   redirects: {
     "/privacy": "/legal/privacy",
     "/privacy-policy": "/legal/privacy",
@@ -25,9 +20,8 @@ export default defineConfig({
     "/cookie-policy": "/legal/cookies",
     "/accessibility": "/legal/accessibility",
   },
-  /* Lets an ngrok tunnel reach `npm run dev` and `npm run preview`, so the
-     local site can be shared for review. A leading dot allows every
-     subdomain, and ngrok gives each tunnel its own. */
+
+  /* Allow ngrok tunnels for local review */
   server: {
     allowedHosts: [
       ".ngrok-free.app",
@@ -37,9 +31,8 @@ export default defineConfig({
       ".ngrok.io",
     ],
   },
-  /* Images from Sanity are downloaded at build time and served from this
-     site, never from Sanity (see src/sanity/image.ts). Only this project's
-     images may be fetched. */
+
+  /* Sanity images */
   image: {
     remotePatterns: [
       {
@@ -49,11 +42,13 @@ export default defineConfig({
       },
     ],
   },
+
   integrations: [
     sitemap({
       filter: (page) => !isNoindexRoute(new URL(page).pathname),
     }),
   ],
+
   fonts: [
     {
       name: "Inter",
@@ -70,6 +65,7 @@ export default defineConfig({
         ],
       },
     },
+
     {
       name: "Plus Jakarta Sans",
       cssVariable: "--font-plus-jakarta",
@@ -94,6 +90,7 @@ export default defineConfig({
         ],
       },
     },
+
     {
       name: "Poppins",
       cssVariable: "--font-poppins",
@@ -120,5 +117,10 @@ export default defineConfig({
       },
     },
   ],
-  vite: { build: { cssTarget: "safari15.4" } },
+
+  vite: {
+    build: {
+      cssTarget: "safari15.4",
+    },
+  },
 });
