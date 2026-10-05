@@ -5,33 +5,35 @@ openings, insights, case studies, the homepage, capabilities, industries,
 locations, search settings and site-wide details. The website in `../site`
 keeps all design, layout and animation; the Studio only holds content.
 
-This is phase 1 of the plan: the Studio, its content types and its
-safeguards. The website doesn't read from Sanity yet, so nothing on the live
-site changes until the later phases.
+The Studio uses project `4ovcy09k` and the `production` dataset. The website
+already fetches this content at build time, but its pages switch to it one
+area at a time, so nothing on the live site changes until then.
 
 ## Set up
 
 Node 22.12 or newer.
 
-1. Create a free project at https://www.sanity.io/manage (dataset
-   `production`, private if the Free plan allows it).
-2. Copy `.env.example` to `.env` and fill in the project id.
-3. Run:
-
 ```sh
 cd studio
 npm install
-npm run dev        # http://localhost:3333
+npm run dev        # http://localhost:3333, sign in with your Sanity account
 ```
 
-| Script             | What it does                                              |
-| ------------------ | --------------------------------------------------------- |
-| `npm run dev`      | The Studio locally                                        |
-| `npm run build`    | Builds the Studio to `dist/`                              |
-| `npm run deploy`   | Publishes it to https://manyait.sanity.studio             |
-| `npm run validate` | Checks the schemas                                        |
-| `npm run check`    | Type-checks the code                                      |
-| `npm run typegen`  | Generates TypeScript types for the website (from phase 2) |
+To publish the Studio for editors, sign in once with `npx sanity login`, then
+run `npm run deploy`. It goes to https://manyait.sanity.studio (if that name
+is taken, Sanity asks for another).
+
+No `.env` is needed. Copy `.env.example` to `.env` only to point the Studio
+at another project or dataset, e.g. a test dataset.
+
+| Script             | What it does                                                       |
+| ------------------ | ------------------------------------------------------------------ |
+| `npm run dev`      | The Studio locally                                                 |
+| `npm run build`    | Builds the Studio to `dist/`                                       |
+| `npm run deploy`   | Publishes it to https://manyait.sanity.studio                      |
+| `npm run validate` | Checks the schemas                                                 |
+| `npm run check`    | Type-checks the code                                               |
+| `npm run typegen`  | Regenerates the website's query types (`site/src/sanity/types.ts`) |
 
 ## What editors see
 
@@ -91,10 +93,11 @@ Shared objects: `seo`, `stat` (a figure with its confirmation), `imageWithAlt`,
 `textBlock` and `articleBody` (rich text with tables and callouts), and the
 section objects used by the pages.
 
-## Next phases
+## Phases
 
-2. The website reads Sanity at build time (images and PDFs are copied onto
-   the site, so visitors never load anything from Sanity).
+1. Done: the Studio, its content types and safeguards.
+2. Done: the website fetches Sanity content at build time. Images are copied
+   onto the site, so visitors never load anything from Sanity.
 3. A seed script imports today's content, with every claim unconfirmed.
 4. Pages switch to Sanity one area at a time, checked against today's output.
 5. Build-time checks for unconfirmed claims, placeholders and banned words.

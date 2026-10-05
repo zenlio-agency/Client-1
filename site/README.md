@@ -15,14 +15,14 @@ npm install
 npm run dev        # http://localhost:4321
 ```
 
-| Script            | What it does                                          |
-| ----------------- | ----------------------------------------------------- |
-| `npm run dev`     | Dev server with hot reload                            |
-| `npm run build`   | Static build to `dist/`                               |
-| `npm run preview` | Serves the built site                                 |
-| `npm run check`   | Type-checks every `.astro` file                       |
-| `npm run format`  | Formats with Prettier                                 |
-| `npm run map`     | Regenerates the dot map in `src/data/world-dots.json` |
+| Script            | What it does                                                 |
+| ----------------- | ------------------------------------------------------------ |
+| `npm run dev`     | Dev server with hot reload                                   |
+| `npm run build`   | Static build to `dist/`, then checks nothing links to Sanity |
+| `npm run preview` | Serves the built site                                        |
+| `npm run check`   | Type-checks every `.astro` file                              |
+| `npm run format`  | Formats with Prettier                                        |
+| `npm run map`     | Regenerates the dot map in `src/data/world-dots.json`        |
 
 `dist/` is plain static files and can go on any host. `wrangler.jsonc` is
 already set up for Cloudflare: `npm run build && npx wrangler deploy` publishes
@@ -50,6 +50,7 @@ src/
                     (no CSS)
   content/legal/    one Markdown file per policy (see "Legal pages")
   content/insights/ one Markdown file per article (see "Insights articles")
+  sanity/           reading content from Sanity (see "Content from Sanity")
   components/
     global/         Nav (mega menu and mobile drawer), Footer, Logo
     content/        one component per section, listed below
@@ -159,6 +160,40 @@ statistics or partner claims until they're confirmed.
 To add an article, copy an existing file, change the front matter and
 write the body with `##` headings. Tables and numbered steps work as
 normal Markdown.
+
+## Content from Sanity
+
+HR and marketing edit content in the Sanity Studio (`../studio`). The site
+reads it at build time from project `4ovcy09k`, dataset `production`.
+Visitors never load anything from Sanity: images are copied into the build.
+
+Pages move from the data files and Markdown to Sanity one area at a time.
+Until an area moves, its Sanity content is fetched but not shown, and the
+pages build exactly as before.
+
+- `src/sanity/queries.ts` holds every query. After changing a query or a
+  Studio schema, run `npm run typegen` in `studio/` to regenerate
+  `src/sanity/types.ts`.
+- `src/content.config.ts` has one collection per content type:
+  `siteSettings`, `homePage`, `pageSettings`, `capabilities`, `industries`,
+  `locations`, `articles`, `articleCategories`, `opportunities`,
+  `caseStudies`, `clientLogos` and `ecosystem`. Each is fetched again on
+  every build, so unpublished content leaves the site on the next build. If
+  Sanity can't be reached, the build fails and the live site stays as it
+  was.
+- Images: `<SanityImg>` gives a responsive image and `sanityPhoto()` a
+  single file for components that take a plain path. Both copy the image
+  into the build with the editor's crop and hotspot.
+- Rich text: `portableTextToHtml()` gives the same HTML Astro makes from
+  Markdown, so `ArticleText`, `RichText` and `FaqList` take it unchanged.
+- `npm run build` ends with `scripts/check-dist.mjs`, which fails the build
+  if any page links to Sanity or contains the read token.
+
+| Variable            | Default      | Notes                                                                                           |
+| ------------------- | ------------ | ----------------------------------------------------------------------------------------------- |
+| `SANITY_PROJECT_ID` | `4ovcy09k`   |                                                                                                 |
+| `SANITY_DATASET`    | `production` |                                                                                                 |
+| `SANITY_READ_TOKEN` | none         | Only if the dataset is private. Set it on the host, or in `site/.env` locally; never commit it. |
 
 ## Brand
 

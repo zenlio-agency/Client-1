@@ -4,7 +4,7 @@ import { visionTool } from "@sanity/vision";
 import { schemaTypes } from "./schemaTypes";
 import { structure } from "./structure";
 import { CloseRoleAction } from "./actions/closeRole";
-import { API_VERSION, FIXED_TYPES } from "./lib/constants";
+import { API_VERSION, DATASET, FIXED_TYPES, PROJECT_ID } from "./lib/constants";
 
 const fixed = new Set<string>(FIXED_TYPES);
 const isAdmin = (roles: { name: string }[] | undefined) =>
@@ -13,8 +13,8 @@ const isAdmin = (roles: { name: string }[] | undefined) =>
 export default defineConfig({
   name: "manyait",
   title: "ManyaIT website",
-  projectId: process.env.SANITY_STUDIO_PROJECT_ID ?? "",
-  dataset: process.env.SANITY_STUDIO_DATASET ?? "production",
+  projectId: PROJECT_ID,
+  dataset: DATASET,
 
   plugins: [
     structureTool({ structure }),

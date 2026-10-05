@@ -3,6 +3,7 @@ import { defineConfig, fontProviders } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import { SITE_URL } from "./src/consts.ts";
 import { isNoindexRoute } from "./src/utils/seo.ts";
+import { SANITY_DATASET, SANITY_PROJECT_ID } from "./src/sanity/config.ts";
 
 export default defineConfig({
   site: SITE_URL,
@@ -25,6 +26,18 @@ export default defineConfig({
       ".ngrok.app",
       ".ngrok.dev",
       ".ngrok.io",
+    ],
+  },
+  /* Images from Sanity are downloaded at build time and served from this
+     site, never from Sanity (see src/sanity/image.ts). Only this project's
+     images may be fetched. */
+  image: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+        pathname: `/images/${SANITY_PROJECT_ID}/${SANITY_DATASET}/**`,
+      },
     ],
   },
   integrations: [

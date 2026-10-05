@@ -56,4 +56,13 @@ export const CONTACT_TOPICS = [
   { title: "Careers", value: "careers" },
 ];
 
+/**
+ * The Sanity project and dataset. The project id isn't secret: it appears
+ * in every request the Studio makes. Set SANITY_STUDIO_PROJECT_ID or
+ * SANITY_STUDIO_DATASET to point the Studio somewhere else, e.g. a test
+ * dataset.
+ */
+export const PROJECT_ID = process.env.SANITY_STUDIO_PROJECT_ID || "4ovcy09k";
+export const DATASET = process.env.SANITY_STUDIO_DATASET || "production";
+
 export const API_VERSION = "2026-10-01";
