@@ -44,10 +44,12 @@ Lumos conventions (layers, themes, `_wrap` components, `rem` only) are in
 
 ```
 src/
-  pages/            index, about, careers, contact, insights, locations, 404,
-                    capabilities/ and industries/ (index and [slug]),
-                    legal/ (hub, [slug] and privacy-requests) (no CSS)
+  pages/            index, about, careers, contact, locations, 404,
+                    capabilities/, industries/ and insights/ (index and
+                    [slug]), legal/ (hub, [slug] and privacy-requests)
+                    (no CSS)
   content/legal/    one Markdown file per policy (see "Legal pages")
+  content/insights/ one Markdown file per article (see "Insights articles")
   components/
     global/         Nav (mega menu and mobile drawer), Footer, Logo
     content/        one component per section, listed below
@@ -93,6 +95,7 @@ section components, so a new page is mostly copy.
 | `/careers`                  | `CareersOpenings`, `StorySplit`, `FeatureGrid` (benefits, tracks), `ProcessSteps`, `FaqList`, `GlobalPresence`, `CtaFinal`                                            |
 | `/locations`                | `HeroDetail`, `HubCards`, `GlobalPresence`, `ProcessSteps`, `FaqList`, `CtaFinal`                                                                                     |
 | `/insights`                 | `HeroDetail`, `InsightsGrid`, `FeatureGrid` (topics), `CtaFinal`                                                                                                      |
+| `/insights/[slug]` (×5)     | `ArticleHeader`, `ArticleBody` (with `ArticleText`), `RelatedTiles`                                                                                                   |
 | `/legal`                    | `LegalHub`, `LegalStrip`                                                                                                                                              |
 | `/legal/[slug]` (×6)        | `LegalDocument` (with `LegalHeader`, `LegalToc`, `LegalBody`), `LegalStrip`                                                                                           |
 | `/legal/privacy-requests`   | `LegalHeader`, `PrivacyRequestForm`                                                                                                                                   |
@@ -140,6 +143,22 @@ listed in `LEGAL_TOKENS`, and an unknown token fails the build.
 To update a policy: edit the text, set `updated` (as `YYYY-MM-DD`), bump
 `version`, and add a line at the top of `changes`. Legal pages have no scroll
 reveals, and they print without the nav, footer or contents list.
+
+## Insights articles
+
+Each article is a Markdown file in `src/content/insights/`, served at
+`/insights/<file name>`, and the Insights grid on the homepage and on
+`/insights` lists them in `order`. The front matter (schema in
+`src/content.config.ts`) sets the title, the one-line summary, the
+category (which must match a grid filter), the type, the photo from
+`public/images/`, the publish date, the "In short" points and the
+capability the closing call to action links to. The read time is worked
+out from the text. Articles follow the copy rules below: no client names,
+statistics or partner claims until they're confirmed.
+
+To add an article, copy an existing file, change the front matter and
+write the body with `##` headings. Tables and numbered steps work as
+normal Markdown.
 
 ## Brand
 
@@ -230,8 +249,10 @@ The open items:
   governing law, which tools receive form data, and Cloudflare's cookies).
   Before release, load the site in a fresh browser and confirm no cookie or
   third-party request appears that the Cookie Notice doesn't mention.
-- **Insights.** The five articles are marked "Coming soon" and do not link
-  anywhere yet.
+- **Insights.** The five articles are drafts. Each shows `[Publish date]`
+  until `published` is set, and all are credited to "The ManyaIT team". The
+  SAP article cites SAP's public maintenance dates (end of 2027, extended to
+  end of 2030); confirm before launch.
 - **Links.** In `SOCIAL`, Instagram links to the account on manyait.com;
   LinkedIn, X, Facebook and YouTube are `#` until their addresses arrive.
   The footer, the menu and the contact section all read from `SOCIAL`.
