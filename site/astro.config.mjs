@@ -15,6 +15,18 @@ export default defineConfig({
     "/cookie-policy": "/legal/cookies",
     "/accessibility": "/legal/accessibility",
   },
+  /* Lets an ngrok tunnel reach `npm run dev` and `npm run preview`, so the
+     local site can be shared for review. A leading dot allows every
+     subdomain, and ngrok gives each tunnel its own. */
+  server: {
+    allowedHosts: [
+      ".ngrok-free.app",
+      ".ngrok-free.dev",
+      ".ngrok.app",
+      ".ngrok.dev",
+      ".ngrok.io",
+    ],
+  },
   integrations: [
     sitemap({
       filter: (page) => !isNoindexRoute(new URL(page).pathname),
