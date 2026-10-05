@@ -4,6 +4,13 @@ import sitemap from "@astrojs/sitemap";
 import { SITE_URL } from "./src/consts.ts";
 import { isNoindexRoute } from "./src/utils/seo.ts";
 import { SANITY_DATASET, SANITY_PROJECT_ID } from "./src/sanity/config.ts";
+import { defineConfig } from 'astro/config';
+
+export default defineConfig({
+  site: 'https://github.io',
+  base: '/Client-1', // Replace with your exact GitHub repository name
+});
+
 
 export default defineConfig({
   site: SITE_URL,
