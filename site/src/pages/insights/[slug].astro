@@ -1,0 +1,95 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Layout from "@/layouts/BaseLayout.astro";
+import Section from "@/components/wrapper/Section.astro";
+import ArticleHeader from "@/components/content/ArticleHeader.astro";
+import ArticleBody from "@/components/content/ArticleBody.astro";
+import RelatedTiles from "@/components/content/RelatedTiles.astro";
+import { SITE_NAME } from "@/consts.ts";
+import {
+  byOrder,
+  insightHref,
+  insightPhoto,
+  readMinutes,
+} from "@/utils/insights.ts";
+
+export async function getStaticPaths() {
+  const articles = (await getCollection("insights")).sort(byOrder);
+  return articles.map((entry) => ({
+    params: { slug: entry.id },
+    props: {
+      entry,
+      others: articles.filter((other) => other.id !== entry.id),
+    },
+  }));
+}
+
+type Props = {
+  entry: CollectionEntry<"insights">;
+  others: CollectionEntry<"insights">[];
+};
+
+const { entry, others } = Astro.props;
+const { data } = entry;
+const photo = insightPhoto(entry);
+
+/* Article structured data for search engines. The publish date is left out
+   until it is a real date. */
+const published = /^\d{4}-\d{2}-\d{2}$/.test(data.published)
+  ? data.published
+  : undefined;
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: data.title,
+  description: data.description,
+  image: new URL(photo, Astro.site).href,
+  ...(published && { datePublished: published }),
+  author: { "@type": "Organization", name: SITE_NAME },
+  publisher: { "@type": "Organization", name: SITE_NAME },
+  mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).href,
+};
+---
+
+<Layout title={data.title} description={data.description} type="article">
+  <script
+    is:inline
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(jsonLd)}
+  />
+
+  {/* Header and photo */}
+  <Section paddingTop="small" paddingBottom="none">
+    <ArticleHeader
+      title={data.title}
+      summary={data.summary}
+      category={data.category}
+      type={data.type}
+      author={data.author}
+      published={data.published}
+      minutes={readMinutes(entry)}
+      photo={photo}
+    />
+  </Section>
+
+  {/* The article */}
+  <Section paddingTop="small">
+    <ArticleBody entry={entry} />
+  </Section>
+
+  {/* More articles */}
+  <Section theme="tint">
+    <RelatedTiles
+      eyebrow="Keep reading"
+      heading="More insights"
+      link={{ label: "All insights", href: "/insights" }}
+      items={others.slice(0, 3).map((other) => ({
+        title: other.data.title,
+        text: other.data.summary,
+        href: insightHref(other),
+        photo: insightPhoto(other),
+      }))}
+    />
+  </Section>
+</Layout>
