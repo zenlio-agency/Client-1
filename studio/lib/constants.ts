@@ -1,0 +1,59 @@
+/**
+ * Fixed content the website's design is built around. These documents are
+ * created once by the seed script with these ids, and editors can change
+ * them but not add or delete them. Adding one is a developer task, because
+ * the homepage grid, icons, menus and contact-form options depend on them.
+ */
+export const CAPABILITY_IDS = [
+  "cap-data",
+  "cap-sap",
+  "cap-ai",
+  "cap-flow",
+  "cap-code",
+] as const;
+
+export const INDUSTRY_IDS = [
+  "industry-banking",
+  "industry-telecom",
+  "industry-healthcare",
+  "industry-energy",
+] as const;
+
+export const LOCATION_IDS = ["dallas", "hyderabad"] as const;
+
+/** Page settings for the routes whose layout lives in code. */
+export const PAGE_SETTINGS = [
+  { id: "page-about", title: "About" },
+  { id: "page-careers", title: "Careers" },
+  { id: "page-locations", title: "Locations" },
+  { id: "page-contact", title: "Contact" },
+  { id: "page-capabilities", title: "Capabilities (overview)" },
+  { id: "page-industries", title: "Industries (overview)" },
+  { id: "page-insights", title: "Insights (overview)" },
+  { id: "page-case-studies", title: "Case studies (overview)" },
+] as const;
+
+/** One document each, opened directly from the menu. */
+export const SINGLETON_TYPES = ["siteSettings", "homePage"] as const;
+
+/** Types editors can edit but never create or delete. */
+export const FIXED_TYPES = [
+  ...SINGLETON_TYPES,
+  "pageSettings",
+  "capability",
+  "industry",
+  "location",
+] as const;
+
+/** Contact-form topics an article's call to action can preselect. */
+export const CONTACT_TOPICS = [
+  { title: "Data & Analytics", value: "cap-data" },
+  { title: "SAP & Enterprise Data", value: "cap-sap" },
+  { title: "Applied AI", value: "cap-ai" },
+  { title: "Agentic AI & Automation", value: "cap-flow" },
+  { title: "Digital Product Engineering", value: "cap-code" },
+  { title: "A full capability center", value: "capability-center" },
+  { title: "Careers", value: "careers" },
+];
+
+export const API_VERSION = "2026-10-01";
