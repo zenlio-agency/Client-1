@@ -1,6 +1,9 @@
 import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
+import { sanityLoader } from "./sanity/loader.ts";
+import * as queries from "./sanity/queries.ts";
+import type * as Sanity from "./sanity/types.ts";
 
 /**
  * The legal pack: one Markdown file per policy in `src/content/legal/`, each
@@ -80,4 +83,73 @@ const insights = defineCollection({
   }),
 });
 
-export const collections = { legal, insights };
+/**
+ * Content from Sanity, fetched fresh on every build: one collection per
+ * content type, each entry keyed by its Sanity document id. Studio checks the
+ * content when it's published, so these schemas only carry the types that
+ * `npm run typegen` (in studio/) generates from the queries.
+ *
+ * Pages switch from the data files and Markdown to these one area at a time.
+ */
+const fromSanity = <Entry>(query: string) =>
+  defineCollection({
+    loader: sanityLoader(query),
+    schema: z.custom<Entry>(),
+  });
+
+type One<T extends unknown[]> = T[number];
+
+const siteSettings = fromSanity<One<Sanity.SiteSettingsQueryResult>>(
+  queries.siteSettingsQuery,
+);
+const homePage = fromSanity<One<Sanity.HomePageQueryResult>>(
+  queries.homePageQuery,
+);
+const pageSettings = fromSanity<One<Sanity.PageSettingsQueryResult>>(
+  queries.pageSettingsQuery,
+);
+const capabilities = fromSanity<One<Sanity.CapabilitiesQueryResult>>(
+  queries.capabilitiesQuery,
+);
+const industries = fromSanity<One<Sanity.IndustriesQueryResult>>(
+  queries.industriesQuery,
+);
+const locations = fromSanity<One<Sanity.LocationsQueryResult>>(
+  queries.locationsQuery,
+);
+/** Replaces the Markdown `insights` collection when the Insights pages switch. */
+const articles = fromSanity<One<Sanity.ArticlesQueryResult>>(
+  queries.articlesQuery,
+);
+const articleCategories = fromSanity<One<Sanity.ArticleCategoriesQueryResult>>(
+  queries.articleCategoriesQuery,
+);
+const opportunities = fromSanity<One<Sanity.OpportunitiesQueryResult>>(
+  queries.opportunitiesQuery,
+);
+const caseStudies = fromSanity<One<Sanity.CaseStudiesQueryResult>>(
+  queries.caseStudiesQuery,
+);
+const clientLogos = fromSanity<One<Sanity.ClientLogosQueryResult>>(
+  queries.clientLogosQuery,
+);
+const ecosystem = fromSanity<One<Sanity.EcosystemQueryResult>>(
+  queries.ecosystemQuery,
+);
+
+export const collections = {
+  legal,
+  insights,
+  siteSettings,
+  homePage,
+  pageSettings,
+  capabilities,
+  industries,
+  locations,
+  articles,
+  articleCategories,
+  opportunities,
+  caseStudies,
+  clientLogos,
+  ecosystem,
+};
