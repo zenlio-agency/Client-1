@@ -284,6 +284,35 @@ export const COMPANY_CONTACT = {
   phone: "+1 682-500-9839",
 } as const;
 
+/**
+ * Company figures shown in the "Why ManyaIT" panel and the "at a glance"
+ * strip (6 October 2026):
+ * - enterprises, years and specialists come from ManyaIT;
+ * - practices is counted from `CAPABILITIES` so it can't drift;
+ * - programs, dataEstates, onSchedule and kickoff are conservative estimates
+ *   based on market benchmarks, approved for publication. Replace them with
+ *   ManyaIT's measured figures when its records are available.
+ */
+export const COMPANY_FIGURES = {
+  programs: { value: "100+", label: "Data and AI programs taken to production" },
+  dataEstates: {
+    value: "25+",
+    label: "Enterprise data estates modernized and governed",
+  },
+  onSchedule: {
+    value: "90%+",
+    label: "Programs delivered on schedule, end to end",
+  },
+  kickoff: { value: "4–6 wks", label: "From kickoff to a delivery-ready team" },
+  practices: {
+    value: String(CAPABILITIES.length),
+    label: "Capability practices, from data platforms to agentic AI",
+  },
+  enterprises: { value: "50+", label: "Global enterprises served" },
+  years: { value: "10+", label: "Years powering enterprise technology" },
+  specialists: { value: "250+", label: "Specialists in our talent network" },
+} as const;
+
 /** Wraps `[placeholder]` runs in a marked span so they read as unconfirmed. */
 export const tbc = (text: string) =>
   text.replace(
