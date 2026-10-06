@@ -33,9 +33,9 @@ export type CapabilityPage = {
 export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
   "cap-data": {
     description:
-      "Data engineers, analytics engineers and architects who build lakehouse platforms, real-time pipelines and AI-ready data products inside your capability center.",
+      "Modern data platforms, real-time pipelines and AI-ready data products, delivered end to end by data engineers and architects who run what they build.",
     title: "Turn scattered data into decisions people trust.",
-    lede: "Data engineers, analytics engineers and architects who build the platform, the pipelines and the data products your business and your AI run on. They join your capability center and stay to run what they build.",
+    lede: "From strategy and architecture to pipelines, governance and analytics, we design, build and run the data platforms your business and your AI depend on. Expert data engineers, analytics engineers and architects deliver end to end and stay accountable for what they build.",
     points: [
       "Lakehouse and real-time pipelines",
       "Governed, self-serve analytics",
@@ -67,7 +67,7 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
       ],
     },
     offerings: {
-      heading: "What your data team delivers",
+      heading: "End-to-end data solutions, from platform to insight",
       intro:
         "From the first pipeline to a platform the whole enterprise relies on, built to your standards and run with clear service levels.",
       items: [
@@ -163,6 +163,11 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
           "Yes. Most teams start on an existing platform. The first weeks go into learning your models, pipelines and controls, then into the backlog you already have.",
       },
       {
+        question: "Can you deliver a complete data platform end to end?",
+        answer:
+          "Yes. We take ownership from assessment and architecture through migration, pipelines, governance and BI rollout. Then we run the platform with agreed service levels, or hand it over to your team with full documentation.",
+      },
+      {
         question: "Which data platforms do your specialists know?",
         answer:
           "Our data teams work across Databricks, Snowflake, Microsoft Fabric, BigQuery and the major cloud warehouses, plus dbt, Spark, Kafka and Airflow. We match the team to the stack you run, not the other way round.",
@@ -178,18 +183,18 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
           "Yes, and it's one of the best reasons to build the data foundation well. The team prepares data products for models and copilots and works alongside our Applied AI specialists.",
       },
       {
-        question: "How quickly can a data team start?",
+        question: "How quickly can we get started?",
         answer:
-          "Most teams are live within [X] weeks of an agreed skills brief. A smaller starting team can begin sooner while the rest joins.",
+          "Most engagements begin within [X] weeks of an agreed scope. A focused team can start with an assessment or a first pipeline while the wider program ramps up.",
       },
     ],
   },
 
   "cap-sap": {
     description:
-      "S/4HANA, SAP BTP and clean-core specialists who modernize your SAP landscape, keep it upgrade-ready and connect SAP data to the rest of the enterprise.",
+      "End-to-end S/4HANA transformation, clean-core BTP extensions and SAP data integration, from assessment and migration to post-go-live support.",
     title: "Modernize your SAP core and unlock what's inside it.",
-    lede: "S/4HANA, BTP and clean-core specialists who move your ERP forward without disrupting the business that runs on it, then connect SAP data to planning, finance, operations and AI.",
+    lede: "Functional and technical SAP experts who take your ERP from assessment to go-live and beyond. We modernize the core without disrupting the business that runs on it, then connect SAP data to planning, finance, operations and AI.",
     points: [
       "S/4HANA and RISE with SAP",
       "Clean-core extensions on BTP",
@@ -221,7 +226,7 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
       ],
     },
     offerings: {
-      heading: "What your SAP team delivers",
+      heading: "SAP transformation, delivered end to end",
       intro:
         "Functional and technical depth in one team, from the first assessment to the support desk after go-live.",
       items: [
@@ -323,6 +328,11 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
           "It depends on how much of your current process design you want to keep. Our architects assess custom code, data quality and appetite for change, then recommend a path with the trade-offs written down.",
       },
       {
+        question: "Can you run a complete S/4HANA program end to end?",
+        answer:
+          "Yes. We cover readiness assessment, roadmap, data migration, custom-code remediation, testing, cutover and hypercare, with one accountable team from the first workshop to stable operations.",
+      },
+      {
         question: "What does clean core mean in practice?",
         answer:
           "Keeping S/4HANA as close to standard as possible and building extensions on SAP BTP through released APIs. Upgrades get faster and cheaper because nothing custom sits inside the core.",
@@ -342,9 +352,9 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
 
   "cap-ai": {
     description:
-      "GenAI and machine learning specialists who build on your own data, ship AI to production and measure every use case against a business outcome.",
+      "GenAI and machine learning taken from use case to production, built on your data, governed for the enterprise and measured on business outcomes.",
     title: "Take AI from pilot to production.",
-    lede: "GenAI and machine learning specialists who build on your own data, ship to production and measure every use case against a business outcome, with the security and governance your risk teams expect.",
+    lede: "We take AI from idea to production. We identify high-value use cases, engineer GenAI and machine learning solutions on your own data, and run them with the security, governance and monitoring your risk teams expect. Every use case is measured against a business outcome.",
     points: [
       "Copilots and knowledge assistants",
       "Document intelligence",
@@ -376,7 +386,7 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
       ],
     },
     offerings: {
-      heading: "What your AI team delivers",
+      heading: "AI solutions engineered for production",
       intro:
         "Use cases that earn their place in production, built on the data and controls you already have.",
       items: [
@@ -465,6 +475,11 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
     ],
     faq: [
       {
+        question: "Can you take an AI use case from idea to production?",
+        answer:
+          "Yes. We run the full path: use-case discovery, data readiness, prototyping, evaluation, production engineering, MLOps and post-release monitoring, so a promising idea becomes a dependable, governed service.",
+      },
+      {
         question: "Do we need perfect data before starting with AI?",
         answer:
           "No. A good first use case needs data that is good enough for one job. The team checks quality early, fixes what that use case needs, then builds from there.",
@@ -494,9 +509,9 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
 
   "cap-flow": {
     description:
-      "Builders of AI agents and automation that complete multi-step work across ERP, CRM and ticketing systems, with human approvals, guardrails and full audit trails.",
+      "AI agents and intelligent automation that complete multi-step work across ERP, CRM and ticketing systems, with human approvals, guardrails and audit trails.",
     title: "AI that doesn't just answer. It gets work done.",
-    lede: "Builders of AI agents and automation that complete multi-step work across your ERP, CRM and ticketing systems, with people approving the decisions that need judgment.",
+    lede: "We design, build and run AI agents and automated workflows that complete multi-step work across your ERP, CRM and ticketing systems, from process discovery to production, with people approving the decisions that need judgment.",
     points: [
       "Agents with human approvals",
       "Guardrails and audit trails",
@@ -528,7 +543,7 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
       ],
     },
     offerings: {
-      heading: "What your automation team delivers",
+      heading: "Intelligent automation, delivered end to end",
       intro:
         "Agents and workflows that finish the job, with people in charge of the moments that need judgment.",
       items: [
@@ -633,14 +648,19 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
         answer:
           "High-volume work with clear rules for most cases and a manageable set of exceptions. The discovery sprint ranks candidates so the first release pays back quickly.",
       },
+      {
+        question: "Can you deliver an automation program end to end?",
+        answer:
+          "Yes. We discover and prioritize processes, design the agents and workflows, integrate them with your systems, and run them in production with monitoring, governance and continuous improvement.",
+      },
     ],
   },
 
   "cap-code": {
     description:
-      "Cloud-native product teams who design, build and run web, mobile and platform software, with AI-assisted engineering and DevSecOps built into every release.",
+      "Cloud-native web, mobile and platform products designed, built and run end to end, with AI-assisted engineering and DevSecOps in every release.",
     title: "Build modern software, faster.",
-    lede: "Cloud-native product teams who design, build and run web, mobile and platform software, with AI-assisted engineering and security built into every release.",
+    lede: "From product strategy and UX to architecture, engineering and release, we design, build and run web, mobile and platform software, with AI-assisted engineering and security built into every release.",
     points: [
       "Web and mobile products",
       "Legacy modernization",
@@ -672,7 +692,7 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
       ],
     },
     offerings: {
-      heading: "What your product team delivers",
+      heading: "Digital products, from concept to scale",
       intro:
         "Product, design and engineering in one team, measured on what users do with the software, not on tickets closed.",
       items: [
@@ -766,6 +786,11 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
       { value: "[X] wks", label: "to a productive product team" },
     ],
     faq: [
+      {
+        question: "Can you build a new product from concept to launch?",
+        answer:
+          "Yes. We cover discovery, UX and design, architecture, engineering, quality and release, then support and evolve the product after launch, with the same accountable team throughout.",
+      },
       {
         question: "Can your team take over an existing codebase?",
         answer:

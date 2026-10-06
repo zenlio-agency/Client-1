@@ -47,7 +47,7 @@ const contact = `${CTA.primary.href}?topic=${cap.id}`;
       title={page.title}
       lede={page.lede}
       points={page.points}
-      primary={{ label: "Share your skills brief", href: contact }}
+      primary={{ label: "Discuss your initiative", href: contact }}
       secondary={{ label: "All capabilities", href: "/capabilities" }}
       photo={CAPABILITY_PHOTOS[cap.id]}
       icon={cap.icon}
@@ -100,12 +100,12 @@ const contact = `${CTA.primary.href}?topic=${cap.id}`;
     />
   </Section>
 
-  {/* How the team comes together */}
+  {/* How it works */}
   <Section theme="dark">
     <ProcessSteps
       eyebrow="How it works"
-      heading="From skills brief to a team that ships"
-      intro="Start with one focused team. Grow it as results come in, or move it into your own capability center when you're ready."
+      heading="From first conversation to lasting impact"
+      intro="Start with a focused assessment, a defined project or a dedicated team. Scale the scope as results come in, and take full ownership whenever you're ready."
       steps={TEAM_STEPS}
     />
   </Section>
