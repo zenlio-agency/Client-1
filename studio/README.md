@@ -101,7 +101,9 @@ The menu is arranged around the jobs HR and marketing do:
   "Proof & claims → Not confirmed yet" lists what's waiting.
 - **Copy rules.** Every copy field warns about the banned words in
   `site/README.md` (recruiting, staffing, hire, consulting, vendor and the
-  rest).
+  rest). The readers are B2B decision-makers and talent partners, so write in
+  high-level business and technical terms, never basic ones (see "Copy rules"
+  in `site/README.md`).
 - **Addresses stay put.** Capability and industry addresses are read-only. A
   published article, role or case study can't change its address unless an
   administrator allows it (a developer then adds a redirect).
