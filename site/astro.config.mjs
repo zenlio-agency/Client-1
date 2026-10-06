@@ -21,7 +21,7 @@ export default defineConfig({
     "/accessibility": "/legal/accessibility",
   },
 
-  /* Allow ngrok tunnels for local review */
+  /* Allow ngrok and Cloudflare (cloudflared) tunnels for local review */
   server: {
     allowedHosts: [
       ".ngrok-free.app",
@@ -29,6 +29,7 @@ export default defineConfig({
       ".ngrok.app",
       ".ngrok.dev",
       ".ngrok.io",
+      ".trycloudflare.com",
     ],
   },
 
