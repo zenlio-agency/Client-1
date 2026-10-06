@@ -6,7 +6,7 @@ import Button from "@/components/Button.astro";
 import ButtonWrapper from "@/components/wrapper/ButtonWrapper.astro";
 import Icon from "@/components/media/Icon.astro";
 import arrow from "@/assets/icons/ui-arrow.svg";
-import { tbc } from "@/data/site.ts";
+import { COMPANY_FIGURES, tbc } from "@/data/site.ts";
 
 interface Props {
   /** Set to `false` to omit the component. */
@@ -34,14 +34,14 @@ const {
     { label: "Testimonials", href: "#" },
   ],
   stats = [
-    { value: "[XX]+", label: "Data and AI programs taken to production" },
-    { value: "[XX]+", label: "Enterprise data estates modernized and governed" },
-    { value: "[XX]%", label: "Programs delivered on schedule, end to end" },
-    { value: "[X] wks", label: "From kickoff to a delivery-ready team" },
-    { value: "[XX]+", label: "Specialists across data, cloud and AI" },
-    { value: "[XX]%", label: "Specialist retention on multi-year programs" },
-    { value: "[XX]+", label: "Global enterprises served" },
-    { value: "[XX]+", label: "Years powering enterprise technology" },
+    COMPANY_FIGURES.programs,
+    COMPANY_FIGURES.dataEstates,
+    COMPANY_FIGURES.onSchedule,
+    COMPANY_FIGURES.kickoff,
+    COMPANY_FIGURES.practices,
+    COMPANY_FIGURES.enterprises,
+    COMPANY_FIGURES.years,
+    COMPANY_FIGURES.specialists,
   ],
 } = Astro.props;
 
