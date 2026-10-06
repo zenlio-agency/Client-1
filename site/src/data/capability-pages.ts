@@ -37,82 +37,71 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
     title: "Turn scattered data into decisions people trust.",
     lede: "From strategy and architecture to pipelines, governance and analytics, we design, build and run the data platforms your business and your AI depend on. Expert data engineers, analytics engineers and architects deliver end to end and stay accountable for what they build.",
     points: [
-      "Lakehouse and real-time pipelines",
-      "Governed, self-serve analytics",
+      "Trusted data foundation",
       "AI-ready data products",
+      "Governed self-service insights",
     ],
     problems: {
-      heading: "Where data programs stall",
+      heading: "Where data programs lose value",
       rows: [
         {
           challenge: "Every team has its own version of revenue.",
           answer:
-            "One governed semantic layer with shared definitions, so finance, sales and operations read the same number from the same place.",
+            "A single, governed source of truth with shared business definitions, so every function makes decisions from the same numbers.",
         },
         {
           challenge: "Our reports are a day old before anyone opens them.",
           answer:
-            "Streaming and change-data-capture pipelines that land data in minutes, with freshness checks that alert the team before a dashboard goes stale.",
+            "Real-time pipelines and freshness monitoring, so leaders act on what is happening now, not on yesterday's numbers.",
         },
         {
-          challenge: "The AI team spends most of its time cleaning data.",
+          challenge:
+            "Our AI initiatives spend most of their time waiting on data.",
           answer:
-            "Curated data products with owners, contracts and quality tests, ready for models and copilots without another round of wrangling.",
+            "Curated, AI-ready data products with clear ownership and built-in quality checks, so AI initiatives start from trusted inputs.",
         },
         {
           challenge: "Cloud data costs keep climbing and nobody knows why.",
           answer:
-            "Cost tagging, workload tuning and storage tiering, reported every month, so spend follows value instead of habit.",
+            "Cost transparency and continuous optimization, so platform spend tracks business value instead of habit.",
         },
       ],
     },
     offerings: {
       heading: "End-to-end data solutions, from platform to insight",
       intro:
-        "From the first pipeline to a platform the whole enterprise relies on, built to your standards and run with clear service levels.",
+        "From data strategy to a platform the whole enterprise relies on, engineered for scale, governed by design and run against clear service levels.",
       items: [
         {
           title: "Modern data platforms",
-          text: "Lakehouse and warehouse platforms on Databricks, Snowflake, Microsoft Fabric or BigQuery, designed around the questions your business actually asks.",
+          text: "Cloud lakehouse and warehouse platforms designed around the decisions your business needs to make, on Databricks, Snowflake, Microsoft Fabric or BigQuery.",
         },
         {
-          title: "Pipelines and integration",
-          text: "Batch and streaming pipelines from ERP, CRM, core systems and SaaS apps, with orchestration, lineage and automated recovery.",
+          title: "Data integration and pipelines",
+          text: "Reliable batch and real-time pipelines that bring ERP, CRM, core systems and SaaS data together, with full lineage and automated recovery.",
         },
         {
-          title: "Analytics engineering and BI",
-          text: "Tested data models, a shared semantic layer and dashboards in Power BI, Tableau or Looker that leaders open every morning.",
+          title: "Analytics and business intelligence",
+          text: "A shared business layer and executive dashboards that turn data into decisions leaders act on every day.",
         },
         {
           title: "Governance and data quality",
-          text: "Catalogs, access policies, quality rules and lineage that satisfy audit and still let teams move quickly.",
+          text: "Catalogs, access policies, quality controls and lineage that satisfy regulators while keeping the business moving.",
         },
         {
           title: "AI-ready data products",
-          text: "Feature tables, document stores ready for retrieval and curated datasets with clear owners, so AI projects start from trusted inputs.",
+          text: "Curated, well-owned data products that give AI and analytics initiatives a trusted starting point.",
         },
         {
           title: "Platform operations and FinOps",
-          text: "Monitoring, incident response, cost control and continuous tuning once the platform is live.",
+          text: "Ongoing monitoring, optimization and cost control that keep the platform reliable and efficient as it grows.",
         },
       ],
     },
     stack: {
       intro:
-        "Each team is shaped around the platforms you run today and the roles your roadmap needs next.",
+        "We work with the platforms you already run and the ones your roadmap calls for next, so every program builds on your existing investments.",
       groups: [
-        {
-          title: "Specialists",
-          items: [
-            "Data engineer",
-            "Analytics engineer",
-            "Data architect",
-            "BI developer",
-            "Data governance lead",
-            "DataOps engineer",
-            "Data product owner",
-          ],
-        },
         {
           title: "Platforms",
           items: [
@@ -142,11 +131,11 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
     },
     industries: {
       "industry-banking":
-        "Risk, liquidity and regulatory reporting from one reconciled source, with lineage an auditor can follow.",
+        "One reconciled view of risk, liquidity and regulatory data, with lineage auditors can follow.",
       "industry-telecom":
-        "Network, usage and billing data joined in near real time for churn, capacity and revenue-assurance analytics.",
+        "Network, usage and billing data combined for customer retention, capacity planning and revenue assurance.",
       "industry-healthcare":
-        "Claims, clinical and operational data on one governed platform, with patient data protected by design.",
+        "Clinical, claims and operational data on one governed platform, with patient privacy built in.",
       "industry-energy":
         "Sensor, maintenance and market data combined for asset health, demand forecasting and emissions reporting.",
     },
@@ -158,9 +147,9 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
     ],
     faq: [
       {
-        question: "We already have a data platform. Can your team work on it?",
+        question: "We already have a data platform. Can you build on it?",
         answer:
-          "Yes. Most teams start on an existing platform. The first weeks go into learning your models, pipelines and controls, then into the backlog you already have.",
+          "Yes. Most programs start on an existing platform. We assess what is in place, protect what works and improve it against your priorities, rather than starting over.",
       },
       {
         question: "Can you deliver a complete data platform end to end?",
@@ -168,19 +157,19 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
           "Yes. We take ownership from assessment and architecture through migration, pipelines, governance and BI rollout. Then we run the platform with agreed service levels, or hand it over to your team with full documentation.",
       },
       {
-        question: "Which data platforms do your specialists know?",
+        question: "Which data platforms do you work with?",
         answer:
-          "Our data teams work across Databricks, Snowflake, Microsoft Fabric, BigQuery and the major cloud warehouses, plus dbt, Spark, Kafka and Airflow. We match the team to the stack you run, not the other way round.",
+          "Databricks, Snowflake, Microsoft Fabric, BigQuery and the major cloud warehouses, along with dbt, Spark, Kafka and Airflow. We work with the platforms you have chosen, not the other way round.",
       },
       {
         question: "How do you keep sensitive data safe?",
         answer:
-          "Teams work inside your environment and follow your access policies. Least-privilege access, masking for sensitive fields and audit logging are in place from day one.",
+          "We work inside your environment and follow your access policies. Least-privilege access, masking of sensitive data and audit logging are in place from day one.",
       },
       {
-        question: "Can the same team support our AI projects?",
+        question: "Can the data platform support our AI initiatives?",
         answer:
-          "Yes, and it's one of the best reasons to build the data foundation well. The team prepares data products for models and copilots and works alongside our Applied AI specialists.",
+          "Yes, and it's one of the strongest reasons to build the data foundation well. We prepare AI-ready data products and work alongside our Applied AI practice, so models and copilots start from trusted data.",
       },
       {
         question: "How quickly can we get started?",
@@ -196,82 +185,70 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
     title: "Modernize your SAP core and unlock what's inside it.",
     lede: "Functional and technical SAP experts who take your ERP from assessment to go-live and beyond. We modernize the core without disrupting the business that runs on it, then connect SAP data to planning, finance, operations and AI.",
     points: [
-      "S/4HANA and RISE with SAP",
-      "Clean-core extensions on BTP",
-      "SAP data, ready for analytics and AI",
+      "S/4HANA transformation",
+      "Clean-core innovation on SAP BTP",
+      "SAP data ready for analytics and AI",
     ],
     problems: {
-      heading: "Where SAP programs stall",
+      heading: "Where SAP programs lose momentum",
       rows: [
         {
           challenge: "Our S/4HANA move keeps slipping.",
           answer:
-            "A phased roadmap built backwards from the end of ECC mainstream maintenance in 2027, with conversion, selective transition or greenfield chosen on evidence.",
+            "A phased roadmap anchored to the end of ECC mainstream maintenance in 2027, with the right transition path chosen on evidence, not assumption.",
         },
         {
           challenge: "Every upgrade breaks our custom code.",
           answer:
-            "Custom code moved out of the core and onto SAP BTP through released APIs, so upgrades stay routine and your extensions keep working.",
+            "A clean-core approach that moves custom logic onto SAP BTP, so upgrades become routine and innovation no longer waits on the core.",
         },
         {
           challenge: "Finance can't see SAP data next to everything else.",
           answer:
-            "SAP Datasphere and SAP Analytics Cloud models that join ERP data with the rest of your platform and keep its business context intact.",
+            "SAP data connected to the rest of the enterprise with its business context intact, so finance and operations plan from one view.",
         },
         {
           challenge: "Our SAP experts spend their week on support tickets.",
           answer:
-            "Application management with clear service levels, so your in-house experts can focus on change instead of keeping the lights on.",
+            "Application management with clear service levels, freeing your in-house experts to focus on transformation instead of maintenance.",
         },
       ],
     },
     offerings: {
       heading: "SAP transformation, delivered end to end",
       intro:
-        "Functional and technical depth in one team, from the first assessment to the support desk after go-live.",
+        "Business process and technical expertise in one accountable program, from the first assessment to stable operations after go-live.",
       items: [
         {
           title: "S/4HANA transformation",
-          text: "Assessment, roadmap and execution for system conversion, selective data transition or a new implementation, including RISE with SAP.",
+          text: "Assessment, roadmap and delivery for system conversion, selective data transition or a new implementation, including RISE with SAP.",
         },
         {
           title: "Clean-core extensions",
-          text: "Side-by-side apps and integrations on SAP BTP, CAP and Fiori that keep the core standard and upgrade-ready.",
+          text: "Innovation built alongside the core on SAP BTP, so the ERP stays standard, secure and upgrade-ready.",
         },
         {
           title: "Integration",
-          text: "SAP Integration Suite, APIs and event-driven connections between SAP, CRM, banking, manufacturing and SaaS platforms.",
+          text: "Connections between SAP and your CRM, banking, manufacturing and SaaS platforms, so business processes flow end to end.",
         },
         {
           title: "Enterprise data and planning",
-          text: "SAP Datasphere, BW/4HANA and SAP Analytics Cloud for reporting, planning and AI-ready ERP data.",
+          text: "Reporting, planning and AI-ready ERP data that give leaders a single, current view of the business.",
         },
         {
-          title: "Functional depth",
-          text: "FI/CO, MM, SD, PP, PM and EWM specialists who understand the business process as well as the configuration.",
+          title: "Business process excellence",
+          text: "Finance, procurement, sales, manufacturing, maintenance and warehouse processes designed around how your business actually runs.",
         },
         {
           title: "Application management",
-          text: "Monitoring, incident resolution, release management and a steady backlog of improvements after go-live.",
+          text: "Monitoring, incident resolution, release management and continuous improvement after go-live.",
         },
       ],
     },
     stack: {
       intro:
-        "Functional leads, developers and architects in one team, so design decisions and build work never drift apart.",
+        "Experience across the SAP platforms and modules that run the enterprise, so design decisions and delivery stay aligned.",
       groups: [
-        {
-          title: "Specialists",
-          items: [
-            "SAP solution architect",
-            "S/4HANA functional lead",
-            "ABAP and RAP developer",
-            "BTP developer",
-            "Integration specialist",
-            "Basis and cloud engineer",
-            "SAP data engineer",
-          ],
-        },
         {
           title: "Platforms",
           items: [
@@ -301,13 +278,13 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
     },
     industries: {
       "industry-banking":
-        "SAP finance, group reporting and controlling, with clean data flowing into risk and regulatory systems.",
+        "Finance, group reporting and controlling on SAP, with clean data flowing into risk and regulatory reporting.",
       "industry-telecom":
         "Order-to-cash, billing reconciliation and asset accounting that keep pace with constant network change.",
       "industry-healthcare":
-        "Supply chain and finance on S/4HANA for hospital groups and life-science firms, with traceability built in.",
+        "Supply chain and finance on S/4HANA for hospital groups and life-sciences organizations, with traceability built in.",
       "industry-energy":
-        "SAP Plant Maintenance and asset management for plants, grids and field crews, linked to predictive maintenance.",
+        "Asset management and maintenance for plants, grids and field operations, linked to predictive maintenance.",
     },
     outcomes: [
       { value: "[X]%", label: "fewer custom objects in the core" },
@@ -325,7 +302,7 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
         question:
           "Conversion, selective transition or greenfield: which is right?",
         answer:
-          "It depends on how much of your current process design you want to keep. Our architects assess custom code, data quality and appetite for change, then recommend a path with the trade-offs written down.",
+          "It depends on how much of your current process design you want to keep. We assess custom code, data quality and your appetite for change, then recommend a path with the trade-offs clearly documented.",
       },
       {
         question: "Can you run a complete S/4HANA program end to end?",
@@ -338,14 +315,14 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
           "Keeping S/4HANA as close to standard as possible and building extensions on SAP BTP through released APIs. Upgrades get faster and cheaper because nothing custom sits inside the core.",
       },
       {
-        question: "Can your team support our SAP landscape after go-live?",
+        question: "Can you support our SAP landscape after go-live?",
         answer:
-          "Yes. The team that builds the change can run it, with service levels for incidents, a regular release rhythm and a backlog of improvements.",
+          "Yes. We run what we build, with agreed service levels for incidents, a predictable release rhythm and a continuous improvement backlog.",
       },
       {
-        question: "Do your specialists work on RISE with SAP?",
+        question: "Do you work with RISE with SAP?",
         answer:
-          "Yes. Our teams work on RISE with SAP and on private and public cloud editions of S/4HANA, as well as on-premise landscapes.",
+          "Yes. We deliver on RISE with SAP, on private and public cloud editions of S/4HANA, and on on-premise landscapes.",
       },
     ],
   },
@@ -356,82 +333,70 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
     title: "Take AI from pilot to production.",
     lede: "We take AI from idea to production. We identify high-value use cases, engineer GenAI and machine learning solutions on your own data, and run them with the security, governance and monitoring your risk teams expect. Every use case is measured against a business outcome.",
     points: [
-      "Copilots and knowledge assistants",
-      "Document intelligence",
-      "MLOps and LLMOps",
+      "High-value AI use cases",
+      "Governed, production-grade AI",
+      "Measured business outcomes",
     ],
     problems: {
-      heading: "Why AI pilots stall",
+      heading: "Why AI initiatives stall before production",
       rows: [
         {
           challenge: "Our pilot impressed everyone, then went nowhere.",
           answer:
-            "Production engineering from the start: evaluation sets, monitoring, cost limits and a named owner for every model in service.",
+            "Production thinking from day one: clear ownership, quality evaluation, monitoring and cost controls for every model in service.",
         },
         {
           challenge: "We can't trust the answers it gives.",
           answer:
-            "Retrieval grounded in your own documents, with citations, evaluation suites and human review for high-stakes decisions.",
+            "AI grounded in your own knowledge, with cited sources, continuous evaluation and human review for high-stakes decisions.",
         },
         {
           challenge: "Legal and security keep saying no.",
           answer:
-            "Private deployments, data-residency controls, prompt and output filtering, and an audit trail your risk team can sign off.",
+            "Private deployment, data-residency controls and a complete audit trail, designed to meet the standards your risk and compliance teams set.",
         },
         {
           challenge: "Nobody can tell us what AI is worth here.",
           answer:
-            "Use cases ranked by value and feasibility, each with a baseline and a measure agreed before the build starts.",
+            "Use cases prioritized by business value and feasibility, each with a baseline and a success measure agreed before work begins.",
         },
       ],
     },
     offerings: {
       heading: "AI solutions engineered for production",
       intro:
-        "Use cases that earn their place in production, built on the data and controls you already have.",
+        "AI use cases that earn their place in production, built on your data and governed by the controls you already trust.",
       items: [
         {
           title: "Copilots and knowledge assistants",
-          text: "Assistants grounded in your policies, manuals and tickets, with answers that cite their sources.",
+          text: "Assistants that put your policies, manuals and institutional knowledge at every employee's fingertips, with answers that cite their sources.",
         },
         {
           title: "Document intelligence",
-          text: "Extraction and classification for invoices, claims, contracts and forms, with confidence scores and human review queues.",
+          text: "Invoices, claims, contracts and forms processed automatically, with people reviewing only the cases that need judgment.",
         },
         {
-          title: "Predictive models",
-          text: "Forecasting, propensity, risk and anomaly models trained on your data and monitored for drift.",
+          title: "Predictive analytics",
+          text: "Forecasting, risk and anomaly models that help the business anticipate demand, risk and opportunity.",
         },
         {
-          title: "Retrieval and search",
-          text: "Retrieval-augmented generation, vector search and evaluation pipelines that keep answers accurate as your content changes.",
+          title: "Enterprise search and retrieval",
+          text: "Search and retrieval that keep AI answers accurate and current as your content changes.",
         },
         {
           title: "MLOps and LLMOps",
-          text: "Model registries, CI/CD for models and prompts, evaluation gates, cost monitoring and safe rollback.",
+          text: "The release, monitoring and cost discipline that keeps every model dependable after launch.",
         },
         {
           title: "Responsible AI",
-          text: "Guardrails, bias testing, red-teaming and documentation aligned with frameworks such as the NIST AI RMF and the EU AI Act.",
+          text: "Guardrails, bias testing and documentation aligned with frameworks such as the NIST AI RMF and the EU AI Act.",
         },
       ],
     },
     stack: {
       intro:
-        "Engineers who can take a model from notebook to monitored service, on the cloud and model providers you trust.",
+        "Experience across the leading cloud AI platforms and model providers, so each use case runs on the option that best fits its cost, risk and performance needs.",
       groups: [
-        {
-          title: "Specialists",
-          items: [
-            "ML engineer",
-            "GenAI engineer",
-            "Data scientist",
-            "MLOps engineer",
-            "AI architect",
-            "Evaluation engineer",
-            "AI product owner",
-          ],
-        },
         {
           title: "Models and platforms",
           items: [
@@ -459,13 +424,13 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
     },
     industries: {
       "industry-banking":
-        "Fraud signals, KYC document checks and assistants that help service teams answer policy questions in seconds.",
+        "Fraud detection, KYC document checks and assistants that help service teams resolve customer questions faster.",
       "industry-telecom":
-        "Churn prediction, network anomaly detection and assistants that guide agents through complex service issues.",
+        "Churn prediction, network anomaly detection and assistants that guide service staff through complex customer issues.",
       "industry-healthcare":
-        "Claims and prior-authorization document processing, and assistants that support clinical operations teams.",
+        "Claims and prior-authorization processing, and assistants that support clinical operations.",
       "industry-energy":
-        "Failure prediction, load and price forecasting, and inspection reports summarized from field notes and photos.",
+        "Failure prediction, load and price forecasting, and inspection reports summarized automatically from field notes.",
     },
     outcomes: [
       { value: "[X]", label: "AI use cases running in production" },
@@ -482,27 +447,27 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
       {
         question: "Do we need perfect data before starting with AI?",
         answer:
-          "No. A good first use case needs data that is good enough for one job. The team checks quality early, fixes what that use case needs, then builds from there.",
+          "No. A strong first use case needs data that is good enough for one job. We assess quality early, fix what that use case needs and build from there.",
       },
       {
         question: "Will our data be used to train public models?",
         answer:
-          "No. Models run in your cloud tenancy or through enterprise APIs with training on your data switched off, and access follows your existing controls.",
+          "No. Models run in your cloud environment or through enterprise services with training on your data switched off, and access follows your existing controls.",
       },
       {
         question: "Which models do you use?",
         answer:
-          "Whichever fits the task, cost and risk profile: commercial models through Azure OpenAI, Amazon Bedrock or Vertex AI, or open-weight models hosted privately. Evaluation results decide, not preference.",
+          "Whichever best fits the task, cost and risk profile: commercial models through Azure OpenAI, Amazon Bedrock or Vertex AI, or open-weight models hosted privately. Evaluation results decide, not preference.",
       },
       {
         question: "How do you measure whether AI is working?",
         answer:
-          "Every use case gets a baseline and a target before the build, plus an evaluation set for quality. We report both after release, so the decision to scale rests on evidence.",
+          "Every use case gets a baseline and a target before work begins, plus a quality evaluation. We report both after release, so the decision to scale rests on evidence.",
       },
       {
-        question: "Can your specialists work with our data science team?",
+        question: "Can you work alongside our data science team?",
         answer:
-          "Yes. They join your team's rituals and repositories, and often bring the production engineering that turns a promising prototype into a dependable service.",
+          "Yes. We work within your existing processes and repositories, and bring the production engineering that turns a promising prototype into a dependable service.",
       },
     ],
   },
@@ -513,9 +478,9 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
     title: "AI that doesn't just answer. It gets work done.",
     lede: "We design, build and run AI agents and automated workflows that complete multi-step work across your ERP, CRM and ticketing systems, from process discovery to production, with people approving the decisions that need judgment.",
     points: [
-      "Agents with human approvals",
-      "Guardrails and audit trails",
-      "From RPA to AI workflows",
+      "Process intelligence",
+      "Agents with human oversight",
+      "Audit-ready automation",
     ],
     problems: {
       heading: "Where automation hits a wall",
@@ -523,71 +488,60 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
         {
           challenge: "Our teams spend the day copying data between systems.",
           answer:
-            "Agents that read the request, pull what's needed from each system, update the records and route only the exceptions to a person.",
+            "Intelligent workflows that read each request, update every system involved and route only the exceptions to a person.",
         },
         {
           challenge: "Our bots break every time a screen changes.",
           answer:
-            "API-first automation, with AI handling unstructured inputs, so workflows survive new screens and new document formats.",
+            "Resilient, API-first automation with AI handling unstructured inputs, so workflows keep running as systems and documents change.",
         },
         {
           challenge: "Audit wants to know exactly what the automation did.",
           answer:
-            "Every action logged with its inputs, its reasoning and its approver, in a format your audit and risk teams can review.",
+            "A complete record of every action, its inputs and its approver, ready for audit and risk review.",
         },
         {
           challenge: "We have dozens of ideas and no way to choose.",
           answer:
-            "A discovery sprint that scores candidate workflows on volume, effort and risk, then builds the strongest ones first.",
+            "Process discovery that ranks opportunities by value, effort and risk, so the first releases deliver measurable returns.",
         },
       ],
     },
     offerings: {
       heading: "Intelligent automation, delivered end to end",
       intro:
-        "Agents and workflows that finish the job, with people in charge of the moments that need judgment.",
+        "Agents and workflows that complete real work end to end, with people in control of the decisions that need judgment.",
       items: [
         {
           title: "AI agents for operations",
-          text: "Agents that triage tickets, reconcile records, prepare reports and complete requests from start to finish.",
+          text: "Agents that triage requests, reconcile records, prepare reports and complete tasks across your systems, from start to finish.",
         },
         {
           title: "Human-in-the-loop workflows",
-          text: "Approval steps, confidence thresholds and escalation paths, so people stay in charge of the decisions that matter.",
+          text: "Approval steps, confidence thresholds and escalation paths that keep people in charge of the decisions that matter.",
         },
         {
           title: "Intelligent document flows",
-          text: "Inbound email, forms and PDFs classified, extracted and routed into the right system automatically.",
+          text: "Emails, forms and documents classified, extracted and routed into the right system without manual handling.",
         },
         {
           title: "RPA modernization",
-          text: "Fragile screen bots replaced or reinforced with APIs and AI, and existing UiPath or Power Automate estates brought under one model.",
+          text: "Fragile screen-based bots strengthened or replaced with APIs and AI, and existing automation estates brought under one operating model.",
         },
         {
-          title: "Guardrails and observability",
-          text: "Permission scopes, policy checks, tool limits, tracing and cost dashboards for every agent in service.",
+          title: "Governance and observability",
+          text: "Permissions, policy checks, monitoring and cost visibility for every agent in production.",
         },
         {
           title: "Process discovery",
-          text: "Process and task mining that shows where work waits, where it repeats and where automation will pay back first.",
+          text: "Process and task insight that shows where work waits, where it repeats and where automation will pay back first.",
         },
       ],
     },
     stack: {
       intro:
-        "Process thinkers and engineers in one team, building on the automation platforms you already own.",
+        "Experience across the automation and enterprise platforms you already own, so automation builds on existing investments.",
       groups: [
-        {
-          title: "Specialists",
-          items: [
-            "AI automation engineer",
-            "Agent developer",
-            "Automation architect",
-            "Process analyst",
-            "Integration engineer",
-            "RPA developer",
-          ],
-        },
         {
           title: "Platforms",
           items: [
@@ -613,13 +567,13 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
     },
     industries: {
       "industry-banking":
-        "KYC refresh, payment exceptions and dispute workflows that close faster, with every approval logged for audit.",
+        "KYC refresh, payment exceptions and dispute workflows completed faster, with every approval recorded for audit.",
       "industry-telecom":
-        "Order fallout, provisioning errors and service tickets resolved end to end, with engineers called in only for real faults.",
+        "Order fallout, provisioning errors and service tickets resolved end to end, with engineers involved only for real faults.",
       "industry-healthcare":
-        "Eligibility checks, prior authorizations and claim follow-ups prepared automatically for your team to review and send.",
+        "Eligibility checks, prior authorizations and claim follow-ups prepared automatically for review.",
       "industry-energy":
-        "Work orders, permits and field reports raised and updated from technician notes and sensor alerts.",
+        "Work orders, permits and field reports created and updated automatically from technician notes and sensor alerts.",
     },
     outcomes: [
       { value: "[X]%", label: "of requests completed with no manual steps" },
@@ -631,22 +585,22 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
       {
         question: "How is an AI agent different from RPA?",
         answer:
-          "RPA follows fixed steps on a screen. An agent works from a goal: it reads unstructured input, decides which tools to use and asks a person when it isn't sure. Most estates use both.",
+          "RPA follows fixed steps on a screen. An agent works toward a goal: it reads unstructured input, decides which tools to use and asks a person when it is unsure. Most organizations use both.",
       },
       {
         question: "How do you stop an agent from doing something it shouldn't?",
         answer:
-          "Agents get narrow permissions, approved tools and spending limits. Risky actions need a human approval, and every step is logged so it can be reviewed or reversed.",
+          "Agents operate with narrow permissions, approved tools and spending limits. Higher-risk actions require human approval, and every step is recorded so it can be reviewed or reversed.",
       },
       {
         question: "Do we have to replace our current automation tools?",
         answer:
-          "No. Teams build on what you run today, including Power Automate, UiPath and ServiceNow, and add AI where it removes manual work.",
+          "No. We build on the platforms you already run, including Power Automate, UiPath and ServiceNow, and add AI where it removes manual effort.",
       },
       {
         question: "Which processes should we automate first?",
         answer:
-          "High-volume work with clear rules for most cases and a manageable set of exceptions. The discovery sprint ranks candidates so the first release pays back quickly.",
+          "High-volume work with clear rules for most cases and a manageable set of exceptions. Process discovery ranks the candidates so the first release pays back quickly.",
       },
       {
         question: "Can you deliver an automation program end to end?",
@@ -662,9 +616,9 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
     title: "Build modern software, faster.",
     lede: "From product strategy and UX to architecture, engineering and release, we design, build and run web, mobile and platform software, with AI-assisted engineering and security built into every release.",
     points: [
-      "Web and mobile products",
-      "Legacy modernization",
-      "Platform engineering and DevSecOps",
+      "Faster time to market",
+      "Modernization without disruption",
+      "Security in every release",
     ],
     problems: {
       heading: "Where delivery slows down",
@@ -672,73 +626,60 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
         {
           challenge: "Every release waits on the legacy platform.",
           answer:
-            "A step-by-step modernization that moves functions to new services one at a time, while the old system keeps running.",
+            "A phased modernization that moves capabilities to modern services one at a time, while existing systems keep running.",
         },
         {
           challenge: "Releasing takes weeks of manual testing.",
           answer:
-            "Automated test suites, CI/CD pipelines and feature flags, so releases become small, frequent and routine.",
+            "Automated testing and release pipelines that make releases smaller, faster and routine.",
         },
         {
           challenge: "Our cloud bill grows faster than our product.",
           answer:
-            "Right-sized infrastructure as code, autoscaling and cost visibility per service and per team.",
+            "Right-sized, automated infrastructure with cost visibility for every product and service.",
         },
         {
           challenge: "Security reviews arrive at the end and block launches.",
           answer:
-            "Code scanning, dependency checks and threat modeling inside the pipeline, not after it.",
+            "Security built into every stage of delivery, so risks are caught early instead of at launch.",
         },
       ],
     },
     offerings: {
       heading: "Digital products, from concept to scale",
       intro:
-        "Product, design and engineering in one team, measured on what users do with the software, not on tickets closed.",
+        "Product strategy, design and engineering working as one, measured on business results rather than activity.",
       items: [
         {
           title: "Web and mobile applications",
-          text: "Customer and employee apps in React, Next.js, Flutter and native mobile, designed with users and measured in production.",
+          text: "Customer and employee experiences on web and mobile, designed with users and measured in production.",
         },
         {
           title: "Cloud-native services",
-          text: "APIs and microservices in Java, .NET, Node.js and Go on AWS, Azure or Google Cloud.",
+          text: "Scalable APIs and services on AWS, Azure or Google Cloud that let products grow without re-engineering.",
         },
         {
           title: "Legacy modernization",
-          text: "Monoliths and older applications re-platformed or rebuilt in stages, without freezing the roadmap.",
+          text: "Older applications re-platformed or rebuilt in stages, without freezing the product roadmap.",
         },
         {
           title: "Platform engineering",
-          text: "Internal developer platforms, Kubernetes, infrastructure as code and golden paths that make the right way the easy way.",
+          text: "Developer platforms and automated infrastructure that make secure, repeatable delivery the default.",
         },
         {
           title: "Quality engineering",
-          text: "Test automation, performance and accessibility testing built into every pipeline.",
+          text: "Automated, performance and accessibility testing built into every release.",
         },
         {
           title: "AI-assisted engineering",
-          text: "Coding assistants, AI test generation and review tooling used inside clear guardrails, so teams ship faster without lowering the bar.",
+          text: "AI tools for coding, testing and review, used within clear guardrails to accelerate delivery without lowering quality.",
         },
       ],
     },
     stack: {
       intro:
-        "Cross-functional teams sized to the product, from a focused squad to a full engineering hub.",
+        "Experience across modern languages, frameworks and cloud platforms, matched to the product and the roadmap ahead.",
       groups: [
-        {
-          title: "Specialists",
-          items: [
-            "Full-stack engineer",
-            "Java engineer",
-            "Mobile engineer",
-            "Cloud architect",
-            "Platform and SRE engineer",
-            "QA automation engineer",
-            "UX designer",
-            "Product owner",
-          ],
-        },
         {
           title: "Languages and frameworks",
           items: [
@@ -775,7 +716,7 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
       "industry-telecom":
         "Self-service apps, order management and partner portals that let customers change plans without calling.",
       "industry-healthcare":
-        "Patient and member portals, care-team tools and interoperability services built on FHIR APIs.",
+        "Patient and member portals, care-team tools and interoperability services on modern health APIs.",
       "industry-energy":
         "Field-service apps, customer portals and outage updates that keep working in low-connectivity areas.",
     },
@@ -792,14 +733,14 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
           "Yes. We cover discovery, UX and design, architecture, engineering, quality and release, then support and evolve the product after launch, with the same accountable team throughout.",
       },
       {
-        question: "Can your team take over an existing codebase?",
+        question: "Can you take over an existing codebase?",
         answer:
-          "Yes. The team starts with a codebase and architecture review, documents what it finds and agrees priorities with you before changing anything significant.",
+          "Yes. We start with a codebase and architecture review, document what we find and agree priorities with you before making significant changes.",
       },
       {
         question: "Do you work in our tools and processes?",
         answer:
-          "Yes. Teams join your repositories, ticketing and rituals and follow your definition of done. Where there are gaps, we suggest improvements rather than impose a method.",
+          "Yes. We work within your repositories, ticketing and ways of working, and follow your definition of done. Where we see gaps, we recommend improvements rather than impose a method.",
       },
       {
         question: "How do you modernize without stopping new features?",
@@ -807,9 +748,9 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
           "We move one capability at a time behind stable interfaces, so product work continues while the legacy footprint shrinks every quarter.",
       },
       {
-        question: "How do your teams use AI in engineering?",
+        question: "How do you use AI in engineering?",
         answer:
-          "Coding and testing assistants help with routine work, inside guardrails your security team approves. Engineers review every change, and nothing ships without passing the pipeline.",
+          "AI assistants support coding and testing within guardrails your security team approves. An engineer reviews every change, and nothing ships without passing the release pipeline.",
       },
     ],
   },
