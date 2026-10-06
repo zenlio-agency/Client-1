@@ -14,8 +14,8 @@ takeaways:
   - Treat the handoff note as a product, because the next shift depends on it.
 topic: capability-center
 related:
-  label: Our locations
-  href: /locations
+  label: Our global presence
+  href: /about#locations
 ---
 
 When the working day ends at our US hub, it's the middle of the night in India, and the India team starts its morning while the US team sleeps. The two hubs are ten and a half hours apart in summer and eleven and a half in winter, because US Central Time changes its clocks and India doesn't.

@@ -22,7 +22,6 @@ const company = [
   { label: "About", href: "/about" },
   { label: "Careers", href: "/careers" },
   { label: "Insights", href: "/insights" },
-  { label: "Locations", href: "/locations" },
   { label: "Contact", href: "/contact" },
 ];
 ---
@@ -84,7 +83,7 @@ const company = [
               <ul class="footer_hubs">
                 {HUBS.map((hub) => (
                   <li>
-                    <a class="footer_link" href={`/locations#${hub.id}`}>
+                    <a class="footer_link" href="/about#locations">
                       {hub.city}
                     </a>
                     <span class="footer_hub_role">{hub.role}</span>

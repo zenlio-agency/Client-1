@@ -2,7 +2,6 @@
 import Layout from "@/layouts/BaseLayout.astro";
 import Section from "@/components/wrapper/Section.astro";
 import ContactConversation from "@/components/content/ContactConversation.astro";
-import GlobalPresence from "@/components/content/GlobalPresence.astro";
 ---
 
 <Layout
@@ -12,10 +11,5 @@ import GlobalPresence from "@/components/content/GlobalPresence.astro";
   {/* Conversation */}
   <Section paddingTop="small">
     <ContactConversation />
-  </Section>
-
-  {/* Locations */}
-  <Section theme="tint" id="locations">
-    <GlobalPresence />
   </Section>
 </Layout>
