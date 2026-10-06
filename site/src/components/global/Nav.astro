@@ -81,22 +81,15 @@ const MENUS: Record<string, Menu> = {
           href: industryHref(industry),
         })),
       },
-      {
-        eyebrow: "Explore",
-        links: [
-          { label: "All industries", href: "/industries" },
-          { label: "Global presence", href: "/locations" },
-          { label: "Insights", href: "/insights" },
-        ],
-      },
     ],
     footerLinks: [
+      { label: "All industries", href: "/industries" },
       { label: "Talk to us about your sector", href: CTA.primary.href },
     ],
     feature: {
       label: "Industries",
-      title: "Talent that knows your sector",
-      text: "Specialists fluent in the rules and systems of your industry.",
+      title: "Built for your sector",
+      text: "Technology, data and AI programs shaped around your industry's rules and systems.",
       href: "/industries",
     },
   },
@@ -163,7 +156,10 @@ const MENUS: Record<string, Menu> = {
           <div class="nav_mega_inner">
             {Object.entries(MENUS).map(([key, menu]) => (
               <div class="nav_panel" id={`menu-${key}`} data-panel={key} hidden>
-                <div class="nav_panel_grid">
+                <div
+                  class="nav_panel_grid"
+                  style={`--_columns: ${menu.columns.length}`}
+                >
                   {menu.columns.map((column, index) => (
                     <div class="nav_column">
                       <span class="nav_eyebrow">{column.eyebrow}</span>
@@ -618,7 +614,8 @@ const MENUS: Record<string, Menu> = {
 
     .nav_panel_grid {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+      /* One track per link column, then the feature card. */
+      grid-template-columns: repeat(var(--_columns, 2), minmax(0, 1fr)) auto;
       gap: 2.5rem;
       padding: 0.5rem 2rem 2rem;
     }

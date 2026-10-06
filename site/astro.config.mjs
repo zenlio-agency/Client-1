@@ -11,8 +11,9 @@ import {
 export default defineConfig({
   site: SITE_URL,
 
-  /* Legal page redirects */
+  /* Legal page redirects, and the former Locations page */
   redirects: {
+    "/locations": "/about#locations",
     "/privacy": "/legal/privacy",
     "/privacy-policy": "/legal/privacy",
     "/terms": "/legal/terms",

@@ -6,7 +6,6 @@ import StorySplit from "@/components/content/StorySplit.astro";
 import FeatureGrid from "@/components/content/FeatureGrid.astro";
 import ProcessSteps from "@/components/content/ProcessSteps.astro";
 import FaqList from "@/components/content/FaqList.astro";
-import GlobalPresence from "@/components/content/GlobalPresence.astro";
 import CtaFinal from "@/components/content/CtaFinal.astro";
 import { CAPABILITIES, capabilityHref } from "@/data/site.ts";
 import { LEGAL, mailLink } from "@/data/legal.ts";
@@ -29,7 +28,7 @@ const tracks: Record<string, string> = {
 
 <Layout
   title="Careers"
-  description="Build systems that matter. Work on enterprise platforms millions of people rely on, with mentors, certifications and a clear path to grow."
+  description="Careers at ManyaIT: engineer the data, AI and enterprise platforms that leading organizations run on, with certifications, mentoring and a clear path to grow."
 >
   {/* Openings */}
   <Section paddingTop="small" id="careers">
@@ -42,13 +41,13 @@ const tracks: Record<string, string> = {
       eyebrow="Life at ManyaIT"
       heading="Work that stays with you."
       paragraphs={[
-        "At ManyaIT you join a dedicated team inside an enterprise's capability center. You learn one business deeply, own real systems and see your work used by millions of people.",
-        "Teams in India work side by side with colleagues in the United States and with the enterprises they build for. Questions go straight to the people who own the outcome, not through layers.",
-        "Because teams are built to stay, you get time to master a platform, grow into a lead role and see the results of your work over years, not sprints.",
+        "At ManyaIT you work on the platforms that run modern enterprises: data foundations, enterprise systems, applied AI and digital products. Every program is tied to a business outcome, so you see the difference your work makes.",
+        "Our people in the United States and India work as one delivery organization, side by side with the enterprises we partner with. Decisions are made close to the work, by the people who own the outcome.",
+        "Programs run for the long term, so you have time to master a platform, grow into a lead or architect role and see the results of your work over years, not sprints.",
       ]}
       points={[
         {
-          title: "Real enterprise platforms",
+          title: "Enterprise platforms",
           text: "Banking, telecom, healthcare and energy",
         },
         { title: "Two hubs, one team", text: "United States and India" },
@@ -83,7 +82,7 @@ const tracks: Record<string, string> = {
         },
         {
           title: "Flexible ways of working",
-          text: "Hybrid and on-site roles, set per team and listed on every opening.",
+          text: "Hybrid, on-site and remote roles, set per team and listed on every opening.",
         },
         {
           title: "Health and wellbeing",
@@ -108,7 +107,7 @@ const tracks: Record<string, string> = {
         })),
         {
           title: "Client Partnership",
-          text: "Shape teams with enterprise leaders from our US hub, as a client partner or solution architect.",
+          text: "Partner with enterprise leaders to shape programs and roadmaps, as a client partner or solution architect.",
         },
       ]}
       linkLabel="See the work"
@@ -164,7 +163,7 @@ const tracks: Record<string, string> = {
         {
           question: "Are roles remote, hybrid or on-site?",
           answer:
-            "It depends on the team and the enterprise you work with. Every opening lists its working mode.",
+            "It depends on the team and the program. Every opening lists its location and working mode.",
         },
         {
           question: "What is the Talent Network?",
@@ -182,11 +181,6 @@ const tracks: Record<string, string> = {
         },
       ]}
     />
-  </Section>
-
-  {/* Locations */}
-  <Section theme="tint" id="locations">
-    <GlobalPresence />
   </Section>
 
   {/* Final CTA */}

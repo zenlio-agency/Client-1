@@ -4,7 +4,6 @@ import Section from "@/components/wrapper/Section.astro";
 import HeroDetail from "@/components/content/HeroDetail.astro";
 import ProblemRows from "@/components/content/ProblemRows.astro";
 import FeatureGrid from "@/components/content/FeatureGrid.astro";
-import TrustStrip from "@/components/content/TrustStrip.astro";
 import ChipGroups from "@/components/content/ChipGroups.astro";
 import ProcessSteps from "@/components/content/ProcessSteps.astro";
 import FaqList from "@/components/content/FaqList.astro";
@@ -64,7 +63,7 @@ const contact = `${CTA.primary.href}?topic=${cap.id}`;
     />
   </Section>
 
-  {/* What the team delivers, with the outcomes to expect */}
+  {/* What the team delivers */}
   <Section>
     <FeatureGrid
       eyebrow="What we build"
@@ -73,7 +72,6 @@ const contact = `${CTA.primary.href}?topic=${cap.id}`;
       items={page.offerings.items}
       numbered
     />
-    <TrustStrip label="Outcomes to expect" stats={page.outcomes} />
   </Section>
 
   {/* Roles and stack */}

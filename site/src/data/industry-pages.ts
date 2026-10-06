@@ -24,6 +24,7 @@ export type IndustryPage = {
     intro: string;
     groups: { title: string; items: string[] }[];
   };
+  /** Outcome figures to confirm. Not shown on the page until confirmed. */
   outcomes: { value: string; label: string }[];
   faq: { question: string; answer: string }[];
 };
@@ -31,12 +32,12 @@ export type IndustryPage = {
 export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
   "industry-banking": {
     description:
-      "Specialist teams for core banking, payments, fraud, risk and regulatory data, who modernize banking platforms without slowing the business.",
-    lede: "Teams that know core banking, payments, risk and compliance, building and running the platforms your customers and your regulators depend on.",
+      "Technology, data and AI engineering for banks and financial institutions: modern core and digital banking, real-time payments, fraud prevention and trusted regulatory data.",
+    lede: "We help banks and financial institutions modernize the platforms their customers and regulators depend on, so they can launch faster, manage risk with confidence and keep the business running while it changes.",
     points: [
-      "Core and digital banking",
-      "Payments and fraud",
-      "Risk, finance and regulatory data",
+      "Modernization without disruption",
+      "Real-time, resilient payments",
+      "Trusted risk and regulatory data",
     ],
     problems: {
       heading: "What banks are up against",
@@ -44,83 +45,72 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
         {
           challenge: "Our core is decades old, and every change feels risky.",
           answer:
-            "Progressive modernization: new products on cloud services and APIs, connected to the core through a stable integration layer, so risk falls with every release.",
+            "A phased path around the core: new products launch on modern platforms while the systems that run the bank stay stable, so risk falls with every release.",
         },
         {
           challenge: "Customers expect everything in real time.",
           answer:
-            "Event-driven payments and account services built for instant rails such as FedNow and RTP, with monitoring that spots delays in seconds.",
+            "Real-time payment and account services with end-to-end monitoring, so customers get instant experiences and operations see issues before customers do.",
         },
         {
           challenge: "Fraud gets more sophisticated every month.",
           answer:
-            "Machine learning fraud signals scored in real time, with a clear reason behind every alert so investigators act faster.",
+            "AI-driven fraud detection that scores activity as it happens and explains every alert, so investigators act faster and genuine customers aren't blocked.",
         },
         {
           challenge: "Regulatory reporting eats our best people's time.",
           answer:
-            "Automated lineage and reconciliations from source system to submission, so the numbers hold up when supervisors ask.",
+            "Automated, traceable reporting from source to submission, so the figures hold up under scrutiny and experts spend their time on analysis, not reconciliation.",
         },
       ],
     },
     offerings: {
-      heading: "What we build for banks and financial institutions",
+      heading: "How we help banks and financial institutions",
       intro:
-        "Platforms that move money, manage risk and serve customers, built and run inside your controls.",
+        "Platforms that move money, manage risk and serve customers, delivered end to end inside your controls.",
       items: [
         {
           title: "Core banking modernization",
-          text: "Product, account and ledger services modernized in stages, with coexistence patterns that keep the existing core stable.",
+          text: "A phased move from legacy cores to modern, cloud-ready platforms, without disrupting day-to-day operations.",
         },
         {
           title: "Digital banking",
-          text: "Mobile and web banking, onboarding journeys and open-banking APIs that customers actually enjoy using.",
+          text: "Mobile, web and open-banking experiences that make onboarding and everyday banking simple for customers.",
         },
         {
           title: "Payments",
-          text: "Real-time payments, ISO 20022 messaging, card platforms and reconciliation services.",
+          text: "Real-time, resilient payment platforms that meet new industry standards and keep every transaction reconciled.",
         },
         {
           title: "Fraud and financial crime",
-          text: "Fraud scoring, support for AML transaction monitoring and KYC automation, with complete audit trails.",
+          text: "Smarter fraud detection and automated compliance checks, with a complete audit trail behind every decision.",
         },
         {
           title: "Risk, finance and regulatory data",
-          text: "Data platforms for credit risk, liquidity, capital and regulatory reporting, with lineage from source to submission.",
+          text: "Trusted data for risk, finance and regulatory reporting, traceable from source to submission.",
         },
         {
           title: "Operations automation",
-          text: "Agents and workflows for KYC refresh, payment exceptions, disputes and loan servicing.",
+          text: "Intelligent workflows that take manual effort out of onboarding, disputes, payment exceptions and servicing.",
         },
       ],
     },
     capabilities: {
       "cap-data":
-        "One reconciled source for risk, finance and regulatory reporting.",
+        "One trusted view of risk, finance and customer data for faster, better decisions.",
       "cap-sap":
-        "SAP finance, group reporting and controlling, with clean data downstream.",
+        "Finance, group reporting and controlling on SAP, with clean data flowing downstream.",
       "cap-ai":
-        "Fraud signals, document checks and assistants for service teams.",
+        "Fraud detection, document processing and assistants that help service teams respond faster.",
       "cap-flow":
-        "KYC, disputes and payment exceptions handled end to end, with approvals.",
+        "Onboarding, disputes and payment exceptions handled end to end, with the right approvals.",
       "cap-code":
-        "Digital banking apps, payments services and open APIs on cloud.",
+        "Digital banking apps, payment services and open APIs built for scale.",
     },
     stack: {
       intro:
-        "Specialists who already speak the language of banking, so time goes into building rather than explaining.",
+        "Experience with the platforms and regulations that shape banking, so programs move quickly and stay compliant.",
       groups: [
-        {
-          title: "Specialists",
-          items: [
-            "Core banking engineer",
-            "Payments architect",
-            "Fraud data scientist",
-            "Risk data engineer",
-            "Banking business analyst",
-            "Security engineer",
-          ],
-        },
         {
           title: "Platforms",
           items: [
@@ -155,36 +145,36 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
     ],
     faq: [
       {
-        question: "Can your teams work within our risk and audit controls?",
+        question: "Can you work within our risk and audit controls?",
         answer:
-          "Yes. Teams work inside your environments, follow your change-management and segregation-of-duties rules, and keep the evidence auditors ask for as part of the work.",
+          "Yes. We deliver inside your environments and change-management processes, follow segregation-of-duties rules and maintain the evidence auditors expect as part of the work.",
       },
       {
         question: "Do you replace our core banking system?",
         answer:
-          "Rarely in one step. Most banks get better results modernizing around the core first, moving products and journeys to new services until what remains is small enough to replace safely.",
+          "Rarely in one step. Most banks see better results by modernizing around the core first, moving products and journeys to new platforms until what remains can be replaced safely.",
       },
       {
-        question: "How do you handle customer data?",
+        question: "How do you protect customer data?",
         answer:
-          "Customer data stays in your environment. Access follows least-privilege rules, sensitive fields are masked outside production, and every access is logged.",
+          "Customer data stays in your environment. Access follows least-privilege principles, sensitive data is masked outside production and every access is logged.",
       },
       {
-        question: "Can teams support us around the clock?",
+        question: "Can you support us around the clock?",
         answer:
-          "Yes. With hubs in the United States and India, support and operations follow the sun, with handovers at fixed times every day.",
+          "Yes. With hubs in the United States and India, support and operations follow the sun, with structured handovers every day.",
       },
     ],
   },
 
   "industry-telecom": {
     description:
-      "Engineers for OSS/BSS, billing, network data and customer platforms, who help operators launch faster, recover sooner and keep customers connected.",
-    lede: "Engineers for OSS/BSS, billing, network data and customer platforms, who keep pace with constant network change and keep every outage short.",
+      "Technology, data and AI engineering for telecom operators: faster launches, accurate billing, proactive service assurance and better customer experiences.",
+    lede: "We help operators modernize the systems that sell, deliver and bill every service, so new offers reach the market faster, revenue is protected and customers stay connected.",
     points: [
-      "OSS/BSS and billing",
-      "Network and customer analytics",
-      "Service assurance and operations",
+      "Faster time to market",
+      "Protected revenue",
+      "Proactive service assurance",
     ],
     problems: {
       heading: "What operators are up against",
@@ -192,49 +182,49 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
         {
           challenge: "Billing errors cost us revenue and customers.",
           answer:
-            "Revenue-assurance checks that reconcile usage, rating and invoices every day, catching leakage before the bill goes out.",
+            "Automated revenue-assurance checks that reconcile usage and invoices every day, stopping leakage before bills go out.",
         },
         {
           challenge: "Launching a new plan takes months.",
           answer:
-            "Catalog-driven BSS and modular order management, so new offers launch in weeks without custom code.",
+            "Modular, catalog-driven systems that let product teams launch and change offers in weeks, without custom development.",
         },
         {
           challenge: "We hear about outages from customer complaints.",
           answer:
-            "AI-driven service assurance that correlates alarms, predicts degradation and opens the right ticket before customers notice.",
+            "AI-driven monitoring that predicts service issues and starts the fix before customers notice.",
         },
         {
           challenge: "Our network data is huge and mostly unused.",
           answer:
-            "Streaming platforms that turn network telemetry into capacity planning, churn and customer experience insight.",
+            "Data platforms that turn network and customer data into insight for capacity planning, retention and customer experience.",
         },
       ],
     },
     offerings: {
-      heading: "What we build for operators and service providers",
+      heading: "How we help operators and service providers",
       intro:
-        "The systems that sell, provision, bill and assure every connection, modernized one domain at a time.",
+        "The systems that sell, deliver, bill and assure every connection, modernized one domain at a time.",
       items: [
         {
           title: "OSS/BSS modernization",
-          text: "Order management, product catalog, inventory and CRM platforms aligned with TM Forum Open APIs.",
+          text: "Order, catalog and customer systems modernized in stages, built on open industry standards.",
         },
         {
           title: "Billing and revenue assurance",
-          text: "Rating, charging and billing platforms with automated reconciliation and leakage detection.",
+          text: "Accurate charging and billing, with automated reconciliation that protects every dollar of revenue.",
         },
         {
           title: "Network data platforms",
-          text: "Streaming pipelines for performance counters, probes and call detail records, with storage designed for petabyte scale.",
+          text: "Scalable platforms that turn network data into planning, performance and customer insight.",
         },
         {
           title: "Service assurance",
-          text: "Alarm correlation, anomaly detection and automated ticketing that shorten the time to restore service.",
+          text: "Proactive monitoring and automated incident handling that restore service faster.",
         },
         {
           title: "Customer and channel apps",
-          text: "Self-service apps, retail and partner portals and contact-center tools built on modern cloud stacks.",
+          text: "Self-service apps and partner portals that improve the customer experience and reduce contact-center demand.",
         },
         {
           title: "Application operations",
@@ -244,30 +234,20 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
     },
     capabilities: {
       "cap-data":
-        "Network, usage and customer data joined for churn and capacity planning.",
+        "Network, usage and customer data combined for retention and capacity planning.",
       "cap-sap":
-        "Order-to-cash, billing reconciliation and asset accounting on S/4HANA.",
+        "Order-to-cash, billing reconciliation and asset accounting on SAP S/4HANA.",
       "cap-ai":
-        "Churn prediction, anomaly detection and agent assist for complex cases.",
-      "cap-flow": "Order fallout and provisioning errors resolved end to end.",
+        "Churn prediction, anomaly detection and assistants for complex customer cases.",
+      "cap-flow":
+        "Order and provisioning issues resolved automatically, end to end.",
       "cap-code":
-        "Self-service apps and partner portals that cut calls to the contact center.",
+        "Self-service apps and partner portals that reduce calls to the contact center.",
     },
     stack: {
       intro:
-        "Engineers who understand how a network, a catalog and a bill fit together, and where each one breaks.",
+        "Experience across the platforms and standards that run modern networks, so programs integrate cleanly and scale with your business.",
       groups: [
-        {
-          title: "Specialists",
-          items: [
-            "OSS/BSS architect",
-            "Billing engineer",
-            "Network data engineer",
-            "Site reliability engineer",
-            "Telecom business analyst",
-            "Integration engineer",
-          ],
-        },
         {
           title: "Platforms",
           items: [
@@ -301,23 +281,22 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
     ],
     faq: [
       {
-        question: "Do your teams know TM Forum standards?",
+        question: "Do you follow telecom industry standards?",
         answer:
-          "Yes. Our OSS/BSS work follows TM Forum Open APIs and information models wherever your stack supports them, which keeps integrations cleaner and future changes cheaper.",
+          "Yes. Our work follows TM Forum Open APIs and information models wherever your systems support them, which keeps integrations cleaner and future change less costly.",
       },
       {
         question: "Can you run operations around the clock?",
         answer:
-          "Yes. Our US and India hubs cover the day between them, with agreed handovers, runbooks and on-call rotations for priority incidents.",
+          "Yes. Our US and India hubs cover the full day, with agreed handovers, runbooks and on-call cover for priority incidents.",
       },
       {
-        question:
-          "Can your teams work alongside our network equipment partners?",
+        question: "Can you work alongside our network equipment partners?",
         answer:
-          "Yes. Our teams work with the platforms and partners you already have, and focus on the data, integration and software layers around them.",
+          "Yes. We work with the platforms and partners you already have, focusing on the data, integration and software layers around them.",
       },
       {
-        question: "How do you handle subscriber data?",
+        question: "How do you protect subscriber data?",
         answer:
           "It stays in your environment under your access controls, with masking outside production and logging that supports CPNI and GDPR obligations.",
       },
@@ -326,11 +305,11 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
 
   "industry-healthcare": {
     description:
-      "Teams fluent in health data, interoperability, claims and HIPAA, building platforms that help providers, payers and life-science firms work faster and safer.",
-    lede: "Teams fluent in health data, claims and privacy rules such as HIPAA, building the platforms that help providers, payers and life-science firms work faster and safer.",
+      "Technology, data and AI engineering for healthcare: connected health data, streamlined claims and revenue cycle, and privacy built into every platform.",
+    lede: "We help providers, payers and life-sciences organizations connect their data, simplify administration and protect patient privacy, so more time and money go to care.",
     points: [
-      "Health data and interoperability",
-      "Claims and revenue cycle",
+      "Connected health data",
+      "Streamlined claims and revenue cycle",
       "Privacy and security by design",
     ],
     problems: {
@@ -339,29 +318,29 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
         {
           challenge: "Patient records are scattered across systems.",
           answer:
-            "Interoperability services on HL7 FHIR that bring records together while every source system stays in place.",
+            "Standards-based integration that brings records together while every source system stays in place.",
         },
         {
           challenge: "Admin work keeps growing faster than care.",
           answer:
-            "Document intelligence and workflows that prepare claims, prior authorizations and referrals for your team to check and send.",
+            "Intelligent document processing and workflows that prepare claims, authorizations and referrals for your team to review.",
         },
         {
           challenge: "Every new tool raises a privacy question.",
           answer:
-            "HIPAA-aligned architectures, access controls and audit logging, designed in from the first sprint rather than added at the end.",
+            "HIPAA-aligned architecture, access controls and audit logging, designed in from day one rather than added at the end.",
         },
         {
           challenge: "Leaders can't see operations in real time.",
           answer:
-            "Dashboards for capacity, throughput and revenue cycle, fed by governed data instead of spreadsheets.",
+            "Live dashboards for capacity, throughput and revenue cycle, built on governed data instead of spreadsheets.",
         },
       ],
     },
     offerings: {
-      heading: "What we build for providers, payers and life sciences",
+      heading: "How we help providers, payers and life sciences",
       intro:
-        "Platforms that move health data safely and take admin work off the people who deliver care.",
+        "Platforms that move health data safely and take administrative work off the people who deliver care.",
       items: [
         {
           title: "Healthcare data platforms",
@@ -369,23 +348,23 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
         },
         {
           title: "Interoperability",
-          text: "HL7 v2 and FHIR integration, APIs and patient-matching services that connect EHRs and partners.",
+          text: "Secure connections between health records, partners and applications, built on industry standards such as FHIR.",
         },
         {
           title: "Claims and revenue cycle",
-          text: "Claims intake, coding support, denial analytics and payment reconciliation, with automation at every step.",
+          text: "Faster claims, fewer denials and cleaner reconciliation, with automation at every step.",
         },
         {
           title: "Document intelligence",
-          text: "Extraction from referrals, faxes, lab reports and forms, routed into the right system with human review.",
+          text: "Referrals, lab reports and forms captured automatically and routed to the right system, with human review.",
         },
         {
           title: "Patient and member experience",
-          text: "Portals, apps and contact-center tools that make appointments, benefits and bills easier to understand.",
+          text: "Portals and apps that make appointments, benefits and bills easier to understand.",
         },
         {
           title: "Security and compliance",
-          text: "Access management, encryption, audit logging and evidence collection for HIPAA and HITRUST assessments.",
+          text: "Access management, encryption and audit evidence that support HIPAA and HITRUST requirements.",
         },
       ],
     },
@@ -393,29 +372,18 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
       "cap-data":
         "Clinical, claims and operational data on one governed platform.",
       "cap-sap":
-        "Supply chain and finance with traceability for hospital groups and life sciences.",
+        "Supply chain and finance with full traceability for hospital groups and life sciences.",
       "cap-ai":
-        "Claims and document processing, and assistants for operations teams.",
+        "Claims and document processing, and assistants that support operations teams.",
       "cap-flow":
         "Eligibility checks, prior authorizations and claim follow-ups prepared for review.",
       "cap-code":
-        "Patient and member portals, and services built on FHIR APIs.",
+        "Patient and member portals, and services built on modern health APIs.",
     },
     stack: {
       intro:
-        "Specialists who treat privacy as part of the design, and who know the formats health data actually arrives in.",
+        "Experience with the systems and regulations of healthcare, with privacy treated as part of the design from the start.",
       groups: [
-        {
-          title: "Specialists",
-          items: [
-            "Healthcare data engineer",
-            "Interoperability engineer",
-            "FHIR developer",
-            "Revenue-cycle analyst",
-            "Security and compliance engineer",
-            "Clinical data analyst",
-          ],
-        },
         {
           title: "Platforms",
           items: [
@@ -449,14 +417,14 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
     ],
     faq: [
       {
-        question: "Do your teams work under HIPAA?",
+        question: "Do you work under HIPAA?",
         answer:
-          "Yes. Teams follow your HIPAA policies, complete privacy and security training, and work only in environments you control. Business associate agreements are put in place wherever the work requires them.",
+          "Yes. We follow your HIPAA policies, complete privacy and security training and work only in environments you control. Business associate agreements are put in place wherever the work requires them.",
       },
       {
         question: "Can you connect to our EHR?",
         answer:
-          "Yes, through the interfaces your EHR supports, including FHIR APIs, HL7 v2 feeds and approved integration engines.",
+          "Yes, through the interfaces your EHR supports, including standard health APIs and approved integration engines.",
       },
       {
         question: "Is AI safe to use with patient data?",
@@ -466,19 +434,19 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
       {
         question: "Do you work with payers as well as providers?",
         answer:
-          "Yes. Our teams work on claims, eligibility and member platforms for payers, and on data, revenue cycle and patient tools for providers.",
+          "Yes. We deliver claims, eligibility and member platforms for payers, and data, revenue-cycle and patient solutions for providers.",
       },
     ],
   },
 
   "industry-energy": {
     description:
-      "Specialists in SAP asset management, predictive maintenance, OT data and field operations, helping utilities, producers and renewables operators keep assets online.",
-    lede: "Specialists in SAP asset management, field operations and energy data, helping utilities, producers and renewables operators keep assets online and decisions on time.",
+      "Technology, data and AI engineering for energy: reliable assets, connected field and enterprise data, and forecasting for a changing energy mix.",
+    lede: "We help utilities, producers and renewables operators keep critical assets running, connect field and enterprise data, and plan with confidence as the energy mix changes.",
     points: [
-      "SAP asset management",
-      "Predictive maintenance",
-      "Field, grid and market data",
+      "Asset reliability",
+      "Connected field operations",
+      "Smarter forecasting",
     ],
     problems: {
       heading: "What energy companies are up against",
@@ -486,41 +454,41 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
         {
           challenge: "Unplanned downtime costs us more every year.",
           answer:
-            "Predictive maintenance models built on sensor and work-order history, flagging failing equipment early enough to plan the fix.",
+            "Predictive maintenance that flags failing equipment early enough to plan the fix, before it becomes an outage.",
         },
         {
           challenge: "Our field data and enterprise data never meet.",
           answer:
-            "Secure integration between historians, SCADA feeds and SAP, so maintenance, finance and operations see the same asset.",
+            "Secure integration between operational systems and SAP, so maintenance, finance and operations work from the same picture of every asset.",
         },
         {
           challenge: "Paperwork slows down every field crew.",
           answer:
-            "Mobile work orders, digital permits and reports created automatically from technician notes and photos.",
+            "Mobile work orders, digital permits and automated reporting that give crews time back in the field.",
         },
         {
           challenge: "Renewables make demand harder to predict.",
           answer:
-            "Load, generation and price forecasts that update as weather and market data change.",
+            "Load, generation and price forecasts that update as weather and market conditions change.",
         },
       ],
     },
     offerings: {
-      heading: "What we build for utilities, producers and renewables",
+      heading: "How we help utilities, producers and renewables",
       intro:
-        "Digital operations for assets that have to run safely for decades, while the energy mix changes around them.",
+        "Digital operations for assets that must run safely for decades, while the energy mix changes around them.",
       items: [
         {
           title: "SAP asset management",
-          text: "SAP PM, EAM and S/4HANA asset management, with maintenance strategies tied to criticality and cost.",
+          text: "Maintenance and asset management on SAP S/4HANA, with strategies tied to criticality and cost.",
         },
         {
           title: "Predictive maintenance",
-          text: "Condition monitoring and failure prediction for turbines, transformers, pumps and pipelines.",
+          text: "Condition monitoring and failure prediction for critical equipment across generation, networks and pipelines.",
         },
         {
           title: "OT and IT integration",
-          text: "Historian, SCADA and IoT data connected to enterprise systems through secure, segmented interfaces.",
+          text: "Operational and enterprise systems connected through secure, segmented interfaces.",
         },
         {
           title: "Forecasting and trading analytics",
@@ -528,39 +496,28 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
         },
         {
           title: "Field operations apps",
-          text: "Mobile tools for inspections, work orders and safety checks that keep working offline at remote sites.",
+          text: "Mobile tools for inspections, work orders and safety checks that work offline at remote sites.",
         },
         {
           title: "Sustainability reporting",
-          text: "Emissions data collected, calculated and traced to source, for internal targets and external disclosures.",
+          text: "Emissions data collected, calculated and traced to source for internal targets and external disclosures.",
         },
       ],
     },
     capabilities: {
       "cap-data":
-        "Sensor, maintenance and market data on one platform for asset health.",
-      "cap-sap": "SAP PM and asset management linked to field operations.",
+        "Sensor, maintenance and market data on one platform for a clear view of asset health.",
+      "cap-sap": "SAP asset management linked directly to field operations.",
       "cap-ai":
         "Failure prediction and load, generation and price forecasting.",
       "cap-flow":
-        "Work orders and permits raised and updated from field notes and alerts.",
+        "Work orders and permits raised and updated automatically from field notes and alerts.",
       "cap-code": "Offline-ready field apps and customer outage tools.",
     },
     stack: {
       intro:
-        "Specialists who respect the line between enterprise IT and the systems that keep the lights on.",
+        "Experience across enterprise and operational technology, with clear respect for the systems that keep critical infrastructure running.",
       groups: [
-        {
-          title: "Specialists",
-          items: [
-            "SAP PM specialist",
-            "Asset data engineer",
-            "OT integration engineer",
-            "Data scientist",
-            "GIS developer",
-            "Mobile engineer",
-          ],
-        },
         {
           title: "Platforms",
           items: [
@@ -592,24 +549,24 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
     ],
     faq: [
       {
-        question: "Can your teams work with operational technology safely?",
+        question: "Can you work with operational technology safely?",
         answer:
-          "Yes. OT integration follows your segmentation and access rules, with read-only data paths by default and any change to control systems left to your authorized engineers.",
+          "Yes. Integration follows your segmentation and access rules, with read-only data paths by default and any change to control systems left to your authorized engineers.",
       },
       {
         question: "Do you work in renewables as well as traditional energy?",
         answer:
-          "Yes. Our asset, forecasting and field work applies across wind, solar, storage, grids and conventional generation.",
+          "Yes. Our asset, forecasting and field operations work applies across wind, solar, storage, grids and conventional generation.",
       },
       {
         question: "Can you help with our move to S/4HANA asset management?",
         answer:
-          "Yes. Our SAP specialists plan and deliver the move, including maintenance plans, master data clean-up and links to mobile field tools.",
+          "Yes. We plan and deliver the move end to end, including maintenance plans, master data clean-up and links to mobile field tools.",
       },
       {
-        question: "How do you handle critical-infrastructure security?",
+        question: "How do you approach critical-infrastructure security?",
         answer:
-          "Security is designed in from the start, aligned with standards such as IEC 62443 and NERC CIP where they apply, with every access logged and reviewed.",
+          "Security is designed in from the start and aligned with standards such as IEC 62443 and NERC CIP where they apply, with every access logged and reviewed.",
       },
     ],
   },

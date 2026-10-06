@@ -4,7 +4,6 @@ import Section from "@/components/wrapper/Section.astro";
 import HeroDetail from "@/components/content/HeroDetail.astro";
 import StorySplit from "@/components/content/StorySplit.astro";
 import FeatureGrid from "@/components/content/FeatureGrid.astro";
-import TrustStrip from "@/components/content/TrustStrip.astro";
 import ProcessSteps from "@/components/content/ProcessSteps.astro";
 import GlobalPresence from "@/components/content/GlobalPresence.astro";
 import FaqList from "@/components/content/FaqList.astro";
@@ -72,14 +71,13 @@ import { ABOUT_PHOTOS } from "@/data/photos.ts";
         },
       ]}
     />
-    <TrustStrip />
   </Section>
 
   {/* Values */}
   <Section theme="tint" id="values">
     <FeatureGrid
       eyebrow="What we believe"
-      heading="Six principles behind every engagement"
+      heading="The principles behind every engagement"
       intro="They shape who joins ManyaIT, how we partner with every enterprise and what we expect of ourselves."
       numbered
       items={[

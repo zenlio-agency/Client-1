@@ -134,12 +134,12 @@ export const INDUSTRIES = [
     slug: "banking-financial-services",
     title: "Banking & Financial Services",
     short: "Banking & FS",
-    summary: "Specialists in core banking, payments, risk and compliance.",
+    summary: "Modern banking platforms for payments, risk and compliance.",
     hero: "Modernize core banking without slowing the business.",
     challenge:
       "Decades-old core systems, real-time customer expectations, and every change through audit and risk review.",
     build:
-      "Core and digital banking on Java and cloud, SAP finance and data platforms, AI for fraud signals and document processing, and automated KYC and onboarding.",
+      "Modern core and digital banking, trusted finance and risk data, AI-driven fraud detection and automated customer onboarding.",
     outcome: "Faster, compliant releases.",
     metric: "[X]%",
     metricLabel: "faster release cycles",
@@ -149,12 +149,13 @@ export const INDUSTRIES = [
     slug: "telecommunications",
     title: "Telecommunications",
     short: "Telecom",
-    summary: "Engineers for OSS/BSS, billing and network data.",
+    summary:
+      "Faster launches, accurate billing and proactive service assurance.",
     hero: "Keep networks and customers connected.",
     challenge:
       "Huge data volumes, complex billing and constant network change, where every outage is public.",
     build:
-      "OSS/BSS and billing platforms, churn and capacity analytics, AI-driven service assurance, and round-the-clock application operations.",
+      "Modern order and billing systems, customer and network analytics, AI-driven service assurance and round-the-clock operations.",
     outcome: "Fewer manual tickets and faster recovery.",
     metric: "[X]%",
     metricLabel: "faster incident resolution",
@@ -164,12 +165,12 @@ export const INDUSTRIES = [
     slug: "healthcare",
     title: "Healthcare",
     short: "Healthcare",
-    summary: "Teams fluent in health data, claims and HIPAA.",
+    summary: "Connected health data, streamlined claims and privacy by design.",
     hero: "Technology that serves patients and protects their data.",
     challenge:
       "Fragmented records, rising admin cost and strict privacy rules such as HIPAA.",
     build:
-      "Healthcare data platforms and interoperability, AI for claims and document handling, revenue-cycle automation, and operations analytics.",
+      "Connected health data platforms, AI for claims and documents, revenue-cycle automation and real-time operations insight.",
     outcome: "Faster claims, privacy built in from day one.",
     metric: "[X]%",
     metricLabel: "reduction in claims turnaround",
@@ -179,12 +180,13 @@ export const INDUSTRIES = [
     slug: "energy",
     title: "Energy",
     short: "Energy",
-    summary: "Experts in SAP asset management and field operations.",
+    summary:
+      "Reliable assets, connected field operations and smarter forecasting.",
     hero: "Digital operations for a sector in transition.",
     challenge:
       "Ageing assets, safety rules and the shift to renewables, with data split across field and enterprise systems.",
     build:
-      "SAP for asset management and maintenance, predictive maintenance and demand forecasting, and automated field reporting.",
+      "Asset management on SAP, predictive maintenance, demand forecasting and automated field reporting.",
     outcome: "Assets that stay online longer.",
     metric: "[X]%",
     metricLabel: "less unplanned downtime",

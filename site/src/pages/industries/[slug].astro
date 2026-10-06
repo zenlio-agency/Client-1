@@ -4,7 +4,6 @@ import Section from "@/components/wrapper/Section.astro";
 import HeroDetail from "@/components/content/HeroDetail.astro";
 import ProblemRows from "@/components/content/ProblemRows.astro";
 import FeatureGrid from "@/components/content/FeatureGrid.astro";
-import TrustStrip from "@/components/content/TrustStrip.astro";
 import ChipGroups from "@/components/content/ChipGroups.astro";
 import FaqList from "@/components/content/FaqList.astro";
 import RelatedTiles from "@/components/content/RelatedTiles.astro";
@@ -55,22 +54,21 @@ const contact = `${CTA.primary.href}?topic=${industry.id}`;
   {/* Pressures */}
   <Section theme="tint">
     <ProblemRows
-      eyebrow="The pressure"
+      eyebrow="Business challenges"
       heading={page.problems.heading}
       rows={page.problems.rows}
     />
   </Section>
 
-  {/* What we build, with the outcomes to expect */}
+  {/* What we deliver */}
   <Section>
     <FeatureGrid
-      eyebrow="What we build"
+      eyebrow="What we deliver"
       heading={page.offerings.heading}
       intro={page.offerings.intro}
       items={page.offerings.items}
       numbered
     />
-    <TrustStrip label="Outcomes to expect" stats={page.outcomes} />
   </Section>
 
   {/* Capabilities in this industry */}
@@ -78,7 +76,7 @@ const contact = `${CTA.primary.href}?topic=${industry.id}`;
     <FeatureGrid
       variant="rows"
       eyebrow="Capabilities"
-      heading={`What our teams bring to ${industry.short}`}
+      heading={`Capabilities that move ${industry.short} forward`}
       link={{ label: "All capabilities", href: "/capabilities" }}
       items={CAPABILITIES.map((cap) => ({
         title: cap.title,
@@ -90,11 +88,11 @@ const contact = `${CTA.primary.href}?topic=${industry.id}`;
     />
   </Section>
 
-  {/* Systems and standards */}
+  {/* Platforms and standards */}
   <Section>
     <ChipGroups
       eyebrow="Sector knowledge"
-      heading="Systems and standards our teams know"
+      heading="Platforms and standards we work with"
       intro={page.stack.intro}
       groups={page.stack.groups}
     />

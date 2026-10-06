@@ -21,51 +21,108 @@ const { render = true } = Astro.props;
 
 const points = [
   {
-    title: "Real enterprise work",
-    text: "Banking platforms, telecom networks, healthcare data and energy operations. Systems millions of people rely on.",
+    title: "Enterprise-scale impact",
+    text: "Platforms in banking, telecommunications, healthcare and energy that millions of people rely on every day.",
   },
   {
-    title: "Long-term ownership",
-    text: "You join a dedicated team, learn one business deeply and own its systems.",
+    title: "End-to-end ownership",
+    text: "Take work from architecture to production, and see the business results it creates.",
   },
   {
     title: "Learning & growth",
-    text: "Paid certifications on SAP, cloud and AI platforms, and new leads and architects promoted from within.",
+    text: "Paid certifications on SAP, cloud and AI platforms, with leads and architects promoted from within.",
   },
   {
     title: "United States + India",
-    text: "Daily overlap with decision-makers, so you work with the people who own the outcome, not through layers.",
+    text: "One delivery organization across two hubs, working directly with the leaders who own each outcome.",
   },
 ];
 
 const teams = [...CAPABILITIES.map((cap) => cap.title), "Client Partnership"];
 
+/*
+ * Sample openings for the design: the US roles in particular are
+ * placeholders and must be replaced with real openings before launch.
+ * `location` is shown on the role; `country` drives the location filter.
+ */
 const roles = [
   {
     title: "Senior Java Engineer",
     team: "Digital Product Engineering",
     location: "India",
+    country: "India",
     experience: "5–8 yrs",
+    mode: "Hybrid",
+  },
+  {
+    title: "Data Engineering Lead",
+    team: "Data & Analytics",
+    location: "Jersey City, NJ",
+    country: "United States",
+    experience: "8+ yrs",
     mode: "Hybrid",
   },
   {
     title: "SAP S/4HANA Functional Lead",
     team: "SAP & Enterprise Data",
     location: "India",
+    country: "India",
     experience: "4–7 yrs",
+    mode: "Hybrid",
+  },
+  {
+    title: "SAP S/4HANA Solution Architect",
+    team: "SAP & Enterprise Data",
+    location: "Chicago, IL",
+    country: "United States",
+    experience: "10+ yrs",
+    mode: "Hybrid",
+  },
+  {
+    title: "GenAI Engineer",
+    team: "Applied AI",
+    location: "Charlotte, NC",
+    country: "United States",
+    experience: "5–8 yrs",
     mode: "Hybrid",
   },
   {
     title: "AI Automation Engineer",
     team: "Agentic AI & Automation",
     location: "India",
+    country: "India",
     experience: "3–6 yrs",
     mode: "On-site",
   },
   {
+    title: "Intelligent Automation Engineer",
+    team: "Agentic AI & Automation",
+    location: "Atlanta, GA",
+    country: "United States",
+    experience: "4–7 yrs",
+    mode: "On-site",
+  },
+  {
+    title: "Healthcare Data Architect",
+    team: "Data & Analytics",
+    location: "Minneapolis, MN",
+    country: "United States",
+    experience: "8+ yrs",
+    mode: "Hybrid",
+  },
+  {
+    title: "Cloud Platform Engineer",
+    team: "Digital Product Engineering",
+    location: "Remote, United States",
+    country: "United States",
+    experience: "5–8 yrs",
+    mode: "Remote",
+  },
+  {
     title: "Client Partner",
     team: "Client Partnership",
-    location: "United States",
+    location: "New York, NY",
+    country: "United States",
     experience: "8+ yrs",
     mode: "On-site",
   },
@@ -87,9 +144,10 @@ const roles = [
             data-reveal
             style="--reveal-order: 2"
           >
-            Join teams working on real enterprise platforms across the United
-            States and India. You own the work, learn the business and see the impact
-            over years, not sprints.
+            Join a technology, data and AI engineering partner trusted by
+            enterprises in banking, telecommunications, healthcare and energy.
+            Work on production platforms, own outcomes end to end and grow with
+            every program.
           </Paragraph>
           <Paragraph maxWidth={52} data-reveal style="--reveal-order: 3">
             <Fragment
@@ -180,8 +238,9 @@ const roles = [
           {roles.map((role) => (
             <li
               class="careers_role"
-              data-text={`${role.title} ${role.team}`.toLowerCase()}
-              data-location={role.location}
+              data-text={`${role.title} ${role.team} ${role.location}`.toLowerCase()}
+              data-country={role.country}
+              data-mode={role.mode}
               data-team={role.team}
             >
               <a class="careers_role_link" href="/contact?topic=careers">
@@ -234,7 +293,9 @@ const roles = [
       for (const role of roles) {
         const match =
           (!query || (role.dataset.text ?? "").includes(query)) &&
-          (!location || role.dataset.location === location) &&
+          (!location ||
+            role.dataset.country === location ||
+            (location === "Remote" && role.dataset.mode === "Remote")) &&
           (!team || role.dataset.team === team);
         role.hidden = !match;
         if (match) shown++;

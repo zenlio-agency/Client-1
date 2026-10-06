@@ -312,7 +312,6 @@ add(["index.html"], {
 const PAGE_FILES = {
   "page-about": "about.astro",
   "page-careers": "careers.astro",
-  "page-locations": "locations.astro",
   "page-contact": "contact.astro",
   "page-capabilities": "capabilities/index.astro",
   "page-industries": "industries/index.astro",
@@ -423,7 +422,8 @@ for (const industry of site.INDUSTRIES) {
 
 /* Locations */
 site.HUBS.forEach((hub, index) => {
-  add(["locations/index.html"], {
+  /* The Locations page was removed; hubs are no longer checked against a page. */
+  add([], {
     _id: hub.id,
     _type: "location",
     city: hub.city,

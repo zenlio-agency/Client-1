@@ -3,7 +3,6 @@ import Layout from "@/layouts/BaseLayout.astro";
 import Section from "@/components/wrapper/Section.astro";
 import HeroDetail from "@/components/content/HeroDetail.astro";
 import FeatureGrid from "@/components/content/FeatureGrid.astro";
-import TrustStrip from "@/components/content/TrustStrip.astro";
 import ProcessSteps from "@/components/content/ProcessSteps.astro";
 import FaqList from "@/components/content/FaqList.astro";
 import CtaFinal from "@/components/content/CtaFinal.astro";
@@ -80,7 +79,7 @@ import { CAPABILITY_PHOTOS } from "@/data/photos.ts";
     />
   </Section>
 
-  {/* How an engagement runs, with the company figures */}
+  {/* How an engagement runs */}
   <Section theme="dark">
     <ProcessSteps
       eyebrow="How it works"
@@ -88,10 +87,6 @@ import { CAPABILITY_PHOTOS } from "@/data/photos.ts";
       intro="Every capability follows the same accountable path, whether it starts with a focused assessment or a full-scale transformation program."
       steps={TEAM_STEPS}
     />
-  </Section>
-
-  <Section paddingBottom="small">
-    <TrustStrip />
   </Section>
 
   {/* FAQ */}
