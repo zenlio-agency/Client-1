@@ -29,7 +29,7 @@ const pct = (value: number, of: number) =>
       <div class="presence_intro">
         <Eyebrow data-reveal>Global presence</Eyebrow>
         <Heading data-reveal style="--reveal-order: 1">
-          Two cities. One team.
+          Global delivery, one operating model.
         </Heading>
         <Paragraph
           variant="large"
@@ -37,9 +37,9 @@ const pct = (value: number, of: number) =>
           data-reveal
           style="--reveal-order: 2"
         >
-          Client leadership in Dallas. Engineering depth in Hyderabad. One plan,
-          one standard of work, and a working day that hands over instead of
-          stopping.
+          Client leadership in the United States and engineering depth in
+          India, run as one delivery organization with shared governance and a
+          follow-the-sun cadence.
         </Paragraph>
       </div>
 
@@ -50,7 +50,7 @@ const pct = (value: number, of: number) =>
             class="presence_svg"
             viewBox={`0 0 ${dots.width} ${dots.height + 1}`}
             role="img"
-            aria-label="Dotted world map highlighting the United States, Canada and India, with ManyaIT hubs in Dallas and Hyderabad"
+            aria-label="Dotted world map highlighting North America and India, with a ManyaIT hub in each"
           >
             <defs>
               {/* Land dots fade from the top into the dark canvas below. */}
@@ -94,25 +94,18 @@ const pct = (value: number, of: number) =>
                 aria-expanded="false"
                 aria-controls={`presence-tip-${pin.id}`}
               >
-                <span class="presence_marker_city">{pin.short}</span>
-                <span
-                  class="presence_marker_time"
-                  data-clock={pin.timeZone}
-                  data-locale={pin.locale}
-                >
-                  --:--
-                </span>
+                <span class="presence_marker_city">{pin.country}</span>
               </button>
               <div
                 class="presence_tip"
                 id={`presence-tip-${pin.id}`}
                 role="tooltip"
               >
-                <span class="presence_tip_city">{pin.city}</span>
+                <span class="presence_tip_city">{pin.country}</span>
                 <span class="presence_tip_role">{pin.role}</span>
                 <span
                   class="presence_tip_address"
-                  set:html={tbc(pin.address)}
+                  set:html={tbc(`${pin.entity}\n${pin.address}`)}
                 />
               </div>
             </div>
@@ -121,7 +114,7 @@ const pct = (value: number, of: number) =>
         <figcaption class="presence_caption">
           <span class="presence_legend">
             <span class="presence_legend_dot" aria-hidden="true" />
-            United States · Canada · India
+            Delivery footprint
           </span>
           <span set:html={tbc("Serving enterprises in [X] countries.")} />
         </figcaption>
@@ -131,35 +124,6 @@ const pct = (value: number, of: number) =>
 }
 
 <script>
-  /* Live local time for each hub. */
-  const clocks = [
-    ...document.querySelectorAll<HTMLElement>(".presence_wrap [data-clock]"),
-  ];
-  const tick = () => {
-    for (const clock of clocks) {
-      try {
-        clock.textContent = new Intl.DateTimeFormat(
-          clock.dataset.locale || "en-US",
-          {
-            hour: "2-digit",
-            minute: "2-digit",
-            timeZone: clock.dataset.clock,
-            timeZoneName: "short",
-          },
-        )
-          .format(new Date())
-          /* en-IN writes "am"; match the US clock's "AM". */
-          .replace(/\b(am|pm)\b/, (period) => period.toUpperCase());
-      } catch {
-        /* An unknown zone leaves the placeholder in place. */
-      }
-    }
-  };
-  if (clocks.length) {
-    tick();
-    window.setInterval(tick, 30_000);
-  }
-
   /* Hover shows the address; a tap or click pins it open, for touch. */
   const markers = [...document.querySelectorAll<HTMLElement>("[data-marker]")];
   const setOpen = (marker: HTMLElement, open: boolean) => {
@@ -329,12 +293,6 @@ const pct = (value: number, of: number) =>
       color: var(--white);
     }
 
-    .presence_marker_time {
-      font-size: 0.72rem;
-      font-variant-numeric: tabular-nums;
-      color: var(--blue-300);
-    }
-
     .presence_tip {
       position: absolute;
       bottom: calc(100% + 0.6rem);
@@ -428,9 +386,6 @@ const pct = (value: number, of: number) =>
       .presence_tip {
         top: calc(100% + 0.5rem);
         bottom: auto;
-      }
-      .presence_marker_time {
-        display: none;
       }
     }
 

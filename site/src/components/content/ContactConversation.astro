@@ -54,20 +54,8 @@ const industries = [
   { value: "other", label: "Another industry" },
 ];
 
-const next = [
-  [
-    "Our team reads your note",
-    "Every message goes to a person in Dallas, not a queue.",
-  ],
-  [
-    "We set up a 30-minute call",
-    "We listen first: your goals, your systems and your timelines.",
-  ],
-  [
-    "We map the first step together",
-    "You leave with a recommended starting point, whether or not we work together.",
-  ],
-];
+/* What happens after a brief arrives, one word a step. */
+const next = ["Discovery", "Alignment", "Roadmap"];
 
 /* Ways to reach the company without the form, shown beside it. */
 const direct = [
@@ -116,13 +104,10 @@ const direct = [
           />
         </Paragraph>
         <ol class="contact_next" data-reveal style="--reveal-order: 3">
-          {next.map(([title, text], index) => (
+          {next.map((step, index) => (
             <li>
               <span class="contact_next_index">0{index + 1}</span>
-              <span class="contact_next_text">
-                <strong>{title}</strong>
-                <span>{text}</span>
-              </span>
+              <span class="contact_next_text">{step}</span>
             </li>
           ))}
         </ol>
@@ -256,11 +241,11 @@ const direct = [
             {HUBS.map((hub) => (
               <div>
                 <dt>
-                  {hub.short} · {hub.role}
+                  {hub.country} · {hub.role}
                 </dt>
                 <dd>
                   <address class="contact_direct_address">
-                    {hub.address}
+                    {`${hub.entity}\n${hub.address}`}
                   </address>
                 </dd>
               </div>
@@ -338,14 +323,14 @@ const direct = [
     }
 
     /* The intro and the direct details share the left column, beside the
-       form. On narrow screens the form comes straight after the intro and
-       the details follow it. */
+       form. On narrow screens the details come before the form, so email and
+       phone are in reach without scrolling past it. */
     .contact_wrap {
       width: 100%;
       display: grid;
       grid-template-columns: minmax(0, 1fr);
-      grid-template-areas: "intro" "form" "direct";
-      gap: var(--space-8) var(--section-space-small);
+      grid-template-areas: "intro" "direct" "form";
+      gap: var(--space-6) var(--section-space-small);
       @media (width >= 64rem) {
         grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
         grid-template-rows: auto 1fr;
@@ -361,16 +346,16 @@ const direct = [
       gap: var(--space-5);
     }
 
+    /* The three steps read as one line: numbered, one word each. */
     .contact_next {
       display: flex;
-      flex-direction: column;
-      margin-top: var(--space-4);
-      border-top: var(--border-width) solid var(--border);
+      flex-wrap: wrap;
+      gap: var(--space-3) var(--space-5);
+      margin-top: var(--space-2);
       & li {
         display: flex;
-        gap: var(--space-4);
-        padding-block: var(--space-4);
-        border-bottom: var(--border-width) solid var(--border);
+        align-items: center;
+        gap: var(--space-2);
       }
     }
 
@@ -390,16 +375,10 @@ const direct = [
     }
 
     .contact_next_text {
-      display: flex;
-      flex-direction: column;
-      gap: 0.15rem;
+      font-family: var(--heading-family);
       font-size: var(--text-small);
-      color: var(--text-body);
-      & strong {
-        font-family: var(--heading-family);
-        font-weight: var(--heading-bold);
-        color: var(--text);
-      }
+      font-weight: var(--heading-bold);
+      color: var(--text);
     }
 
     /* Email, phone, addresses and social profiles, for anyone who'd rather

@@ -28,7 +28,10 @@ const { render = true } = Astro.props;
           <dl class="hub-cards_details">
             <div class="is-wide">
               <dt>Address</dt>
-              <dd class="hub-cards_address" set:html={tbc(hub.address)} />
+              <dd
+                class="hub-cards_address"
+                set:html={tbc(`${hub.entity}\n${hub.address}`)}
+              />
             </div>
             <div>
               <dt>Phone</dt>
