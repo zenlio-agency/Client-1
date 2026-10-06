@@ -1,7 +1,6 @@
 ---
 import Eyebrow from "@/components/typography/Eyebrow.astro";
 import Heading from "@/components/typography/Heading.astro";
-import Paragraph from "@/components/typography/Paragraph.astro";
 import Button from "@/components/Button.astro";
 import Icon from "@/components/media/Icon.astro";
 import PhotoTile from "@/components/item/PhotoTile.astro";
@@ -28,10 +27,6 @@ const { render = true } = Astro.props;
           </Heading>
         </div>
         <div class="industry-cards_aside" data-reveal style="--reveal-order: 2">
-          <Paragraph variant="large" maxWidth={44}>
-            Specialists who speak the language of your sector, its rules and its
-            systems.
-          </Paragraph>
           <Button element="link" href="/industries" emphasis="secondary">
             Explore Industries
           </Button>
@@ -100,6 +95,13 @@ const { render = true } = Astro.props;
       flex-direction: column;
       align-items: flex-start;
       gap: var(--space-4);
+    }
+
+    /* The button alone closes the row at the right edge on desktop. */
+    .industry-cards_aside {
+      @media (width >= 64rem) {
+        align-items: flex-end;
+      }
     }
 
     /* Portrait photo tiles: two across, four from 80rem. */
