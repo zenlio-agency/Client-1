@@ -21,7 +21,7 @@ changes:
 
 ## Who we are
 
-{{usEntity}} is a {{usIncorporation}} corporation at {{usAddress}}. It runs this website and decides how the personal data collected through it is used. Our Indian company, {{indiaEntity}} (CIN {{indiaCin}}), of {{indiaAddress}}, works with that data alongside us for our Hyderabad team. In this notice, "ManyaIT", "we" and "us" mean both companies.
+{{usEntity}} is a {{usIncorporation}} corporation at {{usAddress}}. It runs this website and decides how the personal data collected through it is used. Our Indian company, {{indiaEntity}} (CIN {{indiaCin}}), of {{indiaAddress}}, works with that data alongside us for our team in India. In this notice, "ManyaIT", "we" and "us" mean both companies.
 
 Under India's Digital Personal Data Protection Act, ManyaIT is the Data Fiduciary for the data described here. Under the EU and UK GDPR, it is the controller. [Counsel to confirm which entity is the controller for each kind of data.]
 
@@ -59,7 +59,7 @@ We don't use automated decision-making or profiling that has legal or similarly 
 We share personal data only with:
 
 - **Service providers** who work for us under contract and only on our instructions: our website host (Cloudflare), and the [email platform], [CRM] and [form provider] we use to receive and answer messages. Each one sees only what it needs to do its job.
-- **The two ManyaIT companies**, so the right person in Dallas or Hyderabad can reply.
+- **The two ManyaIT companies**, so the right person in the United States or India can reply.
 - **Professional advisers** such as lawyers, auditors and insurers, under a duty of confidentiality.
 - **Authorities**, when the law requires it or to protect the rights, property or safety of ManyaIT, our people or others.
 - **A buyer or successor**, if ManyaIT is reorganised, merged or sold. They must protect your data as this notice describes.

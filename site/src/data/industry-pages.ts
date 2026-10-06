@@ -172,7 +172,7 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
       {
         question: "Can teams support us around the clock?",
         answer:
-          "Yes. With hubs in Dallas and Hyderabad, support and operations follow the sun, with handovers at fixed times every day.",
+          "Yes. With hubs in the United States and India, support and operations follow the sun, with handovers at fixed times every day.",
       },
     ],
   },
@@ -238,7 +238,7 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
         },
         {
           title: "Application operations",
-          text: "Round-the-clock monitoring, incident response and release management across Dallas and Hyderabad.",
+          text: "Round-the-clock monitoring, incident response and release management across our US and India hubs.",
         },
       ],
     },
@@ -308,7 +308,7 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
       {
         question: "Can you run operations around the clock?",
         answer:
-          "Yes. Dallas and Hyderabad cover the day between them, with agreed handovers, runbooks and on-call rotations for priority incidents.",
+          "Yes. Our US and India hubs cover the day between them, with agreed handovers, runbooks and on-call rotations for priority incidents.",
       },
       {
         question:

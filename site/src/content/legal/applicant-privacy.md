@@ -9,7 +9,7 @@ version: "[1.0]"
 contact: privacy
 glance:
   - We use what you share to consider you for roles now and in the future, and to stay in touch about them.
-  - Only the ManyaIT team in Dallas and Hyderabad, and the tools we use to manage applications, see it.
+  - Only the ManyaIT team in the United States and India, and the tools we use to manage applications, see it.
   - "Talent Network profiles are kept for [12] months unless you renew them."
   - We never charge a fee, and we never sell your data.
   - You can ask for a copy, a correction or a deletion at any time.
@@ -52,7 +52,7 @@ We don't make decisions about you by automated means alone. A person reviews eve
 
 ## Who sees it
 
-Your details are seen only by the ManyaIT people involved in filling roles, in Dallas and Hyderabad, and by the managers who interview you. Our service providers, such as our [applicant tracking system] and email platform, store it for us under contract and only on our instructions.
+Your details are seen only by the ManyaIT people involved in filling roles, in the United States and India, and by the managers who interview you. Our service providers, such as our [applicant tracking system] and email platform, store it for us under contract and only on our instructions.
 
 We never sell your data, and we never share it with other companies to market roles to you.
 

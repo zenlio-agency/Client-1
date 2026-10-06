@@ -23,15 +23,12 @@ const { render = true } = Astro.props;
           style={`--reveal-order: ${index}`}
         >
           <span class="hub-cards_role">{hub.role}</span>
-          <h2 class="hub-cards_city">{hub.city}</h2>
+          <h2 class="hub-cards_city">{hub.country}</h2>
           <p class="hub-cards_text">{hub.text}</p>
           <dl class="hub-cards_details">
             <div class="is-wide">
-              <dt>Address</dt>
-              <dd
-                class="hub-cards_address"
-                set:html={tbc(`${hub.entity}\n${hub.address}`)}
-              />
+              <dt>Company</dt>
+              <dd class="hub-cards_address">{hub.entity}</dd>
             </div>
             <div>
               <dt>Phone</dt>
