@@ -6,9 +6,7 @@ import ClientLogos from "@/components/content/ClientLogos.astro";
 import WhyMetrics from "@/components/content/WhyMetrics.astro";
 import CapabilityBento from "@/components/content/CapabilityBento.astro";
 import IndustryCards from "@/components/content/IndustryCards.astro";
-import CareersHome from "@/components/content/CareersHome.astro";
 import InsightsGrid from "@/components/content/InsightsGrid.astro";
-import GlobalPresence from "@/components/content/GlobalPresence.astro";
 import EcosystemCards from "@/components/content/EcosystemCards.astro";
 import ContactConversation from "@/components/content/ContactConversation.astro";
 ---
@@ -27,34 +25,24 @@ import ContactConversation from "@/components/content/ContactConversation.astro"
     <ClientLogos />
   </Section>
 
-  {/* Why ManyaIT: the figures, on a gradient panel */}
-  <Section theme="tint" id="why">
-    <WhyMetrics />
-  </Section>
-
   {/* Capabilities */}
-  <Section id="capabilities">
+  <Section theme="tint" id="capabilities">
     <CapabilityBento />
   </Section>
 
   {/* Industries */}
-  <Section theme="tint" id="industries">
+  <Section id="industries">
     <IndustryCards />
   </Section>
 
-  {/* Careers */}
-  <Section id="careers">
-    <CareersHome />
+  {/* Why ManyaIT: the figures, on a dark panel, with the way to careers */}
+  <Section theme="tint" id="why">
+    <WhyMetrics />
   </Section>
 
   {/* Insights */}
-  <Section theme="tint" id="insights">
+  <Section id="insights">
     <InsightsGrid />
-  </Section>
-
-  {/* Global presence */}
-  <Section id="locations">
-    <GlobalPresence />
   </Section>
 
   {/* Other companies */}

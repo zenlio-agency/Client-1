@@ -7,10 +7,10 @@ import { HUBS } from "@/data/site.ts";
  * and ManyaIT to confirm; they show with the "confirm before launch" marker.
  */
 export const LEGAL = {
-  usEntity: "ManyaIT Inc.",
+  usEntity: HUBS[0].entity,
   usIncorporation: "[State of incorporation]",
   usAddress: HUBS[0].address,
-  indiaEntity: "[ManyaIT India entity name]",
+  indiaEntity: HUBS[1].entity,
   indiaCin: "[CIN]",
   indiaAddress: HUBS[1].address,
   privacyEmail: "[privacy@manyait.com]",

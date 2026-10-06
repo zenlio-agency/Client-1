@@ -79,7 +79,7 @@ export const CLIENT_LOGO_ROWS: {
       { name: "Verizon", src: "/logos/verizon.svg" },
       { name: "CVS Health", src: "/logos/cvs-health.svg" },
       { name: "Chevron", src: "/logos/chevron.svg" },
-      { name: "Vodafone", src: "/logos/vodafone.svg" },
+      { name: "T-Mobile", src: "/logos/t-mobile.svg" },
       { name: "Johnson & Johnson", src: "/logos/johnson-johnson.svg" },
       { name: "Schneider Electric", src: "/logos/schneider-electric.svg" },
     ],
@@ -159,6 +159,10 @@ export const HUBS = [
     id: "dallas",
     city: "Dallas, Texas",
     short: "Dallas",
+    /* The name used in section copy and on the map; cities stay in the
+       footer and the postal address. */
+    country: "United States",
+    entity: "ManyaIT Inc.",
     role: "Client & Leadership Hub",
     text: "Where partnerships start. Our Dallas team works in your time zone to shape the right team for each goal and keep it on track across North America.",
     /* Line breaks render where the address is shown (white-space: pre-line). */
@@ -175,10 +179,12 @@ export const HUBS = [
     id: "hyderabad",
     city: "Hyderabad, India",
     short: "Hyderabad",
+    country: "India",
+    entity: "ManyaIT Solutions Pvt Ltd",
     role: "Engineering & Talent Hub",
     text: "Home to our engineering talent. Hyderabad teams build, run and improve platforms for enterprises worldwide, working as part of each enterprise's own technology organization.",
     address:
-      "6E(608), 6th Floor, Business Square\nH.No. 1-98/3/5/23, 24, 25, 26 and 27\nJubilee Enclave, Sy No. 66 & 67\nMadhapur, Hyderabad - 500 081",
+      "Bizness Square, Whitefields\nHITECH City, Hyderabad\nTelangana 500081",
     phone: "[Phone]",
     email: "[Email]",
     timeZone: "Asia/Kolkata",
@@ -218,7 +224,6 @@ export const NAV = [
   { label: "Industries", href: "/industries", menu: "industries" },
   { label: "Careers", href: "/careers" },
   { label: "Insights", href: "/insights" },
-  { label: "Contact", href: "/contact" },
 ] as const;
 
 /**

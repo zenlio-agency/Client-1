@@ -306,6 +306,12 @@ These apply to every word on the site:
 
 - ManyaIT is a GCC (Global Capability Center) technology and talent partner.
   Tagline: "Technology & Talent Partners".
+- **Write for B2B decision-makers (important).** The readers are enterprises
+  weighing a partnership and talent partners looking at open roles. Use
+  high-level business and technical terms: operating model, delivery
+  governance, time to value, data estate, production-grade, platform
+  engineering, Build-Operate-Transfer, elastic capacity. Leave out basic
+  explanations and everyday phrasing ("we listen first", "you meet everyone").
 - Imply, never state, that ManyaIT provides vetted tech talent and builds
   teams. Use: talent, specialists, teams, capability center, AI-ready, vetted,
   matched to your stack, productive from week one, teams live in weeks,
@@ -316,8 +322,10 @@ These apply to every word on the site:
   vendor.
 - The hero does not lead with the service list or with locations.
 - One idea per card, one line per tile.
-- Dallas is the Client & Leadership Hub and Hyderabad the Engineering &
-  Talent Hub.
+- The United States is home to the Client & Leadership Hub and India to the
+  Engineering & Talent Hub. In section copy and on the map, name the
+  countries, once each. City names belong in the footer and in postal
+  addresses.
 - No client, number, certification or affiliate goes live until it is
   confirmed.
 

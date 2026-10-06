@@ -1,26 +1,38 @@
 ---
+import Eyebrow from "@/components/typography/Eyebrow.astro";
 import Heading from "@/components/typography/Heading.astro";
 import Paragraph from "@/components/typography/Paragraph.astro";
+import Button from "@/components/Button.astro";
+import ButtonWrapper from "@/components/wrapper/ButtonWrapper.astro";
+import Icon from "@/components/media/Icon.astro";
+import arrow from "@/assets/icons/ui-arrow.svg";
 import { tbc } from "@/data/site.ts";
 
 interface Props {
   /** Set to `false` to omit the component. */
   render?: boolean;
+  /** Pill label above the heading, as on the other sections. */
+  eyebrow?: string;
   /** Section heading. */
   heading?: string;
-  /** Line under the heading. */
-  subheading?: string;
-  /** Short paragraph under the subheading. */
+  /** Short paragraph under the heading. */
   lede?: string;
+  /** Buttons under the paragraph: the first solid, the rest outlined. */
+  buttons?: { label: string; href: string }[];
   /** Figures and what each one measures, four to a row on desktop. */
   stats?: { value: string; label: string }[];
 }
 
 const {
   render = true,
-  heading = "Why ManyaIT",
-  subheading = "Data-led outcomes, engineered end to end.",
-  lede = "From data foundations to production AI, we architect, implement and scale the platforms your Global Capability Center depends on. Specialists matched to your stack, and a clear path to build, operate and transfer, so the capability you scale is always yours.",
+  eyebrow = "Why ManyaIT",
+  heading = "Data-led outcomes, engineered end to end.",
+  lede = "From data foundations to production-grade AI, we architect, implement and scale the platforms your Global Capability Center runs on. Specialist capacity aligned to your technology landscape, governed delivery and a defined build-operate-transfer path to full ownership.",
+  /* TODO: the Testimonials destination is to be confirmed. */
+  buttons = [
+    { label: "Explore Careers", href: "/careers" },
+    { label: "Testimonials", href: "#" },
+  ],
   stats = [
     { value: "[XX]+", label: "Data and AI programs taken to production" },
     { value: "[XX]+", label: "Enterprise data estates modernized and governed" },
@@ -69,7 +81,7 @@ const waves = [
 
 {
   render && stats.length > 0 && (
-    <div class="why-metrics_panel theme-brand" data-reveal>
+    <div class="why-metrics_panel theme-dark" data-reveal>
       <svg
         class="why-metrics_waves"
         viewBox="0 0 1200 600"
@@ -83,13 +95,29 @@ const waves = [
       </svg>
 
       <div class="why-metrics_head">
-        <Heading class="why-metrics_heading">{heading}</Heading>
-        <Paragraph variant="h4" class="why-metrics_sub">
-          {subheading}
-        </Paragraph>
+        <Eyebrow>{eyebrow}</Eyebrow>
+        <Heading maxWidth={24} class="why-metrics_heading">
+          {heading}
+        </Heading>
         <Paragraph variant="large" maxWidth={64} class="why-metrics_lede">
           {lede}
         </Paragraph>
+        {buttons.length > 0 && (
+          <ButtonWrapper marginTop="2">
+            {buttons.map((button, index) => (
+              <Button
+                element="link"
+                href={button.href}
+                emphasis={index === 0 ? "primary" : "secondary"}
+              >
+                {button.label}
+                {index === 0 && (
+                  <Icon src={arrow} variant="small" class="button_icon" />
+                )}
+              </Button>
+            ))}
+          </ButtonWrapper>
+        )}
       </div>
 
       <ul class="why-metrics_list" style={`--_columns: ${columns}`}>
@@ -122,12 +150,13 @@ const waves = [
       margin-block: 0;
     }
 
-    /* A deep navy to Manya Blue to indigo field, lit from two corners.
-       Captions stay at 4.5:1 or better against every part of it. */
+    /* Black with Manya Blue light from two corners, like the figures strip
+       it replaced. Captions stay at 4.5:1 or better against every part of
+       it. */
     .why-metrics_panel {
-      /* Body text a shade lighter than the brand theme's, so it holds 4.5:1
+      /* Body text a shade lighter than the dark theme's, so it holds 4.5:1
          where a wave line runs beneath it. */
-      --_soft: color-mix(in srgb, var(--white) 50%, var(--blue-100));
+      --_soft: color-mix(in srgb, var(--white) 35%, var(--slate-300));
       position: relative;
       isolation: isolate;
       overflow: clip;
@@ -139,24 +168,23 @@ const waves = [
       padding: var(--space-7) var(--space-4);
       border-radius: 1.5rem;
       text-align: center;
-      background-color: var(--blue-800);
+      --_alignment: center;
+      background-color: var(--ink-black);
       background-image:
         radial-gradient(
-          ellipse 55% 75% at 100% 0%,
-          color-mix(in srgb, #5a3fe0 85%, transparent),
+          ellipse 60% 80% at 100% 0%,
+          color-mix(in srgb, var(--blue-500) 45%, transparent),
           transparent 70%
         ),
         radial-gradient(
-          ellipse 50% 70% at 0% 100%,
-          color-mix(in srgb, var(--blue-500) 70%, transparent),
+          ellipse 45% 60% at 0% 100%,
+          color-mix(in srgb, var(--blue-700) 40%, transparent),
           transparent 70%
         ),
         linear-gradient(
           120deg,
-          var(--blue-900) 0%,
-          var(--blue-700) 38%,
-          var(--blue-600) 68%,
-          #4a32c4 100%
+          var(--ink-black) 35%,
+          color-mix(in srgb, var(--blue-900) 70%, var(--ink-black)) 100%
         );
       @media (width >= 48rem) {
         padding: var(--space-8) var(--space-6);
@@ -189,15 +217,12 @@ const waves = [
       gap: var(--space-4);
     }
 
-    .why-metrics_sub {
-      color: var(--text);
-      font-weight: var(--heading-medium);
+    .why-metrics_heading {
       text-wrap: balance;
     }
 
-    /* A little more air above the lede than between heading and line. */
     .why-metrics_lede {
-      margin: var(--space-3) auto 0;
+      margin-inline: auto;
       color: var(--_soft);
     }
 
