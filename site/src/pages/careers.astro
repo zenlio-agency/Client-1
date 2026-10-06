@@ -2,14 +2,12 @@
 import Layout from "@/layouts/BaseLayout.astro";
 import Section from "@/components/wrapper/Section.astro";
 import CareersOpenings from "@/components/content/CareersOpenings.astro";
-import StorySplit from "@/components/content/StorySplit.astro";
 import FeatureGrid from "@/components/content/FeatureGrid.astro";
 import ProcessSteps from "@/components/content/ProcessSteps.astro";
 import FaqList from "@/components/content/FaqList.astro";
 import CtaFinal from "@/components/content/CtaFinal.astro";
 import { CAPABILITIES, capabilityHref } from "@/data/site.ts";
 import { LEGAL, mailLink } from "@/data/legal.ts";
-import { CAREERS_LIFE_PHOTO } from "@/data/photos.ts";
 
 /* One line per career track, keyed by capability id. */
 const tracks: Record<string, string> = {
@@ -28,68 +26,11 @@ const tracks: Record<string, string> = {
 
 <Layout
   title="Careers"
-  description="Careers at ManyaIT: engineer the data, AI and enterprise platforms that leading organizations run on, with certifications, mentoring and a clear path to grow."
+  description="Careers at ManyaIT: engineer the data, AI and enterprise platforms that leading organizations run on, with a clear path to grow from engineer to lead and architect."
 >
   {/* Openings */}
   <Section paddingTop="small" id="careers">
     <CareersOpenings />
-  </Section>
-
-  {/* Life at ManyaIT */}
-  <Section theme="tint" id="life">
-    <StorySplit
-      eyebrow="Life at ManyaIT"
-      heading="Work that stays with you."
-      paragraphs={[
-        "At ManyaIT you work on the platforms that run modern enterprises: data foundations, enterprise systems, applied AI and digital products. Every program is tied to a business outcome, so you see the difference your work makes.",
-        "Our people in the United States and India work as one delivery organization, side by side with the enterprises we partner with. Decisions are made close to the work, by the people who own the outcome.",
-        "Programs run for the long term, so you have time to master a platform, grow into a lead or architect role and see the results of your work over years, not sprints.",
-      ]}
-      points={[
-        {
-          title: "Enterprise platforms",
-          text: "Banking, telecom, healthcare and energy",
-        },
-        { title: "Two hubs, one team", text: "United States and India" },
-      ]}
-      photo={CAREERS_LIFE_PHOTO}
-    />
-  </Section>
-
-  {/* Growth and benefits */}
-  <Section id="benefits">
-    <FeatureGrid
-      eyebrow="Growth and benefits"
-      heading="Built for long careers, not short stints."
-      intro="Everything here is designed around one idea: the longer you stay, the more you should grow."
-      numbered
-      items={[
-        {
-          title: "Paid certifications",
-          text: "Exam fees and study time for the SAP, cloud and AI certifications that matter to your track.",
-        },
-        {
-          title: "A mentor from day one",
-          text: "A senior engineer to learn from in your first year, and regular career conversations after that.",
-        },
-        {
-          title: "A growth plan in 90 days",
-          text: "The certifications to earn, the skills to build and the role to grow into, agreed with your lead.",
-        },
-        {
-          title: "Promotion from within",
-          text: "New leads and architects come from our own teams first.",
-        },
-        {
-          title: "Flexible ways of working",
-          text: "Hybrid, on-site and remote roles, set per team and listed on every opening.",
-        },
-        {
-          title: "Health and wellbeing",
-          text: "[Medical cover and wellbeing benefits to confirm.]",
-        },
-      ]}
-    />
   </Section>
 
   {/* Career tracks */}
@@ -118,24 +59,24 @@ const tracks: Record<string, string> = {
   <Section theme="dark" id="process">
     <ProcessSteps
       eyebrow="Joining ManyaIT"
-      heading="A clear process, start to finish."
-      intro="Four steps, honest feedback at each one, and no fees at any stage."
+      heading="A transparent path to your next role."
+      intro="Every stage helps you understand the work, the team and where your career can go. There is no fee at any stage."
       steps={[
         {
-          title: "Apply or join the network",
-          text: "Apply for an opening, or join the Talent Network and we'll reach out when a team that fits you opens up.",
+          title: "Discover",
+          text: "Explore openings across data, enterprise platforms, AI and digital engineering, or join the Talent Network to hear about future roles.",
         },
         {
-          title: "Meet our people team",
-          text: "A short conversation about your experience, the work you enjoy and where you want to grow.",
+          title: "Connect",
+          text: "An open conversation with our people team about your experience, your ambitions and the work that interests you most.",
         },
         {
-          title: "Technical conversation",
-          text: "A practical session with engineers from the team you'd join, built around real problems rather than trick questions.",
+          title: "Collaborate",
+          text: "A practical session with the team you would join, centered on real business challenges and how you approach them.",
         },
         {
-          title: "Offer and onboarding",
-          text: "Meet your lead, receive your offer and start with a mentor, a growth plan and a clear first project.",
+          title: "Contribute",
+          text: "Receive your offer, meet your team and start on work that matters, with support to grow from your first day.",
         },
       ]}
     />
