@@ -122,7 +122,7 @@ export const HOME = {
 
 /* Footer.astro */
 export const FOOTER_LINE =
-  "Technology & talent partners for global enterprises. AI-ready teams that help your capability center grow.";
+  "Technology, data and AI engineering partner for global enterprises, from strategy to production.";
 
 /*
  * Page headers held in components rather than in a HeroDetail on the page:

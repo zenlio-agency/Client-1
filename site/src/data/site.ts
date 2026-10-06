@@ -7,7 +7,9 @@ import { CAPABILITY_PAGES } from "@/data/capability-pages.ts";
 
 /**
  * The five capability areas, in the order used everywhere on the site.
- * `slug` names each one's page under `/capabilities/`.
+ * `slug` names each one's page under `/capabilities/`. `line` is the
+ * one-liner shown wherever a capability is listed; `focus` is shown only on
+ * the Capabilities page.
  */
 export const CAPABILITIES = [
   {
@@ -15,7 +17,14 @@ export const CAPABILITIES = [
     slug: "data-analytics",
     key: "data",
     title: "Data & Analytics",
-    line: "Data engineers who turn scattered data into decisions.",
+    line: "Modern data platforms that turn scattered data into trusted, decision-ready intelligence.",
+    focus: [
+      "Data strategy & AI-readiness assessment",
+      "Cloud data platform & lakehouse modernization",
+      "Data engineering & pipeline (ETL/ELT) modernization",
+      "Data governance, quality & observability",
+      "BI, analytics & self-service insights",
+    ],
     icon: capData,
   },
   {
@@ -23,7 +32,14 @@ export const CAPABILITIES = [
     slug: "sap-enterprise-data",
     key: "sap",
     title: "SAP & Enterprise Data",
-    line: "S/4HANA, BTP and clean-core specialists.",
+    line: "S/4HANA transformation, BTP innovation and clean-core architecture that keep the enterprise core agile.",
+    focus: [
+      "S/4HANA migration & upgrade",
+      "Clean-core strategy & BTP extensions",
+      "SAP data, analytics & integration",
+      "Master data management & data migration",
+      "Application management & continuous optimization",
+    ],
     icon: capSap,
   },
   {
@@ -31,7 +47,14 @@ export const CAPABILITIES = [
     slug: "applied-ai",
     key: "ai",
     title: "Applied AI",
-    line: "GenAI and ML talent that ships to production.",
+    line: "Generative AI and machine learning, engineered for production and governed for the enterprise.",
+    focus: [
+      "AI use-case discovery & value roadmaps",
+      "GenAI applications, copilots & knowledge assistants",
+      "Machine learning & predictive analytics",
+      "MLOps & LLMOps",
+      "Responsible AI, governance & model risk",
+    ],
     icon: capAi,
   },
   {
@@ -39,7 +62,14 @@ export const CAPABILITIES = [
     slug: "agentic-ai-automation",
     key: "ai",
     title: "Agentic AI & Automation",
-    line: "Builders of AI agents that get real work done.",
+    line: "Intelligent agents and automated workflows that execute real work across your operations.",
+    focus: [
+      "Agentic workflow design & orchestration",
+      "Intelligent process automation",
+      "Process intelligence & discovery",
+      "Operational decision automation",
+      "Agent monitoring, governance & lifecycle management",
+    ],
     icon: capFlow,
   },
   {
@@ -47,7 +77,14 @@ export const CAPABILITIES = [
     slug: "digital-product-engineering",
     key: "digital",
     title: "Digital Product Engineering",
-    line: "Cloud-native product teams, from web to mobile.",
+    line: "Cloud-native products and platforms, engineered from concept to scale across web and mobile.",
+    focus: [
+      "Product strategy, UX & design",
+      "Cloud-native application development",
+      "Legacy application modernization",
+      "APIs, microservices & integration",
+      "DevSecOps, quality engineering & SRE",
+    ],
     icon: capCode,
   },
 ] as const;
@@ -229,29 +266,29 @@ export const NAV = [
 ] as const;
 
 /**
- * How a team comes together, from skills brief to Build-Operate-Transfer.
- * Shown on the About page and every capability page.
+ * The delivery lifecycle, from discovery to running and improving the
+ * platform. Shown on the About, Capabilities and capability pages.
  */
 export const TEAM_STEPS = [
   {
-    title: "Shape the brief",
-    text: "Share a skills brief: the platforms, roles and outcomes you need. We turn it into a team plan with a start date.",
-    note: "Skills brief to team plan",
+    title: "Discover & define",
+    text: "We align on business goals, assess your current landscape across systems, data, architecture and skills, and shape a clear roadmap with measurable success criteria.",
+    note: "Roadmap and success metrics",
   },
   {
-    title: "Build the team",
-    text: "We bring together specialists matched to your stack and assess them on problems from your domain. You meet everyone before they start.",
-    note: "Teams live in weeks",
+    title: "Design & assemble",
+    text: "We architect the solution and bring together the right specialists, matched to your technology stack and your domain. You meet the team before work begins.",
+    note: "Right architecture, right people",
   },
   {
-    title: "Operate together",
-    text: "The team works inside your tools and controls, ships from its first sprint and reports against the measures you set.",
-    note: "Productive from week one",
+    title: "Build & deliver",
+    text: "Agile, DevSecOps-driven delivery inside your tools and controls, with continuous integration, automated testing and transparent progress against agreed outcomes.",
+    note: "Value from the first sprint",
   },
   {
-    title: "Scale or transfer",
-    text: "Grow the team as results come in. When you're ready, the capability moves into your own center, people and knowledge included.",
-    note: "The capability stays yours",
+    title: "Operate & evolve",
+    text: "We run, monitor and optimize what we build. Then we scale the team, expand the scope or transition full ownership to you, on your timeline.",
+    note: "Built to last, yours to keep",
   },
 ];
 
@@ -306,7 +343,10 @@ const STACK_TECHNOLOGIES = new Set(
 );
 
 export const COMPANY_FIGURES = {
-  programs: { value: "100+", label: "Data and AI programs taken to production" },
+  programs: {
+    value: "100+",
+    label: "Data and AI programs taken to production",
+  },
   dataEstates: {
     value: "25+",
     label: "Enterprise data estates modernized and governed",
@@ -324,6 +364,29 @@ export const COMPANY_FIGURES = {
   years: { value: "10+", label: "Years powering enterprise technology" },
   specialists: { value: "250+", label: "Specialists in our talent network" },
 } as const;
+
+/**
+ * The "at a glance" strip on the About and Capabilities pages: the same
+ * figures as above, with labels written for that strip.
+ */
+export const GLANCE_FIGURES = [
+  {
+    value: COMPANY_FIGURES.years.value,
+    label: "Years of enterprise technology delivery",
+  },
+  {
+    value: COMPANY_FIGURES.enterprises.value,
+    label: "Enterprise clients served",
+  },
+  {
+    value: COMPANY_FIGURES.specialists.value,
+    label: "Engineers and specialists in our network",
+  },
+  {
+    value: COMPANY_FIGURES.kickoff.value,
+    label: "Average time from kickoff to a productive team",
+  },
+];
 
 /** Wraps `[placeholder]` runs in a marked span so they read as unconfirmed. */
 export const tbc = (text: string) =>

@@ -337,6 +337,31 @@ const {
             grid-column: auto;
           }
         }
+        /* A row with a list: the list sits under the text, in its column,
+           and the title and arrow span both. */
+        &:has(> .feature-grid_points) {
+          @media (width >= 48rem) {
+            align-items: start;
+            &
+              > :is(
+                .feature-grid_icon,
+                .feature-grid_number,
+                .feature-grid_title
+              ) {
+              grid-row: 1 / span 2;
+            }
+            & > .feature-grid_text {
+              grid-area: 1 / 3;
+            }
+            & > .feature-grid_points {
+              grid-area: 2 / 3;
+            }
+            & > .feature-grid_more {
+              grid-area: 1 / 4 / span 2;
+              align-self: center;
+            }
+          }
+        }
         &.is-linked {
           @media (hover: hover) {
             &:hover {

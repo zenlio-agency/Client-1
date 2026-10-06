@@ -165,6 +165,22 @@ const { render = true } = Astro.props;
       scroll-margin-top: calc(var(--nav-height) + var(--space-5));
     }
 
+    /* The two single-column tiles are too short for the icon, the title
+       and the one-liner together, so the icon steps aside while the
+       one-liner shows (always, on touch screens). */
+    @media (width >= 64rem) {
+      .bento_tile:is(.is-cap-ai, .is-cap-flow) {
+        &:is(:hover, :focus-visible, :focus-within) .photo-tile_icon {
+          display: none;
+        }
+        @media (hover: none) {
+          & .photo-tile_icon {
+            display: none;
+          }
+        }
+      }
+    }
+
     .bento_cta_text {
       margin-bottom: var(--space-2);
       font-size: var(--text-main);

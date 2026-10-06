@@ -17,11 +17,14 @@ const {
 const isNoindex = noindex ?? isNoindexRoute(Astro.url.pathname);
 
 const isHome = Astro.url.pathname.replace(/\/+$/, "") === "";
+/* A title that already names the company is used as written. */
 const pageTitle = !title
   ? SITE_NAME
-  : isHome
-    ? `${SITE_NAME} | ${title}`
-    : `${title} | ${SITE_NAME}`;
+  : title.includes(SITE_NAME)
+    ? title
+    : isHome
+      ? `${SITE_NAME} | ${title}`
+      : `${title} | ${SITE_NAME}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const socialImage = new URL(image, Astro.site);
 ---

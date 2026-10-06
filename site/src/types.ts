@@ -1,6 +1,6 @@
 /** Page metadata for `BaseHead` and layouts. */
 export interface SeoProps {
-  /** Page title. The site name is appended. */
+  /** Page title. The site name is appended unless the title already has it. */
   title?: string;
   /** Page and social description. Defaults to `SITE_DESCRIPTION`. */
   description?: string;
