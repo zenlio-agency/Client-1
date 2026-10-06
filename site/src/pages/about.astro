@@ -14,20 +14,20 @@ import { ABOUT_PHOTOS } from "@/data/photos.ts";
 ---
 
 <Layout
-  title="About"
-  description="ManyaIT is a technology and talent partner for global enterprises, with a Client & Leadership Hub in the United States and an Engineering & Talent Hub in India."
+  title="About ManyaIT | Technology, Data & AI Engineering Partner"
+  description="ManyaIT is a technology, data and AI engineering partner helping enterprises design, build and run modern platforms, from strategy to production."
 >
   {/* Hero */}
   <Section paddingTop="small">
     <HeroDetail
       crumbs={[{ label: "Home", href: "/" }, { label: "About" }]}
       eyebrow="About ManyaIT"
-      title="Technology & talent partners for enterprises that build."
-      lede="ManyaIT helps global enterprises build and scale their capability centers with AI-ready engineering teams. Client leadership in the United States, engineering depth in India, and one standard of work across both."
+      title="Engineering what your enterprise needs next."
+      lede="ManyaIT is a technology and talent partner that turns strategy into production-ready platforms. We bring together expert engineers, proven delivery frameworks and deep domain context to design, build, modernize and run the systems that move your business forward."
       points={[
-        "Matched to your stack",
-        "Productive from week one",
-        "Built to stay",
+        "End-to-end delivery",
+        "Expert engineering talent",
+        "Outcomes that last",
       ]}
       primary={CTA.primary}
       secondary={{ label: "Explore capabilities", href: "/capabilities" }}
@@ -39,11 +39,11 @@ import { ABOUT_PHOTOS } from "@/data/photos.ts";
   <Section theme="tint" id="story">
     <StorySplit
       eyebrow="Our story"
-      heading="From IT services to capability partner."
+      heading="From IT solutions to end-to-end engineering partner."
       paragraphs={[
         "ManyaIT began as a technology solutions firm headquartered in the United States, with an engineering office in India. [Founding year and early milestones to confirm.]",
-        "Years of work in mobility, cloud and big data taught us what enterprise programs need to succeed: the right people, close to the work, who stay long enough to own it.",
-        "Today that lesson shapes everything we do. Enterprises come to us to build and grow their Global Capability Centers, with specialists in data, SAP, AI and digital engineering who are matched to their stack and productive from week one. We measure ourselves by what those teams change for the business, and by how long they stay.",
+        "Years of delivering mobility, cloud and big data programs taught us a simple truth: transformation succeeds when strategy, engineering and the right people move as one. Architecture alone does not ship. Talent alone does not scale. Lasting outcomes come from bringing both together, with clear ownership from the first workshop to the final release.",
+        "Today, enterprises partner with us across the full technology lifecycle, from data foundations and enterprise platforms to applied AI, intelligent automation and digital products. Some engage us to deliver a defined program end to end. Others extend their own engineering organization with our specialists, or build a long-term delivery hub with us. Every engagement is measured the same way: by the business outcomes it creates and the capability it leaves behind.",
       ]}
       points={[
         { title: "United States", text: "Client & Leadership Hub" },
@@ -58,17 +58,17 @@ import { ABOUT_PHOTOS } from "@/data/photos.ts";
   <Section id="why">
     <FeatureGrid
       eyebrow="Why we exist"
-      heading="The right people. Ready faster. Built to stay."
-      intro="Capability centers succeed or stall on their teams. We exist to make the team the easy part."
+      heading="Strategy to production. People to platforms."
+      intro="Enterprises don't need more vendors. They need one accountable partner that can think, build and run."
       columns={2}
       items={[
         {
           title: "Our mission",
-          text: "Help enterprises build technology capability that lasts, with teams that are ready faster, work as part of their organization and get better every quarter.",
+          text: "To help enterprises build technology that delivers measurable value: engineered with precision, delivered end to end and powered by people who take ownership of the outcome.",
         },
         {
           title: "Our vision",
-          text: "To be the first call for any enterprise building a capability center, known for teams that stay and platforms that hold up.",
+          text: "To be the most trusted engineering partner for enterprises modernizing with data and AI, known for platforms that perform in production and teams that raise the bar every quarter.",
         },
       ]}
     />
@@ -79,33 +79,33 @@ import { ABOUT_PHOTOS } from "@/data/photos.ts";
   <Section theme="tint" id="values">
     <FeatureGrid
       eyebrow="What we believe"
-      heading="Six habits behind every team"
-      intro="They shape who joins ManyaIT, how we work with each enterprise and what we expect of ourselves."
+      heading="Six principles behind every engagement"
+      intro="They shape who joins ManyaIT, how we partner with every enterprise and what we expect of ourselves."
       numbered
       items={[
         {
-          title: "Ownership over activity",
-          text: "We judge work by what it changes for the business, not by hours logged or tickets closed.",
+          title: "Outcomes over output",
+          text: "We measure success by business impact, not by hours logged or tickets closed.",
         },
         {
-          title: "Continuity by design",
-          text: "Teams that stay learn your systems, your domain and your controls. We plan for tenure, not rotation.",
+          title: "Engineering excellence",
+          text: "Clean architecture, tested code and documented decisions, built to perform at enterprise scale.",
         },
         {
-          title: "Candor, early",
-          text: "We say what we see, including the bad news, while there is still time to act on it.",
+          title: "Transparency by default",
+          text: "Clear reporting, early visibility of risk and honest recommendations, even when the news is hard.",
         },
         {
-          title: "Craft and curiosity",
-          text: "We keep learning the platforms we work on, and we share what we learn across teams.",
+          title: "Continuity and ownership",
+          text: "Teams that stay learn your systems, your domain and your controls. Knowledge compounds instead of walking out the door.",
         },
         {
-          title: "Security as a habit",
-          text: "Your data, your code and your customers' trust are protected in every sprint, not only at audit time.",
+          title: "Security by design",
+          text: "Governance, privacy and compliance are built into every sprint, not added at audit time.",
         },
         {
-          title: "Two hubs, one team",
-          text: "Our US and India hubs work to one plan and one standard, so the working day hands over instead of stopping.",
+          title: "Two hubs, one standard",
+          text: "Our US and India hubs work to one plan and one quality bar, so delivery moves forward around the clock.",
         },
       ]}
     />
@@ -115,8 +115,8 @@ import { ABOUT_PHOTOS } from "@/data/photos.ts";
   <Section theme="dark" id="model">
     <ProcessSteps
       eyebrow="How we work"
-      heading="Build, operate, and transfer when you're ready"
-      intro="A clear path from the first skills brief to a capability you fully own, at the pace that suits your enterprise."
+      heading="From vision to value, end to end."
+      intro="One accountable lifecycle, from the first conversation to a platform that runs and keeps improving, with the flexibility to engage at any stage."
       steps={TEAM_STEPS}
     />
   </Section>
@@ -130,31 +130,37 @@ import { ABOUT_PHOTOS } from "@/data/photos.ts";
   <Section theme="tint">
     <FaqList
       heading="About ManyaIT, answered"
+      intro="Can't find what you're looking for? Ask us directly."
       items={[
         {
           question: "What does ManyaIT do?",
           answer:
-            "We help global enterprises build and scale technology capability, usually inside a Global Capability Center. That means AI-ready teams in data, SAP, AI, automation and digital engineering, plus the setup and support that keep them productive.",
+            "ManyaIT is a technology, data and AI engineering partner. We help enterprises design, build, modernize and run critical platforms across data and analytics, SAP and enterprise data, applied AI, intelligent automation and digital product engineering, with expert teams and end-to-end delivery ownership.",
         },
         {
-          question: "What is a Global Capability Center?",
+          question: "How can we work with ManyaIT?",
           answer:
-            "A Global Capability Center, or GCC, is an enterprise's own technology and operations center in another country. It gives the enterprise direct control of its talent, its knowledge and its costs.",
+            "Every engagement is shaped around your goals. We can deliver a defined program end to end, embed specialist engineers within your existing teams, or build and run a dedicated delivery hub that scales with your roadmap, with the option to transition it fully to your organization when you're ready.",
         },
         {
-          question: "What does Build-Operate-Transfer mean?",
+          question: "Can you take a project from strategy to production?",
           answer:
-            "We build the team and its ways of working, operate it with you until it runs smoothly, then move it into your own capability center, people and knowledge included. You decide the timing.",
+            "Yes. We cover the full lifecycle: assessment, roadmap, architecture, engineering, testing, deployment and ongoing operations, with one accountable team and clear governance throughout.",
+        },
+        {
+          question: "How do you ensure quality and security?",
+          answer:
+            "Engineering standards, code reviews, automated testing and DevSecOps practices are built into every sprint. Our teams work within your security, privacy and compliance controls and report against the measures you define.",
         },
         {
           question: "Where are you based?",
           answer:
-            "Our Client & Leadership Hub is in the United States, and our Engineering & Talent Hub is in India. Teams work across both, with daily overlap in North American hours.",
+            "Our Client & Leadership Hub is in the United States, and our Engineering & Talent Hub is in India. Teams work across both, with daily overlap in North American business hours.",
         },
         {
-          question: "Which industries do you work in?",
+          question: "Which industries do you serve?",
           answer:
-            "Banking and financial services, telecommunications, healthcare and energy. Our specialists know the rules, systems and pressures of each sector.",
+            "Banking and financial services, telecommunications, healthcare and energy. Our teams understand the regulations, systems and operating pressures of each sector.",
         },
       ]}
     />

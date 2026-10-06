@@ -12,37 +12,38 @@ import { CAPABILITY_PHOTOS } from "@/data/photos.ts";
 ---
 
 <Layout
-  title="Capabilities"
-  description="Data, SAP, AI, automation and product engineering teams that join your capability center, matched to your stack and productive from week one."
+  title="Capabilities | ManyaIT: Data, AI, SAP & Digital Engineering"
+  description="End-to-end data, AI, SAP, automation and digital product engineering, from strategy and architecture to delivery and continuous optimization."
 >
   {/* Hero */}
   <Section paddingTop="small">
     <HeroDetail
       crumbs={[{ label: "Home", href: "/" }, { label: "Capabilities" }]}
       eyebrow="Capabilities"
-      title="Expertise across the modern enterprise stack."
-      lede="Five capability areas, one way of working. Each team is matched to your stack, joins your capability center and stays to run and improve what it builds."
+      title="End-to-end engineering across the modern enterprise stack."
+      lede="Five integrated capability areas, one accountable delivery model. From strategy and architecture to build, deployment and continuous optimization, our teams turn complex technology agendas into measurable business outcomes."
       points={[
-        "Matched to your stack",
-        "Teams live in weeks",
-        "Build-Operate-Transfer",
+        "Strategy to production",
+        "Expert-led teams",
+        "Flexible engagement models",
       ]}
-      primary={{ label: "Share your skills brief", href: CTA.primary.href }}
+      primary={{ label: "Discuss your initiative", href: CTA.primary.href }}
       secondary={{ label: "Why ManyaIT", href: "/about" }}
       photo={CAPABILITY_PHOTOS["cap-data"]}
     />
   </Section>
 
-  {/* The five capabilities */}
+  {/* The five capabilities, each with its focus areas */}
   <Section theme="tint">
     <FeatureGrid
       variant="rows"
-      eyebrow="Choose a capability"
-      heading="Specialist teams for the platforms that matter most"
-      intro="Start with one capability, or combine them. Data feeds AI, SAP feeds data, and one team can carry the work across all three."
+      eyebrow="What we deliver"
+      heading="Integrated capabilities for data-driven, AI-ready enterprises"
+      intro="Start with one capability or combine them into a single program. Data fuels AI, enterprise platforms anchor data, and digital products bring it all to your customers. One partner can carry the work across every layer."
       items={CAPABILITIES.map((cap) => ({
         title: cap.title,
         text: cap.line,
+        list: [...cap.focus],
         href: capabilityHref(cap),
         icon: cap.icon,
       }))}
@@ -50,12 +51,41 @@ import { CAPABILITY_PHOTOS } from "@/data/photos.ts";
     />
   </Section>
 
-  {/* How the team comes together, with the company figures */}
+  {/* Engagement models */}
+  <Section>
+    <FeatureGrid
+      eyebrow="Engagement models"
+      heading="Engage the way your organization works best."
+      intro="Every enterprise moves differently. Choose the model that fits your goals today, and change it as your priorities evolve."
+      columns={4}
+      numbered
+      items={[
+        {
+          title: "Advisory & assessment",
+          text: "Focused engagements to assess your data, platforms and AI readiness, and define a prioritized roadmap with clear business cases.",
+        },
+        {
+          title: "End-to-end delivery",
+          text: "We own a defined scope from discovery to deployment and support, against agreed milestones, quality gates and service levels.",
+        },
+        {
+          title: "Dedicated engineering teams",
+          text: "Expert engineers who integrate with your teams, tools and processes, and scale up or down as your roadmap changes.",
+        },
+        {
+          title: "Build, run & transition",
+          text: "We build and operate a dedicated delivery hub for you, then transition the people, processes and knowledge to your organization on your timeline.",
+        },
+      ]}
+    />
+  </Section>
+
+  {/* How an engagement runs, with the company figures */}
   <Section theme="dark">
     <ProcessSteps
       eyebrow="How it works"
-      heading="From skills brief to a team that ships"
-      intro="Every capability follows the same path, whether it starts with three specialists or a full engineering hub."
+      heading="From first conversation to lasting impact"
+      intro="Every capability follows the same accountable path, whether it starts with a focused assessment or a full-scale transformation program."
       steps={TEAM_STEPS}
     />
   </Section>
@@ -68,26 +98,32 @@ import { CAPABILITY_PHOTOS } from "@/data/photos.ts";
   <Section>
     <FaqList
       heading="Capabilities, answered"
+      intro="Can't find what you're looking for? Ask us directly."
       items={[
         {
           question: "Can one team cover more than one capability?",
           answer:
-            "Yes. Many teams combine data engineering with AI, or SAP with data. We shape the team around the outcome, then add specialists as the scope grows.",
+            "Yes. Many programs combine data engineering with AI, or SAP with analytics and automation. We design the team around the outcome and add specialists as the scope evolves.",
         },
         {
-          question: "Do your teams work on our existing platforms?",
+          question: "Do you work on our existing platforms and tools?",
           answer:
-            "Almost always. Teams join your repositories, tools and controls, learn what is already there and build on it rather than starting over.",
+            "Almost always. Our teams work inside your repositories, cloud environments, toolchains and controls, building on what already works rather than starting over.",
         },
         {
-          question: "How fast can a team start?",
+          question: "Can you take ownership of a complete project?",
           answer:
-            "Most teams are live within [X] weeks of an agreed skills brief. A smaller starting team can begin sooner while the rest joins.",
+            "Yes. We can own delivery end to end, from discovery and architecture to build, testing, deployment and support, with clear milestones, governance and reporting.",
         },
         {
-          question: "What does Build-Operate-Transfer mean?",
+          question: "How quickly can we get started?",
           answer:
-            "We build the team and its ways of working, operate it with you until it runs smoothly, then move it into your own capability center when you're ready. You choose the timing.",
+            "Most engagements begin within [X] weeks of an agreed scope. A core team can start sooner while the wider team ramps up.",
+        },
+        {
+          question: "How do you make AI and data solutions enterprise-ready?",
+          answer:
+            "We build on governed, high-quality data, apply security and responsible-AI controls from the start, and put monitoring, MLOps and clear ownership in place so solutions perform reliably in production.",
         },
       ]}
     />

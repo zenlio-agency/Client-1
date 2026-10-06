@@ -1,25 +1,20 @@
 ---
 import Eyebrow from "@/components/typography/Eyebrow.astro";
-import { COMPANY_FIGURES, tbc } from "@/data/site.ts";
+import { GLANCE_FIGURES, tbc } from "@/data/site.ts";
 
 interface Props {
   /** Set to `false` to omit the component. */
   render?: boolean;
   /** Pill label above the figures. */
   label?: string;
-  /** Figures and what each one measures. Defaults to the company figures. */
+  /** Figures and what each one measures. Defaults to the "at a glance" figures. */
   stats?: { value: string; label: string }[];
 }
 
 const {
   render = true,
   label = "ManyaIT at a glance",
-  stats = [
-    COMPANY_FIGURES.years,
-    COMPANY_FIGURES.enterprises,
-    COMPANY_FIGURES.specialists,
-    COMPANY_FIGURES.kickoff,
-  ],
+  stats = GLANCE_FIGURES,
 } = Astro.props;
 ---
 
