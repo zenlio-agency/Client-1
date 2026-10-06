@@ -1,0 +1,249 @@
+---
+import Heading from "@/components/typography/Heading.astro";
+import Paragraph from "@/components/typography/Paragraph.astro";
+import { tbc } from "@/data/site.ts";
+
+interface Props {
+  /** Set to `false` to omit the component. */
+  render?: boolean;
+  /** Section heading. */
+  heading?: string;
+  /** Line under the heading. */
+  subheading?: string;
+  /** Short paragraph under the subheading. */
+  lede?: string;
+  /** Figures and what each one measures, four to a row on desktop. */
+  stats?: { value: string; label: string }[];
+}
+
+const {
+  render = true,
+  heading = "Why ManyaIT",
+  subheading = "Data-led outcomes, engineered end to end.",
+  lede = "From data foundations to production AI, we architect, implement and scale the platforms your Global Capability Center depends on. Specialists matched to your stack, and a clear path to build, operate and transfer, so the capability you scale is always yours.",
+  stats = [
+    { value: "[XX]+", label: "Data and AI programs taken to production" },
+    { value: "[XX]+", label: "Enterprise data estates modernized and governed" },
+    { value: "[XX]%", label: "Programs delivered on schedule, end to end" },
+    { value: "[X] wks", label: "From kickoff to a delivery-ready team" },
+    { value: "[XX]+", label: "Specialists across data, cloud and AI" },
+    { value: "[XX]%", label: "Specialist retention on multi-year programs" },
+    { value: "[XX]+", label: "Global enterprises served" },
+    { value: "[XX]+", label: "Years powering enterprise technology" },
+  ],
+} = Astro.props;
+
+/* The number is set large; any sign or unit around it ("<", "+", "%",
+   " wks") is set smaller, as in "[XX]+" or "< 5 min". */
+const split = (value: string) => {
+  const match = value.match(/^([^\d[]*)(.*[\d\]])(.*)$/);
+  return match
+    ? { before: match[1], figure: match[2], after: match[3] }
+    : { before: "", figure: value, after: "" };
+};
+
+/* Two fans of thin lines flowing across the panel. Drawn here rather than
+   as an image so they stay sharp at any size and cost no request. */
+const fan = (
+  count: number,
+  line: (t: number) => [number, number, number, number],
+) =>
+  Array.from({ length: count }, (_, index) => {
+    const t = index / (count - 1);
+    const [start, dip, rise, end] = line(t);
+    return {
+      d: `M-40 ${start}C320 ${dip} 760 ${rise} 1240 ${end}`,
+      opacity: (0.05 + 0.1 * Math.sin(Math.PI * t)).toFixed(3),
+    };
+  });
+
+/* Full rows on desktop: four across, or three when that divides evenly
+   (six figures read as two rows of three, not four and two). */
+const columns = stats.length % 4 !== 0 && stats.length % 3 === 0 ? 3 : 4;
+
+const waves = [
+  ...fan(18, (t) => [430 + t * 150, 700 - t * 60, 170 + t * 190, 250 + t * 110]),
+  ...fan(12, (t) => [20 + t * 90, 300 + t * 120, -60 + t * 140, 90 + t * 150]),
+];
+---
+
+{
+  render && stats.length > 0 && (
+    <div class="why-metrics_panel theme-brand" data-reveal>
+      <svg
+        class="why-metrics_waves"
+        viewBox="0 0 1200 600"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+        focusable="false"
+      >
+        {waves.map((wave) => (
+          <path d={wave.d} stroke-opacity={wave.opacity} />
+        ))}
+      </svg>
+
+      <div class="why-metrics_head">
+        <Heading class="why-metrics_heading">{heading}</Heading>
+        <Paragraph variant="h4" class="why-metrics_sub">
+          {subheading}
+        </Paragraph>
+        <Paragraph variant="large" maxWidth={64} class="why-metrics_lede">
+          {lede}
+        </Paragraph>
+      </div>
+
+      <ul class="why-metrics_list" style={`--_columns: ${columns}`}>
+        {stats.map((stat, index) => {
+          const { before, figure, after } = split(stat.value);
+          return (
+            <li
+              class="why-metrics_item"
+              data-reveal
+              style={`--reveal-order: ${index % 4}`}
+            >
+              <span class="why-metrics_value">
+                {before && <span class="why-metrics_unit">{before}</span>}
+                <span set:html={tbc(figure)} />
+                {after && <span class="why-metrics_unit">{after}</span>}
+              </span>
+              <span class="why-metrics_label">{stat.label}</span>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  )
+}
+
+<style is:global>
+  @layer components {
+    /* Spacing here comes from gaps, so type margins step aside. */
+    :where(.why-metrics_panel) :where(.heading, .text) {
+      margin-block: 0;
+    }
+
+    /* A deep navy to Manya Blue to indigo field, lit from two corners.
+       Captions stay at 4.5:1 or better against every part of it. */
+    .why-metrics_panel {
+      /* Body text a shade lighter than the brand theme's, so it holds 4.5:1
+         where a wave line runs beneath it. */
+      --_soft: color-mix(in srgb, var(--white) 50%, var(--blue-100));
+      position: relative;
+      isolation: isolate;
+      overflow: clip;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-7);
+      padding: var(--space-7) var(--space-4);
+      border-radius: 1.5rem;
+      text-align: center;
+      background-color: var(--blue-800);
+      background-image:
+        radial-gradient(
+          ellipse 55% 75% at 100% 0%,
+          color-mix(in srgb, #5a3fe0 85%, transparent),
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 50% 70% at 0% 100%,
+          color-mix(in srgb, var(--blue-500) 70%, transparent),
+          transparent 70%
+        ),
+        linear-gradient(
+          120deg,
+          var(--blue-900) 0%,
+          var(--blue-700) 38%,
+          var(--blue-600) 68%,
+          #4a32c4 100%
+        );
+      @media (width >= 48rem) {
+        padding: var(--space-8) var(--space-6);
+      }
+      @media (width >= 64rem) {
+        gap: var(--space-8);
+        padding: var(--space-8) var(--space-7);
+      }
+    }
+
+    .why-metrics_waves {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      fill: none;
+      stroke: var(--white);
+      stroke-width: 1;
+      pointer-events: none;
+      path {
+        vector-effect: non-scaling-stroke;
+      }
+    }
+
+    .why-metrics_head {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .why-metrics_sub {
+      color: var(--text);
+      font-weight: var(--heading-medium);
+      text-wrap: balance;
+    }
+
+    /* A little more air above the lede than between heading and line. */
+    .why-metrics_lede {
+      margin: var(--space-3) auto 0;
+      color: var(--_soft);
+    }
+
+    /* Two across on phones and tablets, three or four across from 64rem. */
+    .why-metrics_list {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-7) var(--space-4);
+      @media (width >= 64rem) {
+        grid-template-columns: repeat(var(--_columns, 4), minmax(0, 1fr));
+        gap: var(--space-8) var(--space-6);
+      }
+    }
+
+    .why-metrics_item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    /* Figures scale with the viewport up to 3.75rem (60px). */
+    .why-metrics_value {
+      font-family: var(--display-family);
+      font-size: clamp(2.25rem, 1.4rem + 2.6vw, 3.75rem);
+      font-weight: 700;
+      letter-spacing: var(--letter-spacing-tight);
+      line-height: 1;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .why-metrics_unit {
+      margin-inline: 0.08em;
+      font-size: 0.55em;
+      font-weight: 600;
+      letter-spacing: var(--letter-spacing-snug);
+    }
+
+    .why-metrics_label {
+      max-width: 22ch;
+      font-size: var(--text-small);
+      line-height: 1.45;
+      color: var(--_soft);
+      text-wrap: balance;
+    }
+  }
+</style>
