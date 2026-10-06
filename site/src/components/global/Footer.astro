@@ -88,6 +88,19 @@ const company = [
                       {hub.city}
                     </a>
                     <span class="footer_hub_role">{hub.role}</span>
+                    <address class="footer_hub_address">{hub.address}</address>
+                    <a
+                      class="footer_link footer_hub_contact"
+                      href={`tel:${hub.phone.replace(/[^+\d]/g, "")}`}
+                    >
+                      {hub.phone}
+                    </a>
+                    <a
+                      class="footer_link footer_hub_contact"
+                      href={`mailto:${hub.email}`}
+                    >
+                      {hub.email}
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -221,6 +234,21 @@ const company = [
     .footer_hub_role {
       font-size: 0.8rem;
       color: var(--text-2);
+    }
+
+    /* The only place on the site that gives each office's city, address
+       and direct contacts. */
+    .footer_hub_address {
+      margin-block: 0.3rem;
+      font-size: 0.8rem;
+      font-style: normal;
+      line-height: 1.5;
+      white-space: pre-line;
+      color: var(--text-2);
+    }
+
+    .footer_hub_contact {
+      font-size: 0.8rem;
     }
 
     .footer_bottom {

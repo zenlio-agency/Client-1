@@ -160,12 +160,13 @@ export const HUBS = [
     id: "dallas",
     city: "Dallas, Texas",
     short: "Dallas",
-    /* The name used in section copy and on the map; cities stay in the
-       footer and the postal address. */
+    /* The name used everywhere outside the footer. The city and the
+       address appear only in the footer (and in the legal notices, which
+       must give the registered address). */
     country: "United States",
     entity: "ManyaIT Inc.",
     role: "Client & Leadership Hub",
-    text: "Where partnerships start. Our Dallas team works in your time zone to shape the right team for each goal and keep it on track across North America.",
+    text: "Where partnerships start. Our US team works in your time zone to shape the right team for each goal and keep it on track across North America.",
     /* Line breaks render where the address is shown (white-space: pre-line). */
     address: "8668 John Hickman Pkwy #903\nFrisco, Texas 75034",
     phone: "+1 682-500-9839",
@@ -174,7 +175,7 @@ export const HUBS = [
     locale: "en-US",
     lat: 33.15,
     lon: -96.82,
-    link: { label: "Talk to our Dallas team", href: "/contact" },
+    link: { label: "Talk to our US team", href: "/contact" },
   },
   {
     id: "hyderabad",
@@ -183,16 +184,16 @@ export const HUBS = [
     country: "India",
     entity: "ManyaIT Solutions Pvt Ltd",
     role: "Engineering & Talent Hub",
-    text: "Home to our engineering talent. Hyderabad teams build, run and improve platforms for enterprises worldwide, working as part of each enterprise's own technology organization.",
+    text: "Home to our engineering talent. Our India teams build, run and improve platforms for enterprises worldwide, working as part of each enterprise's own technology organization.",
     address:
       "Bizness Square, Whitefields\nHITECH City, Hyderabad\nTelangana 500081",
-    phone: "[Phone]",
-    email: "[Email]",
+    phone: "+91 73869 36669",
+    email: "info@manyait.com",
     timeZone: "Asia/Kolkata",
     locale: "en-IN",
     lat: 17.45,
     lon: 78.39,
-    link: { label: "View opportunities in Hyderabad", href: "/careers" },
+    link: { label: "View opportunities in India", href: "/careers" },
   },
 ] as const;
 

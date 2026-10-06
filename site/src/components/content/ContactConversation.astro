@@ -244,9 +244,13 @@ const direct = [
                   {hub.country} · {hub.role}
                 </dt>
                 <dd>
-                  <address class="contact_direct_address">
-                    {`${hub.entity}\n${hub.address}`}
-                  </address>
+                  {hub.entity}
+                  <br />
+                  <a href={`tel:${hub.phone.replace(/[^+\d]/g, "")}`}>
+                    {hub.phone}
+                  </a>
+                  {" · "}
+                  <a href={`mailto:${hub.email}`}>{hub.email}</a>
                 </dd>
               </div>
             ))}
@@ -449,11 +453,6 @@ const direct = [
           }
         }
       }
-    }
-
-    .contact_direct_address {
-      font-style: normal;
-      white-space: pre-line;
     }
 
     .contact_direct_social {

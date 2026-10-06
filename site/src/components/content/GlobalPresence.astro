@@ -105,7 +105,7 @@ const pct = (value: number, of: number) =>
                 <span class="presence_tip_role">{pin.role}</span>
                 <span
                   class="presence_tip_address"
-                  set:html={tbc(`${pin.entity}\n${pin.address}`)}
+                  set:html={tbc(pin.entity)}
                 />
               </div>
             </div>
