@@ -3,6 +3,7 @@ import capSap from "@/assets/icons/cap-sap.svg";
 import capAi from "@/assets/icons/cap-ai.svg";
 import capFlow from "@/assets/icons/cap-flow.svg";
 import capCode from "@/assets/icons/cap-code.svg";
+import { CAPABILITY_PAGES } from "@/data/capability-pages.ts";
 
 /**
  * The five capability areas, in the order used everywhere on the site.
@@ -288,11 +289,21 @@ export const COMPANY_CONTACT = {
  * Company figures shown in the "Why ManyaIT" panel and the "at a glance"
  * strip (6 October 2026):
  * - enterprises, years and specialists come from ManyaIT;
- * - practices is counted from `CAPABILITIES` so it can't drift;
+ * - technologies is counted from the platforms and tools listed on the
+ *   capability pages (roles left out), rounded down to the ten, so it
+ *   can't drift from what the site shows;
  * - programs, dataEstates, onSchedule and kickoff are conservative estimates
  *   based on market benchmarks, approved for publication. Replace them with
  *   ManyaIT's measured figures when its records are available.
  */
+const STACK_TECHNOLOGIES = new Set(
+  Object.values(CAPABILITY_PAGES).flatMap((page) =>
+    page.stack.groups
+      .filter((group) => group.title !== "Specialists")
+      .flatMap((group) => group.items),
+  ),
+);
+
 export const COMPANY_FIGURES = {
   programs: { value: "100+", label: "Data and AI programs taken to production" },
   dataEstates: {
@@ -304,9 +315,9 @@ export const COMPANY_FIGURES = {
     label: "Programs delivered on schedule, end to end",
   },
   kickoff: { value: "4–6 wks", label: "From kickoff to a delivery-ready team" },
-  practices: {
-    value: String(CAPABILITIES.length),
-    label: "Capability practices, from data platforms to agentic AI",
+  technologies: {
+    value: `${Math.floor(STACK_TECHNOLOGIES.size / 10) * 10}+`,
+    label: "Enterprise platforms and technologies",
   },
   enterprises: { value: "50+", label: "Global enterprises served" },
   years: { value: "10+", label: "Years powering enterprise technology" },
