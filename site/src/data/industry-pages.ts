@@ -32,8 +32,8 @@ export type IndustryPage = {
 export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
   "industry-banking": {
     description:
-      "Technology, data and AI engineering for banks and financial institutions: modern core and digital banking, real-time payments, fraud prevention and trusted regulatory data.",
-    lede: "We help banks and financial institutions modernize the platforms their customers and regulators depend on, so they can launch faster, manage risk with confidence and keep the business running while it changes.",
+      "Core banking modernization, real-time payments, fraud and AML, and trusted regulatory data, engineered for banks and financial institutions.",
+    lede: "We help banks and financial institutions modernize the platforms customers and regulators depend on, so they launch products faster, manage risk with confidence and keep the business running while it changes.",
     points: [
       "Modernization without disruption",
       "Real-time, resilient payments",
@@ -45,12 +45,12 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
         {
           challenge: "Our core is decades old, and every change feels risky.",
           answer:
-            "A phased path around the core: new products launch on modern platforms while the systems that run the bank stay stable, so risk falls with every release.",
+            "Progressive modernization around the core: new products launch on modern platforms while systems of record stay stable, so risk falls with every release.",
         },
         {
           challenge: "Customers expect everything in real time.",
           answer:
-            "Real-time payment and account services with end-to-end monitoring, so customers get instant experiences and operations see issues before customers do.",
+            "Real-time payment and account services with end-to-end observability, so customers get instant experiences and operations see issues first.",
         },
         {
           challenge: "Fraud gets more sophisticated every month.",
@@ -58,9 +58,9 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
             "AI-driven fraud detection that scores activity as it happens and explains every alert, so investigators act faster and genuine customers aren't blocked.",
         },
         {
-          challenge: "Regulatory reporting eats our best people's time.",
+          challenge: "Regulatory reporting consumes our best people.",
           answer:
-            "Automated, traceable reporting from source to submission, so the figures hold up under scrutiny and experts spend their time on analysis, not reconciliation.",
+            "Automated, traceable reporting from source to submission, so figures withstand scrutiny and experts spend their time on analysis, not reconciliation.",
         },
       ],
     },
@@ -71,33 +71,33 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
       items: [
         {
           title: "Core banking modernization",
-          text: "A phased move from legacy cores to modern, cloud-ready platforms, without disrupting day-to-day operations.",
+          text: "A phased move from legacy cores to cloud-ready, API-enabled platforms, without disrupting day-to-day operations.",
         },
         {
-          title: "Digital banking",
-          text: "Mobile, web and open-banking experiences that make onboarding and everyday banking simple for customers.",
+          title: "Digital banking & onboarding",
+          text: "Mobile, web and open-banking journeys that make onboarding and everyday banking effortless.",
         },
         {
-          title: "Payments",
-          text: "Real-time, resilient payment platforms that meet new industry standards and keep every transaction reconciled.",
+          title: "Payments modernization",
+          text: "Real-time, resilient payment platforms aligned to ISO 20022, with every transaction reconciled.",
         },
         {
-          title: "Fraud and financial crime",
-          text: "Smarter fraud detection and automated compliance checks, with a complete audit trail behind every decision.",
+          title: "Fraud, AML & financial crime",
+          text: "Real-time fraud scoring, automated KYC and AML checks, and a complete audit trail behind every decision.",
         },
         {
-          title: "Risk, finance and regulatory data",
-          text: "Trusted data for risk, finance and regulatory reporting, traceable from source to submission.",
+          title: "Risk, finance & regulatory data",
+          text: "Governed data for risk, liquidity, finance and regulatory reporting, traceable from source to submission.",
         },
         {
-          title: "Operations automation",
-          text: "Intelligent workflows that take manual effort out of onboarding, disputes, payment exceptions and servicing.",
+          title: "Operations automation & resilience",
+          text: "Intelligent workflows for disputes, exceptions and servicing, engineered for operational resilience.",
         },
       ],
     },
     capabilities: {
       "cap-data":
-        "One trusted view of risk, finance and customer data for faster, better decisions.",
+        "One trusted view of risk, finance and customer data for faster decisions.",
       "cap-sap":
         "Finance, group reporting and controlling on SAP, with clean data flowing downstream.",
       "cap-ai":
@@ -162,18 +162,23 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
       {
         question: "Can you support us around the clock?",
         answer:
-          "Yes. With hubs in the United States and India, support and operations follow the sun, with structured handovers every day.",
+          "Yes. Support and operations follow the sun, with structured handovers every day and on-call coverage for priority incidents.",
+      },
+      {
+        question: "Can you help us meet operational-resilience expectations?",
+        answer:
+          "Yes. We map critical business services, their dependencies and impact tolerances, then engineer the monitoring, failover and incident playbooks that keep them within those tolerances.",
       },
     ],
   },
 
   "industry-telecom": {
     description:
-      "Technology, data and AI engineering for telecom operators: faster launches, accurate billing, proactive service assurance and better customer experiences.",
-    lede: "We help operators modernize the systems that sell, deliver and bill every service, so new offers reach the market faster, revenue is protected and customers stay connected.",
+      "BSS and OSS modernization, revenue assurance, network analytics and AI-driven service assurance for operators and service providers.",
+    lede: "We help operators and service providers modernize the systems that sell, deliver, charge and assure every service, so new offers reach market faster, revenue is protected and customers stay connected.",
     points: [
       "Faster time to market",
-      "Protected revenue",
+      "Assured revenue",
       "Proactive service assurance",
     ],
     problems: {
@@ -182,53 +187,53 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
         {
           challenge: "Billing errors cost us revenue and customers.",
           answer:
-            "Automated revenue-assurance checks that reconcile usage and invoices every day, stopping leakage before bills go out.",
+            "Automated revenue-assurance controls that reconcile usage, rating and invoices every day, stopping leakage before bills go out.",
         },
         {
           challenge: "Launching a new plan takes months.",
           answer:
-            "Modular, catalog-driven systems that let product teams launch and change offers in weeks, without custom development.",
+            "Catalog-driven, modular BSS that lets product teams launch and change offers in weeks, without custom development.",
         },
         {
           challenge: "We hear about outages from customer complaints.",
           answer:
-            "AI-driven monitoring that predicts service issues and starts the fix before customers notice.",
+            "AI-driven service assurance that predicts degradation and triggers remediation before customers notice.",
         },
         {
           challenge: "Our network data is huge and mostly unused.",
           answer:
-            "Data platforms that turn network and customer data into insight for capacity planning, retention and customer experience.",
+            "Network data platforms that turn telemetry and customer data into insight for capacity planning, retention and experience.",
         },
       ],
     },
     offerings: {
       heading: "How we help operators and service providers",
       intro:
-        "The systems that sell, deliver, bill and assure every connection, modernized one domain at a time.",
+        "The systems that sell, deliver, charge and assure every connection, modernized one domain at a time.",
       items: [
         {
-          title: "OSS/BSS modernization",
-          text: "Order, catalog and customer systems modernized in stages, built on open industry standards.",
+          title: "BSS and OSS modernization",
+          text: "Catalog, order and customer management modernized in stages on TM Forum Open APIs.",
         },
         {
-          title: "Billing and revenue assurance",
-          text: "Accurate charging and billing, with automated reconciliation that protects every dollar of revenue.",
+          title: "Charging, billing & revenue assurance",
+          text: "Accurate convergent charging and billing, with automated reconciliation that protects every dollar of revenue.",
         },
         {
-          title: "Network data platforms",
-          text: "Scalable platforms that turn network data into planning, performance and customer insight.",
+          title: "Network data & analytics",
+          text: "Scalable platforms that turn network telemetry into planning, performance and customer insight.",
         },
         {
-          title: "Service assurance",
-          text: "Proactive monitoring and automated incident handling that restore service faster.",
+          title: "Service assurance & AIOps",
+          text: "Proactive monitoring, event correlation and automated incident handling that restore service faster.",
         },
         {
-          title: "Customer and channel apps",
-          text: "Self-service apps and partner portals that improve the customer experience and reduce contact-center demand.",
+          title: "Customer & partner experience",
+          text: "Self-service apps and partner portals that lift satisfaction and reduce contact-center demand.",
         },
         {
           title: "Application operations",
-          text: "Round-the-clock monitoring, incident response and release management across our US and India hubs.",
+          text: "Round-the-clock monitoring, incident response and release management under agreed service levels.",
         },
       ],
     },
@@ -240,7 +245,7 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
       "cap-ai":
         "Churn prediction, anomaly detection and assistants for complex customer cases.",
       "cap-flow":
-        "Order and provisioning issues resolved automatically, end to end.",
+        "Order fallout and provisioning issues resolved automatically, end to end.",
       "cap-code":
         "Self-service apps and partner portals that reduce calls to the contact center.",
     },
@@ -288,7 +293,7 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
       {
         question: "Can you run operations around the clock?",
         answer:
-          "Yes. Our US and India hubs cover the full day, with agreed handovers, runbooks and on-call cover for priority incidents.",
+          "Yes. Our teams cover the full day across time zones, with agreed handovers, runbooks and on-call coverage for priority incidents.",
       },
       {
         question: "Can you work alongside our network equipment partners?",
@@ -300,15 +305,20 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
         answer:
           "It stays in your environment under your access controls, with masking outside production and logging that supports CPNI and GDPR obligations.",
       },
+      {
+        question: "Can you help us monetize 5G and new services?",
+        answer:
+          "Yes. We modernize the catalog, charging and partner systems that let you package, price and launch network capabilities as products, and the analytics that show which offers perform.",
+      },
     ],
   },
 
   "industry-healthcare": {
     description:
-      "Technology, data and AI engineering for healthcare: connected health data, streamlined claims and revenue cycle, and privacy built into every platform.",
+      "Interoperable health data, claims and revenue-cycle automation, and privacy by design for providers, payers and life-sciences organizations.",
     lede: "We help providers, payers and life-sciences organizations connect their data, simplify administration and protect patient privacy, so more time and money go to care.",
     points: [
-      "Connected health data",
+      "Interoperable health data",
       "Streamlined claims and revenue cycle",
       "Privacy and security by design",
     ],
@@ -318,10 +328,10 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
         {
           challenge: "Patient records are scattered across systems.",
           answer:
-            "Standards-based integration that brings records together while every source system stays in place.",
+            "Standards-based interoperability on HL7 and FHIR that unifies records while every source system stays in place.",
         },
         {
-          challenge: "Admin work keeps growing faster than care.",
+          challenge: "Administrative work keeps growing faster than care.",
           answer:
             "Intelligent document processing and workflows that prepare claims, authorizations and referrals for your team to review.",
         },
@@ -344,27 +354,27 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
       items: [
         {
           title: "Healthcare data platforms",
-          text: "Governed platforms that bring clinical, claims and operational data together for analytics and AI.",
+          text: "Governed platforms that bring clinical, claims and operational data together for analytics, population health and AI.",
         },
         {
-          title: "Interoperability",
-          text: "Secure connections between health records, partners and applications, built on industry standards such as FHIR.",
+          title: "Interoperability & EHR integration",
+          text: "Secure connections between EHRs, partners and applications on HL7, FHIR and approved integration engines.",
         },
         {
-          title: "Claims and revenue cycle",
-          text: "Faster claims, fewer denials and cleaner reconciliation, with automation at every step.",
+          title: "Claims & revenue cycle",
+          text: "Faster adjudication, fewer denials and cleaner reconciliation, with automation at every step.",
         },
         {
-          title: "Document intelligence",
-          text: "Referrals, lab reports and forms captured automatically and routed to the right system, with human review.",
+          title: "Prior authorization & care operations",
+          text: "Eligibility, authorization and referral workflows prepared automatically for review, so care teams wait less.",
         },
         {
-          title: "Patient and member experience",
-          text: "Portals and apps that make appointments, benefits and bills easier to understand.",
+          title: "Patient & member experience",
+          text: "Portals and apps that make appointments, benefits and bills easier to understand and act on.",
         },
         {
-          title: "Security and compliance",
-          text: "Access management, encryption and audit evidence that support HIPAA and HITRUST requirements.",
+          title: "Security & compliance",
+          text: "Access management, encryption and audit evidence that support your HIPAA and HITRUST obligations.",
         },
       ],
     },
@@ -372,7 +382,7 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
       "cap-data":
         "Clinical, claims and operational data on one governed platform.",
       "cap-sap":
-        "Supply chain and finance with full traceability for hospital groups and life sciences.",
+        "Supply chain and finance with full traceability for providers and life sciences.",
       "cap-ai":
         "Claims and document processing, and assistants that support operations teams.",
       "cap-flow":
@@ -436,17 +446,22 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
         answer:
           "Yes. We deliver claims, eligibility and member platforms for payers, and data, revenue-cycle and patient solutions for providers.",
       },
+      {
+        question: "Can you support value-based care programs?",
+        answer:
+          "Yes. We bring clinical, claims and quality data together into governed analytics for risk stratification, care-gap tracking and performance reporting.",
+      },
     ],
   },
 
   "industry-energy": {
     description:
-      "Technology, data and AI engineering for energy: reliable assets, connected field and enterprise data, and forecasting for a changing energy mix.",
+      "Asset performance management, predictive maintenance, OT and IT integration and forecasting for utilities, producers and renewables operators.",
     lede: "We help utilities, producers and renewables operators keep critical assets running, connect field and enterprise data, and plan with confidence as the energy mix changes.",
     points: [
       "Asset reliability",
       "Connected field operations",
-      "Smarter forecasting",
+      "Sharper forecasting",
     ],
     problems: {
       heading: "What energy companies are up against",
@@ -459,7 +474,7 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
         {
           challenge: "Our field data and enterprise data never meet.",
           answer:
-            "Secure integration between operational systems and SAP, so maintenance, finance and operations work from the same picture of every asset.",
+            "Segmented OT and IT integration between operational systems and SAP, so maintenance, finance and operations work from one asset record.",
         },
         {
           challenge: "Paperwork slows down every field crew.",
@@ -479,8 +494,8 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
         "Digital operations for assets that must run safely for decades, while the energy mix changes around them.",
       items: [
         {
-          title: "SAP asset management",
-          text: "Maintenance and asset management on SAP S/4HANA, with strategies tied to criticality and cost.",
+          title: "Asset performance management",
+          text: "Maintenance strategies on SAP S/4HANA tied to asset criticality, risk and cost.",
         },
         {
           title: "Predictive maintenance",
@@ -488,10 +503,10 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
         },
         {
           title: "OT and IT integration",
-          text: "Operational and enterprise systems connected through secure, segmented interfaces.",
+          text: "SCADA, historian and enterprise systems connected through secure, segmented, read-only-by-default interfaces.",
         },
         {
-          title: "Forecasting and trading analytics",
+          title: "Forecasting & trading analytics",
           text: "Demand, generation and price forecasts that support scheduling, trading and grid balancing.",
         },
         {
@@ -499,7 +514,7 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
           text: "Mobile tools for inspections, work orders and safety checks that work offline at remote sites.",
         },
         {
-          title: "Sustainability reporting",
+          title: "Sustainability & emissions reporting",
           text: "Emissions data collected, calculated and traced to source for internal targets and external disclosures.",
         },
       ],
@@ -561,12 +576,17 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
       {
         question: "Can you help with our move to S/4HANA asset management?",
         answer:
-          "Yes. We plan and deliver the move end to end, including maintenance plans, master data clean-up and links to mobile field tools.",
+          "Yes. We plan and deliver the move end to end, including maintenance plans, master data cleanup and links to mobile field tools.",
       },
       {
         question: "How do you approach critical-infrastructure security?",
         answer:
           "Security is designed in from the start and aligned with standards such as IEC 62443 and NERC CIP where they apply, with every access logged and reviewed.",
+      },
+      {
+        question: "Can you support grid modernization?",
+        answer:
+          "Yes. We engineer the data, integration and forecasting layers behind grid modernization, including distributed generation and storage, outage management and network analytics.",
       },
     ],
   },

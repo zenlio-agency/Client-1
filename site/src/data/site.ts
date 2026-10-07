@@ -16,13 +16,14 @@ export const CAPABILITIES = [
     slug: "data-analytics",
     key: "data",
     title: "Data & Analytics",
-    line: "Modern data platforms that turn scattered data into trusted, decision-ready intelligence.",
+    line: "Modern data platforms and AI-ready data products the business can trust.",
     focus: [
       "Data strategy & AI-readiness assessment",
-      "Cloud data platform & lakehouse modernization",
-      "Data engineering & pipeline (ETL/ELT) modernization",
-      "Data governance, quality & observability",
-      "BI, analytics & self-service insights",
+      "Lakehouse & cloud data platform modernization",
+      "Data engineering & pipeline modernization (ELT/ETL)",
+      "Data products & master data",
+      "Governance, quality & observability",
+      "BI, semantic layer & self-service analytics",
     ],
     icon: capData,
   },
@@ -31,13 +32,14 @@ export const CAPABILITIES = [
     slug: "sap-enterprise-data",
     key: "sap",
     title: "SAP & Enterprise Data",
-    line: "S/4HANA transformation, BTP innovation and clean-core architecture that keep the enterprise core agile.",
+    line: "S/4HANA transformation and clean-core architecture for an upgrade-ready digital core.",
     focus: [
-      "S/4HANA migration & upgrade",
+      "S/4HANA transformation & RISE with SAP",
       "Clean-core strategy & BTP extensions",
-      "SAP data, analytics & integration",
-      "Master data management & data migration",
-      "Application management & continuous optimization",
+      "SAP integration",
+      "SAP data, planning & analytics",
+      "Data migration & master data",
+      "Application management",
     ],
     icon: capSap,
   },
@@ -46,13 +48,14 @@ export const CAPABILITIES = [
     slug: "applied-ai",
     key: "ai",
     title: "Applied AI",
-    line: "Generative AI and machine learning, engineered for production and governed for the enterprise.",
+    line: "Generative AI and machine learning, engineered for production and governed for scale.",
     focus: [
-      "AI use-case discovery & value roadmaps",
-      "GenAI applications, copilots & knowledge assistants",
-      "Machine learning & predictive analytics",
+      "AI strategy & use-case portfolio",
+      "Copilots & knowledge assistants",
+      "Document intelligence",
+      "Predictive & prescriptive models",
       "MLOps & LLMOps",
-      "Responsible AI, governance & model risk",
+      "Responsible AI & model risk",
     ],
     icon: capAi,
   },
@@ -61,13 +64,14 @@ export const CAPABILITIES = [
     slug: "agentic-ai-automation",
     key: "ai",
     title: "Agentic AI & Automation",
-    line: "Intelligent agents and automated workflows that execute real work across your operations.",
+    line: "Governed AI agents and orchestrated workflows that execute multi-step work across systems.",
     focus: [
-      "Agentic workflow design & orchestration",
-      "Intelligent process automation",
       "Process intelligence & discovery",
-      "Operational decision automation",
-      "Agent monitoring, governance & lifecycle management",
+      "Agentic workflow orchestration",
+      "Human-in-the-loop controls",
+      "Intelligent document flows",
+      "RPA & low-code modernization",
+      "Agent governance & lifecycle management",
     ],
     icon: capFlow,
   },
@@ -76,13 +80,14 @@ export const CAPABILITIES = [
     slug: "digital-product-engineering",
     key: "digital",
     title: "Digital Product Engineering",
-    line: "Cloud-native products and platforms, engineered from concept to scale across web and mobile.",
+    line: "Cloud-native products and platforms, engineered from concept to scale.",
     focus: [
-      "Product strategy, UX & design",
-      "Cloud-native application development",
-      "Legacy application modernization",
+      "Product strategy & experience design",
+      "Cloud-native application engineering",
+      "Legacy modernization",
       "APIs, microservices & integration",
-      "DevSecOps, quality engineering & SRE",
+      "Platform engineering, DevSecOps & SRE",
+      "Quality engineering",
     ],
     icon: capCode,
   },
@@ -125,7 +130,9 @@ export const CLIENT_LOGO_ROWS: {
 
 /**
  * The four industries in scope. `id` doubles as the deep-link hash and
- * `slug` names each one's page under `/industries/`.
+ * `slug` names each one's page under `/industries/`. `summary` labels the
+ * industry on the Industries page and in "Other industries"; `line` is the
+ * homepage tile.
  */
 export const INDUSTRIES = [
   {
@@ -133,12 +140,13 @@ export const INDUSTRIES = [
     slug: "banking-financial-services",
     title: "Banking & Financial Services",
     short: "Banking & FS",
-    summary: "Modern banking platforms for payments, risk and compliance.",
+    summary: "Modern platforms for payments, risk and compliance.",
+    line: "Core, payments and risk platforms built for regulatory scrutiny.",
     hero: "Modernize core banking without slowing the business.",
     challenge:
-      "Decades-old core systems, real-time customer expectations, and every change through audit and risk review.",
+      "Decades-old cores, real-time customer expectations and every change subject to audit and risk review.",
     build:
-      "Modern core and digital banking, trusted finance and risk data, AI-driven fraud detection and automated customer onboarding.",
+      "Core and digital banking modernization, real-time payments, trusted risk and regulatory data, AI-driven fraud prevention and automated onboarding.",
     outcome: "Faster, compliant releases.",
     metric: "[X]%",
     metricLabel: "faster release cycles",
@@ -149,12 +157,13 @@ export const INDUSTRIES = [
     title: "Telecommunications",
     short: "Telecom",
     summary:
-      "Faster launches, accurate billing and proactive service assurance.",
-    hero: "Keep networks and customers connected.",
+      "Faster launches, assured revenue and proactive service assurance.",
+    line: "Faster launches, assured revenue and proactive service assurance.",
+    hero: "Keep networks, revenue and customers connected.",
     challenge:
-      "Huge data volumes, complex billing and constant network change, where every outage is public.",
+      "Massive data volumes, complex charging and billing, and constant network change, where every outage is public.",
     build:
-      "Modern order and billing systems, customer and network analytics, AI-driven service assurance and round-the-clock operations.",
+      "BSS and OSS modernization, revenue assurance, network and customer analytics, AI-driven service assurance and round-the-clock operations.",
     outcome: "Fewer manual tickets and faster recovery.",
     metric: "[X]%",
     metricLabel: "faster incident resolution",
@@ -164,12 +173,14 @@ export const INDUSTRIES = [
     slug: "healthcare",
     title: "Healthcare",
     short: "Healthcare",
-    summary: "Connected health data, streamlined claims and privacy by design.",
+    summary:
+      "Interoperable health data, streamlined claims and privacy by design.",
+    line: "Interoperable health data, streamlined claims and privacy by design.",
     hero: "Technology that serves patients and protects their data.",
     challenge:
-      "Fragmented records, rising admin cost and strict privacy rules such as HIPAA.",
+      "Fragmented records, rising administrative cost and strict privacy obligations such as HIPAA.",
     build:
-      "Connected health data platforms, AI for claims and documents, revenue-cycle automation and real-time operations insight.",
+      "Interoperable health data platforms, AI for claims and documents, revenue-cycle automation and real-time operational insight.",
     outcome: "Faster claims, privacy built in from day one.",
     metric: "[X]%",
     metricLabel: "reduction in claims turnaround",
@@ -180,12 +191,13 @@ export const INDUSTRIES = [
     title: "Energy",
     short: "Energy",
     summary:
-      "Reliable assets, connected field operations and smarter forecasting.",
+      "Reliable assets, connected field operations and sharper forecasting.",
+    line: "Reliable assets, connected field operations and sharper forecasting.",
     hero: "Digital operations for a sector in transition.",
     challenge:
-      "Ageing assets, safety rules and the shift to renewables, with data split across field and enterprise systems.",
+      "Aging assets, safety-critical operations and the shift to renewables, with data split across field and enterprise systems.",
     build:
-      "Asset management on SAP, predictive maintenance, demand forecasting and automated field reporting.",
+      "Asset performance management, predictive maintenance, OT and IT integration, demand forecasting and automated field reporting.",
     outcome: "Assets that stay online longer.",
     metric: "[X]%",
     metricLabel: "less unplanned downtime",
@@ -204,7 +216,7 @@ export const HUBS = [
     country: "United States",
     entity: "ManyaIT Inc.",
     role: "Client & Leadership Hub",
-    text: "Where partnerships start. Our US team works in your time zone to shape the right team for each goal and keep it on track across North America.",
+    text: "Executive sponsorship, program governance and client partnership.",
     /* Line breaks render where the address is shown (white-space: pre-line). */
     address: "8668 John Hickman Pkwy #903\nFrisco, Texas 75034",
     phone: "+1 682-500-9839",
@@ -221,8 +233,8 @@ export const HUBS = [
     short: "Hyderabad",
     country: "India",
     entity: "ManyaIT Solutions Pvt Ltd",
-    role: "Engineering & Talent Hub",
-    text: "Home to our engineering talent. Our India teams build, run and improve platforms for enterprises worldwide, working as part of each enterprise's own technology organization.",
+    role: "Engineering & Delivery Hub",
+    text: "Architecture, engineering, data and run operations.",
     address:
       "Bizness Square, Whitefields\nHITECH City, Hyderabad\nTelangana 500081",
     phone: "+91 73869 36669",
@@ -273,22 +285,22 @@ export const NAV = [
 export const TEAM_STEPS = [
   {
     title: "Discover & define",
-    text: "We align on business goals, assess your current landscape across systems, data, architecture and skills, and shape a clear roadmap with measurable success criteria.",
+    text: "We align on business outcomes, baseline your systems, data and architecture, and shape a prioritized roadmap with measurable success criteria.",
     note: "Roadmap and success metrics",
   },
   {
-    title: "Design & assemble",
-    text: "We architect the solution and bring together the right specialists, matched to your technology stack and your domain. You meet the team before work begins.",
-    note: "Right architecture, right people",
+    title: "Architect & mobilize",
+    text: "We define the target architecture, delivery plan and quality gates, and mobilize a cross-functional team that knows your domain and owns the outcome.",
+    note: "Architecture before acceleration",
   },
   {
-    title: "Build & deliver",
-    text: "Agile, DevSecOps-driven delivery inside your tools and controls, with continuous integration, automated testing and transparent progress against agreed outcomes.",
+    title: "Engineer & deliver",
+    text: "Agile, DevSecOps-driven delivery inside your environments and controls, with CI/CD, automated testing and transparent progress against agreed outcomes.",
     note: "Value from the first sprint",
   },
   {
     title: "Operate & evolve",
-    text: "We run, monitor and optimize what we build. Then we scale the team, expand the scope or transition full ownership to you, on your timeline.",
+    text: "We run, observe and optimize what we build under agreed service levels, extend the roadmap as value is proven, and transfer operations and knowledge to your teams whenever you choose.",
     note: "Built to last, yours to keep",
   },
 ];

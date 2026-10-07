@@ -23,7 +23,7 @@ const { render = true } = Astro.props;
         <div class="industry-cards_intro">
           <Eyebrow data-reveal>Industries</Eyebrow>
           <Heading maxWidth={20} data-reveal style="--reveal-order: 1">
-            Talent that already knows your industry.
+            Engineering shaped by the realities of your sector.
           </Heading>
         </div>
         <div class="industry-cards_aside" data-reveal style="--reveal-order: 2">
@@ -51,7 +51,7 @@ const { render = true } = Astro.props;
               </span>
               <h3 class="photo-tile_title is-small">{industry.title}</h3>
               <Fragment slot="reveal">
-                <p class="photo-tile_text">{industry.summary}</p>
+                <p class="photo-tile_text">{industry.line}</p>
                 <span class="photo-tile_more">
                   Learn more
                   <Icon src={arrow} variant="small" />

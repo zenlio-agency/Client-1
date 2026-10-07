@@ -100,4 +100,4 @@ Over time, the data products build up into a platform that makes each new AI use
 
 ## How ManyaIT helps
 
-Our data and analytics teams of data engineers, analytics engineers and architects build the data products, quality checks and governed access that AI use cases depend on. They work inside your platform, matched to your stack. Share a skills brief and we'll shape a team around your first use case.
+Our data and analytics teams of data engineers, analytics engineers and architects build the data products, quality checks and governed access that AI use cases depend on. They work inside your platform, matched to your stack. Tell us your first use case, and we'll map the data foundation it needs.

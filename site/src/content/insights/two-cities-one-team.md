@@ -1,7 +1,7 @@
 ---
-title: "Two hubs, one team: how a platform runs around the clock"
-summary: Handoffs, overlap hours and the habits that keep a two-hub team working as one.
-description: Field notes on running an enterprise platform with one team across the United States and India, covering overlap hours, handoffs, follow-the-sun support and the habits that hold it together.
+title: "One team, around the clock: running a platform across time zones"
+summary: Overlap windows, structured handovers and the operating habits that keep a distributed team moving as one.
+description: "Field notes on running an enterprise platform with one team across time zones: overlap windows, structured handovers and follow-the-sun support."
 category: Enterprise Technology
 type: Field notes
 order: 4
@@ -12,7 +12,7 @@ takeaways:
   - Use the short daily overlap for decisions. Everything else moves in writing.
   - One backlog, one definition of done and one on-call rota make two locations work as one team.
   - Treat the handoff note as a product, because the next shift depends on it.
-topic: capability-center
+topic: multi-capability
 related:
   label: Our global presence
   href: /about#locations
@@ -73,7 +73,7 @@ That works when:
 
 ## What the client sees
 
-For the enterprise, a well-run two-hub team should feel simple. Our US team, the Client & Leadership Hub, works in North American hours and is the day-to-day point of contact. The engineering teams in India, our Engineering & Talent Hub, carry the work forward overnight. Each morning starts with a clear summary of what moved, what's next and what needs a decision.
+For the enterprise, a well-run two-hub team should feel simple. Our US team, the Client & Leadership Hub, works in North American hours and is the day-to-day point of contact. The engineering teams in India, our Engineering & Delivery Hub, carry the work forward overnight. Each morning starts with a clear summary of what moved, what's next and what needs a decision.
 
 ## Habits that make it work
 
@@ -85,4 +85,4 @@ For the enterprise, a well-run two-hub team should feel simple. Our US team, the
 
 ## How ManyaIT works
 
-ManyaIT runs this way every day, with client leadership in the United States and engineering teams in India working as one team for each enterprise. If you're planning a capability center or a team that spans time zones, share a skills brief and we'll show you how we'd set it up.
+ManyaIT runs this way every day, with client leadership in the United States and engineering teams in India working as one team for each enterprise. If you're planning a platform that runs across time zones, tell us the outcome you're targeting and we'll show you how we'd run it.

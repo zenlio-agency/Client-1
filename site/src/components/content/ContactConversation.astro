@@ -34,14 +34,20 @@ const cardTag = headingTag === "h1" ? "h2" : "h3";
 
 const areas = [
   ...CAPABILITIES.map((cap) => ({ value: cap.id, label: cap.title })),
-  { value: "capability-center", label: "A full capability center" },
+  {
+    value: "multi-capability",
+    label: "A multi-capability transformation program",
+  },
 ];
 
 const roles = [
-  { value: "enterprise", label: "An enterprise planning a team" },
+  {
+    value: "enterprise",
+    label: "An enterprise leader planning a technology initiative",
+  },
   { value: "client", label: "An existing ManyaIT client" },
   { value: "partner", label: "A technology or alliance partner" },
-  { value: "careers", label: "An engineer or specialist exploring careers" },
+  { value: "careers", label: "An experienced professional exploring careers" },
   { value: "media", label: "Media or an analyst" },
   { value: "other", label: "Something else" },
 ];
@@ -63,11 +69,6 @@ const direct = [
     label: "Email",
     value: COMPANY_CONTACT.email,
     href: `mailto:${COMPANY_CONTACT.email}`,
-  },
-  {
-    label: "Careers",
-    value: COMPANY_CONTACT.careersEmail,
-    href: `mailto:${COMPANY_CONTACT.careersEmail}`,
   },
   {
     label: "Call",
@@ -99,7 +100,7 @@ const direct = [
         >
           <Fragment
             set:html={tbc(
-              "Brief us on your goals and we'll match you with the right team. Expect a reply within 1 business day.",
+              "Share your objectives and we'll bring the right architects and domain leads to the first conversation. Expect a reply within 1 business day.",
             )}
           />
         </Paragraph>
@@ -119,6 +120,7 @@ const direct = [
         </Heading>
         <Form
           name="start-a-conversation"
+          errorMessage={`Your message didn't send. Please try again, or email ${COMPANY_CONTACT.email}.`}
           successMessage="Thanks. This preview form isn't connected to an inbox yet, so nothing was sent. Once ManyaIT's inbox is connected, this is where your note will go."
         >
           <div class="contact_grid">
@@ -180,7 +182,7 @@ const direct = [
             <Textarea
               label="Tell us more about your goals"
               name="message"
-              placeholder="The team you need, the systems involved and any timelines"
+              placeholder="Your objectives, the systems involved and any timelines"
               minLines={9}
               required
             />
@@ -240,16 +242,19 @@ const direct = [
           <dl class="contact_direct_list">
             {HUBS.map((hub) => (
               <div>
-                <dt>
-                  {hub.country} · {hub.role}
-                </dt>
+                <dt>{hub.role}</dt>
                 <dd>
                   {hub.entity}
                   <br />
-                  <a href={`tel:${hub.phone.replace(/[^+\d]/g, "")}`}>
-                    {hub.phone}
-                  </a>
-                  {" · "}
+                  {/* The main number is already listed under "Call". */}
+                  {hub.phone !== COMPANY_CONTACT.phone && (
+                    <Fragment>
+                      <a href={`tel:${hub.phone.replace(/[^+\d]/g, "")}`}>
+                        {hub.phone}
+                      </a>
+                      {" · "}
+                    </Fragment>
+                  )}
                   <a href={`mailto:${hub.email}`}>{hub.email}</a>
                 </dd>
               </div>

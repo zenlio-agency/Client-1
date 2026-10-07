@@ -2,6 +2,8 @@
 import Eyebrow from "@/components/typography/Eyebrow.astro";
 import Heading from "@/components/typography/Heading.astro";
 import Paragraph from "@/components/typography/Paragraph.astro";
+import Icon from "@/components/media/Icon.astro";
+import check from "@/assets/icons/check.svg";
 import { tbc } from "@/data/site.ts";
 
 interface Props {
@@ -15,9 +17,18 @@ interface Props {
   intro?: string;
   /** Steps in order. `note` is a short result shown under each one. */
   steps?: { title: string; text: string; note?: string }[];
+  /** Controls that run through every step, shown as a strip under them. */
+  strip?: { title: string; items: string[] };
 }
 
-const { render = true, eyebrow, heading, intro, steps = [] } = Astro.props;
+const {
+  render = true,
+  eyebrow,
+  heading,
+  intro,
+  steps = [],
+  strip,
+} = Astro.props;
 ---
 
 {
@@ -59,6 +70,19 @@ const { render = true, eyebrow, heading, intro, steps = [] } = Astro.props;
           </li>
         ))}
       </ol>
+      {strip && strip.items.length > 0 && (
+        <div class="process-steps_strip" data-reveal>
+          <p class="process-steps_strip_title">{strip.title}</p>
+          <ul class="process-steps_strip_list">
+            {strip.items.map((item) => (
+              <li>
+                <Icon src={check} variant="small" class="process-steps_check" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   )
 }
@@ -158,6 +182,54 @@ const { render = true, eyebrow, heading, intro, steps = [] } = Astro.props;
       font-size: 0.78rem;
       font-weight: var(--heading-medium);
       color: var(--accent-text);
+    }
+
+    /* The governance strip: one line of controls under the steps. */
+    .process-steps_strip {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      padding-top: var(--space-6);
+      border-top: var(--border-width) solid var(--border);
+      @media (width >= 64rem) {
+        flex-direction: row;
+        align-items: center;
+        gap: var(--space-6);
+      }
+    }
+
+    .process-steps_strip_title {
+      flex: none;
+      margin: 0;
+      font-family: var(--heading-family);
+      font-size: 0.75rem;
+      font-weight: var(--heading-bold);
+      letter-spacing: var(--letter-spacing-wide);
+      text-transform: uppercase;
+      color: var(--text-2);
+    }
+
+    .process-steps_strip_list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2) var(--space-3);
+      & li {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 0.95rem;
+        border: var(--border-width) solid var(--border);
+        border-radius: var(--radius-round);
+        background-color: color-mix(in srgb, var(--text) 5%, transparent);
+        font-size: var(--text-small);
+        line-height: 1.3;
+        color: var(--text);
+      }
+    }
+
+    .process-steps_check {
+      flex: none;
+      color: var(--accent);
     }
   }
 </style>

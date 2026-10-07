@@ -34,7 +34,7 @@ const page = CAPABILITY_PAGES[cap.id];
 const contact = `${CTA.primary.href}?topic=${cap.id}`;
 ---
 
-<Layout title={cap.title} description={page.description}>
+<Layout title={page.seoTitle} description={page.description}>
   {/* Hero */}
   <Section paddingTop="small">
     <HeroDetail
@@ -81,6 +81,7 @@ const contact = `${CTA.primary.href}?topic=${cap.id}`;
       heading="Platforms and tools we work with"
       intro={page.stack.intro}
       groups={page.stack.groups}
+      note={{ label: "Team behind the work", text: page.team }}
     />
   </Section>
 
@@ -105,7 +106,7 @@ const contact = `${CTA.primary.href}?topic=${cap.id}`;
     <ProcessSteps
       eyebrow="How it works"
       heading="From first conversation to lasting impact"
-      intro="Start with a focused assessment, a defined project or a dedicated team. Scale the scope as results come in, and take full ownership whenever you're ready."
+      intro="Every capability follows the same accountable path, whether it starts with a focused assessment or a full-scale transformation program."
       steps={TEAM_STEPS}
     />
   </Section>

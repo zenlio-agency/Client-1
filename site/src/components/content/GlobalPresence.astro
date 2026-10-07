@@ -27,20 +27,31 @@ const pct = (value: number, of: number) =>
   render && (
     <div class="presence_wrap">
       <div class="presence_intro">
-        <Eyebrow data-reveal>Global presence</Eyebrow>
+        <Eyebrow data-reveal>Global delivery</Eyebrow>
         <Heading data-reveal style="--reveal-order: 1">
-          Global delivery, one operating model.
+          One operating model, around the clock.
         </Heading>
         <Paragraph
           variant="large"
-          maxWidth={52}
+          maxWidth={60}
           data-reveal
           style="--reveal-order: 2"
         >
-          Client leadership in the United States and engineering depth in India,
-          run as one delivery organization with shared governance and a
-          follow-the-sun cadence.
+          Client leadership aligned to your business hours and engineering depth
+          across time zones, run as one delivery organization with shared
+          governance, one backlog and a follow-the-sun cadence. Programs scale
+          with your roadmap, and operations and knowledge move in-house whenever
+          you choose.
         </Paragraph>
+        <ul class="presence_hubs" data-reveal style="--reveal-order: 3">
+          {HUBS.map((hub) => (
+            <li class="presence_hub">
+              <span class="presence_hub_role">{hub.role}</span>
+              <span class="presence_hub_entity">{hub.entity}</span>
+              <span class="presence_hub_text">{hub.text}</span>
+            </li>
+          ))}
+        </ul>
       </div>
 
       <figure class="presence_map theme-dark" data-reveal>
@@ -164,6 +175,51 @@ const pct = (value: number, of: number) =>
       display: flex;
       flex-direction: column;
       gap: var(--space-4);
+    }
+
+    /* One card per hub: its role, the company and what it carries. */
+    .presence_hubs {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--site-gutter);
+      margin-top: var(--space-3);
+      @media (width >= 48rem) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .presence_hub {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      padding: var(--space-5) var(--space-6);
+      border: var(--border-width) solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius-main);
+      background-color: var(--background-2);
+    }
+
+    .presence_hub_role {
+      font-family: var(--display-family);
+      font-size: var(--h5);
+      font-weight: var(--heading-bold);
+      line-height: 1.25;
+      color: var(--text);
+    }
+
+    .presence_hub_entity {
+      font-family: var(--heading-family);
+      font-size: 0.75rem;
+      font-weight: var(--heading-bold);
+      letter-spacing: var(--letter-spacing-wide);
+      text-transform: uppercase;
+      color: var(--accent-text);
+    }
+
+    .presence_hub_text {
+      font-size: var(--text-small);
+      line-height: 1.6;
+      color: var(--text-body);
     }
 
     /* Dark rounded canvas holding the map, its glow and the legend. */
