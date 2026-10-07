@@ -3,19 +3,19 @@ title: Applicant Privacy Notice
 summary: How we handle your details when you join the Talent Network or apply for a role, and how long we keep them.
 description: How ManyaIT collects and uses personal data from people who join its Talent Network or apply for roles, who sees it, how long it is kept and your rights.
 order: 5
-effective: "[Effective date]"
-updated: "[Last updated date]"
-version: "[1.0]"
+effective: "2026-10-07"
+updated: "2026-10-07"
+version: "1.0"
 contact: privacy
 glance:
   - We use what you share to consider you for roles now and in the future, and to stay in touch about them.
   - Only the ManyaIT team in the United States and India, and the tools we use to manage applications, see it.
-  - "Talent Network profiles are kept for [12] months unless you renew them."
+  - "Talent Network profiles are kept for 12 months unless you renew them."
   - We never charge a fee, and we never sell your data.
   - You can ask for a copy, a correction or a deletion at any time.
 changes:
-  - version: "[1.0]"
-    date: "[date]"
+  - version: "1.0"
+    date: "2026-10-07"
     summary: First published.
 ---
 
@@ -52,7 +52,7 @@ We don't make decisions about you by automated means alone. A person reviews eve
 
 ## Who sees it
 
-Your details are seen only by the ManyaIT people involved in filling roles, in the United States and India, and by the managers who interview you. Our service providers, such as our [applicant tracking system] and email platform, store it for us under contract and only on our instructions.
+Your details are seen only by the ManyaIT people involved in filling roles, in the United States and India, and by the managers who interview you. Our service providers, such as the tools we use to manage applications and email, store it for us under contract and only on our instructions.
 
 We never sell your data, and we never share it with other companies to market roles to you.
 
@@ -61,7 +61,7 @@ Because our teams work across the United States and India, your data may be hand
 ## How long we keep it
 
 - **Talent Network profiles:** {{talentRetention}} from when you joined or last updated your profile. Before that time is up, we'll ask if you want to stay. If you don't reply, we delete your profile.
-- **Applications that don't lead to an offer:** [12] months after the decision, so we can answer questions about it and consider you for other roles, unless you ask us to delete it sooner.
+- **Applications that don't lead to an offer:** 12 months after the decision, so we can answer questions about it and consider you for other roles, unless you ask us to delete it sooner.
 - **Successful applications:** the details move to your employee record.
 
 ## Your rights

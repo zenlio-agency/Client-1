@@ -6,7 +6,7 @@ category: Data
 type: Guide
 order: 2
 photo: insight-2
-published: "[Publish date]"
+published: "2026-10-05"
 takeaways:
   - AI-ready doesn't mean more data. It means data that is findable, understood, trusted and safe to use.
   - Treat the datasets AI depends on as products, each with an owner, a contract and automated checks.

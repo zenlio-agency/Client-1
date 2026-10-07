@@ -6,7 +6,7 @@ category: SAP
 type: Explainer
 order: 3
 photo: insight-3
-published: "[Publish date]"
+published: "2026-10-05"
 takeaways:
   - Clean core means keeping SAP's standard code standard, and building your own logic beside it through stable interfaces.
   - It turns upgrades from major projects into routine work, and lets you adopt new SAP features sooner.

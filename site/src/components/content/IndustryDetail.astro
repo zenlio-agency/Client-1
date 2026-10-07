@@ -7,7 +7,7 @@ import ButtonWrapper from "@/components/wrapper/ButtonWrapper.astro";
 import Icon from "@/components/media/Icon.astro";
 import arrow from "@/assets/icons/ui-arrow.svg";
 import PhotoTile from "@/components/item/PhotoTile.astro";
-import { INDUSTRIES, CTA, industryHref, tbc } from "@/data/site.ts";
+import { INDUSTRIES, CTA, industryHref } from "@/data/site.ts";
 import { INDUSTRY_PHOTOS } from "@/data/photos.ts";
 
 interface Props {
@@ -16,6 +16,9 @@ interface Props {
 }
 
 const { render = true } = Astro.props;
+
+/** A figure still waiting for ManyaIT shows as `[X]`. */
+const confirmed = (value: string) => !/\[[^\]]+\]/.test(value);
 ---
 
 {
@@ -85,14 +88,16 @@ const { render = true } = Astro.props;
                   <dd>{industry.build}</dd>
                 </div>
               </dl>
+              {/* The figure shows only once ManyaIT confirms it. */}
               <div class="industry-detail_outcome">
-                <span
-                  class="industry-detail_metric"
-                  set:html={tbc(industry.metric)}
-                />
+                {confirmed(industry.metric) && (
+                  <span class="industry-detail_metric">{industry.metric}</span>
+                )}
                 <span>
                   <strong>{industry.outcome}</strong>
-                  <span>{industry.metricLabel}</span>
+                  {confirmed(industry.metric) && (
+                    <span>{industry.metricLabel}</span>
+                  )}
                 </span>
               </div>
               <ButtonWrapper>

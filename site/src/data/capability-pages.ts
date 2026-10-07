@@ -174,7 +174,7 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
       {
         question: "How quickly can we get started?",
         answer:
-          "Most engagements begin within [X] weeks of an agreed scope. A focused team can start with an assessment or a first pipeline while the wider program ramps up.",
+          "Work can begin as soon as the scope is agreed. A focused team can start with an assessment or a first pipeline while the wider program ramps up.",
       },
     ],
   },

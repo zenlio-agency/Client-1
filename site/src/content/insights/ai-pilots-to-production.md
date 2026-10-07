@@ -7,7 +7,7 @@ type: Perspective
 order: 1
 featured: true
 photo: insight-1
-published: "[Publish date]"
+published: "2026-10-05"
 takeaways:
   - Pilots are usually built to impress. Production systems are built to be run.
   - The model is rarely the blocker. Data access, ownership and an agreed measure of "good" usually are.

@@ -37,8 +37,8 @@ const pct = (value: number, of: number) =>
           data-reveal
           style="--reveal-order: 2"
         >
-          Client leadership in the United States and engineering depth in
-          India, run as one delivery organization with shared governance and a
+          Client leadership in the United States and engineering depth in India,
+          run as one delivery organization with shared governance and a
           follow-the-sun cadence.
         </Paragraph>
       </div>
@@ -103,10 +103,7 @@ const pct = (value: number, of: number) =>
               >
                 <span class="presence_tip_city">{pin.country}</span>
                 <span class="presence_tip_role">{pin.role}</span>
-                <span
-                  class="presence_tip_address"
-                  set:html={tbc(pin.entity)}
-                />
+                <span class="presence_tip_address" set:html={tbc(pin.entity)} />
               </div>
             </div>
           ))}
@@ -116,7 +113,7 @@ const pct = (value: number, of: number) =>
             <span class="presence_legend_dot" aria-hidden="true" />
             Delivery footprint
           </span>
-          <span set:html={tbc("Serving enterprises in [X] countries.")} />
+          <span>One team across the United States and India.</span>
         </figcaption>
       </figure>
     </div>

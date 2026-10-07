@@ -6,7 +6,7 @@ category: Digital Engineering
 type: Field notes
 order: 5
 photo: insight-5
-published: "[Publish date]"
+published: "2026-10-05"
 takeaways:
   - Big-bang rewrites freeze new features and rarely land on time. Modernizing in slices keeps shipping.
   - Put a routing layer in front of the old system, and move one capability at a time behind it.

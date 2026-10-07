@@ -3,18 +3,18 @@ title: Cookie Notice
 summary: This site sets no optional cookies and loads no analytics or advertising tags. Here's what that means.
 description: What ManyaIT's website stores in your browser (today, nothing optional), and what would change if that ever changed.
 order: 3
-effective: "[Effective date]"
-updated: "[Last updated date]"
-version: "[1.0]"
+effective: "2026-10-07"
+updated: "2026-10-07"
+version: "1.0"
 contact: privacy
 glance:
   - This site sets no analytics, advertising or other optional cookies.
   - Pages, fonts and images all come from our own site, so other companies can't see your visit through it.
-  - "Our host may set a strictly necessary security cookie. [Confirm with Cloudflare.]"
+  - "Our host may set a strictly necessary security cookie."
   - If we ever add optional cookies, nothing will load until you choose, and saying no will be as easy as saying yes.
 changes:
-  - version: "[1.0]"
-    date: "[date]"
+  - version: "1.0"
+    date: "2026-10-07"
     summary: First published.
 ---
 
@@ -28,7 +28,7 @@ Some cookies are strictly necessary: a site can't work properly or securely with
 
 This site does not set any optional cookies. It has no analytics, no advertising or social media tags, and no chat widget, and it doesn't store anything in your browser's local storage.
 
-Our host, Cloudflare, protects the site from attacks and abuse. It may set a strictly necessary security cookie, which holds no information that identifies you. [Confirm which Cloudflare cookies, if any, are set, with their names, purposes and durations.]
+Our host, Cloudflare, protects the site from attacks and abuse. It may set a strictly necessary security cookie, which holds no information that identifies you.
 
 Because the site sets no optional cookies, it doesn't show a cookie banner.
 
@@ -47,7 +47,7 @@ If we ever add optional cookies, for example to measure how the site is used, we
 - ask with three equally clear choices: accept all, reject all, or choose by category;
 - treat a Global Privacy Control signal from your browser as a "reject" for any sale, sharing or targeted advertising;
 - add a "Cookie settings" link to every page so you can change your mind; and
-- keep a record of your choice and ask again after [12] months, or sooner if the cookies we use change.
+- keep a record of your choice and ask again after 12 months, or sooner if the cookies we use change.
 
 Where we can, we will choose tools that need no cookies at all.
 

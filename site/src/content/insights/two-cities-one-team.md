@@ -6,7 +6,7 @@ category: Enterprise Technology
 type: Field notes
 order: 4
 photo: insight-4
-published: "[Publish date]"
+published: "2026-10-05"
 takeaways:
   - The time difference between the United States and India is an advantage when handoffs are designed, not improvised.
   - Use the short daily overlap for decisions. Everything else moves in writing.
@@ -39,13 +39,13 @@ That window is precious, so protect it:
 
 At the end of each day, one hub hands the work to the other. A good handoff note means the next shift starts working, not asking questions.
 
-| Section          | What goes in it                                           |
-| ---------------- | --------------------------------------------------------- |
-| What changed     | Work finished, deployed or merged today, with links       |
-| In progress      | What's half done, where it stands and the next step       |
-| Blocked          | What's stuck, why, and who can unblock it                 |
+| Section          | What goes in it                                          |
+| ---------------- | -------------------------------------------------------- |
+| What changed     | Work finished, deployed or merged today, with links      |
+| In progress      | What's half done, where it stands and the next step      |
+| Blocked          | What's stuck, why, and who can unblock it                |
 | Decisions needed | Questions only the other hub can answer, with a deadline |
-| Watch list       | Alerts, risks or fragile areas to keep an eye on          |
+| Watch list       | Alerts, risks or fragile areas to keep an eye on         |
 
 Keep the format the same every day, write it where the whole team can see it and make writing it part of the definition of done for the day.
 
