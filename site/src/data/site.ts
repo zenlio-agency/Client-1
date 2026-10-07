@@ -16,7 +16,7 @@ export const CAPABILITIES = [
     slug: "data-analytics",
     key: "data",
     title: "Data & Analytics",
-    line: "Modern data platforms and AI-ready data products the business can trust.",
+    line: "Modern data platforms that turn scattered data into trusted, decision-ready intelligence.",
     focus: [
       "Data strategy & AI-readiness assessment",
       "Lakehouse & cloud data platform modernization",
@@ -32,7 +32,7 @@ export const CAPABILITIES = [
     slug: "sap-enterprise-data",
     key: "sap",
     title: "SAP & Enterprise Data",
-    line: "S/4HANA transformation and clean-core architecture for an upgrade-ready digital core.",
+    line: "S/4HANA transformation, BTP innovation and clean-core architecture that keep the enterprise core agile.",
     focus: [
       "S/4HANA transformation & RISE with SAP",
       "Clean-core strategy & BTP extensions",
@@ -48,7 +48,7 @@ export const CAPABILITIES = [
     slug: "applied-ai",
     key: "ai",
     title: "Applied AI",
-    line: "Generative AI and machine learning, engineered for production and governed for scale.",
+    line: "Generative AI and machine learning, engineered for production and governed for the enterprise.",
     focus: [
       "AI strategy & use-case portfolio",
       "Copilots & knowledge assistants",
@@ -64,7 +64,7 @@ export const CAPABILITIES = [
     slug: "agentic-ai-automation",
     key: "ai",
     title: "Agentic AI & Automation",
-    line: "Governed AI agents and orchestrated workflows that execute multi-step work across systems.",
+    line: "Intelligent agents and automated workflows that execute real work across your operations.",
     focus: [
       "Process intelligence & discovery",
       "Agentic workflow orchestration",
@@ -80,7 +80,7 @@ export const CAPABILITIES = [
     slug: "digital-product-engineering",
     key: "digital",
     title: "Digital Product Engineering",
-    line: "Cloud-native products and platforms, engineered from concept to scale.",
+    line: "Cloud-native products and platforms, engineered from concept to scale across web and mobile.",
     focus: [
       "Product strategy & experience design",
       "Cloud-native application engineering",
@@ -132,7 +132,7 @@ export const CLIENT_LOGO_ROWS: {
  * The four industries in scope. `id` doubles as the deep-link hash and
  * `slug` names each one's page under `/industries/`. `summary` labels the
  * industry on the Industries page and in "Other industries"; `line` is the
- * homepage tile.
+ * homepage tile, which keeps its original wording.
  */
 export const INDUSTRIES = [
   {
@@ -141,7 +141,7 @@ export const INDUSTRIES = [
     title: "Banking & Financial Services",
     short: "Banking & FS",
     summary: "Modern platforms for payments, risk and compliance.",
-    line: "Core, payments and risk platforms built for regulatory scrutiny.",
+    line: "Modern banking platforms for payments, risk and compliance.",
     hero: "Modernize core banking without slowing the business.",
     challenge:
       "Decades-old cores, real-time customer expectations and every change subject to audit and risk review.",
@@ -158,7 +158,7 @@ export const INDUSTRIES = [
     short: "Telecom",
     summary:
       "Faster launches, assured revenue and proactive service assurance.",
-    line: "Faster launches, assured revenue and proactive service assurance.",
+    line: "Faster launches, accurate billing and proactive service assurance.",
     hero: "Keep networks, revenue and customers connected.",
     challenge:
       "Massive data volumes, complex charging and billing, and constant network change, where every outage is public.",
@@ -175,7 +175,7 @@ export const INDUSTRIES = [
     short: "Healthcare",
     summary:
       "Interoperable health data, streamlined claims and privacy by design.",
-    line: "Interoperable health data, streamlined claims and privacy by design.",
+    line: "Connected health data, streamlined claims and privacy by design.",
     hero: "Technology that serves patients and protects their data.",
     challenge:
       "Fragmented records, rising administrative cost and strict privacy obligations such as HIPAA.",
@@ -192,7 +192,7 @@ export const INDUSTRIES = [
     short: "Energy",
     summary:
       "Reliable assets, connected field operations and sharper forecasting.",
-    line: "Reliable assets, connected field operations and sharper forecasting.",
+    line: "Reliable assets, connected field operations and smarter forecasting.",
     hero: "Digital operations for a sector in transition.",
     challenge:
       "Aging assets, safety-critical operations and the shift to renewables, with data split across field and enterprise systems.",
