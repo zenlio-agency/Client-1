@@ -11,6 +11,7 @@ import PhotoTile from "@/components/item/PhotoTile.astro";
 import { CAPABILITIES, tbc } from "@/data/site.ts";
 import { LEGAL, mailLink } from "@/data/legal.ts";
 import { CAREERS_POINT_PHOTOS } from "@/data/photos.ts";
+import { ROLES, TALENT_NETWORK, applyHref } from "@/data/careers.ts";
 
 interface Props {
   /** Set to `false` to omit the component. */
@@ -39,94 +40,6 @@ const points = [
 ];
 
 const teams = [...CAPABILITIES.map((cap) => cap.title), "Client Partnership"];
-
-/*
- * Sample openings for the design: the US roles in particular are
- * placeholders and must be replaced with real openings before launch.
- * `location` is shown on the role; `country` drives the location filter.
- */
-const roles = [
-  {
-    title: "Senior Java Engineer",
-    team: "Digital Product Engineering",
-    location: "India",
-    country: "India",
-    experience: "5–8 yrs",
-    mode: "Hybrid",
-  },
-  {
-    title: "Data Engineering Lead",
-    team: "Data & Analytics",
-    location: "Jersey City, NJ",
-    country: "United States",
-    experience: "8+ yrs",
-    mode: "Hybrid",
-  },
-  {
-    title: "SAP S/4HANA Functional Lead",
-    team: "SAP & Enterprise Data",
-    location: "India",
-    country: "India",
-    experience: "4–7 yrs",
-    mode: "Hybrid",
-  },
-  {
-    title: "SAP S/4HANA Solution Architect",
-    team: "SAP & Enterprise Data",
-    location: "Chicago, IL",
-    country: "United States",
-    experience: "10+ yrs",
-    mode: "Hybrid",
-  },
-  {
-    title: "GenAI Engineer",
-    team: "Applied AI",
-    location: "Charlotte, NC",
-    country: "United States",
-    experience: "5–8 yrs",
-    mode: "Hybrid",
-  },
-  {
-    title: "AI Automation Engineer",
-    team: "Agentic AI & Automation",
-    location: "India",
-    country: "India",
-    experience: "3–6 yrs",
-    mode: "On-site",
-  },
-  {
-    title: "Intelligent Automation Engineer",
-    team: "Agentic AI & Automation",
-    location: "Atlanta, GA",
-    country: "United States",
-    experience: "4–7 yrs",
-    mode: "On-site",
-  },
-  {
-    title: "Healthcare Data Architect",
-    team: "Data & Analytics",
-    location: "Minneapolis, MN",
-    country: "United States",
-    experience: "8+ yrs",
-    mode: "Hybrid",
-  },
-  {
-    title: "Cloud Platform Engineer",
-    team: "Digital Product Engineering",
-    location: "Remote, United States",
-    country: "United States",
-    experience: "5–8 yrs",
-    mode: "Remote",
-  },
-  {
-    title: "Client Partner",
-    team: "Client Partnership",
-    location: "New York, NY",
-    country: "United States",
-    experience: "8+ yrs",
-    mode: "On-site",
-  },
-];
 ---
 
 {
@@ -163,7 +76,7 @@ const roles = [
             </Button>
             <Button
               element="link"
-              href="/contact?topic=careers"
+              href={applyHref(TALENT_NETWORK.slug)}
               emphasis="secondary"
             >
               Register Your Interest
@@ -235,7 +148,7 @@ const roles = [
           </label>
         </form>
         <ul class="careers_roles" aria-live="polite">
-          {roles.map((role) => (
+          {ROLES.map((role) => (
             <li
               class="careers_role"
               data-text={`${role.title} ${role.team} ${role.location}`.toLowerCase()}
@@ -243,7 +156,7 @@ const roles = [
               data-mode={role.mode}
               data-team={role.team}
             >
-              <a class="careers_role_link" href="/contact?topic=careers">
+              <a class="careers_role_link" href={applyHref(role.slug)}>
                 <span class="careers_role_main">
                   <span class="careers_role_title">{role.title}</span>
                   <span class="careers_role_team">{role.team}</span>
@@ -254,6 +167,7 @@ const roles = [
                   <span>{role.mode}</span>
                 </span>
                 <span class="careers_role_go">
+                  <span class="careers_role_go_label">Apply</span>
                   <Icon src={arrowUp} variant="small" />
                 </span>
               </a>
@@ -499,19 +413,37 @@ const roles = [
       }
     }
 
+    /* A round arrow on small screens; "Apply" joins it from tablet up. */
     .careers_role_go {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      place-items: center;
-      width: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      min-width: 2.5rem;
       height: 2.5rem;
-      border-radius: 50%;
+      border-radius: var(--radius-round);
+      font-size: var(--text-small);
+      font-weight: var(--primary-medium);
+      @media (width >= 48rem) {
+        padding-inline: 1rem 0.85rem;
+      }
       border: var(--border-width) solid var(--border);
       color: var(--text);
       transition:
         background-color var(--hover-duration) var(--hover-ease),
         border-color var(--hover-duration) var(--hover-ease),
         color var(--hover-duration) var(--hover-ease);
+    }
+
+    .careers_role_go_label {
+      @media (width < 48rem) {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
     }
 
     .careers_empty {
