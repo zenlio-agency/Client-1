@@ -3,7 +3,6 @@ import capSap from "@/assets/icons/cap-sap.svg";
 import capAi from "@/assets/icons/cap-ai.svg";
 import capFlow from "@/assets/icons/cap-flow.svg";
 import capCode from "@/assets/icons/cap-code.svg";
-import { CAPABILITY_PAGES } from "@/data/capability-pages.ts";
 
 /**
  * The five capability areas, in the order used everywhere on the site.
@@ -326,44 +325,31 @@ export const COMPANY_CONTACT = {
 } as const;
 
 /**
- * Company figures shown in the "Why ManyaIT" panel and the "at a glance"
- * strip (6 October 2026):
- * - enterprises, years and specialists come from ManyaIT;
- * - technologies is counted from the platforms and tools listed on the
- *   capability pages (roles left out), rounded down to the ten, so it
- *   can't drift from what the site shows;
- * - programs, dataEstates, onSchedule and kickoff are conservative estimates
- *   based on market benchmarks, approved for publication. Replace them with
- *   ManyaIT's measured figures when its records are available.
+ * Company figures. The "Why ManyaIT" panel on the homepage shows the first
+ * six, three to a row; the figures and wording were supplied by ManyaIT on
+ * 7 October 2026. kickoff and specialists feed the "at a glance"
+ * strip (`GLANCE_FIGURES`).
  */
-const STACK_TECHNOLOGIES = new Set(
-  Object.values(CAPABILITY_PAGES).flatMap((page) =>
-    page.stack.groups
-      .filter((group) => group.title !== "Specialists")
-      .flatMap((group) => group.items),
-  ),
-);
-
 export const COMPANY_FIGURES = {
   programs: {
     value: "100+",
-    label: "Data and AI programs taken to production",
+    label: "Data and AI programs deployed to production",
   },
-  dataEstates: {
+  products: {
     value: "25+",
-    label: "Enterprise data estates modernized and governed",
+    label: "Digital products engineered from concept to launch",
   },
   onSchedule: {
+    value: "100%",
+    label: "Enterprise solutions delivered on schedule",
+  },
+  testCoverage: {
     value: "90%+",
-    label: "Programs delivered on schedule, end to end",
+    label: "Automated test coverage on production code",
   },
+  enterprises: { value: "50+", label: "Global enterprise clients served" },
+  years: { value: "10+", label: "Years powering enterprise innovation" },
   kickoff: { value: "4–6 wks", label: "From kickoff to a delivery-ready team" },
-  technologies: {
-    value: `${Math.floor(STACK_TECHNOLOGIES.size / 10) * 10}+`,
-    label: "Enterprise platforms and technologies",
-  },
-  enterprises: { value: "50+", label: "Global enterprises served" },
-  years: { value: "10+", label: "Years powering enterprise technology" },
   specialists: { value: "250+", label: "Specialists in our talent network" },
 } as const;
 

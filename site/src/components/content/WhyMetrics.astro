@@ -6,6 +6,7 @@ import Button from "@/components/Button.astro";
 import ButtonWrapper from "@/components/wrapper/ButtonWrapper.astro";
 import Icon from "@/components/media/Icon.astro";
 import arrow from "@/assets/icons/ui-arrow.svg";
+import check from "@/assets/icons/check.svg";
 import { COMPANY_FIGURES, tbc } from "@/data/site.ts";
 
 interface Props {
@@ -19,8 +20,10 @@ interface Props {
   lede?: string;
   /** Buttons under the paragraph: the first solid, the rest outlined. */
   buttons?: { label: string; href: string }[];
-  /** Figures and what each one measures, four to a row on desktop. */
+  /** Figures and what each one measures, three to a row on desktop. */
   stats?: { value: string; label: string }[];
+  /** Engineering practices shown as proof points under the figures. */
+  standards?: { title: string; items: string[] };
 }
 
 const {
@@ -35,14 +38,21 @@ const {
   ],
   stats = [
     COMPANY_FIGURES.programs,
-    COMPANY_FIGURES.dataEstates,
+    COMPANY_FIGURES.products,
     COMPANY_FIGURES.onSchedule,
-    COMPANY_FIGURES.kickoff,
-    COMPANY_FIGURES.technologies,
+    COMPANY_FIGURES.testCoverage,
     COMPANY_FIGURES.enterprises,
     COMPANY_FIGURES.years,
-    COMPANY_FIGURES.specialists,
   ],
+  standards = {
+    title: "Engineering standards on every program",
+    items: [
+      "Peer-reviewed code",
+      "Data quality checks in every pipeline",
+      "Security and quality gates",
+      "CI/CD on every release",
+    ],
+  },
 } = Astro.props;
 
 /* The number is set large; any sign or unit around it ("<", "+", "%",
@@ -69,12 +79,13 @@ const fan = (
     };
   });
 
-/* Full rows on desktop: four across, or three when that divides evenly
-   (six figures read as two rows of three, not four and two). */
-const columns = stats.length % 4 !== 0 && stats.length % 3 === 0 ? 3 : 4;
-
 const waves = [
-  ...fan(18, (t) => [430 + t * 150, 700 - t * 60, 170 + t * 190, 250 + t * 110]),
+  ...fan(18, (t) => [
+    430 + t * 150,
+    700 - t * 60,
+    170 + t * 190,
+    250 + t * 110,
+  ]),
   ...fan(12, (t) => [20 + t * 90, 300 + t * 120, -60 + t * 140, 90 + t * 150]),
 ];
 ---
@@ -120,14 +131,14 @@ const waves = [
         )}
       </div>
 
-      <ul class="why-metrics_list" style={`--_columns: ${columns}`}>
+      <ul class="why-metrics_list">
         {stats.map((stat, index) => {
           const { before, figure, after } = split(stat.value);
           return (
             <li
               class="why-metrics_item"
               data-reveal
-              style={`--reveal-order: ${index % 4}`}
+              style={`--reveal-order: ${index % 3}`}
             >
               <span class="why-metrics_value">
                 {before && <span class="why-metrics_unit">{before}</span>}
@@ -139,6 +150,20 @@ const waves = [
           );
         })}
       </ul>
+
+      {standards.items.length > 0 && (
+        <div class="why-metrics_standards" data-reveal>
+          <p class="why-metrics_standards_title">{standards.title}</p>
+          <ul class="why-metrics_standards_list">
+            {standards.items.map((item) => (
+              <li>
+                <Icon src={check} variant="small" class="why-metrics_check" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   )
 }
@@ -226,23 +251,36 @@ const waves = [
       color: var(--_soft);
     }
 
-    /* Two across on phones and tablets, three or four across from 64rem. */
+    /* One figure per line on phones, the number beside its label; rows of
+       three from 40rem, with hairlines between the figures in a row. */
     .why-metrics_list {
       width: 100%;
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: var(--space-7) var(--space-4);
-      @media (width >= 64rem) {
-        grid-template-columns: repeat(var(--_columns, 4), minmax(0, 1fr));
-        gap: var(--space-8) var(--space-6);
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-4);
+      @media (width >= 40rem) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--space-8) 0;
       }
     }
 
     .why-metrics_item {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 6.5rem minmax(0, 1fr);
       align-items: center;
-      gap: var(--space-3);
+      gap: var(--space-4);
+      text-align: left;
+      @media (width >= 40rem) {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-3);
+        padding-inline: var(--space-4);
+        text-align: center;
+        &:not(:nth-child(3n + 1)) {
+          border-left: 1px solid
+            color-mix(in srgb, var(--white) 14%, transparent);
+        }
+      }
     }
 
     /* Figures scale with the viewport up to 3.75rem (60px). */
@@ -264,11 +302,51 @@ const waves = [
     }
 
     .why-metrics_label {
-      max-width: 22ch;
+      max-width: 24ch;
       font-size: var(--text-small);
       line-height: 1.45;
       color: var(--_soft);
       text-wrap: balance;
+    }
+
+    /* Proof points: the practices behind the figures. */
+    .why-metrics_standards {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-4);
+      padding-top: var(--space-6);
+      border-top: 1px solid color-mix(in srgb, var(--white) 14%, transparent);
+    }
+
+    .why-metrics_standards_title {
+      margin: 0;
+      font-size: var(--text-small);
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .why-metrics_standards_list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-2) var(--space-3);
+      & li {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 0.95rem;
+        border: 1px solid color-mix(in srgb, var(--white) 16%, transparent);
+        border-radius: var(--radius-round);
+        background-color: color-mix(in srgb, var(--white) 6%, transparent);
+        font-size: var(--text-small);
+        color: var(--text);
+      }
+    }
+
+    .why-metrics_check {
+      color: var(--blue-300);
     }
   }
 </style>
