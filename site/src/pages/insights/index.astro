@@ -14,7 +14,7 @@ const capability = (id: string) =>
 
 <Layout
   title="Insights"
-  description="Perspectives, guides and field notes on data, SAP, AI and engineering from the ManyaIT teams building and running enterprise platforms."
+  description="Perspectives, guides and field notes on architecture, data, SAP, AI and engineering from the teams building and running enterprise platforms."
 >
   {/* Hero */}
   <Section paddingTop="small">
@@ -22,7 +22,7 @@ const capability = (id: string) =>
       crumbs={[{ label: "Home", href: "/" }, { label: "Insights" }]}
       eyebrow="Insights"
       title="Field notes from the teams doing the work."
-      lede="Perspectives, guides and explainers on data, SAP, AI and engineering, written by the people who build and run enterprise platforms every day."
+      lede="Perspectives, guides and explainers on architecture, data, AI and engineering, written by the people who build and run enterprise platforms."
       points={["Perspectives", "Guides", "Field notes"]}
       primary={{ label: "Read the articles", href: "#articles" }}
       secondary={CTA.primary}
@@ -32,7 +32,9 @@ const capability = (id: string) =>
 
   {/* Articles */}
   <Section theme="tint" id="articles">
-    <InsightsGrid />
+    <InsightsGrid
+      intro="Field notes from the teams architecting and running enterprise platforms."
+    />
   </Section>
 
   {/* Topics */}
@@ -54,7 +56,7 @@ const capability = (id: string) =>
         },
         {
           title: "SAP and clean core",
-          text: "Plain-language guides to S/4HANA, BTP and the decisions that shape an SAP roadmap.",
+          text: "Decision-maker guides to S/4HANA, BTP and the choices that shape an SAP roadmap.",
           href: capability("cap-sap"),
         },
         {
@@ -63,9 +65,9 @@ const capability = (id: string) =>
           href: capability("cap-code"),
         },
         {
-          title: "Capability centers",
-          text: "Building, running and growing a Global Capability Center, from the first team to a full hub.",
-          href: "/about",
+          title: "Distributed delivery",
+          text: "Operating models, handovers and governance for teams that run platforms across time zones.",
+          href: "/insights/two-cities-one-team",
         },
         {
           title: "Industry field notes",

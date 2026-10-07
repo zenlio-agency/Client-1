@@ -3,7 +3,6 @@ import capSap from "@/assets/icons/cap-sap.svg";
 import capAi from "@/assets/icons/cap-ai.svg";
 import capFlow from "@/assets/icons/cap-flow.svg";
 import capCode from "@/assets/icons/cap-code.svg";
-import { CAPABILITY_PAGES } from "@/data/capability-pages.ts";
 
 /**
  * The five capability areas, in the order used everywhere on the site.
@@ -20,10 +19,11 @@ export const CAPABILITIES = [
     line: "Modern data platforms that turn scattered data into trusted, decision-ready intelligence.",
     focus: [
       "Data strategy & AI-readiness assessment",
-      "Cloud data platform & lakehouse modernization",
-      "Data engineering & pipeline (ETL/ELT) modernization",
-      "Data governance, quality & observability",
-      "BI, analytics & self-service insights",
+      "Lakehouse & cloud data platform modernization",
+      "Data engineering & pipeline modernization (ELT/ETL)",
+      "Data products & master data",
+      "Governance, quality & observability",
+      "BI, semantic layer & self-service analytics",
     ],
     icon: capData,
   },
@@ -34,11 +34,12 @@ export const CAPABILITIES = [
     title: "SAP & Enterprise Data",
     line: "S/4HANA transformation, BTP innovation and clean-core architecture that keep the enterprise core agile.",
     focus: [
-      "S/4HANA migration & upgrade",
+      "S/4HANA transformation & RISE with SAP",
       "Clean-core strategy & BTP extensions",
-      "SAP data, analytics & integration",
-      "Master data management & data migration",
-      "Application management & continuous optimization",
+      "SAP integration",
+      "SAP data, planning & analytics",
+      "Data migration & master data",
+      "Application management",
     ],
     icon: capSap,
   },
@@ -49,11 +50,12 @@ export const CAPABILITIES = [
     title: "Applied AI",
     line: "Generative AI and machine learning, engineered for production and governed for the enterprise.",
     focus: [
-      "AI use-case discovery & value roadmaps",
-      "GenAI applications, copilots & knowledge assistants",
-      "Machine learning & predictive analytics",
+      "AI strategy & use-case portfolio",
+      "Copilots & knowledge assistants",
+      "Document intelligence",
+      "Predictive & prescriptive models",
       "MLOps & LLMOps",
-      "Responsible AI, governance & model risk",
+      "Responsible AI & model risk",
     ],
     icon: capAi,
   },
@@ -64,11 +66,12 @@ export const CAPABILITIES = [
     title: "Agentic AI & Automation",
     line: "Intelligent agents and automated workflows that execute real work across your operations.",
     focus: [
-      "Agentic workflow design & orchestration",
-      "Intelligent process automation",
       "Process intelligence & discovery",
-      "Operational decision automation",
-      "Agent monitoring, governance & lifecycle management",
+      "Agentic workflow orchestration",
+      "Human-in-the-loop controls",
+      "Intelligent document flows",
+      "RPA & low-code modernization",
+      "Agent governance & lifecycle management",
     ],
     icon: capFlow,
   },
@@ -79,11 +82,12 @@ export const CAPABILITIES = [
     title: "Digital Product Engineering",
     line: "Cloud-native products and platforms, engineered from concept to scale across web and mobile.",
     focus: [
-      "Product strategy, UX & design",
-      "Cloud-native application development",
-      "Legacy application modernization",
+      "Product strategy & experience design",
+      "Cloud-native application engineering",
+      "Legacy modernization",
       "APIs, microservices & integration",
-      "DevSecOps, quality engineering & SRE",
+      "Platform engineering, DevSecOps & SRE",
+      "Quality engineering",
     ],
     icon: capCode,
   },
@@ -126,7 +130,9 @@ export const CLIENT_LOGO_ROWS: {
 
 /**
  * The four industries in scope. `id` doubles as the deep-link hash and
- * `slug` names each one's page under `/industries/`.
+ * `slug` names each one's page under `/industries/`. `summary` labels the
+ * industry on the Industries page and in "Other industries"; `line` is the
+ * homepage tile, which keeps its original wording.
  */
 export const INDUSTRIES = [
   {
@@ -134,12 +140,13 @@ export const INDUSTRIES = [
     slug: "banking-financial-services",
     title: "Banking & Financial Services",
     short: "Banking & FS",
-    summary: "Modern banking platforms for payments, risk and compliance.",
+    summary: "Modern platforms for payments, risk and compliance.",
+    line: "Modern banking platforms for payments, risk and compliance.",
     hero: "Modernize core banking without slowing the business.",
     challenge:
-      "Decades-old core systems, real-time customer expectations, and every change through audit and risk review.",
+      "Decades-old cores, real-time customer expectations and every change subject to audit and risk review.",
     build:
-      "Modern core and digital banking, trusted finance and risk data, AI-driven fraud detection and automated customer onboarding.",
+      "Core and digital banking modernization, real-time payments, trusted risk and regulatory data, AI-driven fraud prevention and automated onboarding.",
     outcome: "Faster, compliant releases.",
     metric: "[X]%",
     metricLabel: "faster release cycles",
@@ -150,12 +157,13 @@ export const INDUSTRIES = [
     title: "Telecommunications",
     short: "Telecom",
     summary:
-      "Faster launches, accurate billing and proactive service assurance.",
-    hero: "Keep networks and customers connected.",
+      "Faster launches, assured revenue and proactive service assurance.",
+    line: "Faster launches, accurate billing and proactive service assurance.",
+    hero: "Keep networks, revenue and customers connected.",
     challenge:
-      "Huge data volumes, complex billing and constant network change, where every outage is public.",
+      "Massive data volumes, complex charging and billing, and constant network change, where every outage is public.",
     build:
-      "Modern order and billing systems, customer and network analytics, AI-driven service assurance and round-the-clock operations.",
+      "BSS and OSS modernization, revenue assurance, network and customer analytics, AI-driven service assurance and round-the-clock operations.",
     outcome: "Fewer manual tickets and faster recovery.",
     metric: "[X]%",
     metricLabel: "faster incident resolution",
@@ -165,12 +173,14 @@ export const INDUSTRIES = [
     slug: "healthcare",
     title: "Healthcare",
     short: "Healthcare",
-    summary: "Connected health data, streamlined claims and privacy by design.",
+    summary:
+      "Interoperable health data, streamlined claims and privacy by design.",
+    line: "Connected health data, streamlined claims and privacy by design.",
     hero: "Technology that serves patients and protects their data.",
     challenge:
-      "Fragmented records, rising admin cost and strict privacy rules such as HIPAA.",
+      "Fragmented records, rising administrative cost and strict privacy obligations such as HIPAA.",
     build:
-      "Connected health data platforms, AI for claims and documents, revenue-cycle automation and real-time operations insight.",
+      "Interoperable health data platforms, AI for claims and documents, revenue-cycle automation and real-time operational insight.",
     outcome: "Faster claims, privacy built in from day one.",
     metric: "[X]%",
     metricLabel: "reduction in claims turnaround",
@@ -181,12 +191,13 @@ export const INDUSTRIES = [
     title: "Energy",
     short: "Energy",
     summary:
-      "Reliable assets, connected field operations and smarter forecasting.",
+      "Reliable assets, connected field operations and sharper forecasting.",
+    line: "Reliable assets, connected field operations and smarter forecasting.",
     hero: "Digital operations for a sector in transition.",
     challenge:
-      "Ageing assets, safety rules and the shift to renewables, with data split across field and enterprise systems.",
+      "Aging assets, safety-critical operations and the shift to renewables, with data split across field and enterprise systems.",
     build:
-      "Asset management on SAP, predictive maintenance, demand forecasting and automated field reporting.",
+      "Asset performance management, predictive maintenance, OT and IT integration, demand forecasting and automated field reporting.",
     outcome: "Assets that stay online longer.",
     metric: "[X]%",
     metricLabel: "less unplanned downtime",
@@ -205,7 +216,7 @@ export const HUBS = [
     country: "United States",
     entity: "ManyaIT Inc.",
     role: "Client & Leadership Hub",
-    text: "Where partnerships start. Our US team works in your time zone to shape the right team for each goal and keep it on track across North America.",
+    text: "Executive sponsorship, program governance and client partnership.",
     /* Line breaks render where the address is shown (white-space: pre-line). */
     address: "8668 John Hickman Pkwy #903\nFrisco, Texas 75034",
     phone: "+1 682-500-9839",
@@ -222,8 +233,8 @@ export const HUBS = [
     short: "Hyderabad",
     country: "India",
     entity: "ManyaIT Solutions Pvt Ltd",
-    role: "Engineering & Talent Hub",
-    text: "Home to our engineering talent. Our India teams build, run and improve platforms for enterprises worldwide, working as part of each enterprise's own technology organization.",
+    role: "Engineering & Delivery Hub",
+    text: "Architecture, engineering, data and run operations.",
     address:
       "Bizness Square, Whitefields\nHITECH City, Hyderabad\nTelangana 500081",
     phone: "+91 73869 36669",
@@ -274,22 +285,22 @@ export const NAV = [
 export const TEAM_STEPS = [
   {
     title: "Discover & define",
-    text: "We align on business goals, assess your current landscape across systems, data, architecture and skills, and shape a clear roadmap with measurable success criteria.",
+    text: "We align on business outcomes, baseline your systems, data and architecture, and shape a prioritized roadmap with measurable success criteria.",
     note: "Roadmap and success metrics",
   },
   {
-    title: "Design & assemble",
-    text: "We architect the solution and bring together the right specialists, matched to your technology stack and your domain. You meet the team before work begins.",
-    note: "Right architecture, right people",
+    title: "Architect & mobilize",
+    text: "We define the target architecture, delivery plan and quality gates, and mobilize a cross-functional team that knows your domain and owns the outcome.",
+    note: "Architecture before acceleration",
   },
   {
-    title: "Build & deliver",
-    text: "Agile, DevSecOps-driven delivery inside your tools and controls, with continuous integration, automated testing and transparent progress against agreed outcomes.",
+    title: "Engineer & deliver",
+    text: "Agile, DevSecOps-driven delivery inside your environments and controls, with CI/CD, automated testing and transparent progress against agreed outcomes.",
     note: "Value from the first sprint",
   },
   {
     title: "Operate & evolve",
-    text: "We run, monitor and optimize what we build. Then we scale the team, expand the scope or transition full ownership to you, on your timeline.",
+    text: "We run, observe and optimize what we build under agreed service levels, extend the roadmap as value is proven, and transfer operations and knowledge to your teams whenever you choose.",
     note: "Built to last, yours to keep",
   },
 ];
@@ -326,44 +337,31 @@ export const COMPANY_CONTACT = {
 } as const;
 
 /**
- * Company figures shown in the "Why ManyaIT" panel and the "at a glance"
- * strip (6 October 2026):
- * - enterprises, years and specialists come from ManyaIT;
- * - technologies is counted from the platforms and tools listed on the
- *   capability pages (roles left out), rounded down to the ten, so it
- *   can't drift from what the site shows;
- * - programs, dataEstates, onSchedule and kickoff are conservative estimates
- *   based on market benchmarks, approved for publication. Replace them with
- *   ManyaIT's measured figures when its records are available.
+ * Company figures. The "Why ManyaIT" panel on the homepage shows the first
+ * six, three to a row; the figures and wording were supplied by ManyaIT on
+ * 7 October 2026. kickoff and specialists feed the "at a glance"
+ * strip (`GLANCE_FIGURES`).
  */
-const STACK_TECHNOLOGIES = new Set(
-  Object.values(CAPABILITY_PAGES).flatMap((page) =>
-    page.stack.groups
-      .filter((group) => group.title !== "Specialists")
-      .flatMap((group) => group.items),
-  ),
-);
-
 export const COMPANY_FIGURES = {
   programs: {
     value: "100+",
-    label: "Data and AI programs taken to production",
+    label: "Data and AI programs deployed to production",
   },
-  dataEstates: {
+  products: {
     value: "25+",
-    label: "Enterprise data estates modernized and governed",
+    label: "Digital products engineered from concept to launch",
   },
   onSchedule: {
+    value: "100%",
+    label: "Enterprise solutions delivered on schedule",
+  },
+  testCoverage: {
     value: "90%+",
-    label: "Programs delivered on schedule, end to end",
+    label: "Automated test coverage on production code",
   },
+  enterprises: { value: "50+", label: "Global enterprise clients served" },
+  years: { value: "10+", label: "Years powering enterprise innovation" },
   kickoff: { value: "4–6 wks", label: "From kickoff to a delivery-ready team" },
-  technologies: {
-    value: `${Math.floor(STACK_TECHNOLOGIES.size / 10) * 10}+`,
-    label: "Enterprise platforms and technologies",
-  },
-  enterprises: { value: "50+", label: "Global enterprises served" },
-  years: { value: "10+", label: "Years powering enterprise technology" },
   specialists: { value: "250+", label: "Specialists in our talent network" },
 } as const;
 

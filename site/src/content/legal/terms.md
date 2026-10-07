@@ -3,19 +3,19 @@ title: Terms of Use
 summary: The rules for using this website, who owns its content, and the limits of what it promises.
 description: The terms that apply when you use ManyaIT's website, including acceptable use, intellectual property, disclaimers and governing law.
 order: 2
-effective: "[Effective date]"
-updated: "[Last updated date]"
-version: "[1.0]"
+effective: "2026-10-07"
+updated: "2026-10-07"
+version: "1.0"
 contact: legal
 glance:
   - Using this site means you accept these terms.
   - Use it lawfully. Don't copy it in bulk, interfere with it or try to break into it.
   - The content and the ManyaIT name and logo belong to us. You're welcome to share links.
   - The site describes what we do. It is not an offer of services or employment, and not professional advice.
-  - "[Texas] law governs these terms."
+  - "Texas law governs these terms."
 changes:
-  - version: "[1.0]"
-    date: "[date]"
+  - version: "1.0"
+    date: "2026-10-07"
     summary: First published.
 ---
 
@@ -27,7 +27,7 @@ Our [Privacy Notice](/legal/privacy) and [Cookie Notice](/legal/cookies) explain
 
 ## Who we are
 
-This site is run by {{usEntity}}, a {{usIncorporation}} corporation at {{usAddress}}, working with its Indian company, {{indiaEntity}}. "ManyaIT", "we" and "us" mean both.
+This site is run by {{usEntity}}, of {{usAddress}}, working with its Indian company, {{indiaEntity}}. "ManyaIT", "we" and "us" mean both.
 
 ## Using this site
 
@@ -65,7 +65,7 @@ We work to keep this site accurate and available, but we provide it "as is" and 
 
 ## Limitation of liability
 
-To the extent the law allows, ManyaIT is not liable for any indirect, incidental, special or consequential loss, or for loss of profits, revenue, data or goodwill, arising from your use of this site. Our total liability for any claim about the site is limited to [US$100].
+To the extent the law allows, ManyaIT is not liable for any indirect, incidental, special or consequential loss, or for loss of profits, revenue, data or goodwill, arising from your use of this site. Our total liability for any claim about the site is limited to US$100.
 
 Nothing in these terms limits liability that cannot be limited by law.
 
@@ -75,7 +75,7 @@ If you break these terms and that leads to a claim against ManyaIT, you agree to
 
 ## Governing law and courts
 
-These terms are governed by the laws of [the State of Texas and the United States], without regard to conflict-of-law rules. Any dispute about them goes to the courts of [Collin County, Texas], unless the law where you live gives you the right to bring it in your local courts.
+These terms are governed by the laws of the State of Texas and the United States, without regard to conflict-of-law rules. Any dispute about them goes to the state and federal courts in Texas, unless the law where you live gives you the right to bring it in your local courts.
 
 ## Changes to these terms
 

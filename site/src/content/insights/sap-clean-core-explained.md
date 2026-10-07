@@ -6,7 +6,7 @@ category: SAP
 type: Explainer
 order: 3
 photo: insight-3
-published: "[Publish date]"
+published: "2026-10-05"
 takeaways:
   - Clean core means keeping SAP's standard code standard, and building your own logic beside it through stable interfaces.
   - It turns upgrades from major projects into routine work, and lets you adopt new SAP features sooner.
@@ -72,4 +72,4 @@ Good answers to these questions are a stronger signal of a healthy program than 
 
 ## How ManyaIT helps
 
-Our SAP and enterprise data teams bring functional leads, ABAP and BTP developers and integration specialists who work to clean-core principles: fit to standard first, extensions built on stable interfaces, and data cleaned before it moves. Share a skills brief and we'll shape a team around your S/4HANA roadmap.
+Our SAP and enterprise data teams bring functional leads, ABAP and BTP developers and integration specialists who work to clean-core principles: fit to standard first, extensions built on stable interfaces, and data cleaned before it moves. Tell us where your S/4HANA roadmap stands, and we'll map the route to a clean core.

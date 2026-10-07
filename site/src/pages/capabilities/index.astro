@@ -4,6 +4,7 @@ import Section from "@/components/wrapper/Section.astro";
 import HeroDetail from "@/components/content/HeroDetail.astro";
 import FeatureGrid from "@/components/content/FeatureGrid.astro";
 import ProcessSteps from "@/components/content/ProcessSteps.astro";
+import TeamPanel from "@/components/content/TeamPanel.astro";
 import FaqList from "@/components/content/FaqList.astro";
 import CtaFinal from "@/components/content/CtaFinal.astro";
 import { CAPABILITIES, CTA, TEAM_STEPS, capabilityHref } from "@/data/site.ts";
@@ -11,8 +12,8 @@ import { CAPABILITY_PHOTOS } from "@/data/photos.ts";
 ---
 
 <Layout
-  title="Capabilities | ManyaIT: Data, AI, SAP & Digital Engineering"
-  description="End-to-end data, AI, SAP, automation and digital product engineering, from strategy and architecture to delivery and continuous optimization."
+  title="Capabilities: Data, AI, SAP & Product Engineering | ManyaIT"
+  description="End-to-end data, AI, SAP, automation and digital product engineering, from strategy and architecture to delivery and managed operations."
 >
   {/* Hero */}
   <Section paddingTop="small">
@@ -20,11 +21,11 @@ import { CAPABILITY_PHOTOS } from "@/data/photos.ts";
       crumbs={[{ label: "Home", href: "/" }, { label: "Capabilities" }]}
       eyebrow="Capabilities"
       title="End-to-end engineering across the modern enterprise stack."
-      lede="Five integrated capability areas, one accountable delivery model. From strategy and architecture to build, deployment and continuous optimization, our teams turn complex technology agendas into measurable business outcomes."
+      lede="Integrated capabilities, one accountable delivery model. From strategy and architecture to build, release and continuous optimization, our teams turn complex technology agendas into measurable business outcomes."
       points={[
         "Strategy to production",
-        "Expert-led teams",
-        "Flexible engagement models",
+        "Senior-led, cross-functional teams",
+        "Flexible operating models",
       ]}
       primary={{ label: "Discuss your initiative", href: CTA.primary.href }}
       secondary={{ label: "Why ManyaIT", href: "/about" }}
@@ -38,7 +39,7 @@ import { CAPABILITY_PHOTOS } from "@/data/photos.ts";
       variant="rows"
       eyebrow="What we deliver"
       heading="Integrated capabilities for data-driven, AI-ready enterprises"
-      intro="Start with one capability or combine them into a single program. Data fuels AI, enterprise platforms anchor data, and digital products bring it all to your customers. One partner can carry the work across every layer."
+      intro="Start with one capability or combine them into a single program. Data fuels AI, enterprise platforms anchor data, and digital products put it in front of customers. One partner carries the work across every layer."
       items={CAPABILITIES.map((cap) => ({
         title: cap.title,
         text: cap.line,
@@ -50,36 +51,50 @@ import { CAPABILITY_PHOTOS } from "@/data/photos.ts";
     />
   </Section>
 
-  {/* Engagement models */}
+  {/* Operating models */}
   <Section>
     <FeatureGrid
-      eyebrow="Engagement models"
-      heading="Engage the way your organization works best."
-      intro="Every enterprise moves differently. Choose the model that fits your goals today, and change it as your priorities evolve."
+      eyebrow="Operating models"
+      heading="Work with us the way your organization runs."
+      intro="Every enterprise moves differently. Choose the model that fits your objectives today, and change it as priorities evolve."
       columns={4}
       numbered
       items={[
         {
-          title: "Advisory & assessment",
-          text: "Focused engagements to assess your data, platforms and AI readiness, and define a prioritized roadmap with clear business cases.",
+          title: "Strategy & readiness assessment",
+          text: "A time-boxed assessment of your architecture, data and AI readiness, ending in a prioritized roadmap and business cases leadership can fund.",
         },
         {
-          title: "End-to-end delivery",
-          text: "We own a defined scope from discovery to deployment and support, against agreed milestones, quality gates and service levels.",
+          title: "Outcome-based delivery",
+          text: "We own a defined scope from discovery to deployment and hypercare, against agreed milestones, quality gates and service levels.",
         },
         {
-          title: "Dedicated engineering teams",
-          text: "Expert engineers who integrate with your teams, tools and processes, and scale up or down as your roadmap changes.",
+          title: "Product & platform teams",
+          text: "Persistent, cross-functional teams that own a product or platform roadmap, integrate with your engineering organization and scale with demand.",
         },
         {
-          title: "Build, run & transition",
-          text: "We build and operate a dedicated delivery hub for you, then transition the people, processes and knowledge to your organization on your timeline.",
+          title: "Managed operations",
+          text: "We run, monitor and optimize platforms in production under agreed service levels, and transfer operations and knowledge to your teams whenever you choose.",
         },
       ]}
     />
   </Section>
 
-  {/* How an engagement runs */}
+  {/* The team behind the work */}
+  <Section theme="tint" id="team">
+    <TeamPanel
+      eyebrow="Team behind the work"
+      heading="Senior talent, organized around outcomes."
+      text="Every program is led by an accountable delivery lead and an architect, with engineers, data specialists and domain leads mobilized around your roadmap. The same team stays with the work, so knowledge compounds instead of resetting."
+      points={[
+        "Architects accountable for every program",
+        "Specialists mobilized to the roadmap",
+        "Continuity from first sprint to steady state",
+      ]}
+    />
+  </Section>
+
+  {/* How a program runs */}
   <Section theme="dark">
     <ProcessSteps
       eyebrow="How it works"
@@ -98,27 +113,32 @@ import { CAPABILITY_PHOTOS } from "@/data/photos.ts";
         {
           question: "Can one team cover more than one capability?",
           answer:
-            "Yes. Many programs combine data engineering with AI, or SAP with analytics and automation. We design the team around the outcome and add specialists as the scope evolves.",
+            "Yes. Many programs combine data engineering with AI, or SAP with analytics and automation. We shape one cross-functional team around the outcome and bring in deeper platform expertise as the scope evolves.",
+        },
+        {
+          question: "Can your teams work inside our engineering organization?",
+          answer:
+            "Yes. Our teams work inside your repositories, toolchains and ceremonies, follow your definition of done and report through your governance, while ManyaIT stays accountable for delivery quality and continuity.",
         },
         {
           question: "Do you work on our existing platforms and tools?",
           answer:
-            "Almost always. Our teams work inside your repositories, cloud environments, toolchains and controls, building on what already works rather than starting over.",
+            "Almost always. We build on what already works inside your cloud environments, toolchains and controls rather than starting over.",
         },
         {
-          question: "Can you take ownership of a complete project?",
+          question: "Can you take ownership of a complete program?",
           answer:
-            "Yes. We can own delivery end to end, from discovery and architecture to build, testing, deployment and support, with clear milestones, governance and reporting.",
+            "Yes. We own delivery end to end, from discovery and architecture to build, testing, deployment and support, with clear milestones, governance and reporting.",
         },
         {
           question: "How quickly can we get started?",
           answer:
-            "Most engagements begin within [X] weeks of an agreed scope. A core team can start sooner while the wider team ramps up.",
+            "Work can begin as soon as the scope is agreed. Discovery starts first, led by an architect and a delivery lead, while the full team mobilizes.",
         },
         {
           question: "How do you make AI and data solutions enterprise-ready?",
           answer:
-            "We build on governed, high-quality data, apply security and responsible-AI controls from the start, and put monitoring, MLOps and clear ownership in place so solutions perform reliably in production.",
+            "We build on governed, high-quality data, apply security and responsible-AI controls from the start, and put evaluation, monitoring and clear ownership in place so solutions perform reliably in production.",
         },
       ]}
     />

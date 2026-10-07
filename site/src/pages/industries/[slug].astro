@@ -8,13 +8,7 @@ import ChipGroups from "@/components/content/ChipGroups.astro";
 import FaqList from "@/components/content/FaqList.astro";
 import RelatedTiles from "@/components/content/RelatedTiles.astro";
 import CtaFinal from "@/components/content/CtaFinal.astro";
-import {
-  CAPABILITIES,
-  INDUSTRIES,
-  CTA,
-  capabilityHref,
-  industryHref,
-} from "@/data/site.ts";
+import { INDUSTRIES, CTA, industryHref } from "@/data/site.ts";
 import { INDUSTRY_PAGES } from "@/data/industry-pages.ts";
 import { INDUSTRY_PHOTOS } from "@/data/photos.ts";
 
@@ -71,25 +65,8 @@ const contact = `${CTA.primary.href}?topic=${industry.id}`;
     />
   </Section>
 
-  {/* Capabilities in this industry */}
-  <Section theme="tint">
-    <FeatureGrid
-      variant="rows"
-      eyebrow="Capabilities"
-      heading={`Capabilities that move ${industry.short} forward`}
-      link={{ label: "All capabilities", href: "/capabilities" }}
-      items={CAPABILITIES.map((cap) => ({
-        title: cap.title,
-        text: page.capabilities[cap.id],
-        href: capabilityHref(cap),
-        icon: cap.icon,
-      }))}
-      linkLabel="Explore the capability"
-    />
-  </Section>
-
   {/* Platforms and standards */}
-  <Section>
+  <Section theme="tint">
     <ChipGroups
       eyebrow="Sector knowledge"
       heading="Platforms and standards we work with"
@@ -99,7 +76,7 @@ const contact = `${CTA.primary.href}?topic=${industry.id}`;
   </Section>
 
   {/* FAQ */}
-  <Section theme="tint">
+  <Section>
     <FaqList
       heading={`${industry.short}, answered`}
       items={page.faq}
@@ -108,7 +85,7 @@ const contact = `${CTA.primary.href}?topic=${industry.id}`;
   </Section>
 
   {/* Other industries */}
-  <Section>
+  <Section theme="tint">
     <RelatedTiles
       eyebrow="Keep exploring"
       heading="Other industries"

@@ -6,7 +6,7 @@ category: Digital Engineering
 type: Field notes
 order: 5
 photo: insight-5
-published: "[Publish date]"
+published: "2026-10-05"
 takeaways:
   - Big-bang rewrites freeze new features and rarely land on time. Modernizing in slices keeps shipping.
   - Put a routing layer in front of the old system, and move one capability at a time behind it.
@@ -85,4 +85,4 @@ Modernization competes with features for the same people. A few rules keep both 
 
 ## How ManyaIT helps
 
-Our digital product engineering teams modernize applications this way, slice by slice, alongside the teams that own the roadmap. They are matched to your stack, productive from week one and focused on keeping releases going out while the platform underneath improves. Share a skills brief and we'll shape a team around your application.
+Our digital product engineering teams modernize applications this way, slice by slice, alongside the teams that own the roadmap. They are matched to your stack, productive from week one and focused on keeping releases going out while the platform underneath improves. Tell us about your application, and we'll map a modernization path that keeps the roadmap moving.

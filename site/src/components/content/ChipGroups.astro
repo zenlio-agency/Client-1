@@ -14,9 +14,18 @@ interface Props {
   intro?: string;
   /** Labelled rows of chips, such as roles, platforms or standards. */
   groups?: { title: string; items: string[] }[];
+  /** A labelled line under the groups, such as the team behind the work. */
+  note?: { label: string; text: string };
 }
 
-const { render = true, eyebrow, heading, intro, groups = [] } = Astro.props;
+const {
+  render = true,
+  eyebrow,
+  heading,
+  intro,
+  groups = [],
+  note,
+} = Astro.props;
 ---
 
 {
@@ -33,24 +42,32 @@ const { render = true, eyebrow, heading, intro, groups = [] } = Astro.props;
           </Paragraph>
         )}
       </div>
-      <dl class="chip-groups_list">
-        {groups.map((group, index) => (
-          <div
-            class="chip-groups_row"
-            data-reveal
-            style={`--reveal-order: ${index}`}
-          >
-            <dt class="chip-groups_title">{group.title}</dt>
-            <dd>
-              <ul class="chip-groups_chips">
-                {group.items.map((item) => (
-                  <li>{item}</li>
-                ))}
-              </ul>
-            </dd>
+      <div class="chip-groups_body">
+        <dl class="chip-groups_list">
+          {groups.map((group, index) => (
+            <div
+              class="chip-groups_row"
+              data-reveal
+              style={`--reveal-order: ${index}`}
+            >
+              <dt class="chip-groups_title">{group.title}</dt>
+              <dd>
+                <ul class="chip-groups_chips">
+                  {group.items.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </dd>
+            </div>
+          ))}
+        </dl>
+        {note && (
+          <div class="chip-groups_note" data-reveal>
+            <span class="chip-groups_note_label">{note.label}</span>
+            <p class="chip-groups_note_text">{note.text}</p>
           </div>
-        ))}
-      </dl>
+        )}
+      </div>
     </div>
   )
 }
@@ -78,6 +95,42 @@ const { render = true, eyebrow, heading, intro, groups = [] } = Astro.props;
       flex-direction: column;
       align-items: flex-start;
       gap: var(--space-4);
+    }
+
+    .chip-groups_body {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+
+    /* One line on the people behind the work, set apart from the chips. */
+    .chip-groups_note {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      padding: var(--space-5) var(--space-6);
+      border: var(--border-width) solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius-main);
+      background-color: var(--background-2);
+    }
+
+    .chip-groups_note_label {
+      font-family: var(--heading-family);
+      font-size: 0.75rem;
+      font-weight: var(--heading-bold);
+      letter-spacing: var(--letter-spacing-wide);
+      text-transform: uppercase;
+      color: var(--accent-text);
+    }
+
+    .chip-groups_note_text {
+      margin: 0;
+      font-family: var(--display-family);
+      font-size: var(--h5);
+      font-weight: var(--heading-medium);
+      line-height: 1.4;
+      color: var(--text);
     }
 
     .chip-groups_list {

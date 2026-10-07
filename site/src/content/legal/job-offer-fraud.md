@@ -3,19 +3,19 @@ title: Job Offer Fraud Notice
 summary: ManyaIT never asks for money. How we contact people, how to check an offer, and how to report a fake one.
 description: How to recognise and report fake job offers made in ManyaIT's name. ManyaIT never charges a fee at any stage.
 order: 6
-effective: "[Effective date]"
-updated: "[Last updated date]"
-version: "[1.0]"
+effective: "2026-10-07"
+updated: "2026-10-07"
+version: "1.0"
 contact: careers
 callout: ManyaIT never asks for money. We never charge a fee at any stage, and we never ask for payments, deposits or bank details before an offer.
 glance:
   - ManyaIT never charges a fee, sells training as a condition of a role, or asks for a deposit.
-  - "We contact people only from addresses ending in [@manyait.com] and through our careers page."
+  - "We contact people only from addresses ending in @manyait.com and through our careers page."
   - Every genuine opening is on our careers page. If it isn't there, check with us.
   - Report a suspicious offer to us, and to the police or consumer protection authority where you live.
 changes:
-  - version: "[1.0]"
-    date: "[date]"
+  - version: "1.0"
+    date: "2026-10-07"
     summary: First published.
 ---
 
@@ -32,9 +32,9 @@ If anyone does any of these things in ManyaIT's name, it is not us.
 
 ## How we contact people
 
-- We email only from addresses ending in [@manyait.com]. We never use free email accounts such as Gmail, Yahoo or Outlook.com.
+- We email only from addresses ending in @manyait.com. We never use free email accounts such as Gmail, Yahoo or Outlook.com.
 - We may call or message you to arrange an interview, but we never conduct a whole process over a messaging app alone.
-- Interviews are arranged with named members of our team, and genuine offers come in writing from a [@manyait.com] address.
+- Interviews are arranged with named members of our team, and genuine offers come in writing from a @manyait.com address.
 
 ## How to check an offer
 

@@ -7,7 +7,7 @@ type: Perspective
 order: 1
 featured: true
 photo: insight-1
-published: "[Publish date]"
+published: "2026-10-05"
 takeaways:
   - Pilots are usually built to impress. Production systems are built to be run.
   - The model is rarely the blocker. Data access, ownership and an agreed measure of "good" usually are.
@@ -95,4 +95,4 @@ None of this is glamorous. But it's the difference between a demo people remembe
 
 ## How ManyaIT helps
 
-Our applied AI and agentic AI teams build this way from the first sprint. They work inside your environment, matched to your stack, with evaluation, monitoring and handover planned in from the start. Share a skills brief and we'll shape a team around the workflow you want to move into production.
+Our applied AI and agentic AI teams build this way from the first sprint. They work inside your environment, matched to your stack, with evaluation, monitoring and handover planned in from the start. Tell us the workflow you want to move into production, and we'll map the route from pilot to a governed service.

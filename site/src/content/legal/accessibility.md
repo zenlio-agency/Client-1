@@ -3,18 +3,18 @@ title: Accessibility Statement
 summary: Our commitment to WCAG 2.2 Level AA, what we've done, what we still need to fix, and how to tell us about a barrier.
 description: ManyaIT's commitment to an accessible website, the standard we work to, known limitations and how to send feedback.
 order: 4
-effective: "[Effective date]"
-updated: "[Last updated date]"
-version: "[1.0]"
+effective: "2026-10-07"
+updated: "2026-10-07"
+version: "1.0"
 contact: accessibility
 glance:
   - We aim to meet the Web Content Accessibility Guidelines (WCAG) 2.2 at Level AA.
   - Everything works with a keyboard, and nothing on the site has to move.
   - We haven't had an independent audit yet. We list what we know needs work.
-  - "Tell us about any barrier and we'll reply within [5] business days."
+  - "Tell us about any barrier and we'll reply within 5 business days."
 changes:
-  - version: "[1.0]"
-    date: "[date]"
+  - version: "1.0"
+    date: "2026-10-07"
     summary: First published.
 ---
 
@@ -38,13 +38,12 @@ ManyaIT wants everyone to be able to use this website, including people who use 
 We have not yet had an independent accessibility audit, so we can't yet confirm that every page fully meets WCAG 2.2 AA. What we know about:
 
 - The contact and privacy request forms are not connected yet. They tell you so when you send them. Until they are, please email us instead.
-- [Add any issues the audit finds, each with the date we plan to fix it.]
 
 ## How we test
 
 We check pages with automated tools, then test by hand with a keyboard and with screen readers on desktop and mobile, at different zoom levels and with reduced motion turned on. We test again whenever we change a page's design.
 
-This statement was last reviewed on [date of last review].
+This statement was last updated on October 7, 2026.
 
 ## Feedback
 
