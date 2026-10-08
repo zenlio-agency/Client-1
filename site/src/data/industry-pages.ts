@@ -705,7 +705,7 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
       {
         question: "How do you prepare for peak, and how quickly can you start?",
         answer:
-          "Most programs begin within [X] weeks of an agreed scope. Peak readiness should start well before your code freeze: load testing against forecast peaks, autoscaling, observability and rehearsed runbooks, with round-the-clock support through the season.",
+          "Most programs begin within 4–6 weeks of an agreed scope. Peak readiness should start well before your code freeze: load testing against forecast peaks, autoscaling, observability and rehearsed runbooks, with round-the-clock support through the season.",
       },
       {
         question: "How do you protect customer and payment data?",
