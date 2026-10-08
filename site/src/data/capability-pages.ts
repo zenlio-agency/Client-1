@@ -854,7 +854,7 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
         },
         {
           title: "Prove value",
-          text: "Within [X] weeks, we build a working, sandboxed slice of the architecture to test assumptions and validate the business case.",
+          text: "Within 3–4 weeks, we build a working, sandboxed slice of the architecture to test assumptions and validate the business case.",
           note: "Evidence before investment",
         },
         {
@@ -911,7 +911,7 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
       {
         question: "How quickly can we get started?",
         answer:
-          "Most programs begin within [X] weeks of an agreed scope, starting with discovery and a proof of value.",
+          "Most programs begin within 4–6 weeks of an agreed scope, starting with discovery and a proof of value.",
       },
     ],
   },
