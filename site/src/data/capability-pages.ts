@@ -28,6 +28,12 @@ export type CapabilityPage = {
   };
   /** The roles behind the work, in one line. */
   team: string;
+  /** How this kind of work runs: heading, intro and four steps with tags. */
+  howItWorks: {
+    heading: string;
+    intro: string;
+    steps: { title: string; text: string; note: string }[];
+  };
   /** One line per industry, keyed by industry id. */
   industries: Record<string, string>;
   outcomes: { value: string; label: string }[];
@@ -135,6 +141,33 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
       ],
     },
     team: "Data architects, data and analytics engineers, platform engineers and BI specialists, led by an accountable delivery lead.",
+    howItWorks: {
+      heading: "From fragmented data to decision-grade intelligence",
+      intro:
+        "Every data program moves from an honest view of today's estate to a governed platform the business relies on, with value proven at each stage.",
+      steps: [
+        {
+          title: "Assess & prioritize",
+          text: "We profile your data estate, platforms and quality, map the decisions the business needs to make, and rank use cases by value and readiness.",
+          note: "Value-ranked data roadmap",
+        },
+        {
+          title: "Architect & govern",
+          text: "We design the target lakehouse, semantic layer and data contracts, and set ownership, access policy and quality rules before any data moves.",
+          note: "Governance by design",
+        },
+        {
+          title: "Engineer & migrate",
+          text: "We build pipelines, data products and BI in increments, migrating and reconciling domain by domain so reporting never goes dark.",
+          note: "No gap in reporting",
+        },
+        {
+          title: "Operate & optimize",
+          text: "We run the platform under freshness and quality service levels, with observability and FinOps keeping it reliable and cost-efficient as it grows.",
+          note: "Trusted data, controlled spend",
+        },
+      ],
+    },
     industries: {
       "industry-banking":
         "Reconciled risk, liquidity and regulatory data with lineage auditors can follow.",
@@ -284,6 +317,33 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
       ],
     },
     team: "Solution architects, functional leads across finance, supply chain, manufacturing and asset management, ABAP and BTP developers, and integration specialists.",
+    howItWorks: {
+      heading: "From readiness assessment to a clean, modern core",
+      intro:
+        "SAP programs succeed when the transition path is chosen on evidence and the business never stops running. Every program follows the same disciplined path.",
+      steps: [
+        {
+          title: "Assess readiness",
+          text: "We analyze custom code, data quality, processes and integrations, then recommend conversion, selective transition or new implementation, with the trade-offs documented.",
+          note: "Path chosen on evidence",
+        },
+        {
+          title: "Design to standard",
+          text: "We fit processes to SAP standard first, design clean-core extensions on SAP BTP, and plan data migration and integration.",
+          note: "Clean core from day one",
+        },
+        {
+          title: "Build, test & cut over",
+          text: "Iterative build, automated regression testing and rehearsed data loads lead to a cutover planned around your business calendar.",
+          note: "Rehearsed, low-risk go-live",
+        },
+        {
+          title: "Stabilize & run",
+          text: "Hypercare after go-live, then application management under agreed service levels and a continuous-improvement roadmap.",
+          note: "Stable operations, ongoing value",
+        },
+      ],
+    },
     industries: {
       "industry-banking":
         "Finance, group reporting and controlling on SAP, with clean data flowing into risk and regulatory reporting.",
@@ -427,6 +487,33 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
       ],
     },
     team: "AI architects, ML and GenAI engineers, data scientists and MLOps engineers, working alongside your risk and domain teams.",
+    howItWorks: {
+      heading: "From promising use case to governed production AI",
+      intro:
+        "AI earns its place when value is measured and risk is controlled. Each use case moves through the same evidence-based path.",
+      steps: [
+        {
+          title: "Identify & baseline",
+          text: "We rank use cases by value, feasibility and risk, then agree a baseline and a success measure for each before any build begins.",
+          note: "Value defined up front",
+        },
+        {
+          title: "Prepare & prototype",
+          text: "We ready the data the use case needs and build a working prototype, tested against an evaluation set drawn from your real work.",
+          note: "Evidence before scale",
+        },
+        {
+          title: "Engineer for production",
+          text: "We add security, guardrails, human review and monitoring, and integrate the model into the systems and workflows where the work happens.",
+          note: "Production-grade from release",
+        },
+        {
+          title: "Measure & improve",
+          text: "We track outcomes against the baseline, monitor quality, drift and cost, and refine the model as your data and needs change.",
+          note: "Outcomes you can prove",
+        },
+      ],
+    },
     industries: {
       "industry-banking":
         "Fraud detection, KYC document checks and assistants that help service teams resolve customer questions faster.",
@@ -567,6 +654,33 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
       ],
     },
     team: "Automation architects, agent and integration engineers, and process analysts who understand the operations they automate.",
+    howItWorks: {
+      heading: "From process insight to agents that get work done",
+      intro:
+        "Automation pays back when the right processes go first and people stay in control. Every program follows the same governed path.",
+      steps: [
+        {
+          title: "Discover & rank",
+          text: "Process and task mining shows where work waits and repeats, and ranks candidates by value, effort and risk.",
+          note: "Right processes first",
+        },
+        {
+          title: "Design with controls",
+          text: "We define each agent's goals, approved tools, permissions and human approval points, along with the audit trail every action will leave.",
+          note: "People in control",
+        },
+        {
+          title: "Build & integrate",
+          text: "Agents and workflows are built API-first, connected to your systems of record and tested on real exceptions before release.",
+          note: "Resilient by design",
+        },
+        {
+          title: "Run & scale",
+          text: "We monitor every agent for accuracy, cost and policy compliance, then extend automation to the next process as value is proven.",
+          note: "Audit-ready at scale",
+        },
+      ],
+    },
     industries: {
       "industry-banking":
         "KYC refresh, payment exceptions and dispute workflows completed faster, with every approval recorded for audit.",
@@ -714,6 +828,33 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
       ],
     },
     team: "Product managers, UX designers, solution architects, full-stack, mobile and platform engineers, and quality engineers.",
+    howItWorks: {
+      heading: "From product idea to software that scales",
+      intro:
+        "Great products come from tight loops between users, design and engineering. Every product moves through the same accountable path, from first insight to ongoing evolution.",
+      steps: [
+        {
+          title: "Discover & frame",
+          text: "User research, product strategy and technical discovery define the problem, the outcomes and the release roadmap.",
+          note: "Built around real users",
+        },
+        {
+          title: "Design & architect",
+          text: "Experience design and target architecture develop together, with prototypes tested with users before engineering begins.",
+          note: "Validated before build",
+        },
+        {
+          title: "Build & release",
+          text: "Cross-functional teams ship small, frequent releases through CI/CD, with automated testing and security checks in every pipeline.",
+          note: "Small releases, low risk",
+        },
+        {
+          title: "Measure & evolve",
+          text: "Product analytics, reliability engineering and user feedback guide every next release, keeping the platform secure and cost-efficient.",
+          note: "Better every release",
+        },
+      ],
+    },
     industries: {
       "industry-banking":
         "Digital banking apps, payment services and open-banking APIs, released safely through automated controls.",

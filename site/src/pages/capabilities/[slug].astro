@@ -9,14 +9,7 @@ import ProcessSteps from "@/components/content/ProcessSteps.astro";
 import FaqList from "@/components/content/FaqList.astro";
 import RelatedTiles from "@/components/content/RelatedTiles.astro";
 import CtaFinal from "@/components/content/CtaFinal.astro";
-import {
-  CAPABILITIES,
-  INDUSTRIES,
-  CTA,
-  TEAM_STEPS,
-  capabilityHref,
-  industryHref,
-} from "@/data/site.ts";
+import { CAPABILITIES, CTA, capabilityHref } from "@/data/site.ts";
 import { CAPABILITY_PAGES } from "@/data/capability-pages.ts";
 import { CAPABILITY_PHOTOS } from "@/data/photos.ts";
 
@@ -85,29 +78,13 @@ const contact = `${CTA.primary.href}?topic=${cap.id}`;
     />
   </Section>
 
-  {/* By industry */}
-  <Section>
-    <FeatureGrid
-      eyebrow="Industries"
-      heading={`${cap.title} in your industry`}
-      link={{ label: "All industries", href: "/industries" }}
-      items={INDUSTRIES.map((industry) => ({
-        title: industry.title,
-        text: page.industries[industry.id],
-        href: industryHref(industry),
-      }))}
-      columns={4}
-      linkLabel="Explore the industry"
-    />
-  </Section>
-
   {/* How it works */}
   <Section theme="dark">
     <ProcessSteps
       eyebrow="How it works"
-      heading="From first conversation to lasting impact"
-      intro="Every capability follows the same accountable path, whether it starts with a focused assessment or a full-scale transformation program."
-      steps={TEAM_STEPS}
+      heading={page.howItWorks.heading}
+      intro={page.howItWorks.intro}
+      steps={page.howItWorks.steps}
     />
   </Section>
 
