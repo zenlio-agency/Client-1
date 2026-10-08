@@ -325,6 +325,8 @@ export type Capability = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  heading?: string;
+  descriptor?: string;
   slug?: Slug;
   line?: string;
   photo?: ImageWithAlt;
@@ -368,7 +370,6 @@ export type Industry = {
   _updatedAt: string;
   _rev: string;
   title?: string;
-  name?: string;
   slug?: Slug;
   short?: string;
   summary?: string;
@@ -900,6 +901,8 @@ export type CapabilitiesQueryResult = Array<{
   _updatedAt: string;
   _rev: string;
   title?: string;
+  heading?: string;
+  descriptor?: string;
   slug: string | null;
   line?: string;
   photo: {
@@ -978,7 +981,6 @@ export type IndustriesQueryResult = Array<{
   _updatedAt: string;
   _rev: string;
   title?: string;
-  name?: string;
   slug: string | null;
   short?: string;
   summary?: string;

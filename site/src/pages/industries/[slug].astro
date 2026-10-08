@@ -8,7 +8,7 @@ import ChipGroups from "@/components/content/ChipGroups.astro";
 import FaqList from "@/components/content/FaqList.astro";
 import RelatedTiles from "@/components/content/RelatedTiles.astro";
 import CtaFinal from "@/components/content/CtaFinal.astro";
-import { INDUSTRIES, CTA, industryHref, industryName } from "@/data/site.ts";
+import { INDUSTRIES, CTA, industryHref } from "@/data/site.ts";
 import { INDUSTRY_PAGES } from "@/data/industry-pages.ts";
 import { INDUSTRY_PHOTOS } from "@/data/photos.ts";
 
@@ -24,10 +24,9 @@ type Props = { industry: (typeof INDUSTRIES)[number] };
 const { industry } = Astro.props;
 const page = INDUSTRY_PAGES[industry.id];
 const contact = `${CTA.primary.href}?topic=${industry.id}`;
-const name = industryName(industry);
 ---
 
-<Layout title={name} description={page.description}>
+<Layout title={industry.title} description={page.description}>
   {/* Hero */}
   <Section paddingTop="small">
     <HeroDetail
@@ -36,7 +35,7 @@ const name = industryName(industry);
         { label: "Industries", href: "/industries" },
         { label: industry.title },
       ]}
-      eyebrow={name}
+      eyebrow={industry.title}
       title={industry.hero}
       lede={page.lede}
       points={page.points}

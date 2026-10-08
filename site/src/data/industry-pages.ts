@@ -67,7 +67,7 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
     offerings: {
       heading: "How we help banks and financial institutions",
       intro:
-        "Platforms that move money, manage risk and serve customers, delivered end to end inside your controls.",
+        "Core banking, payments and risk platforms engineered end to end inside your control framework, with regulatory traceability and operational resilience built in.",
       items: [
         {
           title: "Core banking modernization",
@@ -209,7 +209,7 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
     offerings: {
       heading: "How we help operators and service providers",
       intro:
-        "The systems that sell, deliver, charge and assure every connection, modernized one domain at a time.",
+        "The BSS and OSS platforms that sell, provision, charge and assure every service, modernized domain by domain on open industry standards.",
       items: [
         {
           title: "BSS and OSS modernization",
@@ -350,7 +350,7 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
     offerings: {
       heading: "How we help providers, payers and life sciences",
       intro:
-        "Platforms that move health data safely and take administrative work off the people who deliver care.",
+        "Interoperable platforms that move clinical and claims data securely across the care continuum and lift the administrative burden from providers and payers.",
       items: [
         {
           title: "Healthcare data platforms",
@@ -491,7 +491,7 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
     offerings: {
       heading: "How we help utilities, producers and renewables",
       intro:
-        "Digital operations for assets that must run safely for decades, while the energy mix changes around them.",
+        "Asset performance, OT and IT integration and forecasting platforms for critical infrastructure that must run safely for decades through the energy transition.",
       items: [
         {
           title: "Asset performance management",
@@ -632,7 +632,7 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
     offerings: {
       heading: "How we help retailers and brands",
       intro:
-        "The platforms that sell, fulfill and personalize every order, modernized without interrupting trading.",
+        "Composable commerce, order orchestration and customer data platforms that sell, fulfill and personalize every order, modernized without interrupting trading.",
       items: [
         {
           title: "Composable commerce",

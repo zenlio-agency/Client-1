@@ -21,7 +21,7 @@ const { render = true } = Astro.props;
       <SectionHeader
         eyebrow="Capabilities"
         heading="Expertise across the modern enterprise stack"
-        intro="Platform-specialist capability across data, AI, SAP and product engineering, integrated into your roadmap and governed for enterprise scale."
+        intro="Architecture, data, AI and SAP engineering, delivered as one accountable program, aligned to your roadmap and governed for enterprise scale.."
       >
         <Button
           slot="action"
@@ -47,8 +47,9 @@ const { render = true } = Astro.props;
               <Icon src={cap.icon} variant="small" />
             </span>
             <h3 class:list={["photo-tile_title", index === 0 && "is-large"]}>
-              {cap.title}
+              {cap.heading}
             </h3>
+            <p class="photo-tile_descriptor">{cap.descriptor}</p>
             <Fragment slot="reveal">
               <p class="photo-tile_text">{cap.line}</p>
               <span class="photo-tile_more">
