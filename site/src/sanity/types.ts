@@ -17,7 +17,6 @@ export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: schema.json
 export type Problems = {
   heading?: string;
-  intro?: string;
   rows?: Array<{
     _key: string;
   } & ProblemRow>;
@@ -29,7 +28,6 @@ export type Offerings = {
   items?: Array<{
     _key: string;
   } & FeatureItem>;
-  standards?: string;
 };
 
 export type Stack = {
@@ -391,18 +389,6 @@ export type Industry = {
   faq?: Array<{
     _key: string;
   } & FaqItem>;
-  ways?: {
-    heading?: string;
-    intro?: string;
-    points?: Array<string>;
-    models?: Array<{
-      title?: string;
-      bestFor?: string;
-      text?: string;
-      _type: "wayToWork";
-      _key: string;
-    }>;
-  };
   capabilityNotes?: Array<{
     capability?: CapabilityReference;
     text?: string;
@@ -591,19 +577,12 @@ export type FeatureItem = {
   _type: "featureItem";
   title?: string;
   text?: string;
-  capabilities?: Array<{
-    _key: string;
-  } & CapabilityReference>;
-  poweredByOther?: Array<string>;
-  platforms?: Array<string>;
 };
 
 export type ProblemRow = {
   _type: "problemRow";
   challenge?: string;
   answer?: string;
-  segment?: string;
-  leaders?: string;
 };
 
 export type FaqItem = {
@@ -1034,18 +1013,6 @@ export type IndustriesQueryResult = Array<{
   faq?: Array<{
     _key: string;
   } & FaqItem>;
-  ways?: {
-    heading?: string;
-    intro?: string;
-    points?: Array<string>;
-    models?: Array<{
-      title?: string;
-      bestFor?: string;
-      text?: string;
-      _type: "wayToWork";
-      _key: string;
-    }>;
-  };
   capabilityNotes: Array<{
     capability: string | null;
     text?: string;

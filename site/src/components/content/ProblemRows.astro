@@ -11,22 +11,12 @@ interface Props {
   heading?: string;
   /** Paragraph under the heading. */
   intro?: string;
-  /**
-   * Each row pairs a challenge, in the reader's words, with the answer.
-   * `segment` replaces the challenge label; `leaders` adds a footer line.
-   */
-  rows?: {
-    challenge: string;
-    answer: string;
-    segment?: string;
-    leaders?: string;
-  }[];
+  /** Each row pairs a challenge, in the reader's words, with the answer. */
+  rows?: { challenge: string; answer: string }[];
   /** Label over each challenge. */
   challengeLabel?: string;
   /** Label over each answer. */
   answerLabel?: string;
-  /** Label before each row's `leaders` line. */
-  leadersLabel?: string;
 }
 
 const {
@@ -37,7 +27,6 @@ const {
   rows = [],
   challengeLabel = "What we hear",
   answerLabel = "How the team answers",
-  leadersLabel = "Leaders we partner with",
 } = Astro.props;
 ---
 
@@ -60,9 +49,7 @@ const {
             style={`--reveal-order: ${index % 2}`}
           >
             <div class="problem-rows_side">
-              <span class="problem-rows_label">
-                {row.segment ?? challengeLabel}
-              </span>
+              <span class="problem-rows_label">{challengeLabel}</span>
               <h3 class="problem-rows_challenge">“{row.challenge}”</h3>
             </div>
             <span class="problem-rows_arrow" aria-hidden="true">
@@ -74,11 +61,6 @@ const {
               <span class="problem-rows_label is-answer">{answerLabel}</span>
               <p class="problem-rows_answer" set:html={tbc(row.answer)} />
             </div>
-            {row.leaders && (
-              <p class="problem-rows_leaders">
-                <span>{leadersLabel}:</span> {row.leaders}
-              </p>
-            )}
           </li>
         ))}
       </ol>
@@ -166,21 +148,6 @@ const {
       font-size: var(--text-small);
       line-height: 1.6;
       color: var(--text-body);
-    }
-
-    /* Spans the row under the challenge and answer. */
-    .problem-rows_leaders {
-      grid-column: 1 / -1;
-      padding-top: var(--space-4);
-      border-top: var(--border-width) solid var(--border);
-      font-size: var(--text-small);
-      line-height: 1.5;
-      color: var(--text-2);
-      & span {
-        font-family: var(--heading-family);
-        font-weight: var(--heading-medium);
-        color: var(--text);
-      }
     }
 
     .problem-rows_arrow {

@@ -121,68 +121,6 @@ export const industry = defineType({
     }),
     ...pageSections,
     defineField({
-      name: "ways",
-      title: "Why ManyaIT and ways to work",
-      type: "object",
-      group: "page",
-      description: "Optional. Proof points and the ways of working.",
-      fields: [
-        defineField({
-          name: "heading",
-          title: "Heading",
-          type: "string",
-          validation: copy(),
-        }),
-        defineField({
-          name: "intro",
-          title: "Intro",
-          type: "text",
-          rows: 3,
-          validation: copy(),
-        }),
-        defineField({
-          name: "points",
-          title: "Proof points",
-          type: "array",
-          of: [defineArrayMember({ type: "string" })],
-          validation: (rule) => rule.max(3),
-        }),
-        defineField({
-          name: "models",
-          title: "Ways to work",
-          type: "array",
-          of: [
-            defineArrayMember({
-              name: "wayToWork",
-              type: "object",
-              fields: [
-                defineField({
-                  name: "title",
-                  title: "Model",
-                  type: "string",
-                  validation: copy(true),
-                }),
-                defineField({
-                  name: "bestFor",
-                  title: "Best for",
-                  type: "string",
-                  validation: copy(true),
-                }),
-                defineField({
-                  name: "text",
-                  title: "What you get",
-                  type: "text",
-                  rows: 2,
-                  validation: copy(true),
-                }),
-              ],
-              preview: { select: { title: "title", subtitle: "bestFor" } },
-            }),
-          ],
-        }),
-      ],
-    }),
-    defineField({
       name: "capabilityNotes",
       title: "Each capability here",
       type: "array",
