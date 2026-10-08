@@ -65,10 +65,13 @@ const steps = [
   render && (
     <div class="careers-apply_wrap" data-apply>
       <div class="careers-apply_card">
+        {/* /api/apply files each application in HighLevel (site/api/apply.ts). */}
         <Form
           name="application"
+          action="/api/apply"
           enctype="multipart/form-data"
-          successMessage="Thanks. This preview form isn't connected yet, so nothing was sent. Once it is, you'll get a confirmation email with what happens next. Until then, please send your CV to our careers team by email."
+          successMessage="Thank you. Your application is with our people team, and a person will review it."
+          errorMessage={`Your application didn't send. Please try again, or email your CV to ${LEGAL.careersEmail}.`}
         >
           <Fieldset legend="The role">
             <Select
@@ -79,6 +82,8 @@ const steps = [
               required
               data-role-select
             />
+            {/* The chosen role's title, so HighLevel shows a name, not an id. */}
+            <input type="hidden" name="role-title" data-role-title />
           </Fieldset>
 
           <Fieldset legend="About you" variant="columns">
@@ -114,7 +119,13 @@ const steps = [
 
           <Fieldset legend="Your experience" variant="columns">
             <div class="careers-apply_wide">
-              <FileInput label="CV or résumé" name="cv" required />
+              {/* The site's host accepts up to 4.5 MB per request. */}
+              <FileInput
+                label="CV or résumé"
+                name="cv"
+                maxMegabytes={4}
+                required
+              />
             </div>
             <Select
               label="Years of experience"
@@ -298,6 +309,9 @@ const steps = [
     const talent = wrap.querySelector<HTMLInputElement>(
       "input[data-talent-choice]",
     );
+    const title = wrap.querySelector<HTMLInputElement>(
+      "input[data-role-title]",
+    );
     if (!select) continue;
 
     /* The role comes from the link that brought you here
@@ -314,6 +328,14 @@ const steps = [
         ? select.value
         : "";
       for (const card of cards) card.hidden = card.dataset.roleCard !== chosen;
+      if (title) {
+        title.value = chosen
+          ? (cards
+              .find((card) => card.dataset.roleCard === chosen)
+              ?.querySelector(".careers-apply_role_title")
+              ?.textContent?.trim() ?? "")
+          : "";
+      }
       /* Choosing the Talent Network is already asking to be kept on file. */
       if (talent) {
         const network = select.value === "talent-network";
