@@ -58,6 +58,12 @@ npx sanity login   # once, with an account that's an Administrator on the projec
 npm run seed
 ```
 
+`npm run seed` and `npm run deploy` first check where they're about to go
+(`scripts/preflight.ts`, also `npm run preflight` on its own). They print the
+project, dataset and signed-in account, and stop with the fix if the project
+isn't `n3hghywr` (a leftover `.env` file or environment variable), the account
+isn't a member or can only view, or the dataset is missing.
+
 `npm run seed` skips any document that already exists, so running it again
 is safe and never overwrites an editor's changes. Assets are matched by
 their contents, so nothing uploads twice.

@@ -56,13 +56,18 @@ export const CONTACT_TOPICS = [
   { title: "Careers", value: "careers" },
 ];
 
+/** ManyaIT's own project, where the live content lives. */
+export const MANYAIT_PROJECT_ID = "n3hghywr";
+
 /**
  * The Sanity project and dataset. The project id isn't secret: it appears
  * in every request the Studio makes. Set SANITY_STUDIO_PROJECT_ID or
  * SANITY_STUDIO_DATASET to point the Studio somewhere else, e.g. a test
- * dataset.
+ * dataset. `npm run seed` and `npm run deploy` refuse any project but
+ * ManyaIT's (scripts/preflight.ts).
  */
-export const PROJECT_ID = process.env.SANITY_STUDIO_PROJECT_ID || "n3hghywr";
+export const PROJECT_ID =
+  process.env.SANITY_STUDIO_PROJECT_ID || MANYAIT_PROJECT_ID;
 export const DATASET = process.env.SANITY_STUDIO_DATASET || "production";
 
 export const API_VERSION = "2026-10-01";
