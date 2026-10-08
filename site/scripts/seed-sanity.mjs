@@ -185,12 +185,9 @@ const seo = (fields) => {
 const sectionIntro = (intro) => intro && { _type: "sectionIntro", ...intro };
 
 /** Problems, offerings and stack, shared by capabilities and industries. */
-const isCapability = (id) => site.CAPABILITIES.some((cap) => cap.id === id);
-
 const pageSections = (page) => ({
   problems: {
     heading: page.problems.heading,
-    ...(page.problems.intro && { intro: page.problems.intro }),
     rows: keyed(page.problems.rows, "problem", (row) => ({
       _type: "problemRow",
       ...row,
@@ -199,29 +196,18 @@ const pageSections = (page) => ({
   offerings: {
     heading: page.offerings.heading,
     intro: page.offerings.intro,
-    /* A card's `poweredBy` holds capability ids (references) and labels
-       for teams with no page yet. */
-    items: keyed(page.offerings.items, "offer", ({ poweredBy, ...item }) => ({
+    items: keyed(page.offerings.items, "offer", (item) => ({
       _type: "featureItem",
       ...item,
-      ...(poweredBy?.some(isCapability) && {
-        capabilities: poweredBy.filter(isCapability).map((id) => ref(id, id)),
-      }),
-      ...(poweredBy?.some((id) => !isCapability(id)) && {
-        poweredByOther: poweredBy.filter((id) => !isCapability(id)),
-      }),
     })),
-    ...(page.offerings.standards && { standards: page.offerings.standards }),
   },
-  ...(page.stack && {
-    stack: {
-      intro: page.stack.intro,
-      groups: keyed(page.stack.groups, "group", (group) => ({
-        _type: "chipGroup",
-        ...group,
-      })),
-    },
-  }),
+  stack: {
+    intro: page.stack.intro,
+    groups: keyed(page.stack.groups, "group", (group) => ({
+      _type: "chipGroup",
+      ...group,
+    })),
+  },
   /* Outcome figures are still placeholders, which the site hides. */
   outcomes: keyed(
     page.outcomes.filter(({ value }) => !placeholder(value)),
@@ -457,17 +443,6 @@ for (const industry of site.INDUSTRIES) {
       metric: stat({ value: industry.metric, label: industry.metricLabel }),
     }),
     ...pageSections(page),
-    ...(page.ways && {
-      ways: {
-        heading: page.ways.heading,
-        intro: page.ways.intro,
-        points: page.ways.points,
-        models: keyed(page.ways.models, "model", (model) => ({
-          _type: "wayToWork",
-          ...model,
-        })),
-      },
-    }),
     /* Likewise the per-capability notes, since the capabilities section
        was removed from industry pages. */
     seo: seo({ description: page.description }),

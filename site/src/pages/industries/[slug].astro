@@ -5,18 +5,10 @@ import HeroDetail from "@/components/content/HeroDetail.astro";
 import ProblemRows from "@/components/content/ProblemRows.astro";
 import FeatureGrid from "@/components/content/FeatureGrid.astro";
 import ChipGroups from "@/components/content/ChipGroups.astro";
-import TeamPanel from "@/components/content/TeamPanel.astro";
 import FaqList from "@/components/content/FaqList.astro";
 import RelatedTiles from "@/components/content/RelatedTiles.astro";
 import CtaFinal from "@/components/content/CtaFinal.astro";
-import {
-  CAPABILITIES,
-  INDUSTRIES,
-  CTA,
-  capabilityHref,
-  industryHref,
-  industryName,
-} from "@/data/site.ts";
+import { INDUSTRIES, CTA, industryHref, industryName } from "@/data/site.ts";
 import { INDUSTRY_PAGES } from "@/data/industry-pages.ts";
 import { INDUSTRY_PHOTOS } from "@/data/photos.ts";
 
@@ -33,19 +25,6 @@ const { industry } = Astro.props;
 const page = INDUSTRY_PAGES[industry.id];
 const contact = `${CTA.primary.href}?topic=${industry.id}`;
 const name = industryName(industry);
-
-/* An intro this long would stand taller than the heading beside it, so it
-   sits under the heading instead (as on About's global delivery section). */
-const longIntro = (text: string) => text.length > 200;
-
-/* A capability id becomes a link to its page; anything else stays a label. */
-const poweredBy = (ids: string[] = []) =>
-  ids.map((id) => {
-    const cap = CAPABILITIES.find((c) => c.id === id);
-    return cap
-      ? { label: cap.title, href: capabilityHref(cap) }
-      : { label: id };
-  });
 ---
 
 <Layout title={name} description={page.description}>
@@ -72,7 +51,6 @@ const poweredBy = (ids: string[] = []) =>
     <ProblemRows
       eyebrow="Business challenges"
       heading={page.problems.heading}
-      intro={page.problems.intro}
       rows={page.problems.rows}
     />
   </Section>
@@ -83,57 +61,20 @@ const poweredBy = (ids: string[] = []) =>
       eyebrow="What we deliver"
       heading={page.offerings.heading}
       intro={page.offerings.intro}
-      headerLayout={longIntro(page.offerings.intro) ? "stack" : "split"}
-      items={page.offerings.items.map((item) => ({
-        title: item.title,
-        text: item.text,
-        chips: item.poweredBy && poweredBy(item.poweredBy),
-        foot: item.platforms && {
-          label: "Platforms",
-          text: item.platforms.join("\u00a0· "),
-        },
-      }))}
-      note={page.offerings.standards}
+      items={page.offerings.items}
       numbered
     />
   </Section>
 
   {/* Platforms and standards */}
-  {
-    page.stack && (
-      <Section theme="tint">
-        <ChipGroups
-          eyebrow="Sector knowledge"
-          heading="Platforms and standards we work with"
-          intro={page.stack.intro}
-          groups={page.stack.groups}
-        />
-      </Section>
-    )
-  }
-
-  {/* Why ManyaIT and the ways of working */}
-  {
-    page.ways && (
-      <Section theme="tint" gap="7">
-        <TeamPanel
-          eyebrow="Why ManyaIT"
-          heading={page.ways.heading}
-          text={page.ways.intro}
-          points={page.ways.points}
-        />
-        <FeatureGrid
-          columns={4}
-          numbered
-          items={page.ways.models.map((model) => ({
-            title: model.title,
-            text: model.text,
-            foot: { label: "Best for", text: model.bestFor },
-          }))}
-        />
-      </Section>
-    )
-  }
+  <Section theme="tint">
+    <ChipGroups
+      eyebrow="Sector knowledge"
+      heading="Platforms and standards we work with"
+      intro={page.stack.intro}
+      groups={page.stack.groups}
+    />
+  </Section>
 
   {/* FAQ */}
   <Section>
