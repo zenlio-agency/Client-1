@@ -734,146 +734,152 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
     ],
   },
 
+  /* Content from "ManyaIT Projects & Development Capability Page: Content"
+     (7 October 2026), on this page under its existing name. */
   "cap-code": {
     seoTitle: "Digital Product Engineering",
     description:
-      "Cloud-native web, mobile and platform products designed, built and run end to end, with AI-augmented engineering and DevSecOps in every release.",
-    title: "Engineer digital products that scale.",
-    lede: "From product strategy and experience design to architecture, engineering and release, we build and run cloud-native web, mobile and platform products, with AI-augmented engineering, DevSecOps and quality engineering in every release.",
+      "Greenfield platforms, zero-downtime modernization, AI integration and recovery of stalled programs, delivered to production by one accountable team.",
+    title: "Complex programs, delivered to production.",
+    lede: "We take ambitious blueprints, legacy estates and stalled initiatives through to production-grade enterprise platforms. Architects, engineers and data specialists own the work end to end, under DevSecOps delivery and the compliance controls your enterprise runs on.",
     points: [
-      "Faster time to market",
-      "Modernization without disruption",
-      "Security in every release",
+      "Greenfield platforms built to scale",
+      "Modernization without downtime",
+      "Stalled programs brought back on track",
     ],
     problems: {
-      heading: "Where delivery slows down",
+      heading: "Where complex programs break down",
       rows: [
         {
-          challenge: "Every release waits on the legacy platform.",
+          challenge:
+            "We need a new platform, and the clock is already running.",
           answer:
-            "Incremental modernization that moves capabilities to modern services behind stable interfaces, while existing systems keep running.",
+            "Cloud-native, multi-tenant architecture designed in discovery and proven in a working slice before full build, so speed never comes at the cost of scale.",
         },
         {
-          challenge: "Releasing takes weeks of manual testing.",
+          challenge:
+            "The monolith is too risky to touch and too costly to keep.",
           answer:
-            "Automated testing and CI/CD pipelines that make releases smaller, faster and routine.",
+            "Domain-driven decomposition behind API gateways, moving one capability at a time while the business keeps running.",
         },
         {
-          challenge: "Our cloud bill grows faster than our product.",
+          challenge: "Our AI pilots never reach the systems that matter.",
           answer:
-            "Right-sized, codified infrastructure with cost visibility for every product and service.",
+            "AI and agent workflows integrated into core processes, grounded in governed enterprise data with traceable lineage.",
         },
         {
-          challenge: "Security reviews arrive at the end and block launches.",
+          challenge:
+            "Our program is behind, over budget and losing confidence.",
           answer:
-            "Shift-left security across the delivery lifecycle, so risks surface early instead of at launch.",
+            "An independent technical audit, a re-baselined plan and SRE-led stabilization that restore predictable delivery.",
         },
       ],
     },
     offerings: {
-      heading: "Digital products, from concept to scale",
+      heading: "Complex program delivery, end to end",
       intro:
-        "Product strategy, design and engineering working as one, measured on business results rather than activity.",
+        "From the first architecture decision to stable operations, one accountable team carries the program through every phase.",
       items: [
         {
-          title: "Product strategy & experience design",
-          text: "Discovery, service design and UX research that shape products around real users and measurable outcomes.",
+          title: "Greenfield platform engineering",
+          text: "Cloud-native, multi-tenant platforms built on microservices, event streaming and governed APIs, designed to grow with the business.",
         },
         {
-          title: "Cloud-native application engineering",
-          text: "Web and mobile applications and scalable services on AWS, Azure or Google Cloud that grow without re-engineering.",
+          title: "Monolith decomposition & legacy modernization",
+          text: "Domain-driven decomposition, incremental migration and API-first refactoring that retire legacy risk without downtime.",
         },
         {
-          title: "Legacy modernization",
-          text: "Older applications re-platformed or rebuilt in stages, without freezing the product roadmap.",
+          title: "Data and database modernization",
+          text: "Legacy data structures moved to modern databases and medallion lakehouses, with lineage and reconciliation at every step.",
         },
         {
-          title: "APIs, microservices & integration",
-          text: "Domain-driven services and well-governed APIs that let products and partners connect cleanly.",
+          title: "AI and agentic integration",
+          text: "Language models and agent workflows embedded in core processes, grounded through retrieval and knowledge graphs, with audit-ready lineage.",
         },
         {
-          title: "Platform engineering, DevSecOps & SRE",
-          text: "Internal developer platforms, infrastructure as code and reliability engineering that make secure, repeatable delivery the default.",
+          title: "Program recovery & stabilization",
+          text: "Code and architecture audits, CI/CD repair, performance tuning and security remediation that bring stalled initiatives to production.",
         },
         {
-          title: "Quality engineering",
-          text: "Automated functional, performance and accessibility testing built into every release.",
+          title: "Cloud-native DevSecOps foundations",
+          text: "Infrastructure as code, zero-trust access and self-healing clusters that make every release secure and repeatable.",
         },
       ],
     },
+    /* "Program types and technologies": each program type with its platforms. */
     stack: {
       intro:
-        "Experience across modern languages, frameworks and cloud platforms, matched to the product and the roadmap ahead.",
+        "Every program type has its own delivery priorities. We match the architecture and toolchain to the problem, not the other way around.",
       groups: [
         {
-          title: "Languages and frameworks",
+          title: "Enterprise SaaS & composable web",
           items: [
-            "Java and Spring Boot",
-            ".NET",
-            "Node.js",
-            "TypeScript",
-            "React",
-            "Next.js",
-            "Flutter",
-            "Kotlin",
-            "Swift",
-            "Go",
+            "Strongly typed microservices",
+            "Server-side rendering",
+            "GraphQL",
+            "gRPC",
           ],
         },
         {
-          title: "Cloud and DevOps",
+          title: "Distributed data pipelines",
           items: [
-            "AWS",
-            "Microsoft Azure",
-            "Google Cloud",
+            "Apache Iceberg",
+            "Delta Lake",
+            "Cloud data warehouses",
+            "Apache Kafka",
+            "Apache Spark",
+          ],
+        },
+        {
+          title: "Cloud-native DevSecOps",
+          items: [
             "Kubernetes",
             "Terraform",
-            "GitHub Actions",
-            "Azure DevOps",
-            "Datadog",
+            "GitOps deployment pipelines",
+            "OpenTelemetry",
           ],
         },
       ],
     },
-    team: "Product managers, UX designers, solution architects, full-stack, mobile and platform engineers, and quality engineers.",
+    team: "Solution and enterprise architects, backend and full-stack engineers, data engineers, SRE and DevSecOps engineers, and AI engineers, led by an accountable program lead.",
     howItWorks: {
-      heading: "From product idea to software that scales",
+      heading: "How we deliver complex programs",
       intro:
-        "Great products come from tight loops between users, design and engineering. Every product moves through the same accountable path, from first insight to ongoing evolution.",
+        "Every program follows the same accountable path, with risk retired early and value proven before scale.",
       steps: [
         {
-          title: "Discover & frame",
-          text: "User research, product strategy and technical discovery define the problem, the outcomes and the release roadmap.",
-          note: "Built around real users",
+          title: "Discover & map",
+          text: "We audit the target environment, dependencies, data maturity and constraints, and agree outcomes and success measures.",
+          note: "Risks visible before build",
         },
         {
-          title: "Design & architect",
-          text: "Experience design and target architecture develop together, with prototypes tested with users before engineering begins.",
-          note: "Validated before build",
+          title: "Prove value",
+          text: "Within [X] weeks, we build a working, sandboxed slice of the architecture to test assumptions and validate the business case.",
+          note: "Evidence before investment",
         },
         {
-          title: "Build & release",
-          text: "Cross-functional teams ship small, frequent releases through CI/CD, with automated testing and security checks in every pipeline.",
-          note: "Small releases, low risk",
+          title: "Deliver continuously",
+          text: "Cross-functional teams of architects, data engineers and DevSecOps specialists ship production-ready increments through automated testing and release pipelines.",
+          note: "Value from the first sprint",
         },
         {
-          title: "Measure & evolve",
-          text: "Product analytics, reliability engineering and user feedback guide every next release, keeping the platform secure and cost-efficient.",
-          note: "Better every release",
+          title: "Govern & transfer",
+          text: "We hand over a documented, audit-ready platform with runbooks, or operate it under agreed availability service levels.",
+          note: "Built to last, yours to keep",
         },
       ],
     },
     industries: {
       "industry-banking":
-        "Digital banking apps, payment services and open-banking APIs, released safely through automated controls.",
+        "Core and payment platform modernization, and recovery of high-concurrency transaction systems.",
       "industry-telecom":
-        "Self-service apps, order management and partner portals that let customers change plans without calling.",
+        "BSS decomposition and multi-tenant partner platforms built to keep pace with network change.",
       "industry-healthcare":
-        "Patient and member portals, care-team tools and interoperability services on modern health APIs.",
+        "Interoperability platforms and legacy claims systems modernized without service interruption.",
       "industry-energy":
-        "Field-service apps, customer portals and outage updates that keep working in low-connectivity areas.",
+        "Field and asset platforms rebuilt on cloud-native foundations, with operational data kept safely segmented.",
       "industry-retail":
-        "Headless storefronts and clienteling apps built for peak traffic.",
+        "Composable commerce and order platforms engineered for peak trading.",
     },
     outcomes: [
       { value: "[X]x", label: "more frequent releases" },
@@ -883,29 +889,29 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
     ],
     faq: [
       {
-        question: "Can you build a new product from concept to launch?",
+        question: "Can you take over a program that is already in trouble?",
         answer:
-          "Yes. Discovery, experience design, architecture, engineering, quality and release, then support and evolution after launch, with the same accountable team throughout.",
+          "Yes. We start with an independent audit of code, architecture, delivery and risk, share the findings openly, then agree a re-baselined plan before taking ownership of delivery.",
       },
       {
-        question: "Can you take over an existing codebase?",
+        question: "How do you modernize without downtime?",
         answer:
-          "Yes. We start with a codebase and architecture review, document what we find and agree priorities with you before making significant changes.",
+          "We decompose by business domain, route traffic through API gateways and migrate one capability at a time, with parallel running and reconciliation until each cutover is proven.",
       },
       {
-        question: "Do you work in our tools and processes?",
+        question: "How do you keep AI outputs reliable in production?",
         answer:
-          "Yes. We work within your repositories, ticketing and ways of working, and follow your definition of done. Where we see gaps, we recommend improvements rather than impose a method.",
+          "We ground models in governed enterprise data through retrieval and knowledge graphs, evaluate them continuously, require human approval for high-stakes actions and record the lineage of every output.",
       },
       {
-        question: "How do you modernize without stopping new features?",
+        question: "Do you run what you build?",
         answer:
-          "We move one capability at a time behind stable interfaces, so product work continues while the legacy footprint shrinks every quarter.",
+          "Yes, under agreed availability and response service levels, or we hand over to your teams with complete documentation and runbooks.",
       },
       {
-        question: "How do you use AI in engineering?",
+        question: "How quickly can we get started?",
         answer:
-          "AI assistants support coding, testing and review within guardrails your security team approves. An engineer reviews every change, and nothing ships without passing the release pipeline.",
+          "Most programs begin within [X] weeks of an agreed scope, starting with discovery and a proof of value.",
       },
     ],
   },
