@@ -18,6 +18,7 @@ import {
   CTA,
   HUBS,
   COMPANY_CONTACT,
+  CONTACT_TRACKER,
   tbc,
 } from "@/data/site.ts";
 import { LEGAL } from "@/data/legal.ts";
@@ -38,6 +39,8 @@ const { render = true, headingTag = "h1", variant = "page" } = Astro.props;
 const cardTag = headingTag === "h1" ? "h2" : "h3";
 const isHome = variant === "home";
 
+/* Areas and industries submit their labels, so HighLevel shows readable
+   answers. `value` is the id a link's ?topic= uses to preselect one. */
 const areas = [
   ...CAPABILITIES.map((cap) => ({ value: cap.id, label: cap.title })),
   isHome
@@ -108,7 +111,12 @@ const direct = [
 
 {
   render && (
-    <div class="contact_wrap" data-contact>
+    <div
+      class="contact_wrap"
+      data-contact
+      data-tracker-src={CONTACT_TRACKER.src}
+      data-tracker-id={CONTACT_TRACKER.trackingId}
+    >
       <div class="contact_intro">
         <Eyebrow data-reveal>Start a conversation</Eyebrow>
         <Heading
@@ -144,12 +152,8 @@ const direct = [
         </Heading>
         <Form
           name="start-a-conversation"
-          errorMessage={
-            isHome
-              ? undefined
-              : `Your message didn't send. Please try again, or email ${COMPANY_CONTACT.email}.`
-          }
-          successMessage="Thanks. This preview form isn't connected to an inbox yet, so nothing was sent. Once ManyaIT's inbox is connected, this is where your note will go."
+          errorMessage={`Your message didn't send. Please try again, or email ${COMPANY_CONTACT.email}.`}
+          successMessage="Thank you. Your message is with our team, and we'll reply within 1 business day."
         >
           <div class="contact_grid">
             <Input
@@ -190,9 +194,17 @@ const direct = [
             <Select
               label="Industry"
               name="industry"
-              options={industries}
+              options={industries.map((industry) => industry.label)}
               placeholder="Choose an industry"
               data-industry
+              data-topics={JSON.stringify(
+                Object.fromEntries(
+                  industries.map((industry) => [
+                    industry.value,
+                    industry.label,
+                  ]),
+                ),
+              )}
             />
             <Fieldset
               legend="What would you like to build?"
@@ -204,7 +216,12 @@ const direct = [
                 Choose as many as needed.
               </p>
               {areas.map((area) => (
-                <Choice label={area.label} name="areas" value={area.value} />
+                <Choice
+                  label={area.label}
+                  name="areas"
+                  value={area.label}
+                  data-topic={area.value}
+                />
               ))}
             </Fieldset>
             <Textarea
@@ -304,9 +321,95 @@ const direct = [
 }
 
 <script>
+  /* HighLevel's External Tracking script, loaded once a page. On load it
+     finds the form and, from then on, sends each submission to HighLevel. */
+  let ready = false;
+  let tracker: Promise<void> | undefined;
+  const loadTracker = (src: string, id: string) =>
+    (tracker ??= new Promise<void>((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.dataset.trackingId = id;
+      script.addEventListener("load", () => {
+        ready = true;
+        resolve();
+      });
+      script.addEventListener("error", () => {
+        /* Blocked or offline: the next attempt loads it afresh. */
+        script.remove();
+        tracker = undefined;
+        reject(new Error("The HighLevel script didn't load."));
+      });
+      document.body.append(script);
+    }));
+
   for (const contact of document.querySelectorAll<HTMLElement>(
     "[data-contact]",
   )) {
+    const fields = contact.querySelector<HTMLFormElement>("form");
+    const wrap = fields?.closest<HTMLElement>(".form_wrap");
+    const send = fields?.querySelector<HTMLButtonElement>(
+      'button:not([type]), button[type="submit"]',
+    );
+    const { trackerSrc, trackerId } = contact.dataset;
+    if (fields && wrap && send && trackerSrc && trackerId) {
+      const load = () => loadTracker(trackerSrc, trackerId);
+
+      /* Only people who start on the form load the script, so other visitors
+         aren't tracked. */
+      for (const type of ["focusin", "pointerdown", "change"]) {
+        fields.addEventListener(type, () => load().catch(() => {}), {
+          once: true,
+        });
+      }
+
+      /* HighLevel also sends on a click of a button marked type="submit",
+         even when the form is incomplete. Such a click stops here, and the
+         browser points at what's missing. */
+      fields.addEventListener(
+        "click",
+        (event) => {
+          const target = event.target as Element;
+          const button = target.closest('button:not([type]), [type="submit"]');
+          if (!button || fields.checkValidity()) return;
+          event.preventDefault();
+          event.stopPropagation();
+          fields.reportValidity();
+        },
+        { capture: true },
+      );
+
+      /* A submit that comes before the script is ready waits for it, up to
+         10 seconds, then goes through. If it can't load, the error message
+         shows and nothing reads as sent. */
+      wrap.addEventListener(
+        "submit",
+        (event) => {
+          if (ready) return;
+          event.preventDefault();
+          event.stopPropagation();
+          if (wrap.dataset.state === "sending") return;
+          wrap.dataset.state = "sending";
+          send.disabled = true;
+          const timeout = new Promise<never>((_, reject) =>
+            setTimeout(() => reject(new Error("Timed out.")), 10_000),
+          );
+          Promise.race([load(), timeout])
+            .then(() => {
+              /* Hand back to the form, which checks the fields again. */
+              wrap.dataset.state = "idle";
+              send.disabled = false;
+              fields.requestSubmit();
+            })
+            .catch(() => {
+              wrap.dataset.state = "failed";
+              send.disabled = false;
+            });
+        },
+        { capture: true },
+      );
+    }
+
     /* At least one area must be ticked; the first box carries the message so
        the browser blocks the submit and points at the group. */
     const boxes = [
@@ -339,18 +442,16 @@ const direct = [
        matching answer. */
     const topic = new URLSearchParams(location.search).get("topic");
     if (!topic) continue;
-    const area = boxes.find((box) => box.value === topic);
+    const area = boxes.find((box) => box.dataset.topic === topic);
     const industry = contact.querySelector<HTMLSelectElement>(
       "select[data-industry]",
     );
+    const industryLabel = JSON.parse(industry?.dataset.topics ?? "{}")[topic];
     if (area) {
       area.checked = true;
       sync();
-    } else if (
-      industry &&
-      [...industry.options].some((o) => o.value === topic)
-    ) {
-      industry.value = topic;
+    } else if (industry && industryLabel) {
+      industry.value = industryLabel;
     } else if (role && topic === "careers") {
       role.value = "careers";
       syncNotice();

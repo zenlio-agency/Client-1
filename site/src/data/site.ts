@@ -337,6 +337,17 @@ export const COMPANY_CONTACT = {
 } as const;
 
 /**
+ * HighLevel's External Tracking script, which sends each contact-form
+ * submission to HighLevel as a contact. The contact form loads it only once
+ * someone starts filling the form in. The tracking id is public, as in the
+ * script tag HighLevel provides; it isn't a secret.
+ */
+export const CONTACT_TRACKER = {
+  src: "https://link.yourmarketingai.com/js/external-tracking.js",
+  trackingId: "tk_78496c73a31147ccb529989b741fa4a3",
+} as const;
+
+/**
  * Company figures. The "Why ManyaIT" panel on the homepage shows the first
  * six, three to a row; the figures and wording were supplied by ManyaIT on
  * 7 October 2026. kickoff and specialists feed the "at a glance"
