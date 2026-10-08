@@ -81,7 +81,7 @@ export const HOME = {
       eyebrow: "Capabilities",
       heading: "Expertise across the modern enterprise stack",
       intro:
-        "Platform-specialist capability across data, AI, SAP and product engineering, integrated into your roadmap and governed for enterprise scale.",
+        "Architecture, data, AI and SAP engineering, delivered as one accountable program, aligned to your roadmap and governed for enterprise scale..",
     },
     /* IndustryCards.astro */
     industries: {

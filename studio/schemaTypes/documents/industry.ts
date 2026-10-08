@@ -29,15 +29,6 @@ export const industry = defineType({
       validation: copy(true),
     }),
     defineField({
-      name: "name",
-      title: "Full name",
-      type: "string",
-      group: "overview",
-      description:
-        'Optional. The page eyebrow and browser title when they differ from the name in menus, e.g. "Retail & Consumer Commerce".',
-      validation: copy(),
-    }),
-    defineField({
       name: "slug",
       title: "Page address",
       type: "slug",
@@ -50,7 +41,7 @@ export const industry = defineType({
       title: "Short name",
       type: "string",
       group: "overview",
-      description: 'Used in phrases like "Talk to us about Banking & FS".',
+      description: 'Used in phrases like "Talk to us about Banking & Finance".',
       validation: copy(true),
     }),
     defineField({

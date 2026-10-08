@@ -6,7 +6,10 @@ import capCode from "@/assets/icons/cap-code.svg";
 
 /**
  * The five capability areas, in the order used everywhere on the site.
- * `slug` names each one's page under `/capabilities/`. `line` is the
+ * `slug` names each one's page under `/capabilities/`. `title` is the service
+ * name used in menus, the footer, URLs and page titles. `heading` and
+ * `descriptor` head the cards on Home and the Capabilities page, and
+ * `heading` is the eyebrow on the capability's own page. `line` is the
  * one-liner shown wherever a capability is listed; `focus` is shown only on
  * the Capabilities page.
  */
@@ -16,6 +19,8 @@ export const CAPABILITIES = [
     slug: "data-analytics",
     key: "data",
     title: "Data & Analytics",
+    heading: "Trusted Data",
+    descriptor: "Data platforms, governance and analytics",
     line: "Modern data platforms that turn scattered data into trusted, decision-ready intelligence.",
     focus: [
       "Data strategy & AI-readiness assessment",
@@ -32,6 +37,8 @@ export const CAPABILITIES = [
     slug: "sap-enterprise-data",
     key: "sap",
     title: "SAP & Enterprise Data",
+    heading: "Modern Core",
+    descriptor: "SAP S/4HANA, BTP and ERP data",
     line: "S/4HANA transformation, BTP innovation and clean-core architecture that keep the enterprise core agile.",
     focus: [
       "S/4HANA transformation & RISE with SAP",
@@ -48,6 +55,8 @@ export const CAPABILITIES = [
     slug: "applied-ai",
     key: "ai",
     title: "Applied AI",
+    heading: "Applied Intelligence",
+    descriptor: "Generative AI and machine learning in production",
     line: "Generative AI and machine learning, engineered for production and governed for the enterprise.",
     focus: [
       "AI strategy & use-case portfolio",
@@ -64,6 +73,8 @@ export const CAPABILITIES = [
     slug: "agentic-ai-automation",
     key: "ai",
     title: "Agentic AI & Automation",
+    heading: "Autonomous Operations",
+    descriptor: "AI agents and intelligent automation",
     line: "Intelligent agents and automated workflows that execute real work across your operations.",
     focus: [
       "Process intelligence & discovery",
@@ -80,6 +91,8 @@ export const CAPABILITIES = [
     slug: "digital-product-engineering",
     key: "digital",
     title: "Digital Product Engineering",
+    heading: "Scalable Products",
+    descriptor: "Product, cloud and application engineering",
     line: "Cloud-native products and platforms, engineered from concept to scale across web and mobile.",
     focus: [
       "Product strategy & experience design",
@@ -103,7 +116,7 @@ export const CLIENT_LOGO_ROWS: {
   logos: { name: string; src?: string }[];
 }[] = [
   {
-    label: "Banking & Financial Services",
+    label: "Banking & Finance",
     logos: [
       { name: "American Express", src: "/logos/american-express.svg" },
       { name: "JPMorgan Chase", src: "/logos/jpmorgan-chase.svg" },
@@ -132,15 +145,15 @@ export const CLIENT_LOGO_ROWS: {
  * The industries in scope. `id` doubles as the deep-link hash and
  * `slug` names each one's page under `/industries/`. `summary` labels the
  * industry on the Industries page and in "Other industries"; `line` is the
- * homepage tile, which keeps its original wording. `name`, where set, is the
- * page's eyebrow and browser title when it differs from the menu label.
+ * homepage tile, which keeps its original wording. `short` is used in
+ * phrases such as "Talk to us about …".
  */
 export const INDUSTRIES = [
   {
     id: "industry-banking",
     slug: "banking-financial-services",
-    title: "Banking & Financial Services",
-    short: "Banking & FS",
+    title: "Banking & Finance",
+    short: "Banking & Finance",
     summary: "Modern platforms for payments, risk and compliance.",
     line: "Modern banking platforms for payments, risk and compliance.",
     hero: "Modernize core banking without slowing the business.",
@@ -155,8 +168,8 @@ export const INDUSTRIES = [
   {
     id: "industry-telecom",
     slug: "telecommunications",
-    title: "Telecommunications",
-    short: "Telecom",
+    title: "Telecom & Networks",
+    short: "Telecom & Networks",
     summary:
       "Faster launches, assured revenue and proactive service assurance.",
     line: "Faster launches, accurate billing and proactive service assurance.",
@@ -172,8 +185,8 @@ export const INDUSTRIES = [
   {
     id: "industry-healthcare",
     slug: "healthcare",
-    title: "Healthcare",
-    short: "Healthcare",
+    title: "Healthcare & Wellness",
+    short: "Healthcare & Wellness",
     summary:
       "Interoperable health data, streamlined claims and privacy by design.",
     line: "Connected health data, streamlined claims and privacy by design.",
@@ -189,8 +202,8 @@ export const INDUSTRIES = [
   {
     id: "industry-energy",
     slug: "energy",
-    title: "Energy",
-    short: "Energy",
+    title: "Energy & Utilities",
+    short: "Energy & Utilities",
     summary:
       "Reliable assets, connected field operations and sharper forecasting.",
     line: "Reliable assets, connected field operations and smarter forecasting.",
@@ -206,9 +219,8 @@ export const INDUSTRIES = [
   {
     id: "industry-retail",
     slug: "retail",
-    title: "Retail",
-    name: "Retail & Consumer Commerce",
-    short: "Retail",
+    title: "Retail & E-commerce",
+    short: "Retail & E-commerce",
     summary:
       "Unified commerce, real-time inventory and first-party data monetization.",
     line: "Unified commerce, real-time inventory and first-party data that drives lifetime value.",
@@ -222,10 +234,6 @@ export const INDUSTRIES = [
     metricLabel: "improvement in inventory accuracy",
   },
 ] as const;
-
-/** An industry's full name: its page eyebrow and browser title. */
-export const industryName = (industry: (typeof INDUSTRIES)[number]) =>
-  "name" in industry ? industry.name : industry.title;
 
 /** The two hubs. Coordinates place the pins on the dot map. */
 export const HUBS = [

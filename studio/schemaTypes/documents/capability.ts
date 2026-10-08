@@ -27,6 +27,25 @@ export const capability = defineType({
       title: "Name",
       type: "string",
       group: "overview",
+      description:
+        "The service name in menus, the footer, page titles and search results.",
+      validation: copy(true),
+    }),
+    defineField({
+      name: "heading",
+      title: "Card heading",
+      type: "string",
+      group: "overview",
+      description:
+        "Heads the cards on Home and the Capabilities page, and is the eyebrow on this capability's page.",
+      validation: copy(true),
+    }),
+    defineField({
+      name: "descriptor",
+      title: "Descriptor",
+      type: "string",
+      group: "overview",
+      description: "A short line in smaller text under the card heading.",
       validation: copy(true),
     }),
     defineField({

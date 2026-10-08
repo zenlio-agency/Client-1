@@ -81,7 +81,7 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
     offerings: {
       heading: "End-to-end data engineering, from platform to insight",
       intro:
-        "From data strategy to a platform the whole enterprise relies on, engineered for scale, governed by design and operated against clear service levels.",
+        "From data strategy and target-state architecture to a governed lakehouse the whole enterprise relies on, with lineage, observability and service levels engineered in from day one.",
       items: [
         {
           title: "Data strategy & AI-readiness",
@@ -259,7 +259,7 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
     offerings: {
       heading: "SAP transformation, delivered end to end",
       intro:
-        "Business process and technical depth in one accountable program, from readiness assessment to stable operations after go-live.",
+        "Functional and technical SAP depth in one accountable program, from readiness assessment and S/4HANA transformation to clean-core extensions and stable operations after go-live.",
       items: [
         {
           title: "S/4HANA transformation",
@@ -433,7 +433,7 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
     offerings: {
       heading: "AI solutions engineered for production",
       intro:
-        "AI that earns its place in production, built on your data and governed by the controls you already trust.",
+        "Generative AI and machine learning engineered for production: grounded in your enterprise data, governed by your existing controls and measured against business outcomes.",
       items: [
         {
           title: "AI strategy & use-case portfolio",
@@ -604,7 +604,7 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
     offerings: {
       heading: "Intelligent automation, delivered end to end",
       intro:
-        "Agents and workflows that complete real work end to end, with people in control of the decisions that need judgment.",
+        "Orchestrated AI agents and intelligent workflows that execute multi-step work across systems of record, with human approval and a full audit trail where judgment matters.",
       items: [
         {
           title: "Process intelligence & discovery",
@@ -778,7 +778,7 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
     offerings: {
       heading: "Complex program delivery, end to end",
       intro:
-        "From the first architecture decision to stable operations, one accountable team carries the program through every phase.",
+        "Product strategy, experience design and cloud-native engineering working as one team, with DevSecOps in every release and success measured on business outcomes, not output.",
       items: [
         {
           title: "Greenfield platform engineering",
