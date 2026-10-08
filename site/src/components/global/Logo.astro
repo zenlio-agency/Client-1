@@ -48,12 +48,14 @@ const { render = true, markOnly = false, class: className } = Astro.props;
 
       .logo_word {
         font-family: var(--heading-family);
-        font-size: 0.95em;
+        font-size: 1.25em;
         font-weight: var(--heading-bold);
-        letter-spacing: 0.16em;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
         white-space: nowrap;
         line-height: 1;
+        /* Sits a touch below centre, closer to the mark's base. */
+        translate: 0 0.06em;
       }
 
       .logo_it {

@@ -27,7 +27,7 @@ ManyaIT wants everyone to be able to use this website, including people who use 
 - **Structure.** Each page has one main heading, headings in order, landmarks for the navigation, main content and footer, and a "Skip to content" link.
 - **Keyboard.** Menus, the mobile navigation and every form can be used with a keyboard alone. The Escape key closes open menus, and a visible focus outline shows where you are.
 - **Colour and text.** Our palette was chosen for strong contrast, and colour is never the only way information is shown. Text can be resized to 200% without loss of content.
-- **Motion.** The photo reel and the client logo rows pause when you hover over them and have their own pause button. If your device is set to reduce motion, they start paused and nothing on the site fades or slides.
+- **Motion.** The photo reel and the client logo rows pause when you hover over them, and a tap or click stops or restarts them. Keyboard users reach a pause button for each, which appears when it has focus. If your device is set to reduce motion, they start paused and nothing on the site fades or slides.
 - **Images.** Images that carry meaning have text alternatives. The world map is described in words, and the hub addresses are written out beside it.
 - **Forms.** Every field has a visible label, required fields are marked, and errors are announced by the browser.
 - **Without JavaScript.** All content shows even if scripts don't load.

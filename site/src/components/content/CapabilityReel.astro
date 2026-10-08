@@ -101,6 +101,13 @@ const photos = [
     toggle?.addEventListener("click", () =>
       setPlaying(reel.dataset.state !== "playing"),
     );
+    /* No visible button: a pointer pauses the reel by hovering, a tap or
+       click stops or restarts it, and the keyboard reaches the toggle. */
+    reel
+      .querySelector(".reel_viewport")
+      ?.addEventListener("click", () =>
+        setPlaying(reel.dataset.state !== "playing"),
+      );
 
     /* One photo at a time lifts out of the reel, walking through the
        tiles' data-lift keys. Still for reduced motion and hidden tabs. */
@@ -207,19 +214,35 @@ const photos = [
       }
     }
 
+    /* The toggle takes no space and shows only when the keyboard reaches
+       it, over the reel's bottom edge. */
+    .reel_wrap {
+      position: relative;
+    }
+
     .reel_controls {
+      position: absolute;
+      inset: auto 0 0;
       width: var(--site-width);
       max-width: var(--max-width-main);
       margin-inline: auto;
       display: flex;
-      align-items: center;
       justify-content: flex-end;
-      gap: var(--space-4);
       color: var(--text-2);
+      pointer-events: none;
     }
 
     .reel_toggle {
       font-size: 0.75rem;
+      pointer-events: auto;
+      &:not(:focus-visible) {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
