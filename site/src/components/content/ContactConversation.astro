@@ -39,8 +39,10 @@ const { render = true, headingTag = "h1", variant = "page" } = Astro.props;
 const cardTag = headingTag === "h1" ? "h2" : "h3";
 const isHome = variant === "home";
 
-/* Areas and industries submit their labels, so HighLevel shows readable
-   answers. `value` is the id a link's ?topic= uses to preselect one. */
+/* Every answer submits its label, so HighLevel shows readable text. `value`
+   is the id a link's ?topic= uses to preselect one. Field names match the
+   HighLevel contact field keys, such as contact.job_title, so each answer
+   lands in its field on the contact. */
 const areas = [
   ...CAPABILITIES.map((cap) => ({ value: cap.id, label: cap.title })),
   isHome
@@ -172,24 +174,27 @@ const direct = [
             />
             <Input
               label="Company name"
-              name="company"
+              name="company_name"
               autocomplete="organization"
               placeholder="Company"
               required
             />
             <Input
               label="Job title"
-              name="title"
+              name="job_title"
               autocomplete="organization-title"
               placeholder="Your role"
               required
             />
             <Select
               label="Which best describes you?"
-              name="role"
-              options={roles}
+              name="enquirer_type"
+              options={roles.map((role) => role.label)}
               placeholder="Choose one"
               data-role
+              data-careers={
+                roles.find((role) => role.value === "careers")?.label
+              }
             />
             <Select
               label="Industry"
@@ -218,7 +223,7 @@ const direct = [
               {areas.map((area) => (
                 <Choice
                   label={area.label}
-                  name="areas"
+                  name="areas_of_interest"
                   value={area.label}
                   data-topic={area.value}
                 />
@@ -241,14 +246,14 @@ const direct = [
           <div class="contact_consent">
             <Choice
               label="I agree to ManyaIT contacting me about this request."
-              name="consent"
-              value="yes"
+              name="contact_consent"
+              value="Yes"
               required
             />
             <Choice
               label="Also send me occasional ManyaIT news and insights by email."
-              name="marketing"
-              value="yes"
+              name="marketing_opt_in"
+              value="Yes"
             />
           </div>
           <div class="contact_submit">
@@ -427,7 +432,10 @@ const direct = [
     const role = contact.querySelector<HTMLSelectElement>("select[data-role]");
     const notices = [...contact.querySelectorAll<HTMLElement>("[data-notice]")];
     const syncNotice = () => {
-      const kind = role?.value === "careers" ? "careers" : "general";
+      const kind =
+        role?.value && role.value === role.dataset.careers
+          ? "careers"
+          : "general";
       for (const notice of notices) {
         notice.hidden = notice.dataset.notice !== kind;
       }
@@ -452,8 +460,8 @@ const direct = [
       sync();
     } else if (industry && industryLabel) {
       industry.value = industryLabel;
-    } else if (role && topic === "careers") {
-      role.value = "careers";
+    } else if (role?.dataset.careers && topic === "careers") {
+      role.value = role.dataset.careers;
       syncNotice();
     }
   }
