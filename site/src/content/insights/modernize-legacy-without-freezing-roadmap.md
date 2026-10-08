@@ -14,7 +14,7 @@ takeaways:
   - Agree how capacity is split between new features and modernization, and protect that split.
 topic: cap-code
 related:
-  label: Digital Product Engineering
+  label: Scalable Products
   href: /capabilities/digital-product-engineering
 ---
 

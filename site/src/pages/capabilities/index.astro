@@ -40,8 +40,7 @@ import { CAPABILITY_PHOTOS } from "@/data/photos.ts";
       heading="Integrated capabilities for data-driven, AI-ready enterprises"
       intro="Start with one capability or combine them into a single program. Data fuels AI, enterprise platforms anchor data, and digital products put it in front of customers. One partner carries the work across every layer."
       items={CAPABILITIES.map((cap) => ({
-        title: cap.heading,
-        descriptor: cap.descriptor,
+        title: cap.title,
         text: cap.line,
         list: [...cap.focus],
         href: capabilityHref(cap),

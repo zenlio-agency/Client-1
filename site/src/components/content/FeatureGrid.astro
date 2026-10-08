@@ -8,8 +8,6 @@ import { tbc } from "@/data/site.ts";
 
 type Item = {
   title: string;
-  /** A short line in smaller text straight under the title. */
-  descriptor?: string;
   text: string;
   href?: string;
   icon?: SvgComponent;
@@ -100,22 +98,9 @@ const {
                 </span>
               )
             )}
-            {item.descriptor ? (
-              <div class="feature-grid_heading">
-                <h3 class="feature-grid_title">
-                  {item.href ? (
-                    <a href={item.href}>{item.title}</a>
-                  ) : (
-                    item.title
-                  )}
-                </h3>
-                <p class="feature-grid_descriptor">{item.descriptor}</p>
-              </div>
-            ) : (
-              <h3 class="feature-grid_title">
-                {item.href ? <a href={item.href}>{item.title}</a> : item.title}
-              </h3>
-            )}
+            <h3 class="feature-grid_title">
+              {item.href ? <a href={item.href}>{item.title}</a> : item.title}
+            </h3>
             <p class="feature-grid_text" set:html={tbc(item.text)} />
             {item.list && (
               <ul class="feature-grid_points">
@@ -186,21 +171,6 @@ const {
           }
         }
       }
-    }
-
-    /* The title and its descriptor stay together wherever the title sits. */
-    .feature-grid_heading {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-1);
-    }
-
-    .feature-grid_descriptor {
-      font-family: var(--heading-family);
-      font-size: var(--text-small);
-      font-weight: var(--heading-medium);
-      line-height: 1.4;
-      color: var(--text-2);
     }
 
     .feature-grid_text {
@@ -343,8 +313,7 @@ const {
               > :is(
                 .feature-grid_icon,
                 .feature-grid_number,
-                .feature-grid_title,
-                .feature-grid_heading
+                .feature-grid_title
               ) {
               grid-row: 1 / span 2;
             }

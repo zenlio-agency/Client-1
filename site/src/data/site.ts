@@ -6,21 +6,17 @@ import capCode from "@/assets/icons/cap-code.svg";
 
 /**
  * The five capability areas, in the order used everywhere on the site.
- * `slug` names each one's page under `/capabilities/`. `title` is the service
- * name used in menus, the footer, URLs and page titles. `heading` and
- * `descriptor` head the cards on Home and the Capabilities page, and
- * `heading` is the eyebrow on the capability's own page. `line` is the
- * one-liner shown wherever a capability is listed; `focus` is shown only on
- * the Capabilities page.
+ * `slug` names each one's page under `/capabilities/`. `title` is the name
+ * shown everywhere on the site; each page's browser title is its `seoTitle`
+ * in capability-pages.ts. `line` is the one-liner shown wherever a
+ * capability is listed; `focus` is shown only on the Capabilities page.
  */
 export const CAPABILITIES = [
   {
     id: "cap-data",
     slug: "data-analytics",
     key: "data",
-    title: "Data & Analytics",
-    heading: "Trusted Data",
-    descriptor: "Data platforms, governance and analytics",
+    title: "Trusted Data",
     line: "Modern data platforms that turn scattered data into trusted, decision-ready intelligence.",
     focus: [
       "Data strategy & AI-readiness assessment",
@@ -36,9 +32,7 @@ export const CAPABILITIES = [
     id: "cap-sap",
     slug: "sap-enterprise-data",
     key: "sap",
-    title: "SAP & Enterprise Data",
-    heading: "Modern Core",
-    descriptor: "SAP S/4HANA, BTP and ERP data",
+    title: "Modern Core",
     line: "S/4HANA transformation, BTP innovation and clean-core architecture that keep the enterprise core agile.",
     focus: [
       "S/4HANA transformation & RISE with SAP",
@@ -54,9 +48,7 @@ export const CAPABILITIES = [
     id: "cap-ai",
     slug: "applied-ai",
     key: "ai",
-    title: "Applied AI",
-    heading: "Applied Intelligence",
-    descriptor: "Generative AI and machine learning in production",
+    title: "Applied Intelligence",
     line: "Generative AI and machine learning, engineered for production and governed for the enterprise.",
     focus: [
       "AI strategy & use-case portfolio",
@@ -72,9 +64,7 @@ export const CAPABILITIES = [
     id: "cap-flow",
     slug: "agentic-ai-automation",
     key: "ai",
-    title: "Agentic AI & Automation",
-    heading: "Autonomous Operations",
-    descriptor: "AI agents and intelligent automation",
+    title: "Autonomous Operations",
     line: "Intelligent agents and automated workflows that execute real work across your operations.",
     focus: [
       "Process intelligence & discovery",
@@ -90,9 +80,7 @@ export const CAPABILITIES = [
     id: "cap-code",
     slug: "digital-product-engineering",
     key: "digital",
-    title: "Digital Product Engineering",
-    heading: "Scalable Products",
-    descriptor: "Product, cloud and application engineering",
+    title: "Scalable Products",
     line: "Cloud-native products and platforms, engineered from concept to scale across web and mobile.",
     focus: [
       "Product strategy & experience design",

@@ -68,6 +68,8 @@ const MENUS: Record<string, Menu> = {
         links: capLinks(["cap-sap", "cap-code"]),
       },
     ],
+    footerLinks: [{ label: "All capabilities", href: "/capabilities" }],
+    footerColumn: 0,
     showSocials: true,
     feature: {
       label: "Get started",
@@ -260,13 +262,16 @@ const MENUS: Record<string, Menu> = {
                       id={`mobile-${item.menu}`}
                       hidden
                     >
-                      {MENUS[item.menu].columns
-                        .flatMap((column) => column.links)
-                        .map((link) => (
-                          <li>
-                            <a href={link.href}>{link.label}</a>
-                          </li>
-                        ))}
+                      {[
+                        ...MENUS[item.menu].columns.flatMap(
+                          (column) => column.links,
+                        ),
+                        ...(MENUS[item.menu].footerLinks ?? []),
+                      ].map((link) => (
+                        <li>
+                          <a href={link.href}>{link.label}</a>
+                        </li>
+                      ))}
                     </ul>
                   </li>
                 ) : (

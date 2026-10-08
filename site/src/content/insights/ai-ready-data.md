@@ -14,7 +14,7 @@ takeaways:
   - Governance built into the platform makes AI faster to ship, not slower.
 topic: cap-data
 related:
-  label: Data & Analytics
+  label: Trusted Data
   href: /capabilities/data-analytics
 ---
 
