@@ -135,7 +135,7 @@ export const COMPONENT_HEROES = {
   "page-careers": {
     eyebrow: "Careers",
     title: "Build systems that matter.",
-    lede: "Join a technology, data and AI engineering partner trusted by enterprises in banking, telecommunications, healthcare and energy. Work on production platforms, own outcomes end to end and grow with every program.",
+    lede: "Join a technology, data and AI engineering partner trusted by enterprises in banking, telecommunications, healthcare, energy and retail. Work on production platforms, own outcomes end to end and grow with every program.",
   },
   "page-contact": {
     eyebrow: "Start a conversation",

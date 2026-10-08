@@ -11,18 +11,41 @@ export type IndustryPage = {
   points: string[];
   problems: {
     heading: string;
-    rows: { challenge: string; answer: string }[];
+    intro?: string;
+    /** `segment` labels the row; `leaders` is a footer line. */
+    rows: {
+      challenge: string;
+      answer: string;
+      segment?: string;
+      leaders?: string;
+    }[];
   };
   offerings: {
     heading: string;
     intro: string;
-    items: { title: string; text: string }[];
+    /** `poweredBy` holds capability ids (linked) or plain labels. */
+    items: {
+      title: string;
+      text: string;
+      poweredBy?: string[];
+      platforms?: string[];
+    }[];
+    /** A line under the cards. */
+    standards?: string;
   };
   /** One line per capability, keyed by capability id. */
   capabilities: Record<string, string>;
-  stack: {
+  /** The "Platforms and standards" section; omitted where the cards list them. */
+  stack?: {
     intro: string;
     groups: { title: string; items: string[] }[];
+  };
+  /** Why ManyaIT, with proof points and the ways of working. */
+  ways?: {
+    heading: string;
+    intro: string;
+    points: string[];
+    models: { title: string; bestFor: string; text: string }[];
   };
   /** Outcome figures to confirm. Not shown on the page until confirmed. */
   outcomes: { value: string; label: string }[];
@@ -587,6 +610,193 @@ export const INDUSTRY_PAGES: Record<string, IndustryPage> = {
         question: "Can you support grid modernization?",
         answer:
           "Yes. We engineer the data, integration and forecasting layers behind grid modernization, including distributed generation and storage, outage management and network analytics.",
+      },
+    ],
+  },
+
+  /* From "ManyaIT Retail Industry Page: Content" (7 October 2026). */
+  "industry-retail": {
+    description:
+      "Composable commerce, real-time inventory, order orchestration and first-party data engineering for grocers, luxury, apparel and direct-to-consumer brands.",
+    lede: "From storefront and point of sale to fulfillment and first-party data, we engineer the platforms behind every order for grocers, mass merchants, specialty retailers, luxury and apparel brands and direct-to-consumer businesses.",
+    points: [
+      "Composable, headless commerce",
+      "Real-time inventory and fulfillment",
+      "First-party data that drives lifetime value",
+    ],
+    problems: {
+      heading: "What retailers are up against",
+      intro:
+        "Each retail segment carries its own economics. Our teams bring the architecture and domain depth each one demands.",
+      rows: [
+        {
+          segment: "Grocery & mass retail",
+          challenge: "Online orders are growing, and margins are shrinking.",
+          answer:
+            "Real-time inventory, order orchestration, micro-fulfillment automation and cold-chain visibility that lower cost-to-serve and protect margin at scale.",
+          leaders:
+            "Chief Digital Officers, supply chain automation leaders, ERP and warehouse technology heads",
+        },
+        {
+          segment: "Luxury & apparel",
+          challenge:
+            "Our stores and our digital channels feel like two different brands.",
+          answer:
+            "Headless storefronts, unified clienteling and global order routing that carry one brand experience across every channel and market.",
+          leaders:
+            "Omnichannel experience, brand technology and e-commerce product leaders",
+        },
+        {
+          segment: "Direct-to-consumer & digital commerce",
+          challenge: "We spend more to acquire customers every quarter.",
+          answer:
+            "Predictive analytics on a unified customer data platform, so acquisition, personalization and retention spend follows lifetime value.",
+          leaders:
+            "Chief Data Officers, MarTech and performance analytics leaders, cloud platform heads",
+        },
+        {
+          segment: "Retail media & data monetization",
+          challenge:
+            "We're sitting on first-party data we can't safely monetize.",
+          answer:
+            "Privacy-preserving clean rooms and consent-aware audience pipelines that turn first-party data into retail media revenue.",
+          leaders: "Retail media, data monetization and privacy leaders",
+        },
+      ],
+    },
+    offerings: {
+      heading: "How we help retailers and brands",
+      intro:
+        "The platforms that sell, fulfill and personalize every order, modernized without interrupting trading. Every program is led by an accountable architect and delivery lead, with commerce, ERP, supply chain, data and cloud specialists mobilized around your trading calendar.",
+      items: [
+        {
+          title: "Composable commerce",
+          text: "MACH-based, headless storefronts and clienteling apps that let teams change customer experiences without replatforming.",
+          poweredBy: ["cap-code"],
+          platforms: [
+            "Adobe Commerce",
+            "Shopify Plus",
+            "Salesforce Commerce Cloud",
+            "SAP Commerce Cloud",
+            "commercetools",
+            "Next.js",
+            "GraphQL",
+          ],
+        },
+        {
+          title: "Order, inventory & fulfillment",
+          text: "Real-time inventory visibility, distributed order orchestration and warehouse integration, with exceptions, returns and replenishment handled automatically.",
+          poweredBy: ["cap-data", "cap-flow"],
+          platforms: [
+            "Apache Kafka",
+            "Databricks",
+            "warehouse and order management systems",
+          ],
+        },
+        {
+          title: "Customer data & personalization",
+          text: "Point-of-sale, loyalty and digital data unified into predictive models for acquisition, personalization, pricing and lifetime value.",
+          poweredBy: ["cap-ai"],
+          platforms: ["Snowflake", "Segment", "PyTorch"],
+        },
+        {
+          title: "Retail media & clean rooms",
+          text: "Consent-aware data products and clean rooms that monetize first-party data without compromising privacy.",
+          poweredBy: ["cap-data"],
+          platforms: ["Snowflake", "Databricks"],
+        },
+        {
+          title: "ERP, point of sale & store operations",
+          text: "ERP, merchandising, point-of-sale and store systems modernized and integrated for margin visibility and clean master data.",
+          poweredBy: ["cap-sap"],
+          platforms: [
+            "SAP S/4HANA",
+            "Oracle Cloud ERP",
+            "Oracle Retail",
+            "Microsoft Dynamics 365",
+            "NetSuite",
+          ],
+        },
+        {
+          title: "Cloud & peak resilience",
+          text: "Legacy retail applications moved to the cloud and engineered to stay fast and available through peak trading.",
+          /* No page for this one yet, so it shows as a label. */
+          poweredBy: ["Projects & Development"],
+          platforms: ["AWS", "Microsoft Azure", "Google Cloud"],
+        },
+      ],
+      standards:
+        "Built to MACH principles, PCI DSS, GDPR, CCPA/CPRA, GS1 standards and WCAG 2.2.",
+    },
+    capabilities: {
+      "cap-data":
+        "Customer, inventory and transaction data unified for demand forecasting and lifetime value.",
+      "cap-sap":
+        "Merchandising, finance and supply chain on S/4HANA with clean master data.",
+      "cap-ai":
+        "Demand forecasting, pricing and personalization models in production.",
+      "cap-flow":
+        "Order exceptions, returns and replenishment handled end to end.",
+      "cap-code":
+        "Headless storefronts and clienteling apps built for peak traffic.",
+    },
+    ways: {
+      heading: "Built for retail's pace",
+      intro:
+        "Retail moves in seasons. Choose the model that fits the moment, backed by teams that understand margins, inventory turns and what every minute of downtime costs during peak.",
+      points: [
+        "Retail domain depth",
+        "Mobilized around your trading calendar",
+        "Engineering rigor on every release",
+      ],
+      models: [
+        {
+          title: "Peak readiness",
+          bestFor:
+            "Peak shopping events, seasonal campaigns and major launches",
+          text: "A time-boxed program that load-tests, hardens and supports your platforms before and through peak.",
+        },
+        {
+          title: "Outcome-based delivery",
+          bestFor:
+            "Defined rollouts such as replatforming, point-of-sale integration or a new order management system",
+          text: "One accountable team delivering a fixed scope end to end, against agreed milestones.",
+        },
+        {
+          title: "Product & platform teams",
+          bestFor:
+            "Long-term digital transformation and continuous roadmap delivery",
+          text: "Persistent, cross-functional teams that own the roadmap and build lasting knowledge inside your organization.",
+        },
+        {
+          title: "Managed operations",
+          bestFor: "Continuous platform support after launch",
+          text: "Platforms run, monitored and optimized under agreed service levels, around the clock.",
+        },
+      ],
+    },
+    outcomes: [{ value: "[X]%", label: "improvement in inventory accuracy" }],
+    faq: [
+      {
+        question:
+          "Can you modernize our commerce platform without disrupting trading?",
+        answer:
+          "Yes. We decouple the storefront or order management first and move capabilities to composable services one domain at a time, keeping what already works and planning every cutover around your trading calendar and peak freeze periods.",
+      },
+      {
+        question: "How do you prepare for peak, and how quickly can you start?",
+        answer:
+          "Most programs begin within [X] weeks of an agreed scope. Peak readiness should start well before your code freeze: load testing against forecast peaks, autoscaling, observability and rehearsed runbooks, with round-the-clock support through the season.",
+      },
+      {
+        question: "How do you protect customer and payment data?",
+        answer:
+          "Payment flows follow PCI DSS, personal data is handled under consent and privacy rules such as GDPR and CCPA, and data shared through clean rooms never leaves governed environments in identifiable form.",
+      },
+      {
+        question: "Can you help us launch a retail media network?",
+        answer:
+          "Yes. We engineer the consent-aware audience data, clean-room integrations and measurement pipelines a retail media business runs on, and connect them to your commerce and loyalty data.",
       },
     ],
   },
