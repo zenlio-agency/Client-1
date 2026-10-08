@@ -62,7 +62,7 @@ export const CONTACT_TOPICS = [
  * SANITY_STUDIO_DATASET to point the Studio somewhere else, e.g. a test
  * dataset.
  */
-export const PROJECT_ID = process.env.SANITY_STUDIO_PROJECT_ID || "4ovcy09k";
+export const PROJECT_ID = process.env.SANITY_STUDIO_PROJECT_ID || "n3hghywr";
 export const DATASET = process.env.SANITY_STUDIO_DATASET || "production";
 
 export const API_VERSION = "2026-10-01";

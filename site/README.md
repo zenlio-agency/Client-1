@@ -164,7 +164,7 @@ normal Markdown.
 ## Content from Sanity
 
 HR and marketing edit content in the Sanity Studio (`../studio`). The site
-reads it at build time from project `4ovcy09k`, dataset `production`.
+reads it at build time from project `n3hghywr`, dataset `production`.
 Visitors never load anything from Sanity: images are copied into the build.
 
 Pages move from the data files and Markdown to Sanity one area at a time.
@@ -197,7 +197,7 @@ pages build exactly as before.
 
 | Variable            | Default      | Notes                                                                                           |
 | ------------------- | ------------ | ----------------------------------------------------------------------------------------------- |
-| `SANITY_PROJECT_ID` | `4ovcy09k`   |                                                                                                 |
+| `SANITY_PROJECT_ID` | `n3hghywr`   |                                                                                                 |
 | `SANITY_DATASET`    | `production` |                                                                                                 |
 | `SANITY_READ_TOKEN` | none         | Only if the dataset is private. Set it on the host, or in `site/.env` locally; never commit it. |
 

@@ -25,7 +25,7 @@ import {
   COMPONENT_HEROES,
   FOOTER_LINE,
   HOME,
-  ROLES,
+  WHY_FIGURES,
 } from "./seed/page-copy.mjs";
 
 const SITE = fileURLToPath(new URL("..", import.meta.url));
@@ -68,6 +68,7 @@ const site = await load("/src/data/site.ts");
 const photos = await load("/src/data/photos.ts");
 const consts = await load("/src/consts.ts");
 const legal = await load("/src/data/legal.ts");
+const careers = await load("/src/data/careers.ts");
 const { CAPABILITY_PAGES } = await load("/src/data/capability-pages.ts");
 const { INDUSTRY_PAGES } = await load("/src/data/industry-pages.ts");
 const { portableTextToHtml } = await load("/src/sanity/portable-text.ts");
@@ -206,19 +207,26 @@ const pageSections = (page) => ({
       ...group,
     })),
   },
-  outcomes: keyed(page.outcomes, "outcome", stat),
+  /* Outcome figures are still placeholders, which the site hides. */
+  outcomes: keyed(
+    page.outcomes.filter(({ value }) => !placeholder(value)),
+    "outcome",
+    stat,
+  ),
   faq: faq(page.faq),
 });
 
 /** `[placeholder]` values aren't stored: phase 4 shows the marker instead. */
 const known = (value) => (/^\[.*\]$/.test(value) ? undefined : value);
+/** A figure that still holds a placeholder, such as `[X]%`. */
+const placeholder = (value) => /\[[^\]]*\]/.test(value);
 
 /* ---------------------------------------------------------------------------
  * Page props, read from the page files with Astro's own parser. Expression
  * props (`points={[...]}`, `photo={ABOUT_PHOTOS.hero}`) are evaluated with
  * the site's data in scope; they come only from this repo's own pages.
  */
-const scope = { ...site, ...photos, ...legal };
+const scope = { ...site, ...photos, ...legal, ...careers };
 const evaluate = (expression) =>
   new Function(...Object.keys(scope), `return (${expression});`)(
     ...Object.values(scope),
@@ -251,36 +259,47 @@ async function pageProps(file) {
 }
 
 /* ---------------------------------------------------------------------------
- * Documents. Each lists the built pages its words appear on, for the checks.
+ * Documents. Each lists the built pages its words appear on, for the checks,
+ * and any paths whose words no page shows on purpose.
  */
 const documents = [];
-const add = (pages, document) => documents.push({ pages, document });
+const add = (pages, document, unchecked = []) =>
+  documents.push({ pages, document, unchecked });
 
 const home = await pageProps("index.astro");
 
-/* Site settings */
-add(["index.html"], {
-  _id: "siteSettings",
-  _type: "siteSettings",
-  email: site.COMPANY_CONTACT.email,
-  careersEmail: site.COMPANY_CONTACT.careersEmail,
-  phone: site.COMPANY_CONTACT.phone,
-  /* Only profiles with a real address; the rest are still `#`. */
-  social: keyed(
-    site.SOCIAL.filter(({ href }) => href.startsWith("https://")),
-    "social",
-    ({ icon, href }) => ({ _type: "socialProfile", platform: icon, url: href }),
-  ),
-  ctaPrimaryLabel: site.CTA.primary.label,
-  ctaSecondaryLabel: site.CTA.secondary.label,
-  footerLine: FOOTER_LINE,
-  approvedJobBoards: [],
-  seo: seo({
-    title: consts.SITE_NAME,
-    description: consts.SITE_DESCRIPTION,
-    image: image("site/public/og-image.jpg"),
-  }),
-});
+/* Site settings. The default description applies only to pages that set
+   none, so no page shows it today. */
+add(
+  ["index.html", "about/index.html"],
+  {
+    _id: "siteSettings",
+    _type: "siteSettings",
+    email: site.COMPANY_CONTACT.email,
+    careersEmail: site.COMPANY_CONTACT.careersEmail,
+    phone: site.COMPANY_CONTACT.phone,
+    /* Only profiles with a real address; the rest are still `#`. */
+    social: keyed(
+      site.SOCIAL.filter(({ href }) => href.startsWith("https://")),
+      "social",
+      ({ icon, href }) => ({
+        _type: "socialProfile",
+        platform: icon,
+        url: href,
+      }),
+    ),
+    ctaPrimaryLabel: site.CTA.primary.label,
+    ctaSecondaryLabel: site.CTA.secondary.label,
+    footerLine: FOOTER_LINE,
+    approvedJobBoards: [],
+    seo: seo({
+      title: consts.SITE_NAME,
+      description: consts.SITE_DESCRIPTION,
+      image: image("site/public/og-image.jpg"),
+    }),
+  },
+  ["seo.description"],
+);
 
 /* Homepage */
 add(["index.html"], {
@@ -294,7 +313,11 @@ add(["index.html"], {
   })),
   logosHeading: HOME.logosHeading,
   why: HOME.why,
-  stats: keyed(HOME.stats, "stat", stat),
+  stats: keyed(
+    WHY_FIGURES.map((key) => site.COMPANY_FIGURES[key]),
+    "stat",
+    stat,
+  ),
   ...Object.fromEntries(
     Object.entries(HOME.sections).map(([name, intro]) => [
       name,
@@ -375,15 +398,8 @@ for (const cap of site.CAPABILITIES) {
     lede: page.lede,
     points: page.points,
     ...pageSections(page),
-    industryNotes: keyed(
-      Object.entries(page.industries),
-      "note",
-      ([industry, text]) => ({
-        _type: "industryNote",
-        industry: ref(industry),
-        text,
-      }),
-    ),
+    /* The per-industry notes stay in capability-pages.ts but aren't shown
+       since the "in your industry" section was removed, so none is imported. */
     seo: seo({ description: page.description }),
   });
 }
@@ -405,17 +421,12 @@ for (const industry of site.INDUSTRIES) {
     challenge: industry.challenge,
     build: industry.build,
     outcome: industry.outcome,
-    metric: stat({ value: industry.metric, label: industry.metricLabel }),
+    ...(!placeholder(industry.metric) && {
+      metric: stat({ value: industry.metric, label: industry.metricLabel }),
+    }),
     ...pageSections(page),
-    capabilityNotes: keyed(
-      Object.entries(page.capabilities),
-      "note",
-      ([capability, text]) => ({
-        _type: "capabilityNote",
-        capability: ref(capability),
-        text,
-      }),
-    ),
+    /* Likewise the per-capability notes, since the capabilities section
+       was removed from industry pages. */
     seo: seo({ description: page.description }),
   });
 }
@@ -534,10 +545,15 @@ site.ECOSYSTEM.forEach((company, index) => {
   });
 });
 
-/* Job roles, as drafts for HR to complete and publish */
+/* Job roles, as drafts for HR to complete and publish. A role's location is
+   the hub in its country; the city it names (e.g. Jersey City, NJ) has no
+   field yet. */
 const teamOf = (title) =>
   site.CAPABILITIES.find((cap) => cap.title === title)?.id;
-for (const role of ROLES) {
+const hubIn = (country) => site.HUBS.find((hub) => hub.country === country)?.id;
+for (const role of careers.ROLES) {
+  const hub = hubIn(role.country);
+  if (!hub) throw new Error(`Role "${role.title}": no hub in ${role.country}`);
   const capability = teamOf(role.team);
   if (!capability && role.team !== "Client Partnership") {
     throw new Error(`Role "${role.title}": unknown team "${role.team}"`);
@@ -547,10 +563,10 @@ for (const role of ROLES) {
     _type: "opportunity",
     title: role.title,
     status: "open",
-    slug: slug(slugify(role.title)),
+    slug: slug(role.slug),
     team: capability ? "capability" : "client-partnership",
     ...(capability && { capability: ref(capability) }),
-    locations: [ref(role.location, "loc0")],
+    locations: [ref(hub, "loc0")],
     remote: false,
     workMode: role.mode,
     employmentType: "Full-time",
@@ -676,7 +692,7 @@ async function haystack(page) {
   return haystacks.get(page);
 }
 
-for (const { pages, document } of documents) {
+for (const { pages, document, unchecked } of documents) {
   for (const [path, value] of leaves(document)) {
     if (typeof value !== "string" || path.some((p) => NOT_SHOWN.has(p)))
       continue;
@@ -686,7 +702,8 @@ for (const { pages, document } of documents) {
           `${document._id}: banned word "${word}" in ${path.join(".")}`,
         );
     }
-    if (!pages.length || value === "\n") continue;
+    if (!pages.length || value === "\n" || unchecked.includes(path.join(".")))
+      continue;
     const needle = squash(value);
     const found = await Promise.all(
       pages.map(async (page) => (await haystack(page)).includes(needle)),

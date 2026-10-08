@@ -12,40 +12,39 @@ export const HOME = {
     badge: "Technology & Talent Partners",
     heading: "Build the capabilities your enterprise",
     highlight: "needs next.",
-    lede: "ManyaIT helps global enterprises build and scale capability centers with AI-ready tech talent, matched to your stack and productive from week one.",
+    lede: "ManyaIT helps global enterprises establish and scale Global Capability Centers, with AI-ready engineering capacity aligned to your technology landscape and an operating model built for ownership.",
     points: [
-      "Vetted, AI-ready talent",
-      "Teams live in weeks",
-      "Flexible scale",
+      "AI-ready engineering capacity",
+      "Accelerated time to value",
+      "Elastic, governed scale",
     ],
-    careersPrompt: "Building your career?",
   },
   /* CapabilityReel.astro: files in src/assets/photos/ */
   reel: [
     {
       file: "reel-laptop-review.jpg",
-      alt: "Two colleagues reviewing a dashboard on a laptop",
-      caption: "Specialists matched to your stack",
+      alt: "Two professionals reviewing an analytics dashboard on a laptop",
+      caption: "Analytics-led delivery governance",
     },
     {
       file: "reel-conversation.jpg",
-      alt: "Two people talking across a table by a window",
-      caption: "Every team starts with your skills brief",
+      alt: "Two professionals in a one-to-one discussion by a window",
+      caption: "Outcome-led discovery and scoping",
     },
     {
       file: "reel-team-briefing.jpg",
-      alt: "A team in a meeting room following a presentation",
-      caption: "Teams live in weeks, not quarters",
+      alt: "A presenter leading a working session for a team at laptops",
+      caption: "Knowledge transfer built into delivery",
     },
     {
       file: "reel-candidate-meeting.jpg",
-      alt: "A specialist in conversation with two team leads",
-      caption: "Assessed on real problems from your domain",
+      alt: "A specialist in a structured interview with a two-person panel",
+      caption: "Domain-specific technical assessment",
     },
     {
       file: "reel-panel-conversation.jpg",
-      alt: "Two team leads meeting a new specialist",
-      caption: "You meet everyone before they start",
+      alt: "A two-person client panel interviewing a specialist",
+      caption: "Client sign-off before onboarding",
     },
   ],
   /* ClientLogos.astro */
@@ -53,21 +52,14 @@ export const HOME = {
     start: "Trusted by global enterprises.",
     emphasis: "Powered by our talent.",
   },
-  /* WhyCards.astro */
+  /* WhyMetrics.astro defaults. Its figures come from COMPANY_FIGURES in
+     src/data/site.ts, in the order WHY_FIGURES lists. */
   why: {
     eyebrow: "Why ManyaIT",
-    heading: "The right people. Ready faster.",
-    emphasis: "Built to stay.",
+    heading: "Data-led outcomes, engineered end to end.",
     statement:
-      "We bring the specialists, the setup and the support your Global Capability Center needs to grow without slowing down. Vetted, AI-ready engineers matched to your stack. Teams live in weeks, not quarters. And a clear path to build, operate and transfer, so the capability you scale is always yours.",
+      "From data foundations to production-grade AI, we architect, implement and scale the platforms your Global Capability Center runs on. Specialist capacity aligned to your technology landscape, governed delivery and a defined build-operate-transfer path to full ownership.",
   },
-  /* TrustStrip.astro defaults. Every figure is a placeholder. */
-  stats: [
-    { value: "[XX]+", label: "Years powering enterprise technology" },
-    { value: "[XX]+", label: "Global enterprises served" },
-    { value: "[XX]+", label: "Specialists in our talent network" },
-    { value: "[X] wks", label: "Average time to a productive team" },
-  ],
   /* The intro of each homepage section. */
   sections: {
     /* CapabilityBento.astro */
@@ -75,19 +67,12 @@ export const HOME = {
       eyebrow: "Capabilities",
       heading: "Expertise across the modern enterprise stack",
       intro:
-        "Specialist teams for the platforms that matter most, ready to plug into your roadmap.",
+        "Platform-specialist capability across data, AI, SAP and product engineering, integrated into your roadmap and governed for enterprise scale.",
     },
     /* IndustryCards.astro */
     industries: {
       eyebrow: "Industries",
       heading: "Talent that already knows your industry.",
-      intro:
-        "Specialists who speak the language of your sector, its rules and its systems.",
-    },
-    /* CareersHome.astro */
-    careers: {
-      eyebrow: "Careers",
-      heading: "Build systems that matter.",
     },
     /* InsightsGrid.astro */
     insights: {
@@ -96,29 +81,32 @@ export const HOME = {
       intro:
         "Field notes from the teams building and running enterprise platforms.",
     },
-    /* GlobalPresence.astro */
-    locations: {
-      eyebrow: "Global presence",
-      heading: "Two cities. One team.",
-      intro:
-        "Client leadership in Dallas. Engineering depth in Hyderabad. One plan, one standard of work, and a working day that hands over instead of stopping.",
-    },
     /* EcosystemCards.astro */
     ecosystem: {
-      eyebrow: "The ManyaIT ecosystem",
-      heading: "More capabilities. One connected ecosystem.",
+      eyebrow: "Other companies",
+      heading: "Specialist firms. Complementary capabilities.",
       intro:
-        "Companies that share ManyaIT's standards of engineering and ownership, so enterprises can add capabilities without adding complexity.",
+        "Companies that share ManyaIT's standards of engineering and ownership, extending what enterprises can deliver without adding operational complexity.",
     },
-    /* ContactConversation.astro */
+    /* ContactConversation.astro, homepage version */
     contact: {
       eyebrow: "Start a conversation",
       heading: "Tell us what you want to build.",
       intro:
-        "Brief us on your goals and we'll match you with the right team. Expect a reply within [1] business day.",
+        "Brief us on your goals and we'll match you with the right team. Expect a reply within 1 business day.",
     },
   },
 };
+
+/* WhyMetrics.astro: the COMPANY_FIGURES keys it shows, in order. */
+export const WHY_FIGURES = [
+  "programs",
+  "products",
+  "onSchedule",
+  "testCoverage",
+  "enterprises",
+  "years",
+];
 
 /* Footer.astro */
 export const FOOTER_LINE =
@@ -133,49 +121,16 @@ export const COMPONENT_HEROES = {
   "page-careers": {
     eyebrow: "Careers",
     title: "Build systems that matter.",
-    lede: "Join teams working on real enterprise platforms across Dallas and Hyderabad. You own the work, learn the business and see the impact over years, not sprints.",
+    lede: "Join a technology, data and AI engineering partner trusted by enterprises in banking, telecommunications, healthcare and energy. Work on production platforms, own outcomes end to end and grow with every program.",
   },
-  "page-contact": sectionHero("contact"),
-  "page-industries": sectionHero("industries"),
+  "page-contact": {
+    eyebrow: "Start a conversation",
+    title: "Tell us what you want to build.",
+    lede: "Share your objectives and we'll bring the right architects and domain leads to the first conversation. Expect a reply within 1 business day.",
+  },
+  "page-industries": {
+    eyebrow: "Industries",
+    title: "Engineering built around your industry.",
+    lede: "Technology, data and AI programs shaped by the regulation, core systems and operating pressures of your sector.",
+  },
 };
-
-/** A homepage section intro, as a page header. */
-function sectionHero(name) {
-  const { eyebrow, heading, intro } = HOME.sections[name];
-  return { eyebrow, title: heading, lede: intro };
-}
-
-/*
- * The open roles in CareersOpenings.astro. They're imported as drafts: HR
- * adds the reference code, description and posting date, then publishes.
- */
-export const ROLES = [
-  {
-    title: "Senior Java Engineer",
-    team: "Digital Product Engineering",
-    location: "hyderabad",
-    experience: "5–8 yrs",
-    mode: "Hybrid",
-  },
-  {
-    title: "SAP S/4HANA Functional Lead",
-    team: "SAP & Enterprise Data",
-    location: "hyderabad",
-    experience: "4–7 yrs",
-    mode: "Hybrid",
-  },
-  {
-    title: "AI Automation Engineer",
-    team: "Agentic AI & Automation",
-    location: "hyderabad",
-    experience: "3–6 yrs",
-    mode: "On-site",
-  },
-  {
-    title: "Client Partner",
-    team: "Client Partnership",
-    location: "dallas",
-    experience: "8+ yrs",
-    mode: "On-site",
-  },
-];
