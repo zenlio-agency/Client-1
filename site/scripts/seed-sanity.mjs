@@ -399,8 +399,6 @@ for (const cap of site.CAPABILITIES) {
     _id: cap.id,
     _type: "capability",
     title: cap.title,
-    heading: cap.heading,
-    descriptor: cap.descriptor,
     slug: slug(cap.slug),
     line: cap.line,
     photo: photo(publicFile(photos.CAPABILITY_PHOTOS[cap.id])),
@@ -678,6 +676,9 @@ for (const { document } of documents) {
 }
 
 /* 4. Words: no banned words, and every word is on the site today */
+/* Kept for the Studio but not rendered: the section and page eyebrows and
+   the homepage badge were switched off across the site. */
+const NOT_RENDERED = new Set(["eyebrow", "badge"]);
 const NOT_SHOWN = new Set([
   "_id",
   "_type",
@@ -753,7 +754,12 @@ for (const { pages, document, unchecked } of documents) {
         `${document._id}: banned word "${word}" in ${path.join(".")}`,
       );
     }
-    if (!pages.length || value === "\n" || unchecked.includes(path.join(".")))
+    if (
+      !pages.length ||
+      value === "\n" ||
+      unchecked.includes(path.join(".")) ||
+      path.some((p) => NOT_RENDERED.has(p))
+    )
       continue;
     const needle = squash(value);
     const found = await Promise.all(

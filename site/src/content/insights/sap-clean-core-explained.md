@@ -14,7 +14,7 @@ takeaways:
   - The investment comes early. The savings come back with every upgrade after.
 topic: cap-sap
 related:
-  label: SAP & Enterprise Data
+  label: Modern Core
   href: /capabilities/sap-enterprise-data
 ---
 

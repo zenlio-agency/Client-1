@@ -15,7 +15,7 @@ takeaways:
   - Start with one frequent, costly task, and plan the handover to operations from the first week.
 topic: cap-ai
 related:
-  label: Applied AI
+  label: Applied Intelligence
   href: /capabilities/applied-ai
 ---
 

@@ -26,9 +26,6 @@ const points = [
   render && (
     <div class="hero-home_wrap">
       <div class="hero-home_copy">
-        <div class="hero-home_badge" data-reveal style="--reveal-order: 0">
-          Technology &amp; Talent Partners
-        </div>
         <Heading
           tag="h1"
           variant="display"
@@ -115,25 +112,8 @@ const points = [
       );
     }
 
-    /* Same pill as the section labels (Eyebrow), without the dot. */
-    .hero-home_badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.45rem 1rem;
-      border: var(--border-width) solid var(--border);
-      border-radius: var(--radius-round);
-      background-color: var(--background-2);
-      font-family: var(--primary-family);
-      font-size: var(--text-small);
-      font-weight: var(--primary-regular);
-      line-height: 1.2;
-      color: var(--text);
-    }
-
-    /* Larger type, but the tighter leading and top margin hand back the
-       extra height, so nothing below the headline moves. */
+    /* Larger type, with tighter leading to hand back the extra height. */
     .hero-home_title {
-      margin-top: var(--space-4);
       max-width: 26ch;
       font-family: var(--display-family);
       font-size: clamp(2.25rem, 1.5rem + 3.3vw, 4.25rem);

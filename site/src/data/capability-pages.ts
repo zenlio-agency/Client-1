@@ -210,7 +210,7 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
       {
         question: "Can the data platform support our AI initiatives?",
         answer:
-          "Yes, and it is one of the strongest reasons to build the foundation well. We prepare AI-ready data products alongside our Applied AI practice, so models and copilots start from trusted data.",
+          "Yes, and it is one of the strongest reasons to build the foundation well. We prepare AI-ready data products alongside our Applied Intelligence practice, so models and copilots start from trusted data.",
       },
       {
         question: "How quickly can we get started?",

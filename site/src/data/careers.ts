@@ -11,7 +11,7 @@ export const ROLES = [
   {
     slug: "senior-java-engineer",
     title: "Senior Java Engineer",
-    team: "Digital Product Engineering",
+    team: "Scalable Products",
     location: "India",
     country: "India",
     experience: "5–8 yrs",
@@ -20,7 +20,7 @@ export const ROLES = [
   {
     slug: "data-engineering-lead",
     title: "Data Engineering Lead",
-    team: "Data & Analytics",
+    team: "Trusted Data",
     location: "Jersey City, NJ",
     country: "United States",
     experience: "8+ yrs",
@@ -29,7 +29,7 @@ export const ROLES = [
   {
     slug: "sap-s4hana-functional-lead",
     title: "SAP S/4HANA Functional Lead",
-    team: "SAP & Enterprise Data",
+    team: "Modern Core",
     location: "India",
     country: "India",
     experience: "4–7 yrs",
@@ -38,7 +38,7 @@ export const ROLES = [
   {
     slug: "sap-s4hana-solution-architect",
     title: "SAP S/4HANA Solution Architect",
-    team: "SAP & Enterprise Data",
+    team: "Modern Core",
     location: "Chicago, IL",
     country: "United States",
     experience: "10+ yrs",
@@ -47,7 +47,7 @@ export const ROLES = [
   {
     slug: "genai-engineer",
     title: "GenAI Engineer",
-    team: "Applied AI",
+    team: "Applied Intelligence",
     location: "Charlotte, NC",
     country: "United States",
     experience: "5–8 yrs",
@@ -56,7 +56,7 @@ export const ROLES = [
   {
     slug: "ai-automation-engineer",
     title: "AI Automation Engineer",
-    team: "Agentic AI & Automation",
+    team: "Autonomous Operations",
     location: "India",
     country: "India",
     experience: "3–6 yrs",
@@ -65,7 +65,7 @@ export const ROLES = [
   {
     slug: "intelligent-automation-engineer",
     title: "Intelligent Automation Engineer",
-    team: "Agentic AI & Automation",
+    team: "Autonomous Operations",
     location: "Atlanta, GA",
     country: "United States",
     experience: "4–7 yrs",
@@ -74,7 +74,7 @@ export const ROLES = [
   {
     slug: "healthcare-data-architect",
     title: "Healthcare Data Architect",
-    team: "Data & Analytics",
+    team: "Trusted Data",
     location: "Minneapolis, MN",
     country: "United States",
     experience: "8+ yrs",
@@ -83,7 +83,7 @@ export const ROLES = [
   {
     slug: "cloud-platform-engineer",
     title: "Cloud Platform Engineer",
-    team: "Digital Product Engineering",
+    team: "Scalable Products",
     location: "Remote, United States",
     country: "United States",
     experience: "5–8 yrs",
