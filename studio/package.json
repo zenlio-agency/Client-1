@@ -10,11 +10,12 @@
   "scripts": {
     "dev": "sanity dev",
     "build": "sanity build",
-    "deploy": "sanity deploy",
+    "deploy": "sanity exec scripts/preflight.ts --with-user-token && sanity deploy",
     "typegen": "sanity schema extract --force && sanity typegen generate",
     "validate": "sanity schema validate",
     "check": "tsc --noEmit",
-    "seed": "sanity datasets import seed/production.ndjson --dataset production --missing"
+    "preflight": "sanity exec scripts/preflight.ts --with-user-token",
+    "seed": "sanity exec scripts/preflight.ts --with-user-token && sanity datasets import seed/production.ndjson --dataset production --missing"
   },
   "dependencies": {
     "@sanity/icons": "^5.2.3",
