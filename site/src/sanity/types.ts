@@ -17,6 +17,7 @@ export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: schema.json
 export type Problems = {
   heading?: string;
+  intro?: string;
   rows?: Array<{
     _key: string;
   } & ProblemRow>;
@@ -28,6 +29,7 @@ export type Offerings = {
   items?: Array<{
     _key: string;
   } & FeatureItem>;
+  standards?: string;
 };
 
 export type Stack = {
@@ -241,6 +243,7 @@ export type Opportunity = {
   locations?: Array<{
     _key: string;
   } & LocationReference>;
+  place?: string;
   remote?: boolean;
   workMode?: "On-site" | "Hybrid" | "Remote";
   employmentType?: "Full-time" | "Part-time" | "Fixed-term" | "Internship";
@@ -295,6 +298,7 @@ export type Location = {
   _rev: string;
   city?: string;
   short?: string;
+  country?: string;
   role?: string;
   text?: string;
   address?: string;
@@ -338,6 +342,18 @@ export type Capability = {
   faq?: Array<{
     _key: string;
   } & FaqItem>;
+  team?: string;
+  howItWorks?: {
+    heading?: string;
+    intro?: string;
+    steps?: Array<{
+      title?: string;
+      text?: string;
+      note?: string;
+      _type: "processStep";
+      _key: string;
+    }>;
+  };
   industryNotes?: Array<{
     industry?: IndustryReference;
     text?: string;
@@ -354,6 +370,7 @@ export type Industry = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  name?: string;
   slug?: Slug;
   short?: string;
   summary?: string;
@@ -374,6 +391,18 @@ export type Industry = {
   faq?: Array<{
     _key: string;
   } & FaqItem>;
+  ways?: {
+    heading?: string;
+    intro?: string;
+    points?: Array<string>;
+    models?: Array<{
+      title?: string;
+      bestFor?: string;
+      text?: string;
+      _type: "wayToWork";
+      _key: string;
+    }>;
+  };
   capabilityNotes?: Array<{
     capability?: CapabilityReference;
     text?: string;
@@ -460,10 +489,17 @@ export type HomePage = {
     heading?: string;
     emphasis?: string;
     statement?: string;
+    buttons?: Array<{
+      _key: string;
+    } & LinkItem>;
   };
   stats?: Array<{
     _key: string;
   } & Stat>;
+  standards?: {
+    title?: string;
+    items?: Array<string>;
+  };
   capabilities?: SectionIntro;
   industries?: SectionIntro;
   careers?: SectionIntro;
@@ -555,12 +591,19 @@ export type FeatureItem = {
   _type: "featureItem";
   title?: string;
   text?: string;
+  capabilities?: Array<{
+    _key: string;
+  } & CapabilityReference>;
+  poweredByOther?: Array<string>;
+  platforms?: Array<string>;
 };
 
 export type ProblemRow = {
   _type: "problemRow";
   challenge?: string;
   answer?: string;
+  segment?: string;
+  leaders?: string;
 };
 
 export type FaqItem = {
@@ -771,10 +814,17 @@ export type HomePageQueryResult = Array<{
     heading?: string;
     emphasis?: string;
     statement?: string;
+    buttons?: Array<{
+      _key: string;
+    } & LinkItem>;
   };
   stats?: Array<{
     _key: string;
   } & Stat>;
+  standards?: {
+    title?: string;
+    items?: Array<string>;
+  };
   capabilities?: SectionIntro;
   industries?: SectionIntro;
   careers?: SectionIntro;
@@ -900,6 +950,18 @@ export type CapabilitiesQueryResult = Array<{
   faq?: Array<{
     _key: string;
   } & FaqItem>;
+  team?: string;
+  howItWorks?: {
+    heading?: string;
+    intro?: string;
+    steps?: Array<{
+      title?: string;
+      text?: string;
+      note?: string;
+      _type: "processStep";
+      _key: string;
+    }>;
+  };
   industryNotes: Array<{
     industry: string | null;
     text?: string;
@@ -937,6 +999,7 @@ export type IndustriesQueryResult = Array<{
   _updatedAt: string;
   _rev: string;
   title?: string;
+  name?: string;
   slug: string | null;
   short?: string;
   summary?: string;
@@ -971,6 +1034,18 @@ export type IndustriesQueryResult = Array<{
   faq?: Array<{
     _key: string;
   } & FaqItem>;
+  ways?: {
+    heading?: string;
+    intro?: string;
+    points?: Array<string>;
+    models?: Array<{
+      title?: string;
+      bestFor?: string;
+      text?: string;
+      _type: "wayToWork";
+      _key: string;
+    }>;
+  };
   capabilityNotes: Array<{
     capability: string | null;
     text?: string;
@@ -1009,6 +1084,7 @@ export type LocationsQueryResult = Array<{
   _rev: string;
   city?: string;
   short?: string;
+  country?: string;
   role?: string;
   text?: string;
   address?: string;
@@ -1159,6 +1235,7 @@ export type OpportunitiesQueryResult = Array<{
   team?: "capability" | "client-partnership";
   capability: string | null;
   locations: Array<string> | null;
+  place?: string;
   remote?: boolean;
   workMode?: "Hybrid" | "On-site" | "Remote";
   employmentType?: "Fixed-term" | "Full-time" | "Internship" | "Part-time";

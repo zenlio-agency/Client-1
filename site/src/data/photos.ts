@@ -21,6 +21,7 @@ export const INDUSTRY_PHOTOS: Record<string, string> = {
   "industry-telecom": image("industry-telecom"),
   "industry-healthcare": image("industry-healthcare"),
   "industry-energy": image("industry-energy"),
+  "industry-retail": image("industry-retail"),
 };
 
 /** One per Insights article, in order. */

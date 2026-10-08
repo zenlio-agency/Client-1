@@ -1,6 +1,5 @@
 ---
-import Eyebrow from "@/components/typography/Eyebrow.astro";
-import Heading from "@/components/typography/Heading.astro";
+import SectionHeader from "@/components/content/SectionHeader.astro";
 import Paragraph from "@/components/typography/Paragraph.astro";
 import Button from "@/components/Button.astro";
 import Icon from "@/components/media/Icon.astro";
@@ -37,27 +36,24 @@ const {
 {
   render && items.length > 0 && (
     <div class="faq-list_wrap">
-      <div class="faq-list_head">
-        <Eyebrow data-reveal>{eyebrow}</Eyebrow>
-        <Heading maxWidth={16} data-reveal style="--reveal-order: 1">
-          {heading}
-        </Heading>
-        {intro && (
-          <Paragraph maxWidth={36} data-reveal style="--reveal-order: 2">
-            {intro}
-          </Paragraph>
-        )}
+      <SectionHeader
+        class="faq-list_head"
+        layout="stack"
+        eyebrow={eyebrow}
+        heading={heading}
+        intro={intro}
+        introVariant="main"
+      >
         <Button
+          slot="action"
           element="link"
           href={link.href}
           emphasis="secondary"
-          data-reveal
-          style="--reveal-order: 3"
         >
           {link.label}
           <Icon src={arrow} variant="small" class="button_icon" />
         </Button>
-      </div>
+      </SectionHeader>
       <Accordion class="faq-list_items" openFirst data-reveal>
         {items.map((item) => (
           <AccordionItem heading={item.question}>
@@ -73,6 +69,14 @@ const {
 
 <style is:global>
   @layer components {
+    /* The header stays in view beside the long column on desktop. */
+    .faq-list_head {
+      @media (width >= 64rem) {
+        position: sticky;
+        top: calc(var(--nav-height) + var(--space-5));
+      }
+    }
+
     /* Spacing here comes from gaps, so type margins step aside. */
     :where(.faq-list_head) :where(.heading, .text) {
       margin-block: 0;
@@ -86,20 +90,6 @@ const {
       align-items: start;
       @media (width >= 64rem) {
         grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-      }
-    }
-
-    .faq-list_head {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: var(--space-4);
-      & .button_wrap {
-        margin-top: var(--space-2);
-      }
-      @media (width >= 64rem) {
-        position: sticky;
-        top: calc(var(--nav-height) + var(--space-5));
       }
     }
 

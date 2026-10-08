@@ -1,7 +1,5 @@
 ---
-import Eyebrow from "@/components/typography/Eyebrow.astro";
-import Heading from "@/components/typography/Heading.astro";
-import Paragraph from "@/components/typography/Paragraph.astro";
+import SectionHeader from "@/components/content/SectionHeader.astro";
 import { ECOSYSTEM, tbc } from "@/data/site.ts";
 
 interface Props {
@@ -21,22 +19,14 @@ const siteLabel = (href: string) =>
 {
   render && companies.length > 0 && (
     <div class="ecosystem_wrap">
-      <div class="ecosystem_intro">
-        <Eyebrow data-reveal>Other companies</Eyebrow>
-        <Heading
-          variant="h3"
-          maxWidth={22}
-          data-reveal
-          style="--reveal-order: 1"
-        >
-          Specialist firms. Complementary capabilities.
-        </Heading>
-        <Paragraph maxWidth={44} data-reveal style="--reveal-order: 2">
-          Companies that share ManyaIT's standards of engineering and ownership,
-          extending what enterprises can deliver without adding operational
-          complexity.
-        </Paragraph>
-      </div>
+      <SectionHeader
+        layout="stack"
+        eyebrow="Other companies"
+        heading="Specialist firms. Complementary capabilities."
+        headingVariant="h3"
+        intro="Companies that share ManyaIT's standards of engineering and ownership, extending what enterprises can deliver without adding operational complexity."
+        introVariant="main"
+      />
       <ul class="ecosystem_list">
         {companies.map((company, index) => {
           const Tag = company.href ? "a" : "div";
@@ -97,13 +87,6 @@ const siteLabel = (href: string) =>
       @media (width >= 64rem) {
         grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
       }
-    }
-
-    .ecosystem_intro {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: var(--space-4);
     }
 
     .ecosystem_list {

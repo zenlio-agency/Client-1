@@ -1,7 +1,5 @@
 ---
-import Eyebrow from "@/components/typography/Eyebrow.astro";
-import Heading from "@/components/typography/Heading.astro";
-import Paragraph from "@/components/typography/Paragraph.astro";
+import SectionHeader from "@/components/content/SectionHeader.astro";
 import PhotoTile from "@/components/item/PhotoTile.astro";
 import { getCollection } from "astro:content";
 import {
@@ -39,27 +37,16 @@ const articles = (await getCollection("insights")).sort(byOrder);
 {
   render && (
     <div class="insights_wrap" data-insights>
-      <div class="insights_head">
-        <div class="insights_intro">
-          <Eyebrow data-reveal>Insights</Eyebrow>
-          <Heading maxWidth={20} data-reveal style="--reveal-order: 1">
-            Ideas shaping technology, data and AI.
-          </Heading>
-          <Paragraph
-            variant="large"
-            maxWidth={46}
-            data-reveal
-            style="--reveal-order: 2"
-          >
-            {intro}
-          </Paragraph>
-        </div>
+      <SectionHeader
+        eyebrow="Insights"
+        heading="Ideas shaping technology, data and AI."
+        intro={intro}
+      >
         <div
+          slot="action"
           class="insights_filters"
           role="group"
           aria-label="Filter insights"
-          data-reveal
-          style="--reveal-order: 3"
         >
           {filters.map((filter, index) => (
             <button
@@ -72,7 +59,7 @@ const articles = (await getCollection("insights")).sort(byOrder);
             </button>
           ))}
         </div>
-      </div>
+      </SectionHeader>
 
       <div class="insights_grid">
         {articles.map((article, index) => (
@@ -158,29 +145,11 @@ const articles = (await getCollection("insights")).sort(byOrder);
       gap: var(--space-7);
     }
 
-    .insights_head {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: var(--space-6) var(--section-space-small);
-      align-items: end;
-      @media (width >= 64rem) {
-        grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
-      }
-    }
-
-    .insights_intro {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-4);
-    }
-
+    /* Under the intro, starting where it starts. */
     .insights_filters {
       display: flex;
       flex-wrap: wrap;
       gap: var(--space-2);
-      @media (width >= 64rem) {
-        justify-content: flex-end;
-      }
     }
 
     .insights_filter {

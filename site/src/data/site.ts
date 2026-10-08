@@ -129,10 +129,11 @@ export const CLIENT_LOGO_ROWS: {
 ];
 
 /**
- * The four industries in scope. `id` doubles as the deep-link hash and
+ * The industries in scope. `id` doubles as the deep-link hash and
  * `slug` names each one's page under `/industries/`. `summary` labels the
  * industry on the Industries page and in "Other industries"; `line` is the
- * homepage tile, which keeps its original wording.
+ * homepage tile, which keeps its original wording. `name`, where set, is the
+ * page's eyebrow and browser title when it differs from the menu label.
  */
 export const INDUSTRIES = [
   {
@@ -202,7 +203,29 @@ export const INDUSTRIES = [
     metric: "[X]%",
     metricLabel: "less unplanned downtime",
   },
+  {
+    id: "industry-retail",
+    slug: "retail",
+    title: "Retail",
+    name: "Retail & Consumer Commerce",
+    short: "Retail",
+    summary:
+      "Unified commerce, real-time inventory and first-party data monetization.",
+    line: "Unified commerce, real-time inventory and first-party data that drives lifetime value.",
+    hero: "Unified commerce, engineered for every channel.",
+    challenge:
+      "Rising fulfillment costs, fragmented channels and first-party data that is hard to activate safely.",
+    build:
+      "Composable commerce, order and inventory management, customer data and personalization, and retail media data products.",
+    outcome: "Inventory you can promise in every channel.",
+    metric: "[X]%",
+    metricLabel: "improvement in inventory accuracy",
+  },
 ] as const;
+
+/** An industry's full name: its page eyebrow and browser title. */
+export const industryName = (industry: (typeof INDUSTRIES)[number]) =>
+  "name" in industry ? industry.name : industry.title;
 
 /** The two hubs. Coordinates place the pins on the dot map. */
 export const HUBS = [

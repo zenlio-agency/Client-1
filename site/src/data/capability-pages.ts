@@ -177,6 +177,8 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
         "Clinical, claims and operational data on one governed platform, with privacy built in.",
       "industry-energy":
         "Sensor, maintenance and market data combined for asset health, forecasting and emissions reporting.",
+      "industry-retail":
+        "Customer, inventory and transaction data unified for demand forecasting and lifetime value.",
     },
     outcomes: [
       { value: "[X]%", label: "faster time from question to answer" },
@@ -353,6 +355,8 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
         "Supply chain and finance on S/4HANA for providers and life-sciences organizations, with traceability built in.",
       "industry-energy":
         "Asset management and maintenance for plants, grids and field operations, linked to predictive maintenance.",
+      "industry-retail":
+        "Merchandising, finance and supply chain on S/4HANA with clean master data.",
     },
     outcomes: [
       { value: "[X]%", label: "fewer custom objects in the core" },
@@ -523,6 +527,8 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
         "Claims and prior-authorization processing, and assistants that support clinical operations.",
       "industry-energy":
         "Failure prediction, load and price forecasting, and inspection reports summarized automatically from field notes.",
+      "industry-retail":
+        "Demand forecasting, pricing and personalization models in production.",
     },
     outcomes: [
       { value: "[X]", label: "AI use cases running in production" },
@@ -690,6 +696,8 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
         "Eligibility checks, prior authorizations and claim follow-ups prepared automatically for review.",
       "industry-energy":
         "Work orders, permits and field reports created and updated automatically from technician notes and sensor alerts.",
+      "industry-retail":
+        "Order exceptions, returns and replenishment handled end to end.",
     },
     outcomes: [
       { value: "[X]%", label: "of requests completed with no manual steps" },
@@ -864,6 +872,8 @@ export const CAPABILITY_PAGES: Record<string, CapabilityPage> = {
         "Patient and member portals, care-team tools and interoperability services on modern health APIs.",
       "industry-energy":
         "Field-service apps, customer portals and outage updates that keep working in low-connectivity areas.",
+      "industry-retail":
+        "Headless storefronts and clienteling apps built for peak traffic.",
     },
     outcomes: [
       { value: "[X]x", label: "more frequent releases" },

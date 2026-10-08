@@ -17,6 +17,7 @@ export const INDUSTRY_IDS = [
   "industry-telecom",
   "industry-healthcare",
   "industry-energy",
+  "industry-retail",
 ] as const;
 
 export const LOCATION_IDS = ["dallas", "hyderabad"] as const;

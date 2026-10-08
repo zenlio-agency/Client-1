@@ -34,8 +34,11 @@ const icons = { linkedin, x, facebook, youtube, instagram };
 
 type MenuLink = { label: string; href: string };
 type Menu = {
-  columns: { eyebrow: string; links: MenuLink[] }[];
+  /* A column without an eyebrow lines its links up with the one before. */
+  columns: { eyebrow?: string; links: MenuLink[] }[];
   footerLinks?: MenuLink[];
+  /* The column the footer links sit under; the last one by default. */
+  footerColumn?: number;
   showSocials?: boolean;
   feature: { label: string; title: string; text: string; href: string };
 };
@@ -46,8 +49,13 @@ const capLinks = (ids: string[]) =>
     href: capabilityHref(cap),
   }));
 
+const industryLinks = (ids: string[]) =>
+  INDUSTRIES.filter((industry) => ids.includes(industry.id)).map(
+    (industry) => ({ label: industry.title, href: industryHref(industry) }),
+  );
+
 /* Each panel opens inside the bar: link columns, optional small footer
-   links under the last column, and a feature card on the right. */
+   links under one of them, and a feature card on the right. */
 const MENUS: Record<string, Menu> = {
   capabilities: {
     columns: [
@@ -72,16 +80,19 @@ const MENUS: Record<string, Menu> = {
     columns: [
       {
         eyebrow: "Industries",
-        links: INDUSTRIES.map((industry) => ({
-          label: industry.title,
-          href: industryHref(industry),
-        })),
+        links: industryLinks([
+          "industry-banking",
+          "industry-telecom",
+          "industry-healthcare",
+        ]),
       },
+      { links: industryLinks(["industry-energy", "industry-retail"]) },
     ],
     footerLinks: [
       { label: "All industries", href: "/industries" },
       { label: "Talk to us about your sector", href: CTA.primary.href },
     ],
+    footerColumn: 0,
     feature: {
       label: "Industries",
       title: "Built for your sector",
@@ -158,7 +169,13 @@ const MENUS: Record<string, Menu> = {
                 >
                   {menu.columns.map((column, index) => (
                     <div class="nav_column">
-                      <span class="nav_eyebrow">{column.eyebrow}</span>
+                      {column.eyebrow ? (
+                        <span class="nav_eyebrow">{column.eyebrow}</span>
+                      ) : (
+                        <span class="nav_eyebrow is-blank" aria-hidden="true">
+                          &nbsp;
+                        </span>
+                      )}
                       <ul class="nav_column_links">
                         {column.links.map((link) => (
                           <li>
@@ -169,7 +186,8 @@ const MENUS: Record<string, Menu> = {
                           </li>
                         ))}
                       </ul>
-                      {index === menu.columns.length - 1 &&
+                      {index ===
+                        (menu.footerColumn ?? menu.columns.length - 1) &&
                         menu.footerLinks && (
                           <ul class="nav_column_footer">
                             {menu.footerLinks.map((link) => (
@@ -630,6 +648,10 @@ const MENUS: Record<string, Menu> = {
       font-size: 0.75rem;
       font-weight: var(--primary-medium);
       color: var(--text-2);
+      /* Keeps the eyebrow's height so the links line up. */
+      &.is-blank {
+        visibility: hidden;
+      }
     }
 
     .nav_column_links {
