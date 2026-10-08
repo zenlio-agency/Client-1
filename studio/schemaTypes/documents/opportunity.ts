@@ -109,6 +109,15 @@ export const opportunity = defineType({
       ],
     }),
     defineField({
+      name: "place",
+      title: "Location shown",
+      type: "string",
+      group: "role",
+      description:
+        'How the location reads on the role, e.g. "Jersey City, NJ", "India" or "Remote, United States".',
+      validation: copy(true),
+    }),
+    defineField({
       name: "remote",
       title: "Open to remote",
       type: "boolean",
@@ -260,7 +269,7 @@ export const opportunity = defineType({
       title: "title",
       status: "status",
       reference: "reference",
-      city: "locations.0.short",
+      city: "place",
     },
     prepare: ({ title, status, reference, city }) => ({
       title,

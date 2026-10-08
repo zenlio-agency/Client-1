@@ -28,6 +28,14 @@ export const location = defineType({
       validation: copy(true),
     }),
     defineField({
+      name: "country",
+      title: "Country",
+      type: "string",
+      description:
+        'e.g. "United States". The careers page filters roles by country.',
+      validation: copy(true),
+    }),
+    defineField({
       name: "role",
       title: "Role",
       type: "string",

@@ -68,8 +68,9 @@ After the import:
   the ecosystem company. None is confirmed until someone records the evidence.
 - **Careers → All roles** shows the Careers page's sample roles as drafts.
   HR replaces them with real openings: each needs a reference code, a summary
-  and a posting date before it's published. A role's location is the hub in
-  its country; the city a sample role names isn't kept.
+  and a posting date before it's published. A role is linked to the hub in
+  its country, and "Location shown" keeps the place it names, e.g.
+  "Jersey City, NJ".
 - Figures that are still placeholders (capability and industry outcomes) and
   the capability and industry notes the site no longer shows aren't
   imported.

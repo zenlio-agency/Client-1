@@ -59,6 +59,20 @@ export const HOME = {
     heading: "Data-led outcomes, engineered end to end.",
     statement:
       "From data foundations to production-grade AI, we architect, implement and scale the platforms your Global Capability Center runs on. Specialist capacity aligned to your technology landscape, governed delivery and a defined build-operate-transfer path to full ownership.",
+    /* The Testimonials destination is still to be confirmed. */
+    buttons: [
+      { label: "Explore Careers", href: "/careers" },
+      { label: "Testimonials", href: "#" },
+    ],
+  },
+  standards: {
+    title: "Engineering standards on every program",
+    items: [
+      "Peer-reviewed code",
+      "Data quality checks in every pipeline",
+      "Security and quality gates",
+      "CI/CD on every release",
+    ],
   },
   /* The intro of each homepage section. */
   sections: {

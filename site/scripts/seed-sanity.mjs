@@ -312,12 +312,19 @@ add(["index.html"], {
     caption,
   })),
   logosHeading: HOME.logosHeading,
-  why: HOME.why,
+  why: {
+    ...HOME.why,
+    buttons: keyed(HOME.why.buttons, "button", (button) => ({
+      _type: "linkItem",
+      ...button,
+    })),
+  },
   stats: keyed(
     WHY_FIGURES.map((key) => site.COMPANY_FIGURES[key]),
     "stat",
     stat,
   ),
+  standards: HOME.standards,
   ...Object.fromEntries(
     Object.entries(HOME.sections).map(([name, intro]) => [
       name,
@@ -398,9 +405,18 @@ for (const cap of site.CAPABILITIES) {
     lede: page.lede,
     points: page.points,
     ...pageSections(page),
+    team: page.team,
+    howItWorks: {
+      heading: page.howItWorks.heading,
+      intro: page.howItWorks.intro,
+      steps: keyed(page.howItWorks.steps, "step", (step) => ({
+        _type: "processStep",
+        ...step,
+      })),
+    },
     /* The per-industry notes stay in capability-pages.ts but aren't shown
        since the "in your industry" section was removed, so none is imported. */
-    seo: seo({ description: page.description }),
+    seo: seo({ title: page.seoTitle, description: page.description }),
   });
 }
 
@@ -439,6 +455,7 @@ site.HUBS.forEach((hub, index) => {
     _type: "location",
     city: hub.city,
     short: hub.short,
+    country: hub.country,
     role: hub.role,
     text: hub.text,
     address: hub.address,
@@ -546,8 +563,8 @@ site.ECOSYSTEM.forEach((company, index) => {
 });
 
 /* Job roles, as drafts for HR to complete and publish. A role's location is
-   the hub in its country; the city it names (e.g. Jersey City, NJ) has no
-   field yet. */
+   the hub in its country, and the place it names (e.g. Jersey City, NJ) is
+   the location shown. */
 const teamOf = (title) =>
   site.CAPABILITIES.find((cap) => cap.title === title)?.id;
 const hubIn = (country) => site.HUBS.find((hub) => hub.country === country)?.id;
@@ -558,21 +575,26 @@ for (const role of careers.ROLES) {
   if (!capability && role.team !== "Client Partnership") {
     throw new Error(`Role "${role.title}": unknown team "${role.team}"`);
   }
-  add(["careers/index.html"], {
-    _id: `drafts.role-${slugify(role.title)}`,
-    _type: "opportunity",
-    title: role.title,
-    status: "open",
-    slug: slug(role.slug),
-    team: capability ? "capability" : "client-partnership",
-    ...(capability && { capability: ref(capability) }),
-    locations: [ref(hub, "loc0")],
-    remote: false,
-    workMode: role.mode,
-    employmentType: "Full-time",
-    experience: role.experience,
-    applyMethod: "email",
-  });
+  add(
+    ["careers/index.html"],
+    {
+      _id: `drafts.role-${slugify(role.title)}`,
+      _type: "opportunity",
+      title: role.title,
+      status: "open",
+      slug: slug(role.slug),
+      team: capability ? "capability" : "client-partnership",
+      ...(capability && { capability: ref(capability) }),
+      locations: [ref(hub, "loc0")],
+      place: role.location,
+      remote: false,
+      workMode: role.mode,
+      employmentType: "Full-time",
+      experience: role.experience,
+      applyMethod: "email",
+    },
+    ["team"],
+  );
 }
 
 /* ---------------------------------------------------------------------------
@@ -665,7 +687,6 @@ const NOT_SHOWN = new Set([
   "platform",
   "row",
   "status",
-  "team",
   "employmentType",
   "applyMethod",
   "timeZone",
