@@ -74,7 +74,8 @@ const { INDUSTRY_PAGES } = await load("/src/data/industry-pages.ts");
 const { portableTextToHtml } = await load("/src/sanity/portable-text.ts");
 const { wrapTables, markPlaceholders } = await load("/src/utils/html.ts");
 const studio = await load(join(REPO, "studio/lib/constants.ts"));
-const { BANNED_WORDS } = await load(join(REPO, "studio/lib/validation.ts"));
+/* The build's copy rules, which the Studio repeats in its own list. */
+const { BANNED_WORDS, COPY_EXCEPTIONS } = await load("/src/data/copy-rules.ts");
 
 /* ---------------------------------------------------------------------------
  * Building blocks
@@ -698,6 +699,34 @@ const NOT_SHOWN = new Set([
   "marks",
 ]);
 const squash = (text) => text.replace(/\s+/g, " ").trim();
+
+/** A built page's route, as COPY_EXCEPTIONS names it. */
+const routeOf = (page) => `/${page.replace(/(^|\/)index\.html$/, "$1")}`;
+
+/** Banned words in a value, apart from the exceptions on its pages. */
+function bannedIn(value, pages) {
+  const allowed = COPY_EXCEPTIONS.filter((exception) =>
+    pages.some((page) => routeOf(page) === exception.page),
+  ).flatMap(({ phrase }) => {
+    const spans = [];
+    for (
+      let at = value.indexOf(phrase);
+      at !== -1;
+      at = value.indexOf(phrase, at + 1)
+    )
+      spans.push([at, at + phrase.length]);
+    return spans;
+  });
+  return BANNED_WORDS.filter(({ pattern }) =>
+    [...value.matchAll(new RegExp(pattern.source, `${pattern.flags}g`))].some(
+      (match) =>
+        !allowed.some(
+          ([from, to]) =>
+            from <= match.index && match.index + match[0].length <= to,
+        ),
+    ),
+  ).map(({ word }) => word);
+}
 const haystacks = new Map();
 async function haystack(page) {
   if (!haystacks.has(page)) {
@@ -717,11 +746,10 @@ for (const { pages, document, unchecked } of documents) {
   for (const [path, value] of leaves(document)) {
     if (typeof value !== "string" || path.some((p) => NOT_SHOWN.has(p)))
       continue;
-    for (const { word, pattern } of BANNED_WORDS) {
-      if (pattern.test(value))
-        problems.push(
-          `${document._id}: banned word "${word}" in ${path.join(".")}`,
-        );
+    for (const word of bannedIn(value, pages)) {
+      problems.push(
+        `${document._id}: banned word "${word}" in ${path.join(".")}`,
+      );
     }
     if (!pages.length || value === "\n" || unchecked.includes(path.join(".")))
       continue;
