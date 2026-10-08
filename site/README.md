@@ -164,7 +164,7 @@ normal Markdown.
 ## Content from Sanity
 
 HR and marketing edit content in the Sanity Studio (`../studio`). The site
-reads it at build time from project `4ovcy09k`, dataset `production`.
+reads it at build time from project `n3hghywr`, dataset `production`.
 Visitors never load anything from Sanity: images are copied into the build.
 
 Pages move from the data files and Markdown to Sanity one area at a time.
@@ -194,12 +194,15 @@ pages build exactly as before.
   marked confirmed. `npm run seed` in `studio/` imports it.
 - `npm run build` ends with `scripts/check-dist.mjs`, which fails the build
   if any page links to Sanity or contains the read token.
+- Every build also runs the content check
+  (`src/integrations/content-check.ts`), described under "Before launch".
 
-| Variable            | Default      | Notes                                                                                           |
-| ------------------- | ------------ | ----------------------------------------------------------------------------------------------- |
-| `SANITY_PROJECT_ID` | `4ovcy09k`   |                                                                                                 |
-| `SANITY_DATASET`    | `production` |                                                                                                 |
-| `SANITY_READ_TOKEN` | none         | Only if the dataset is private. Set it on the host, or in `site/.env` locally; never commit it. |
+| Variable            | Default      | Notes                                                                                            |
+| ------------------- | ------------ | ------------------------------------------------------------------------------------------------ |
+| `SANITY_PROJECT_ID` | `n3hghywr`   |                                                                                                  |
+| `SANITY_DATASET`    | `production` |                                                                                                  |
+| `SANITY_READ_TOKEN` | none         | Only if the dataset is private. Set it on the host, or in `site/.env` locally; never commit it.  |
+| `STRICT_CONTENT`    | none         | `1` on the live site's builds only: the content check then stops the build on anything it finds. |
 
 ## Brand
 
@@ -235,13 +238,27 @@ marquees start paused. Without JavaScript, all content still shows.
 
 Anything in square brackets is a placeholder. Each one goes through `tbc()` in
 `src/data/site.ts`, so on the page it shows with a dotted underline and a
-"confirm before launch" tooltip. To list them all after a build:
+"confirm before launch" tooltip.
 
-```sh
-npm run build
-find dist -name '*.html' -exec grep -ohE 'class="tbc"[^>]*>[^<]+' {} + \
-  | sed 's/.*>//' | sort | uniq -c
-```
+**The content check** (`src/integrations/content-check.ts`) runs at the end of
+every `npm run build` and lists:
+
+- **claims** in Sanity that aren't confirmed yet: figures, client logos, the
+  ecosystem company, case-study quotes and client names. It's the same list
+  as the Studio's "Proof & claims → Not confirmed yet";
+- **placeholders** left on any page, legal pages included;
+- **copy rules** broken on any page except the legal notices: banned words,
+  and Dallas, Texas or Hyderabad outside the footer (see "Copy rules");
+- **office addresses** in Sanity that differ from the ones the legal notices
+  give.
+
+Review builds print these as warnings and carry on. Set `STRICT_CONTENT=1`
+on the live site's builds (Vercel → Settings → Environment Variables,
+Production only), and any of them stops the build, so the version already
+live stays up. In that mode the build also stops while Sanity has no
+content, since nothing then records whether the site's claims are confirmed.
+Two published items of one type with the same page address stop every
+build.
 
 The open items:
 
@@ -304,22 +321,26 @@ The open items:
 
 These apply to every word on the site:
 
-- ManyaIT is a GCC (Global Capability Center) technology and talent partner.
-  Tagline: "Technology & Talent Partners".
+- ManyaIT is a technology and talent partner. Tagline: "Technology & Talent
+  Partners".
 - **Write for B2B decision-makers (important).** The readers are enterprises
   weighing a partnership and talent partners looking at open roles. Use
   high-level business and technical terms: operating model, delivery
   governance, time to value, data estate, production-grade, platform
-  engineering, Build-Operate-Transfer, elastic capacity. Leave out basic
-  explanations and everyday phrasing ("we listen first", "you meet everyone").
+  engineering, elastic capacity. Leave out basic explanations and everyday
+  phrasing ("we listen first", "you meet everyone").
 - Imply, never state, that ManyaIT provides vetted tech talent and builds
-  teams. Use: talent, specialists, teams, capability center, AI-ready, vetted,
-  matched to your stack, productive from week one, teams live in weeks,
-  flexible scale, scale on demand, Build-Operate-Transfer, skills brief.
+  teams. Use: talent, specialists, teams, AI-ready, vetted, matched to your
+  stack, productive from week one, teams live in weeks, flexible scale, scale
+  on demand.
 - Never use: recruiting/recruitment, staffing, staff augmentation,
   hire/hiring, placement, headhunting, outsourcing, consulting/consultants,
   agency, contractor, engagement/engagement lead, bench, resources, manpower,
-  vendor.
+  vendor, GCC, capability center, Build-Operate-Transfer (BOT), headcount,
+  skills brief.
+- The homepage keeps its original wording at ManyaIT's request, including
+  "Global Capability Center" and "build-operate-transfer". Those phrases are
+  listed as exceptions in `src/data/copy-rules.ts`, for the homepage only.
 - The hero does not lead with the service list or with locations.
 - One idea per card, one line per tile.
 - The United States is home to the Client & Leadership Hub and India to the
@@ -335,10 +356,7 @@ consultants, "applicants" and "applications" for candidates and recruiting,
 and "project" or "relationship" for engagement. Terms the law defines, such
 as "sale", "share", "controller" and "Data Fiduciary", stay as written.
 
-To check a build for the banned words:
-
-```sh
-npm run build
-find dist -name '*.html' -exec grep -oiE "recruit|staffing|staff aug|\bhir(e|ed|ing)\b|placement|headhunt|outsourc|consult|agency|contractor|engagement|\bbench\b|\bresources?\b|manpower|vendor" {} + \
-  | sort | uniq -c
-```
+Every build checks the pages against these rules (see "Before launch"). The
+list lives in `src/data/copy-rules.ts`, and the Studio warns editors with its
+own copy in `studio/lib/validation.ts`; change the two together, and the
+build warns when they differ.

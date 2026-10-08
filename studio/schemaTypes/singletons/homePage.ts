@@ -160,6 +160,14 @@ export const homePage = defineType({
             "Plain text: the words light up one by one as the page scrolls.",
           validation: copy(true),
         }),
+        defineField({
+          name: "buttons",
+          title: "Buttons",
+          type: "array",
+          description: "The first is solid, the second outlined.",
+          of: [defineArrayMember({ type: "linkItem" })],
+          validation: (rule) => rule.max(2),
+        }),
       ],
     }),
     defineField({
@@ -168,9 +176,30 @@ export const homePage = defineType({
       type: "array",
       group: "proof",
       description:
-        "Up to four. Each figure is a claim and needs evidence before launch.",
+        "Up to six, three to a row. Each figure is a claim and needs evidence before launch.",
       of: [defineArrayMember({ type: "stat" })],
-      validation: (rule) => rule.max(4),
+      validation: (rule) => rule.max(6),
+    }),
+    defineField({
+      name: "standards",
+      title: "Engineering standards",
+      type: "object",
+      group: "proof",
+      description: "Shown under the figures.",
+      fields: [
+        defineField({
+          name: "title",
+          title: "Heading",
+          type: "string",
+          validation: copy(),
+        }),
+        defineField({
+          name: "items",
+          title: "Standards",
+          type: "array",
+          of: [defineArrayMember({ type: "string", validation: copy() })],
+        }),
+      ],
     }),
     section("capabilities", "Capabilities"),
     section("industries", "Industries"),

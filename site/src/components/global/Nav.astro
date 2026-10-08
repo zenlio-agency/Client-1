@@ -46,8 +46,8 @@ const capLinks = (ids: string[]) =>
     href: capabilityHref(cap),
   }));
 
-/* Each panel opens inside the bar: link columns, small footer links under
-   the last column, and a feature card on the right. */
+/* Each panel opens inside the bar: link columns, optional small footer
+   links under the last column, and a feature card on the right. */
 const MENUS: Record<string, Menu> = {
   capabilities: {
     columns: [
@@ -59,10 +59,6 @@ const MENUS: Record<string, Menu> = {
         eyebrow: "Platforms & Engineering",
         links: capLinks(["cap-sap", "cap-code"]),
       },
-    ],
-    footerLinks: [
-      { label: "All capabilities", href: "/capabilities" },
-      { label: "Why ManyaIT", href: "/about" },
     ],
     showSocials: true,
     feature: {

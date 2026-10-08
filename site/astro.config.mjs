@@ -7,6 +7,7 @@ import {
   SANITY_DATASET,
   SANITY_PROJECT_ID,
 } from "./src/sanity/config.ts";
+import contentCheck from "./src/integrations/content-check.ts";
 
 export default defineConfig({
   site: SITE_URL,
@@ -49,6 +50,8 @@ export default defineConfig({
     sitemap({
       filter: (page) => !isNoindexRoute(new URL(page).pathname),
     }),
+    /* Claims, placeholders, copy rules and legal addresses, after each build */
+    contentCheck(),
   ],
 
   fonts: [

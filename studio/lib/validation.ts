@@ -7,24 +7,35 @@ import { API_VERSION } from "./constants";
 
 /**
  * Words the site's copy rules never use (see site/README.md, "Copy rules").
- * Studio shows a warning, and the website build checks again.
+ * Studio shows a warning, and the website build checks every page again with
+ * its own copy of this list, site/src/data/copy-rules.ts: change the two
+ * together.
  */
 export const BANNED_WORDS: { word: string; pattern: RegExp }[] = [
   { word: "recruiting / recruitment", pattern: /recruit/i },
   { word: "staffing", pattern: /staffing/i },
   { word: "staff augmentation", pattern: /staff aug/i },
-  { word: "hire / hired / hiring", pattern: /\bhir(e|ed|ing)\b/i },
+  { word: "hire / hired / hiring", pattern: /\bhir(e|ed|es|ing)\b/i },
   { word: "placement", pattern: /placement/i },
   { word: "headhunting", pattern: /headhunt/i },
   { word: "outsourcing", pattern: /outsourc/i },
   { word: "consulting / consultant", pattern: /consult/i },
-  { word: "agency", pattern: /agency/i },
+  { word: "agency", pattern: /agenc(y|ies)/i },
   { word: "contractor", pattern: /contractor/i },
   { word: "engagement", pattern: /engagement/i },
   { word: "bench", pattern: /\bbench\b/i },
   { word: "resources", pattern: /\bresources?\b/i },
   { word: "manpower", pattern: /manpower/i },
   { word: "vendor", pattern: /vendor/i },
+  { word: "GCC", pattern: /\bGCCs?\b/ },
+  { word: "capability center", pattern: /capabilit(y|ies) cent(er|re)s?/i },
+  {
+    word: "build-operate-transfer",
+    pattern: /build[-,\s]+operate[-,\s]+(and\s+)?transfer/i,
+  },
+  { word: "BOT", pattern: /\bBOT\b/ },
+  { word: "headcount", pattern: /headcount/i },
+  { word: "skills brief", pattern: /skills? brief/i },
 ];
 
 /** Plain text of a value: a string, a string list or Portable Text. */

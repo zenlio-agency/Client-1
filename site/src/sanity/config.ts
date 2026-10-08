@@ -14,7 +14,7 @@ try {
   /* No .env file. */
 }
 
-export const SANITY_PROJECT_ID = process.env.SANITY_PROJECT_ID || "4ovcy09k";
+export const SANITY_PROJECT_ID = process.env.SANITY_PROJECT_ID || "n3hghywr";
 export const SANITY_DATASET = process.env.SANITY_DATASET || "production";
 export const SANITY_READ_TOKEN = process.env.SANITY_READ_TOKEN || undefined;
 

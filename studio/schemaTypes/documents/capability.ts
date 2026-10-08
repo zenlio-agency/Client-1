@@ -76,6 +76,72 @@ export const capability = defineType({
     }),
     ...pageSections,
     defineField({
+      name: "team",
+      title: "Team behind the work",
+      type: "text",
+      rows: 2,
+      group: "page",
+      description:
+        "One line on the roles behind the work, under the platforms.",
+      validation: copy(),
+    }),
+    defineField({
+      name: "howItWorks",
+      title: "How it works",
+      type: "object",
+      group: "page",
+      fields: [
+        defineField({
+          name: "heading",
+          title: "Heading",
+          type: "string",
+          validation: copy(),
+        }),
+        defineField({
+          name: "intro",
+          title: "Intro",
+          type: "text",
+          rows: 3,
+          validation: copy(),
+        }),
+        defineField({
+          name: "steps",
+          title: "Steps",
+          type: "array",
+          description: "In order. Designed for four.",
+          of: [
+            defineArrayMember({
+              name: "processStep",
+              type: "object",
+              fields: [
+                defineField({
+                  name: "title",
+                  title: "Title",
+                  type: "string",
+                  validation: copy(true),
+                }),
+                defineField({
+                  name: "text",
+                  title: "Text",
+                  type: "text",
+                  rows: 3,
+                  validation: copy(true),
+                }),
+                defineField({
+                  name: "note",
+                  title: "Result",
+                  type: "string",
+                  description: "A short result shown under the step.",
+                  validation: copy(),
+                }),
+              ],
+              preview: { select: { title: "title", subtitle: "note" } },
+            }),
+          ],
+        }),
+      ],
+    }),
+    defineField({
       name: "industryNotes",
       title: "In each industry",
       type: "array",

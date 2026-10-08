@@ -3,11 +3,10 @@ import Layout from "@/layouts/BaseLayout.astro";
 import Section from "@/components/wrapper/Section.astro";
 import HeroDetail from "@/components/content/HeroDetail.astro";
 import FeatureGrid from "@/components/content/FeatureGrid.astro";
-import ProcessSteps from "@/components/content/ProcessSteps.astro";
 import TeamPanel from "@/components/content/TeamPanel.astro";
 import FaqList from "@/components/content/FaqList.astro";
 import CtaFinal from "@/components/content/CtaFinal.astro";
-import { CAPABILITIES, CTA, TEAM_STEPS, capabilityHref } from "@/data/site.ts";
+import { CAPABILITIES, CTA, capabilityHref } from "@/data/site.ts";
 import { CAPABILITY_PHOTOS } from "@/data/photos.ts";
 ---
 
@@ -91,16 +90,6 @@ import { CAPABILITY_PHOTOS } from "@/data/photos.ts";
         "Specialists mobilized to the roadmap",
         "Continuity from first sprint to steady state",
       ]}
-    />
-  </Section>
-
-  {/* How a program runs */}
-  <Section theme="dark">
-    <ProcessSteps
-      eyebrow="How it works"
-      heading="From first conversation to lasting impact"
-      intro="Every capability runs on one accountable delivery model, adapted to the work, whether it starts with a focused assessment or a full-scale transformation program."
-      steps={TEAM_STEPS}
     />
   </Section>
 
