@@ -225,7 +225,8 @@ so there are no requests to Google Fonts.
   always shows above the fold. To change a photo, replace the file and keep
   its name, or edit the `photos` list in `CapabilityReel.astro`.
 - The reel and the two client-logo rows scroll as marquees. They pause on
-  hover and have a pause button.
+  hover, a tap or click stops or restarts them, and each has a pause button
+  that shows only when the keyboard reaches it.
 - The data tile in the capabilities grid shows data flowing into a lakehouse
   and out to BI and AI.
 - The map draws the Dallas to Hyderabad arc, with a dot travelling along it.

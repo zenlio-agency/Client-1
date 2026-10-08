@@ -124,6 +124,14 @@ const heightOf = (src?: string) => {
     toggle?.addEventListener("click", () =>
       setPlaying(block.dataset.state !== "playing"),
     );
+    /* No visible button: a pointer pauses a row by hovering, a tap or
+       click stops or restarts both rows, and the keyboard reaches the
+       toggle. */
+    block
+      .querySelector(".client-logos_rows")
+      ?.addEventListener("click", () =>
+        setPlaying(block.dataset.state !== "playing"),
+      );
   }
 </script>
 
@@ -148,9 +156,18 @@ const heightOf = (src?: string) => {
       gap: var(--space-5);
     }
 
+    /* Shown only when the keyboard reaches it. */
     .client-logos_toggle {
       flex: none;
       font-size: 0.75rem;
+      &:not(:focus-visible) {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
     }
 
     .client-logos_rows {
