@@ -1,7 +1,6 @@
 ---
+import SectionHeader from "@/components/content/SectionHeader.astro";
 import type { SvgComponent } from "astro/types";
-import Eyebrow from "@/components/typography/Eyebrow.astro";
-import Heading from "@/components/typography/Heading.astro";
 import Button from "@/components/Button.astro";
 import Icon from "@/components/media/Icon.astro";
 import PhotoTile from "@/components/item/PhotoTile.astro";
@@ -32,25 +31,18 @@ const { render = true, eyebrow, heading, link, items = [] } = Astro.props;
 {
   render && heading && items.length > 0 && (
     <div class="related-tiles_wrap">
-      <div class="related-tiles_head">
-        <div class="related-tiles_intro">
-          {eyebrow && <Eyebrow data-reveal>{eyebrow}</Eyebrow>}
-          <Heading maxWidth={22} data-reveal style="--reveal-order: 1">
-            {heading}
-          </Heading>
-        </div>
+      <SectionHeader eyebrow={eyebrow} heading={heading}>
         {link && (
           <Button
+            slot="action"
             element="link"
             href={link.href}
             emphasis="secondary"
-            data-reveal
-            style="--reveal-order: 2"
           >
             {link.label}
           </Button>
         )}
-      </div>
+      </SectionHeader>
       <ul
         class="related-tiles_list"
         style={`--_count: ${Math.min(items.length, 4)}`}
@@ -95,21 +87,6 @@ const { render = true, eyebrow, heading, link, items = [] } = Astro.props;
       display: flex;
       flex-direction: column;
       gap: var(--space-7);
-    }
-
-    .related-tiles_head {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: var(--space-5);
-    }
-
-    .related-tiles_intro {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: var(--space-4);
     }
 
     .related-tiles_list {

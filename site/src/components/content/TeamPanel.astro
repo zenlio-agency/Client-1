@@ -1,7 +1,5 @@
 ---
-import Eyebrow from "@/components/typography/Eyebrow.astro";
-import Heading from "@/components/typography/Heading.astro";
-import Paragraph from "@/components/typography/Paragraph.astro";
+import SectionHeader from "@/components/content/SectionHeader.astro";
 import Icon from "@/components/media/Icon.astro";
 import check from "@/assets/icons/check.svg";
 
@@ -24,22 +22,12 @@ const { render = true, eyebrow, heading, text, points = [] } = Astro.props;
 {
   render && heading && (
     <div class="team-panel_wrap">
-      <div class="team-panel_copy">
-        {eyebrow && <Eyebrow data-reveal>{eyebrow}</Eyebrow>}
-        <Heading maxWidth={18} data-reveal style="--reveal-order: 1">
-          {heading}
-        </Heading>
-        {text && (
-          <Paragraph
-            variant="large"
-            maxWidth={48}
-            data-reveal
-            style="--reveal-order: 2"
-          >
-            {text}
-          </Paragraph>
-        )}
-      </div>
+      <SectionHeader
+        layout="stack"
+        eyebrow={eyebrow}
+        heading={heading}
+        intro={text}
+      />
       {points.length > 0 && (
         <ul class="team-panel_points">
           {points.map((point, index) => (
@@ -76,13 +64,6 @@ const { render = true, eyebrow, heading, text, points = [] } = Astro.props;
       @media (width >= 64rem) {
         grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
       }
-    }
-
-    .team-panel_copy {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: var(--space-4);
     }
 
     .team-panel_points {

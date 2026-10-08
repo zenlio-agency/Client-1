@@ -1,7 +1,5 @@
 ---
-import Eyebrow from "@/components/typography/Eyebrow.astro";
-import Heading from "@/components/typography/Heading.astro";
-import Paragraph from "@/components/typography/Paragraph.astro";
+import SectionHeader from "@/components/content/SectionHeader.astro";
 import Icon from "@/components/media/Icon.astro";
 import check from "@/assets/icons/check.svg";
 import { tbc } from "@/data/site.ts";
@@ -25,24 +23,7 @@ const { render = true, eyebrow, heading, intro, columns = [] } = Astro.props;
 {
   render && heading && columns.length > 0 && (
     <div class="commitments_wrap">
-      <div class="commitments_head">
-        <div class="commitments_intro">
-          {eyebrow && <Eyebrow data-reveal>{eyebrow}</Eyebrow>}
-          <Heading maxWidth={22} data-reveal style="--reveal-order: 1">
-            {heading}
-          </Heading>
-        </div>
-        {intro && (
-          <Paragraph
-            variant="large"
-            maxWidth={44}
-            data-reveal
-            style="--reveal-order: 2"
-          >
-            {intro}
-          </Paragraph>
-        )}
-      </div>
+      <SectionHeader eyebrow={eyebrow} heading={heading} intro={intro} />
       <div class="commitments_columns">
         {columns.map((column, index) => (
           <section
@@ -86,23 +67,6 @@ const { render = true, eyebrow, heading, intro, columns = [] } = Astro.props;
       display: flex;
       flex-direction: column;
       gap: var(--space-7);
-    }
-
-    .commitments_head {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: var(--space-5) var(--section-space-small);
-      align-items: end;
-      @media (width >= 64rem) {
-        grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-      }
-    }
-
-    .commitments_intro {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: var(--space-4);
     }
 
     /* Two cards, clients then professionals, side by side from 48rem. */

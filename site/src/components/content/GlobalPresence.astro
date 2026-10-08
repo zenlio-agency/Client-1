@@ -1,7 +1,5 @@
 ---
-import Eyebrow from "@/components/typography/Eyebrow.astro";
-import Heading from "@/components/typography/Heading.astro";
-import Paragraph from "@/components/typography/Paragraph.astro";
+import SectionHeader from "@/components/content/SectionHeader.astro";
 import dots from "@/data/world-dots.json";
 import { HUBS, tbc } from "@/data/site.ts";
 
@@ -27,22 +25,12 @@ const pct = (value: number, of: number) =>
   render && (
     <div class="presence_wrap">
       <div class="presence_intro">
-        <Eyebrow data-reveal>Global delivery</Eyebrow>
-        <Heading data-reveal style="--reveal-order: 1">
-          One operating model, around the clock.
-        </Heading>
-        <Paragraph
-          variant="large"
-          maxWidth={60}
-          data-reveal
-          style="--reveal-order: 2"
-        >
-          Client leadership aligned to your business hours and engineering depth
-          across time zones, run as one delivery organization with shared
-          governance, one backlog and a follow-the-sun cadence. Programs scale
-          with your roadmap, and operations and knowledge move in-house whenever
-          you choose.
-        </Paragraph>
+        <SectionHeader
+          layout="stack"
+          eyebrow="Global delivery"
+          heading="One operating model, around the clock."
+          intro="Client leadership aligned to your business hours and engineering depth across time zones, run as one delivery organization with shared governance, one backlog and a follow-the-sun cadence. Programs scale with your roadmap, and operations and knowledge move in-house whenever you choose."
+        />
         <ul class="presence_hubs" data-reveal style="--reveal-order: 3">
           {HUBS.map((hub) => (
             <li class="presence_hub">

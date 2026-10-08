@@ -1,7 +1,5 @@
 ---
-import Eyebrow from "@/components/typography/Eyebrow.astro";
-import Heading from "@/components/typography/Heading.astro";
-import Paragraph from "@/components/typography/Paragraph.astro";
+import SectionHeader from "@/components/content/SectionHeader.astro";
 
 interface Props {
   /** Set to `false` to omit the component. */
@@ -31,17 +29,13 @@ const {
 {
   render && heading && groups.length > 0 && (
     <div class="chip-groups_wrap">
-      <div class="chip-groups_head">
-        {eyebrow && <Eyebrow data-reveal>{eyebrow}</Eyebrow>}
-        <Heading maxWidth={20} data-reveal style="--reveal-order: 1">
-          {heading}
-        </Heading>
-        {intro && (
-          <Paragraph maxWidth={46} data-reveal style="--reveal-order: 2">
-            {intro}
-          </Paragraph>
-        )}
-      </div>
+      <SectionHeader
+        layout="stack"
+        eyebrow={eyebrow}
+        heading={heading}
+        intro={intro}
+        introVariant="main"
+      />
       <div class="chip-groups_body">
         <dl class="chip-groups_list">
           {groups.map((group, index) => (
@@ -88,13 +82,6 @@ const {
       @media (width >= 64rem) {
         grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
       }
-    }
-
-    .chip-groups_head {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: var(--space-4);
     }
 
     .chip-groups_body {

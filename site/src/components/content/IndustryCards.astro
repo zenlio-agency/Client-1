@@ -1,6 +1,5 @@
 ---
-import Eyebrow from "@/components/typography/Eyebrow.astro";
-import Heading from "@/components/typography/Heading.astro";
+import SectionHeader from "@/components/content/SectionHeader.astro";
 import Button from "@/components/Button.astro";
 import Icon from "@/components/media/Icon.astro";
 import PhotoTile from "@/components/item/PhotoTile.astro";
@@ -19,19 +18,19 @@ const { render = true } = Astro.props;
 {
   render && (
     <div class="industry-cards_wrap">
-      <div class="industry-cards_head">
-        <div class="industry-cards_intro">
-          <Eyebrow data-reveal>Industries</Eyebrow>
-          <Heading maxWidth={20} data-reveal style="--reveal-order: 1">
-            Talent that already knows your industry.
-          </Heading>
-        </div>
-        <div class="industry-cards_aside" data-reveal style="--reveal-order: 2">
-          <Button element="link" href="/industries" emphasis="secondary">
-            Explore Industries
-          </Button>
-        </div>
-      </div>
+      <SectionHeader
+        eyebrow="Industries"
+        heading="Talent that already knows your industry."
+      >
+        <Button
+          slot="action"
+          element="link"
+          href="/industries"
+          emphasis="secondary"
+        >
+          Explore Industries
+        </Button>
+      </SectionHeader>
 
       <ul class="industry-cards_list">
         {INDUSTRIES.map((industry, index) => (
@@ -79,30 +78,8 @@ const { render = true } = Astro.props;
       gap: var(--space-7);
     }
 
-    .industry-cards_head {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: var(--space-5) var(--section-space-small);
-      align-items: end;
-      @media (width >= 64rem) {
-        grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-      }
-    }
-
     .industry-cards_intro,
-    .industry-cards_aside {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: var(--space-4);
-    }
 
-    /* The button alone closes the row at the right edge on desktop. */
-    .industry-cards_aside {
-      @media (width >= 64rem) {
-        align-items: flex-end;
-      }
-    }
 
     /* Portrait photo tiles: two across, four from 80rem. */
     .industry-cards_list {

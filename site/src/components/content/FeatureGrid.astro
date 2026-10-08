@@ -1,8 +1,6 @@
 ---
+import SectionHeader from "@/components/content/SectionHeader.astro";
 import type { SvgComponent } from "astro/types";
-import Eyebrow from "@/components/typography/Eyebrow.astro";
-import Heading from "@/components/typography/Heading.astro";
-import Paragraph from "@/components/typography/Paragraph.astro";
 import Button from "@/components/Button.astro";
 import Icon from "@/components/media/Icon.astro";
 import arrow from "@/assets/icons/ui-arrow.svg";
@@ -69,32 +67,18 @@ const {
   render && items.length > 0 && (
     <div class:list={["feature-grid_wrap", `is-${variant}`]}>
       {heading && (
-        <div class="feature-grid_head">
-          <div class="feature-grid_intro">
-            {eyebrow && <Eyebrow data-reveal>{eyebrow}</Eyebrow>}
-            <Heading maxWidth={22} data-reveal style="--reveal-order: 1">
-              {heading}
-            </Heading>
-          </div>
-          {(intro || link) && (
-            <div
-              class="feature-grid_aside"
-              data-reveal
-              style="--reveal-order: 2"
+        <SectionHeader eyebrow={eyebrow} heading={heading} intro={intro}>
+          {link && (
+            <Button
+              slot="action"
+              element="link"
+              href={link.href}
+              emphasis="secondary"
             >
-              {intro && (
-                <Paragraph variant="large" maxWidth={44}>
-                  {intro}
-                </Paragraph>
-              )}
-              {link && (
-                <Button element="link" href={link.href} emphasis="secondary">
-                  {link.label}
-                </Button>
-              )}
-            </div>
+              {link.label}
+            </Button>
           )}
-        </div>
+        </SectionHeader>
       )}
       <ul class="feature-grid_list" style={`--_columns: ${columns}`}>
         {items.map((item, index) => (
@@ -152,24 +136,7 @@ const {
       gap: var(--space-7);
     }
 
-    .feature-grid_head {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: var(--space-5) var(--section-space-small);
-      align-items: end;
-      @media (width >= 64rem) {
-        grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-      }
-    }
-
     .feature-grid_intro,
-    .feature-grid_aside {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: var(--space-4);
-    }
-
     .feature-grid_item {
       position: relative;
       display: flex;
