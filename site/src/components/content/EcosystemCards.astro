@@ -1,15 +1,19 @@
 ---
 import SectionHeader from "@/components/content/SectionHeader.astro";
-import { ECOSYSTEM, tbc } from "@/data/site.ts";
+import { tbc } from "@/data/site.ts";
+import { ecosystem, home, type EcosystemCompany } from "@/sanity/content.ts";
 
 interface Props {
   /** Set to `false` to omit the component. */
   render?: boolean;
-  /** Companies to show, each confirmed in writing. Defaults to `ECOSYSTEM`. */
-  companies?: typeof ECOSYSTEM;
+  /** Companies to show, each confirmed in writing. Defaults to the ones in
+      Sanity. */
+  companies?: EcosystemCompany[];
 }
 
-const { render = true, companies = ECOSYSTEM } = Astro.props;
+const [all, { sections }] = await Promise.all([ecosystem(), home()]);
+const intro = sections.ecosystem;
+const { render = true, companies = all } = Astro.props;
 
 /** The address shown on the card, without the scheme or `www.`. */
 const siteLabel = (href: string) =>
@@ -21,10 +25,10 @@ const siteLabel = (href: string) =>
     <div class="ecosystem_wrap">
       <SectionHeader
         layout="stack"
-        eyebrow="Other companies"
-        heading="Specialist firms. Complementary capabilities."
+        eyebrow={intro.eyebrow}
+        heading={intro.heading}
         headingVariant="h3"
-        intro="Companies that share ManyaIT's standards of engineering and ownership, extending what enterprises can deliver without adding operational complexity."
+        intro={intro.intro}
         introVariant="main"
       />
       <ul class="ecosystem_list">

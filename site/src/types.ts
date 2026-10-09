@@ -2,7 +2,8 @@
 export interface SeoProps {
   /** Page title. The site name is appended unless the title already has it. */
   title?: string;
-  /** Page and social description. Defaults to `SITE_DESCRIPTION`. */
+  /** Page and social description. Defaults to the one in Sanity's Site
+      settings. */
   description?: string;
   /** Social image. Defaults to `/og-image.jpg`. */
   image?: string;

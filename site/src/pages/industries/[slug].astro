@@ -8,21 +8,25 @@ import ChipGroups from "@/components/content/ChipGroups.astro";
 import FaqList from "@/components/content/FaqList.astro";
 import RelatedTiles from "@/components/content/RelatedTiles.astro";
 import CtaFinal from "@/components/content/CtaFinal.astro";
-import { INDUSTRIES, CTA, industryHref } from "@/data/site.ts";
-import { INDUSTRY_PAGES } from "@/data/industry-pages.ts";
-import { INDUSTRY_PHOTOS } from "@/data/photos.ts";
+import { industryHref } from "@/data/site.ts";
+import { industries, settings, type Industry } from "@/sanity/content.ts";
 
-export function getStaticPaths() {
-  return INDUSTRIES.map((industry) => ({
+export async function getStaticPaths() {
+  const all = await industries();
+  return all.map((industry) => ({
     params: { slug: industry.slug },
-    props: { industry },
+    props: {
+      industry,
+      others: all.filter((other) => other.id !== industry.id),
+    },
   }));
 }
 
-type Props = { industry: (typeof INDUSTRIES)[number] };
+type Props = { industry: Industry; others: Industry[] };
 
-const { industry } = Astro.props;
-const page = INDUSTRY_PAGES[industry.id];
+const { industry, others } = Astro.props;
+const { page } = industry;
+const { cta: CTA } = await settings();
 const contact = `${CTA.primary.href}?topic=${industry.id}`;
 ---
 
@@ -41,7 +45,9 @@ const contact = `${CTA.primary.href}?topic=${industry.id}`;
       points={page.points}
       primary={{ label: `Talk to us about ${industry.short}`, href: contact }}
       secondary={{ label: "All industries", href: "/industries" }}
-      photo={INDUSTRY_PHOTOS[industry.id]}
+      photo={industry.photo?.src}
+      photoAlt={industry.photo?.alt}
+      photoPosition={industry.photo?.position}
     />
   </Section>
 
@@ -90,14 +96,12 @@ const contact = `${CTA.primary.href}?topic=${industry.id}`;
       eyebrow="Keep exploring"
       heading="Other industries"
       link={{ label: "All industries", href: "/industries" }}
-      items={INDUSTRIES.filter((other) => other.id !== industry.id).map(
-        (other) => ({
-          title: other.title,
-          text: other.summary,
-          href: industryHref(other),
-          photo: INDUSTRY_PHOTOS[other.id],
-        }),
-      )}
+      items={others.map((other) => ({
+        title: other.title,
+        text: other.summary,
+        href: industryHref(other),
+        photo: other.photo?.src,
+      }))}
     />
   </Section>
 

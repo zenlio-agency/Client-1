@@ -9,25 +9,26 @@ import ProcessSteps from "@/components/content/ProcessSteps.astro";
 import FaqList from "@/components/content/FaqList.astro";
 import RelatedTiles from "@/components/content/RelatedTiles.astro";
 import CtaFinal from "@/components/content/CtaFinal.astro";
-import { CAPABILITIES, CTA, capabilityHref } from "@/data/site.ts";
-import { CAPABILITY_PAGES } from "@/data/capability-pages.ts";
-import { CAPABILITY_PHOTOS } from "@/data/photos.ts";
+import { capabilityHref } from "@/data/site.ts";
+import { capabilities, settings, type Capability } from "@/sanity/content.ts";
 
-export function getStaticPaths() {
-  return CAPABILITIES.map((cap) => ({
+export async function getStaticPaths() {
+  const all = await capabilities();
+  return all.map((cap) => ({
     params: { slug: cap.slug },
-    props: { cap },
+    props: { cap, others: all.filter((other) => other.id !== cap.id) },
   }));
 }
 
-type Props = { cap: (typeof CAPABILITIES)[number] };
+type Props = { cap: Capability; others: Capability[] };
 
-const { cap } = Astro.props;
-const page = CAPABILITY_PAGES[cap.id];
+const { cap, others } = Astro.props;
+const { page } = cap;
+const { cta: CTA } = await settings();
 const contact = `${CTA.primary.href}?topic=${cap.id}`;
 ---
 
-<Layout title={page.seoTitle} description={page.description}>
+<Layout title={page.seoTitle || cap.title} description={page.description}>
   {/* Hero */}
   <Section paddingTop="small">
     <HeroDetail
@@ -42,7 +43,9 @@ const contact = `${CTA.primary.href}?topic=${cap.id}`;
       points={page.points}
       primary={{ label: "Discuss your initiative", href: contact }}
       secondary={{ label: "All capabilities", href: "/capabilities" }}
-      photo={CAPABILITY_PHOTOS[cap.id]}
+      photo={cap.photo?.src}
+      photoAlt={cap.photo?.alt}
+      photoPosition={cap.photo?.position}
       icon={cap.icon}
     />
   </Section>
@@ -103,15 +106,13 @@ const contact = `${CTA.primary.href}?topic=${cap.id}`;
       eyebrow="Keep exploring"
       heading="Other capabilities"
       link={{ label: "All capabilities", href: "/capabilities" }}
-      items={CAPABILITIES.filter((other) => other.id !== cap.id).map(
-        (other) => ({
-          title: other.title,
-          text: other.line,
-          href: capabilityHref(other),
-          photo: CAPABILITY_PHOTOS[other.id],
-          icon: other.icon,
-        }),
-      )}
+      items={others.map((other) => ({
+        title: other.title,
+        text: other.line,
+        href: capabilityHref(other),
+        photo: other.photo?.src,
+        icon: other.icon,
+      }))}
     />
   </Section>
 

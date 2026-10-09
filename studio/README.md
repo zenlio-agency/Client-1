@@ -6,8 +6,9 @@ locations, search settings and site-wide details. The website in `../site`
 keeps all design, layout and animation; the Studio only holds content.
 
 The Studio uses project `n3hghywr` and the `production` dataset. The website
-already fetches this content at build time, but its pages switch to it one
-area at a time, so nothing on the live site changes until then.
+reads its words, photos and job openings from there at build time, and a
+webhook rebuilds it whenever something is published (see "Publishing updates
+the site").
 
 ## Set up
 
@@ -39,51 +40,79 @@ at another project or dataset, e.g. a test dataset.
 | `npm run validate` | Checks the schemas                                                 |
 | `npm run check`    | Type-checks the code                                               |
 | `npm run typegen`  | Regenerates the website's query types (`site/src/sanity/types.ts`) |
-| `npm run seed`     | Imports today's site content into the dataset (see below)          |
+| `npm run seed`     | Fills an empty dataset with the starting content (see below)       |
+| `npm run refresh`  | Replaces the content with the starting content (see below)         |
 
-## Import today's content
+## Publishing updates the site
 
-`seed/production.ndjson` holds the website's current content as Sanity
-documents: settings, the homepage, page headers and FAQs, capabilities,
-industries, locations, Insights articles and categories, client logos and
-the ecosystem company. It also holds the sample roles from the Careers
-page, as drafts.
-Images point at the files already in `../site`, so the import uploads them
-from there.
+The website is rebuilt from Sanity, so anything published in the Studio is
+live about two minutes later. Two settings connect them, each made once.
+Only published content reaches the site; drafts never do.
+
+**1. A deploy hook in Vercel** (a private address that starts a build):
+
+1. Vercel → the website's project → Settings → Git → Deploy Hooks.
+2. Name it `Sanity publish`, choose the branch `main`, and select Create Hook.
+3. Copy the address it shows. Keep it private: anyone with it can start a
+   build. Don't paste it into a chat, an email or the code.
+
+**2. A webhook in Sanity** (calls that address whenever something is
+published):
+
+1. https://www.sanity.io/manage/project/n3hghywr → API → Webhooks →
+   Create webhook.
+2. Name: `Rebuild the website`. URL: paste the Vercel address.
+3. Dataset: `production`. Trigger on: Create, Update and Delete.
+4. Filter:
+   ```
+   _type in ["siteSettings", "homePage", "pageSettings", "capability", "industry", "location", "insight", "insightCategory", "opportunity", "caseStudy", "clientLogo", "ecosystemCompany"]
+   ```
+5. HTTP method: `POST`. Leave the projection, the secret and "Trigger on
+   drafts" empty or off. Save.
+
+To check it: change a word in the Studio, publish, and watch a new build
+start under Vercel → Deployments. If a build fails (Sanity unreachable, a
+required item missing or, with `STRICT_CONTENT=1`, an unconfirmed claim),
+the site that's already live stays up, and the failed build shows why.
+
+## The starting content
+
+`seed/production.ndjson` is the website's content as it was when the pages
+moved to Sanity, as Sanity documents: settings, the homepage, page headers
+and FAQs, capabilities, industries, locations, Insights articles and
+categories, client logos, the ecosystem company and the ten sample job
+roles. Its photos and logos are in `seed/files/`. Sanity is now where the
+content lives; this file is only a starting point.
+
+| Command           | What it does                                                                                                                                              |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run seed`    | Fills an empty dataset. Skips any document that already exists, so it never overwrites an editor's changes.                                               |
+| `npm run refresh` | Replaces each of those documents with the version in the file, then clears drafts started from the old versions. **Overwrites editors' changes to them.** |
+
+Both first check where they're about to go (`scripts/preflight.ts`, also
+`npm run preflight` on its own). They print the project, dataset and
+signed-in account, and stop with the fix if the project isn't `n3hghywr` (a
+leftover `.env` file or environment variable), the account isn't a member
+or can only view, or the dataset is missing. Assets are matched by their
+contents, so nothing uploads twice.
 
 ```sh
 cd studio
 npm install
 npx sanity login   # once, with an account that's an Administrator on the project
-npm run seed
+npm run refresh    # or: npm run seed, for an empty dataset
 ```
 
-`npm run seed` and `npm run deploy` first check where they're about to go
-(`scripts/preflight.ts`, also `npm run preflight` on its own). They print the
-project, dataset and signed-in account, and stop with the fix if the project
-isn't `n3hghywr` (a leftover `.env` file or environment variable), the account
-isn't a member or can only view, or the dataset is missing.
-
-`npm run seed` skips any document that already exists, so running it again
-is safe and never overwrites an editor's changes. Assets are matched by
-their contents, so nothing uploads twice.
-
-After the import:
+After an import:
 
 - **Proof & claims → Not confirmed yet** lists every figure, client logo and
   the ecosystem company. None is confirmed until someone records the evidence.
-- **Careers → All roles** shows the Careers page's sample roles as drafts.
-  HR replaces them with real openings: each needs a reference code, a summary
-  and a posting date before it's published. A role is linked to the hub in
-  its country, and "Location shown" keeps the place it names, e.g.
+- **Careers → Open roles** shows the ten sample roles the careers page lists.
+  HR replaces them with real openings. A role needs a reference code and a
+  posting date before changes to it can be published; to take a sample role
+  down, use Unpublish or Delete. A role is linked to the office in its
+  country, and "Location shown" keeps the place it names, e.g.
   "Jersey City, NJ".
-- Figures that are still placeholders (capability and industry outcomes) and
-  the capability and industry notes the site no longer shows aren't
-  imported.
-
-The file is generated by `npm run seed:build` in `site/` (after
-`npm run build`), which also checks it: every word must match the live
-pages, every image must exist, and no claim may be marked confirmed.
 
 ## What editors see
 
@@ -122,7 +151,7 @@ The menu is arranged around the jobs HR and marketing do:
 - **Fixed sets.** The settings, homepage, page settings, capabilities,
   industries and locations can be edited and published but never created,
   deleted, duplicated or unpublished, because the site's layout depends on
-  them. They are created once by the seed script (phase 3).
+  them. They are created once by the import (see "The starting content").
 - **Job applications** go by email to the careers address, or to a job board
   listed under "Approved job boards" in Site settings. The contact-form option
   is added once the form is connected to an inbox.
@@ -137,7 +166,7 @@ The menu is arranged around the jobs HR and marketing do:
 | `pageSettings`                       | One per code-owned page (`page-about`, …)        |
 | `capability`, `industry`, `location` | Fixed sets with the site's existing ids          |
 | `insight`, `insightCategory`         | Articles at `/insights/<slug>` and their filters |
-| `opportunity`                        | Job openings at `/careers/<slug>`                |
+| `opportunity`                        | Job openings, listed on `/careers`               |
 | `caseStudy`                          | Case studies at `/case-studies/<slug>`           |
 | `clientLogo`, `ecosystemCompany`     | Proof shown on the homepage, each confirmed      |
 
@@ -150,9 +179,11 @@ section objects used by the pages.
 1. Done: the Studio, its content types and safeguards.
 2. Done: the website fetches Sanity content at build time. Images are copied
    onto the site, so visitors never load anything from Sanity.
-3. Done: `npm run seed` imports today's content, with every claim
-   unconfirmed and the roles as drafts.
-4. Pages switch to Sanity one area at a time, checked against today's output.
-5. Build-time checks for unconfirmed claims, placeholders and banned words.
-6. Hosting, the publish webhook and a daily rebuild.
+3. Done: `npm run seed` imports the content, with every claim unconfirmed.
+4. Done: the pages read Sanity, checked word for word against the site
+   before the switch; publishing rebuilds the site through a webhook.
+5. Done: build-time checks for unconfirmed claims, placeholders and banned
+   words.
+6. Hosting, a daily rebuild (so roles past their closing date drop off) and
+   job pages with a PDF and search markup.
 7. An editor guide and invitations.

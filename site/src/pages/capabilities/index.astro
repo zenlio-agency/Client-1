@@ -6,29 +6,27 @@ import FeatureGrid from "@/components/content/FeatureGrid.astro";
 import TeamPanel from "@/components/content/TeamPanel.astro";
 import FaqList from "@/components/content/FaqList.astro";
 import CtaFinal from "@/components/content/CtaFinal.astro";
-import { CAPABILITIES, CTA, capabilityHref } from "@/data/site.ts";
-import { CAPABILITY_PHOTOS } from "@/data/photos.ts";
+import { capabilityHref } from "@/data/site.ts";
+import { capabilities, page, settings } from "@/sanity/content.ts";
+
+const [CAPABILITIES, { hero, faqIntro, faq, seo }, { cta: CTA }] =
+  await Promise.all([capabilities(), page("page-capabilities"), settings()]);
 ---
 
-<Layout
-  title="Capabilities: Data, AI, SAP & Product Engineering | ManyaIT"
-  description="End-to-end data, AI, SAP, automation and digital product engineering, from strategy and architecture to delivery and managed operations."
->
+<Layout title={seo.title} description={seo.description}>
   {/* Hero */}
   <Section paddingTop="small">
     <HeroDetail
       crumbs={[{ label: "Home", href: "/" }, { label: "Capabilities" }]}
-      eyebrow="Capabilities"
-      title="End-to-end engineering across the modern enterprise stack."
-      lede="Integrated capabilities, one accountable delivery model. From strategy and architecture to build, release and continuous optimization, our teams turn complex technology agendas into measurable business outcomes."
-      points={[
-        "Strategy to production",
-        "Senior-led, cross-functional teams",
-        "Flexible operating models",
-      ]}
+      eyebrow={hero.eyebrow}
+      title={hero.title}
+      lede={hero.lede}
+      points={hero.points}
       primary={{ label: "Discuss your initiative", href: CTA.primary.href }}
       secondary={{ label: "Why ManyaIT", href: "/about" }}
-      photo={CAPABILITY_PHOTOS["cap-data"]}
+      photo={hero.photo?.src}
+      photoAlt={hero.photo?.alt}
+      photoPosition={hero.photo?.position}
     />
   </Section>
 
@@ -96,40 +94,9 @@ import { CAPABILITY_PHOTOS } from "@/data/photos.ts";
   {/* FAQ */}
   <Section>
     <FaqList
-      heading="Capabilities, answered"
-      intro="Can't find what you're looking for? Ask us directly."
-      items={[
-        {
-          question: "Can one team cover more than one capability?",
-          answer:
-            "Yes. Many programs combine data engineering with AI, or SAP with analytics and automation. We shape one cross-functional team around the outcome and bring in deeper platform expertise as the scope evolves.",
-        },
-        {
-          question: "Can your teams work inside our engineering organization?",
-          answer:
-            "Yes. Our teams work inside your repositories, toolchains and ceremonies, follow your definition of done and report through your governance, while ManyaIT stays accountable for delivery quality and continuity.",
-        },
-        {
-          question: "Do you work on our existing platforms and tools?",
-          answer:
-            "Almost always. We build on what already works inside your cloud environments, toolchains and controls rather than starting over.",
-        },
-        {
-          question: "Can you take ownership of a complete program?",
-          answer:
-            "Yes. We own delivery end to end, from discovery and architecture to build, testing, deployment and support, with clear milestones, governance and reporting.",
-        },
-        {
-          question: "How quickly can we get started?",
-          answer:
-            "Work can begin as soon as the scope is agreed. Discovery starts first, led by an architect and a delivery lead, while the full team mobilizes.",
-        },
-        {
-          question: "How do you make AI and data solutions enterprise-ready?",
-          answer:
-            "We build on governed, high-quality data, apply security and responsible-AI controls from the start, and put evaluation, monitoring and clear ownership in place so solutions perform reliably in production.",
-        },
-      ]}
+      heading={faqIntro.heading || undefined}
+      intro={faqIntro.intro || undefined}
+      items={faq}
     />
   </Section>
 

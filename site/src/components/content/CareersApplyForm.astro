@@ -10,7 +10,8 @@ import Select from "@/components/form/Select.astro";
 import Textarea from "@/components/form/Textarea.astro";
 import Choice from "@/components/form/Choice.astro";
 import FileInput from "@/components/form/FileInput.astro";
-import { ROLES, TALENT_NETWORK, JOIN_STEPS } from "@/data/careers.ts";
+import { TALENT_NETWORK, JOIN_STEPS } from "@/data/careers.ts";
+import { roles } from "@/sanity/content.ts";
 import { LEGAL, mailLink } from "@/data/legal.ts";
 import { tbc } from "@/data/site.ts";
 
@@ -20,6 +21,8 @@ interface Props {
 }
 
 const { render = true } = Astro.props;
+
+const ROLES = await roles();
 
 const roleOptions = [
   ...ROLES.map((role) => ({

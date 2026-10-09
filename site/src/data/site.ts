@@ -4,289 +4,59 @@ import capAi from "@/assets/icons/cap-ai.svg";
 import capFlow from "@/assets/icons/cap-flow.svg";
 import capCode from "@/assets/icons/cap-code.svg";
 
-/**
- * The five capability areas, in the order used everywhere on the site.
- * `slug` names each one's page under `/capabilities/`. `title` is the name
- * shown everywhere on the site; each page's browser title is its `seoTitle`
- * in capability-pages.ts. `line` is the one-liner shown wherever a
- * capability is listed; `focus` is shown only on the Capabilities page.
+/*
+ * What the design builds on, kept in code: the fixed sets and their order,
+ * icons, menus, link paths and site-wide helpers. The words, photos, figures
+ * and job openings are edited in Sanity and read through
+ * `src/sanity/content.ts`.
  */
-export const CAPABILITIES = [
-  {
-    id: "cap-data",
-    slug: "data-analytics",
-    key: "data",
-    title: "Trusted Data",
-    line: "Modern data platforms that turn scattered data into trusted, decision-ready intelligence.",
-    focus: [
-      "Data strategy & AI-readiness assessment",
-      "Lakehouse & cloud data platform modernization",
-      "Data engineering & pipeline modernization (ELT/ETL)",
-      "Data products & master data",
-      "Governance, quality & observability",
-      "BI, semantic layer & self-service analytics",
-    ],
-    icon: capData,
-  },
-  {
-    id: "cap-sap",
-    slug: "sap-enterprise-data",
-    key: "sap",
-    title: "Modern Core",
-    line: "S/4HANA transformation, BTP innovation and clean-core architecture that keep the enterprise core agile.",
-    focus: [
-      "S/4HANA transformation & RISE with SAP",
-      "Clean-core strategy & BTP extensions",
-      "SAP integration",
-      "SAP data, planning & analytics",
-      "Data migration & master data",
-      "Application management",
-    ],
-    icon: capSap,
-  },
-  {
-    id: "cap-ai",
-    slug: "applied-ai",
-    key: "ai",
-    title: "Applied Intelligence",
-    line: "Generative AI and machine learning, engineered for production and governed for the enterprise.",
-    focus: [
-      "AI strategy & use-case portfolio",
-      "Copilots & knowledge assistants",
-      "Document intelligence",
-      "Predictive & prescriptive models",
-      "MLOps & LLMOps",
-      "Responsible AI & model risk",
-    ],
-    icon: capAi,
-  },
-  {
-    id: "cap-flow",
-    slug: "agentic-ai-automation",
-    key: "ai",
-    title: "Autonomous Operations",
-    line: "Intelligent agents and automated workflows that execute real work across your operations.",
-    focus: [
-      "Process intelligence & discovery",
-      "Agentic workflow orchestration",
-      "Human-in-the-loop controls",
-      "Intelligent document flows",
-      "RPA & low-code modernization",
-      "Agent governance & lifecycle management",
-    ],
-    icon: capFlow,
-  },
-  {
-    id: "cap-code",
-    slug: "digital-product-engineering",
-    key: "digital",
-    title: "Scalable Products",
-    line: "Cloud-native products and platforms, engineered from concept to scale across web and mobile.",
-    focus: [
-      "Product strategy & experience design",
-      "Cloud-native application engineering",
-      "Legacy modernization",
-      "APIs, microservices & integration",
-      "Platform engineering, DevSecOps & SRE",
-      "Quality engineering",
-    ],
-    icon: capCode,
-  },
-] as const;
 
 /**
- * Client logos for the trust marquee, one scrolling row per entry. `src` is
- * a file in `public/logos/`; a logo without one shows a placeholder. Each
- * logo needs written permission from the company before launch.
+ * The five capabilities, in the order used everywhere on the site, with the
+ * icon the design gives each. Their words and photos are edited in Sanity.
  */
-export const CLIENT_LOGO_ROWS: {
-  label: string;
-  logos: { name: string; src?: string }[];
-}[] = [
+export const CAPABILITY_DESIGN = [
+  { id: "cap-data", icon: capData },
+  { id: "cap-sap", icon: capSap },
+  { id: "cap-ai", icon: capAi },
+  { id: "cap-flow", icon: capFlow },
+  { id: "cap-code", icon: capCode },
+] as const;
+
+/** The industries, in the order used everywhere on the site. */
+export const INDUSTRY_IDS = [
+  "industry-banking",
+  "industry-telecom",
+  "industry-healthcare",
+  "industry-energy",
+  "industry-retail",
+] as const;
+
+/** The client-logo rows, in order, as the Studio names them. */
+export const LOGO_ROWS = [
+  { value: "banking", label: "Banking & Finance" },
   {
-    label: "Banking & Finance",
-    logos: [
-      { name: "American Express", src: "/logos/american-express.svg" },
-      { name: "JPMorgan Chase", src: "/logos/jpmorgan-chase.svg" },
-      { name: "Bank of America", src: "/logos/bank-of-america.svg" },
-      { name: "Citi", src: "/logos/citi.svg" },
-      { name: "Goldman Sachs", src: "/logos/goldman-sachs.svg" },
-    ],
-  },
-  {
+    value: "telecom-healthcare-energy",
     label: "Telecommunications, Healthcare and Energy",
-    logos: [
-      { name: "AT&T", src: "/logos/att.svg" },
-      { name: "UnitedHealthcare", src: "/logos/unitedhealthcare.svg" },
-      { name: "ExxonMobil", src: "/logos/exxonmobil.svg" },
-      { name: "Verizon", src: "/logos/verizon.svg" },
-      { name: "CVS Health", src: "/logos/cvs-health.svg" },
-      { name: "Chevron", src: "/logos/chevron.svg" },
-      { name: "T-Mobile", src: "/logos/t-mobile.svg" },
-      { name: "Johnson & Johnson", src: "/logos/johnson-johnson.svg" },
-      { name: "Schneider Electric", src: "/logos/schneider-electric.svg" },
-    ],
-  },
-];
-
-/**
- * The industries in scope. `id` doubles as the deep-link hash and
- * `slug` names each one's page under `/industries/`. `summary` labels the
- * industry on the Industries page and in "Other industries"; `line` is the
- * homepage tile, which keeps its original wording. `short` is used in
- * phrases such as "Talk to us about …".
- */
-export const INDUSTRIES = [
-  {
-    id: "industry-banking",
-    slug: "banking-financial-services",
-    title: "Banking & Finance",
-    short: "Banking & Finance",
-    summary: "Modern platforms for payments, risk and compliance.",
-    line: "Modern banking platforms for payments, risk and compliance.",
-    hero: "Modernize core banking without slowing the business.",
-    challenge:
-      "Decades-old cores, real-time customer expectations and every change subject to audit and risk review.",
-    build:
-      "Core and digital banking modernization, real-time payments, trusted risk and regulatory data, AI-driven fraud prevention and automated onboarding.",
-    outcome: "Faster, compliant releases.",
-    metric: "[X]%",
-    metricLabel: "faster release cycles",
-  },
-  {
-    id: "industry-telecom",
-    slug: "telecommunications",
-    title: "Telecom & Networks",
-    short: "Telecom & Networks",
-    summary:
-      "Faster launches, assured revenue and proactive service assurance.",
-    line: "Faster launches, accurate billing and proactive service assurance.",
-    hero: "Keep networks, revenue and customers connected.",
-    challenge:
-      "Massive data volumes, complex charging and billing, and constant network change, where every outage is public.",
-    build:
-      "BSS and OSS modernization, revenue assurance, network and customer analytics, AI-driven service assurance and round-the-clock operations.",
-    outcome: "Fewer manual tickets and faster recovery.",
-    metric: "[X]%",
-    metricLabel: "faster incident resolution",
-  },
-  {
-    id: "industry-healthcare",
-    slug: "healthcare",
-    title: "Healthcare & Wellness",
-    short: "Healthcare & Wellness",
-    summary:
-      "Interoperable health data, streamlined claims and privacy by design.",
-    line: "Connected health data, streamlined claims and privacy by design.",
-    hero: "Technology that serves patients and protects their data.",
-    challenge:
-      "Fragmented records, rising administrative cost and strict privacy obligations such as HIPAA.",
-    build:
-      "Interoperable health data platforms, AI for claims and documents, revenue-cycle automation and real-time operational insight.",
-    outcome: "Faster claims, privacy built in from day one.",
-    metric: "[X]%",
-    metricLabel: "reduction in claims turnaround",
-  },
-  {
-    id: "industry-energy",
-    slug: "energy",
-    title: "Energy & Utilities",
-    short: "Energy & Utilities",
-    summary:
-      "Reliable assets, connected field operations and sharper forecasting.",
-    line: "Reliable assets, connected field operations and smarter forecasting.",
-    hero: "Digital operations for a sector in transition.",
-    challenge:
-      "Aging assets, safety-critical operations and the shift to renewables, with data split across field and enterprise systems.",
-    build:
-      "Asset performance management, predictive maintenance, OT and IT integration, demand forecasting and automated field reporting.",
-    outcome: "Assets that stay online longer.",
-    metric: "[X]%",
-    metricLabel: "less unplanned downtime",
-  },
-  {
-    id: "industry-retail",
-    slug: "retail",
-    title: "Retail & E-commerce",
-    short: "Retail & E-commerce",
-    summary:
-      "Unified commerce, real-time inventory and first-party data monetization.",
-    line: "Unified commerce, real-time inventory and first-party data that drives lifetime value.",
-    hero: "Unified commerce, engineered for every channel.",
-    challenge:
-      "Rising fulfillment costs, fragmented channels and first-party data that is hard to activate safely.",
-    build:
-      "Composable commerce, order and inventory management, customer data and personalization, and retail media data products.",
-    outcome: "Inventory you can promise in every channel.",
-    metric: "[X]%",
-    metricLabel: "improvement in inventory accuracy",
   },
 ] as const;
 
-/** The two hubs. Coordinates place the pins on the dot map. */
-export const HUBS = [
-  {
-    id: "dallas",
-    city: "Dallas, Texas",
-    short: "Dallas",
-    /* The name used everywhere outside the footer. The city and the
-       address appear only in the footer (and in the legal notices, which
-       must give the registered address). */
-    country: "United States",
-    entity: "ManyaIT Inc.",
-    role: "Client & Leadership Hub",
-    text: "Executive sponsorship, program governance and client partnership.",
-    /* Line breaks render where the address is shown (white-space: pre-line). */
-    address: "8668 John Hickman Pkwy #903\nFrisco, Texas 75034",
-    phone: "+1 682-500-9839",
-    email: "info@manyait.com",
-    timeZone: "America/Chicago",
-    locale: "en-US",
-    lat: 33.15,
-    lon: -96.82,
-    link: { label: "Talk to our US team", href: "/contact" },
-  },
-  {
-    id: "hyderabad",
-    city: "Hyderabad, India",
-    short: "Hyderabad",
-    country: "India",
-    entity: "ManyaIT Solutions Pvt Ltd",
-    role: "Engineering & Delivery Hub",
-    text: "Architecture, engineering, data and run operations.",
-    address:
-      "Bizness Square, Whitefields\nHITECH City, Hyderabad\nTelangana 500081",
-    phone: "+91 73869 36669",
-    email: "info@manyait.com",
-    timeZone: "Asia/Kolkata",
-    locale: "en-IN",
-    lat: 17.45,
-    lon: 78.39,
-    link: { label: "View opportunities in India", href: "/careers" },
-  },
-] as const;
+/** Where the two site-wide buttons go. Their labels are edited in Sanity. */
+export const CTA_HREFS = {
+  primary: "/contact",
+  secondary: "/careers",
+} as const;
 
-/**
- * Other companies shown at the foot of the homepage. Each needs written
- * confirmation before launch. `focus` is the label over the card, `logo` a
- * path under `public/` (the name shows instead when it's missing) and
- * `href` the company's site.
- */
-export const ECOSYSTEM: {
-  name: string;
-  focus: string;
-  line: string;
-  logo?: string;
-  href?: string;
-}[] = [
-  {
-    name: "Siri Data Analytics",
-    focus: "Data & analytics",
-    line: "Advanced analytics, cloud and AI for banking, retail, energy, insurance and utilities.",
-    logo: "/logos/siri-data-analytics.webp",
-    href: "https://siridataanalytics.com/",
-  },
-];
+/** The social platforms the design has icons for. */
+export const SOCIAL_LABELS = {
+  linkedin: "LinkedIn",
+  instagram: "Instagram",
+  x: "X",
+  facebook: "Facebook",
+  youtube: "YouTube",
+} as const;
+
+export type SocialIcon = keyof typeof SOCIAL_LABELS;
 
 /** Main navigation. Items with `menu` open a panel. */
 export const NAV = [
@@ -330,31 +100,6 @@ export const capabilityHref = (cap: { slug: string }) =>
 export const industryHref = (industry: { slug: string }) =>
   `/industries/${industry.slug}`;
 
-export const CTA = {
-  primary: { label: "Start a Conversation", href: "/contact" },
-  secondary: { label: "Explore Opportunities", href: "/careers" },
-} as const;
-
-/** Social profiles. `#` marks a profile whose address is still to come. */
-export const SOCIAL = [
-  { label: "LinkedIn", href: "#", icon: "linkedin" },
-  {
-    label: "Instagram",
-    href: "https://www.instagram.com/manyait_inc/",
-    icon: "instagram",
-  },
-  { label: "X", href: "#", icon: "x" },
-  { label: "Facebook", href: "#", icon: "facebook" },
-  { label: "YouTube", href: "#", icon: "youtube" },
-] as const;
-
-/** The company's own email addresses and phone, as published on manyait.com. */
-export const COMPANY_CONTACT = {
-  email: "info@manyait.com",
-  careersEmail: "hr@manyait.com",
-  phone: "+1 682-500-9839",
-} as const;
-
 /**
  * HighLevel's External Tracking script, which sends each contact-form
  * submission to HighLevel as a contact. The contact form loads it only once
@@ -365,58 +110,6 @@ export const CONTACT_TRACKER = {
   src: "https://link.yourmarketingai.com/js/external-tracking.js",
   trackingId: "tk_78496c73a31147ccb529989b741fa4a3",
 } as const;
-
-/**
- * Company figures. The "Why ManyaIT" panel on the homepage shows the first
- * six, three to a row; the figures and wording were supplied by ManyaIT on
- * 7 October 2026. kickoff and specialists feed the "at a glance"
- * strip (`GLANCE_FIGURES`).
- */
-export const COMPANY_FIGURES = {
-  programs: {
-    value: "100+",
-    label: "Data and AI programs deployed to production",
-  },
-  products: {
-    value: "25+",
-    label: "Digital products engineered from concept to launch",
-  },
-  onSchedule: {
-    value: "100%",
-    label: "Enterprise solutions delivered on schedule",
-  },
-  testCoverage: {
-    value: "90%+",
-    label: "Automated test coverage on production code",
-  },
-  enterprises: { value: "50+", label: "Global enterprise clients served" },
-  years: { value: "10+", label: "Years powering enterprise innovation" },
-  kickoff: { value: "4–6 wks", label: "From kickoff to a delivery-ready team" },
-  specialists: { value: "250+", label: "Specialists in our talent network" },
-} as const;
-
-/**
- * The "at a glance" strip on the About and Capabilities pages: the same
- * figures as above, with labels written for that strip.
- */
-export const GLANCE_FIGURES = [
-  {
-    value: COMPANY_FIGURES.years.value,
-    label: "Years of enterprise technology delivery",
-  },
-  {
-    value: COMPANY_FIGURES.enterprises.value,
-    label: "Enterprise clients served",
-  },
-  {
-    value: COMPANY_FIGURES.specialists.value,
-    label: "Engineers and specialists in our network",
-  },
-  {
-    value: COMPANY_FIGURES.kickoff.value,
-    label: "Average time from kickoff to a productive team",
-  },
-];
 
 /** Wraps `[placeholder]` runs in a marked span so they read as unconfirmed. */
 export const tbc = (text: string) =>

@@ -5,7 +5,7 @@ import x from "@/assets/icons/social-x.svg";
 import facebook from "@/assets/icons/social-facebook.svg";
 import youtube from "@/assets/icons/social-youtube.svg";
 import instagram from "@/assets/icons/social-instagram.svg";
-import { SOCIAL } from "@/data/site.ts";
+import { settings } from "@/sanity/content.ts";
 
 interface Props {
   /** Set to `false` to omit the component. */
@@ -16,6 +16,7 @@ interface Props {
 
 const { render = true, class: className } = Astro.props;
 const icons = { linkedin, x, facebook, youtube, instagram };
+const { social: SOCIAL } = await settings();
 ---
 
 {

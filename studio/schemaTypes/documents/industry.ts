@@ -49,6 +49,15 @@ export const industry = defineType({
       title: "One-line summary",
       type: "string",
       group: "overview",
+      description: "Shown on the Industries page and in related tiles.",
+      validation: copy(true),
+    }),
+    defineField({
+      name: "line",
+      title: "Homepage line",
+      type: "string",
+      group: "overview",
+      description: "Shown on the industry's tile on the homepage.",
       validation: copy(true),
     }),
     defineField({

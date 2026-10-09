@@ -4,8 +4,8 @@ import Button from "@/components/Button.astro";
 import Icon from "@/components/media/Icon.astro";
 import PhotoTile from "@/components/item/PhotoTile.astro";
 import arrow from "@/assets/icons/ui-arrow.svg";
-import { CAPABILITIES, CTA, capabilityHref } from "@/data/site.ts";
-import { CAPABILITY_PHOTOS } from "@/data/photos.ts";
+import { capabilityHref } from "@/data/site.ts";
+import { capabilities, home, settings } from "@/sanity/content.ts";
 
 interface Props {
   /** Set to `false` to omit the component. */
@@ -13,15 +13,22 @@ interface Props {
 }
 
 const { render = true } = Astro.props;
+
+const [CAPABILITIES, { sections }, { cta: CTA }] = await Promise.all([
+  capabilities(),
+  home(),
+  settings(),
+]);
+const intro = sections.capabilities;
 ---
 
 {
   render && (
     <div class="bento_wrap">
       <SectionHeader
-        eyebrow="Capabilities"
-        heading="Expertise across the modern enterprise stack"
-        intro="Architecture, data, AI and SAP engineering, delivered as one accountable program, aligned to your roadmap and governed for enterprise scale.."
+        eyebrow={intro.eyebrow}
+        heading={intro.heading}
+        intro={intro.intro}
       >
         <Button
           slot="action"
@@ -37,7 +44,8 @@ const { render = true } = Astro.props;
         {CAPABILITIES.map((cap, index) => (
           <PhotoTile
             href={capabilityHref(cap)}
-            photo={CAPABILITY_PHOTOS[cap.id]}
+            photo={cap.photo?.src}
+            photoPosition={cap.photo?.position}
             class={`bento_tile is-${cap.id}`}
             id={cap.id}
             data-reveal

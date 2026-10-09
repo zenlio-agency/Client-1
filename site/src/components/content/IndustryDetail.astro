@@ -7,8 +7,8 @@ import ButtonWrapper from "@/components/wrapper/ButtonWrapper.astro";
 import Icon from "@/components/media/Icon.astro";
 import arrow from "@/assets/icons/ui-arrow.svg";
 import PhotoTile from "@/components/item/PhotoTile.astro";
-import { INDUSTRIES, CTA, industryHref } from "@/data/site.ts";
-import { INDUSTRY_PHOTOS } from "@/data/photos.ts";
+import { industryHref } from "@/data/site.ts";
+import { industries, page, settings } from "@/sanity/content.ts";
 
 interface Props {
   /** Set to `false` to omit the component. */
@@ -17,15 +17,18 @@ interface Props {
 
 const { render = true } = Astro.props;
 
-/** A figure still waiting for ManyaIT shows as `[X]`. */
-const confirmed = (value: string) => !/\[[^\]]+\]/.test(value);
+const [INDUSTRIES, { hero }, { cta: CTA }] = await Promise.all([
+  industries(),
+  page("page-industries"),
+  settings(),
+]);
 ---
 
 {
   render && (
     <div class="industry-detail_wrap">
       <div class="industry-detail_head">
-        <Eyebrow data-reveal>Industries</Eyebrow>
+        <Eyebrow data-reveal>{hero.eyebrow}</Eyebrow>
         <Heading
           tag="h1"
           variant="h1"
@@ -33,7 +36,7 @@ const confirmed = (value: string) => !/\[[^\]]+\]/.test(value);
           data-reveal
           style="--reveal-order: 1"
         >
-          Engineering built around your industry.
+          {hero.title}
         </Heading>
         <Paragraph
           variant="large"
@@ -41,8 +44,7 @@ const confirmed = (value: string) => !/\[[^\]]+\]/.test(value);
           data-reveal
           style="--reveal-order: 2"
         >
-          Technology, data and AI programs shaped by the regulation, core
-          systems and operating pressures of your sector.
+          {hero.lede}
         </Paragraph>
         <ul
           class="industry-detail_jump"
@@ -63,7 +65,8 @@ const confirmed = (value: string) => !/\[[^\]]+\]/.test(value);
           <li class="industry-detail_item" id={industry.id} data-reveal>
             <PhotoTile
               href={industryHref(industry)}
-              photo={INDUSTRY_PHOTOS[industry.id]}
+              photo={industry.photo?.src}
+              photoPosition={industry.photo?.position}
               class="industry-detail_tile theme-dark"
             >
               <span class="photo-tile_eyebrow" slot="top">
@@ -88,16 +91,17 @@ const confirmed = (value: string) => !/\[[^\]]+\]/.test(value);
                   <dd>{industry.build}</dd>
                 </div>
               </dl>
-              {/* The figure shows only once ManyaIT confirms it. */}
+              {/* The figure shows once one is entered in Sanity. Like every
+                  figure, it must be confirmed there before launch. */}
               <div class="industry-detail_outcome">
-                {confirmed(industry.metric) && (
-                  <span class="industry-detail_metric">{industry.metric}</span>
+                {industry.metric && (
+                  <span class="industry-detail_metric">
+                    {industry.metric.value}
+                  </span>
                 )}
                 <span>
                   <strong>{industry.outcome}</strong>
-                  {confirmed(industry.metric) && (
-                    <span>{industry.metricLabel}</span>
-                  )}
+                  {industry.metric && <span>{industry.metric.label}</span>}
                 </span>
               </div>
               <ButtonWrapper>

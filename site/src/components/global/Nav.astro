@@ -9,15 +9,8 @@ import x from "@/assets/icons/social-x.svg";
 import facebook from "@/assets/icons/social-facebook.svg";
 import youtube from "@/assets/icons/social-youtube.svg";
 import instagram from "@/assets/icons/social-instagram.svg";
-import {
-  CAPABILITIES,
-  INDUSTRIES,
-  NAV,
-  CTA,
-  SOCIAL,
-  capabilityHref,
-  industryHref,
-} from "@/data/site.ts";
+import { NAV, capabilityHref, industryHref } from "@/data/site.ts";
+import { capabilities, industries, settings } from "@/sanity/content.ts";
 import { SITE_NAME } from "@/consts.ts";
 
 interface Props {
@@ -31,6 +24,9 @@ const { render = true, overlap = false } = Astro.props;
 const path = Astro.url.pathname.replace(/\/+$/, "") || "/";
 
 const icons = { linkedin, x, facebook, youtube, instagram };
+
+const [CAPABILITIES, INDUSTRIES, { cta: CTA, social: SOCIAL }] =
+  await Promise.all([capabilities(), industries(), settings()]);
 
 type MenuLink = { label: string; href: string };
 type Menu = {

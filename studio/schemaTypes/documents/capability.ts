@@ -46,6 +46,14 @@ export const capability = defineType({
       validation: copy(true),
     }),
     defineField({
+      name: "focus",
+      title: "Focus areas",
+      type: "array",
+      group: "overview",
+      description: "Listed under the capability on the Capabilities page.",
+      of: [defineArrayMember({ type: "string", validation: copy() })],
+    }),
+    defineField({
       name: "photo",
       title: "Photo",
       type: "imageWithAlt",

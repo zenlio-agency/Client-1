@@ -4,7 +4,8 @@ import Heading from "@/components/typography/Heading.astro";
 import Paragraph from "@/components/typography/Paragraph.astro";
 import Icon from "@/components/media/Icon.astro";
 import arrow from "@/assets/icons/ui-arrow.svg";
-import { CTA, tbc } from "@/data/site.ts";
+import { tbc } from "@/data/site.ts";
+import { settings } from "@/sanity/content.ts";
 
 interface Props {
   /** Set to `false` to omit the component. */
@@ -12,6 +13,8 @@ interface Props {
 }
 
 const { render = true } = Astro.props;
+
+const { cta: CTA } = await settings();
 ---
 
 {

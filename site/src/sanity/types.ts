@@ -327,6 +327,7 @@ export type Capability = {
   title?: string;
   slug?: Slug;
   line?: string;
+  focus?: Array<string>;
   photo?: ImageWithAlt;
   pageTitle?: string;
   lede?: string;
@@ -371,6 +372,7 @@ export type Industry = {
   slug?: Slug;
   short?: string;
   summary?: string;
+  line?: string;
   photo?: ImageWithAlt;
   hero?: string;
   lede?: string;
@@ -901,6 +903,7 @@ export type CapabilitiesQueryResult = Array<{
   title?: string;
   slug: string | null;
   line?: string;
+  focus?: Array<string>;
   photo: {
     _type: "imageWithAlt";
     asset: {
@@ -980,6 +983,7 @@ export type IndustriesQueryResult = Array<{
   slug: string | null;
   short?: string;
   summary?: string;
+  line?: string;
   photo: {
     _type: "imageWithAlt";
     asset: {

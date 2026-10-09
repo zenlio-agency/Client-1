@@ -48,11 +48,11 @@ export const FIXED_TYPES = [
 
 /** Contact-form topics an article's call to action can preselect. */
 export const CONTACT_TOPICS = [
-  { title: "Data & Analytics", value: "cap-data" },
-  { title: "SAP & Enterprise Data", value: "cap-sap" },
-  { title: "Applied AI", value: "cap-ai" },
-  { title: "Agentic AI & Automation", value: "cap-flow" },
-  { title: "Digital Product Engineering", value: "cap-code" },
+  { title: "Trusted Data", value: "cap-data" },
+  { title: "Modern Core", value: "cap-sap" },
+  { title: "Applied Intelligence", value: "cap-ai" },
+  { title: "Autonomous Operations", value: "cap-flow" },
+  { title: "Scalable Products", value: "cap-code" },
   { title: "A full capability center", value: "capability-center" },
   { title: "Careers", value: "careers" },
 ];

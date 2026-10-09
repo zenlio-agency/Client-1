@@ -44,52 +44,11 @@ const legal = defineCollection({
 });
 
 /**
- * Insights articles: one Markdown file per article in `src/content/insights/`,
- * served at `/insights/<file name>`. The read time is worked out from the
- * text, so it never needs updating by hand.
- */
-const insights = defineCollection({
-  loader: glob({ pattern: "*.md", base: "./src/content/insights" }),
-  schema: z.object({
-    title: z.string(),
-    /** One line under the title, and on the card. */
-    summary: z.string(),
-    /** Meta description. */
-    description: z.string(),
-    /** Matches a filter on the Insights grid. */
-    category: z.enum([
-      "AI",
-      "Data",
-      "SAP",
-      "Digital Engineering",
-      "Enterprise Technology",
-    ]),
-    type: z.enum(["Perspective", "Guide", "Explainer", "Field notes"]),
-    /** Position on the grid. */
-    order: z.number().int(),
-    /** The first card, shown large. */
-    featured: z.boolean().default(false),
-    /** A file name in `public/images/`, without `.webp`. */
-    photo: z.string(),
-    /** ISO date (`2026-10-05`) once set, or a bracketed placeholder. */
-    published: z.string(),
-    author: z.string().default("The ManyaIT team"),
-    /** Three or four lines for the "In short" box at the top. */
-    takeaways: z.array(z.string()).min(1),
-    /** Contact-form topic the closing call to action preselects. */
-    topic: z.string(),
-    /** The capability or page the article leads to. */
-    related: z.object({ label: z.string(), href: z.string() }),
-  }),
-});
-
-/**
  * Content from Sanity, fetched fresh on every build: one collection per
  * content type, each entry keyed by its Sanity document id. Studio checks the
  * content when it's published, so these schemas only carry the types that
- * `npm run typegen` (in studio/) generates from the queries.
- *
- * Pages switch from the data files and Markdown to these one area at a time.
+ * `npm run typegen` (in studio/) generates from the queries. Pages read them
+ * through `src/sanity/content.ts`.
  */
 const fromSanity = <Entry>(query: string) =>
   defineCollection({
@@ -117,7 +76,7 @@ const industries = fromSanity<One<Sanity.IndustriesQueryResult>>(
 const locations = fromSanity<One<Sanity.LocationsQueryResult>>(
   queries.locationsQuery,
 );
-/** Replaces the Markdown `insights` collection when the Insights pages switch. */
+/** Insights articles, at /insights/<slug>. */
 const articles = fromSanity<One<Sanity.ArticlesQueryResult>>(
   queries.articlesQuery,
 );
@@ -139,7 +98,6 @@ const ecosystem = fromSanity<One<Sanity.EcosystemQueryResult>>(
 
 export const collections = {
   legal,
-  insights,
   siteSettings,
   homePage,
   pageSettings,

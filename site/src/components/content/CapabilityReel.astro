@@ -1,12 +1,8 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import Img from "@/components/media/Img.astro";
+import SanityImg from "@/components/media/SanityImg.astro";
 import Button from "@/components/Button.astro";
-import laptopReview from "@/assets/photos/reel-laptop-review.jpg";
-import conversation from "@/assets/photos/reel-conversation.jpg";
-import teamBriefing from "@/assets/photos/reel-team-briefing.jpg";
-import candidateMeeting from "@/assets/photos/reel-candidate-meeting.jpg";
-import panelConversation from "@/assets/photos/reel-panel-conversation.jpg";
+import { home } from "@/sanity/content.ts";
 
 type Props = HTMLAttributes<"div"> & {
   /** Set to `false` to omit the component. */
@@ -15,33 +11,8 @@ type Props = HTMLAttributes<"div"> & {
 
 const { render = true, class: className, ...rest } = Astro.props;
 
-const photos = [
-  {
-    src: laptopReview,
-    alt: "Two professionals reviewing an analytics dashboard on a laptop",
-    caption: "Analytics-led delivery governance",
-  },
-  {
-    src: conversation,
-    alt: "Two professionals in a one-to-one discussion by a window",
-    caption: "Outcome-led discovery and scoping",
-  },
-  {
-    src: teamBriefing,
-    alt: "A presenter leading a working session for a team at laptops",
-    caption: "Knowledge transfer built into delivery",
-  },
-  {
-    src: candidateMeeting,
-    alt: "A specialist in a structured interview with a two-person panel",
-    caption: "Domain-specific technical assessment",
-  },
-  {
-    src: panelConversation,
-    alt: "A two-person client panel interviewing a specialist",
-    caption: "Client sign-off before onboarding",
-  },
-];
+/* The photos and captions are edited in Sanity, on the homepage. */
+const { reel: photos } = await home();
 ---
 
 {
@@ -58,9 +29,12 @@ const photos = [
               {photos.map((photo, index) => (
                 <figure class="reel_tile" data-lift={index}>
                   <div class="reel_box">
-                    <Img
-                      src={photo.src}
-                      alt={copy === 0 ? photo.alt : ""}
+                    <SanityImg
+                      image={
+                        copy === 0
+                          ? photo.image
+                          : { ...photo.image, alt: "", decorative: true }
+                      }
                       variant="densities"
                       width={296}
                       height={216}

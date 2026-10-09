@@ -3,6 +3,7 @@ import {
   toHTML,
   uriLooksSafe,
   type PortableTextBlockComponent,
+  type PortableTextMarkComponent,
 } from "@portabletext/to-html";
 import GithubSlugger from "github-slugger";
 import { sanityPhoto, type SanityImage } from "./image.ts";
@@ -38,6 +39,36 @@ export function plainText(blocks: Block[] | null | undefined): string {
       return "";
     })
     .join("\n\n");
+}
+
+/** Links in rich text, kept only when the address looks safe. */
+const link: PortableTextMarkComponent = ({ value, children }) => {
+  const href = String(value?.href ?? "");
+  return uriLooksSafe(href)
+    ? `<a href="${escapeHTML(href)}">${children}</a>`
+    : children;
+};
+
+/**
+ * Short rich text, such as an FAQ answer, as inline HTML for a component
+ * that sets its own paragraph: each paragraph's words with their links and
+ * emphasis, with a blank line between paragraphs.
+ */
+export function inlineHtml(blocks: Block[] | null | undefined): string {
+  return (blocks ?? [])
+    .map((block) =>
+      toHTML([block], {
+        components: {
+          block: { normal: ({ children }) => children ?? "" },
+          marks: { link },
+        },
+        onMissingComponent: (message) => {
+          throw new Error(`Portable Text: ${message}`);
+        },
+      }),
+    )
+    .filter(Boolean)
+    .join("<br /><br />");
 }
 
 /** The first row is the header, as in the Markdown tables. */
@@ -85,14 +116,7 @@ export async function portableTextToHtml(
   return toHTML(blocks, {
     components: {
       block: { h2: heading("h2"), h3: heading("h3") },
-      marks: {
-        link: ({ value, children }) => {
-          const href = String(value?.href ?? "");
-          return uriLooksSafe(href)
-            ? `<a href="${escapeHTML(href)}">${children}</a>`
-            : children;
-        },
-      },
+      marks: { link },
       types: {
         imageWithAlt: ({ value }) => {
           const photo = photos.get(value._key);
