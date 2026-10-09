@@ -197,28 +197,48 @@ async function fileApplication(
   if (!contact?.id) throw new Error("HighLevel returned no contact id.");
 
   const upload = new FormData();
-  upload.append("file", cv, cv.name);
-  upload.append("hosted", "false");
-  upload.append("name", cv.name);
+  // GHL expects <custom_field_id>_<random_id> for forms/upload-custom-files
+  upload.append(`${cvFieldId}_${crypto.randomUUID()}`, cv, cv.name);
+  const uploadQuery = new URLSearchParams({
+    contactId: contact.id,
+    locationId: settings.locationId,
+  });
 
-  const uploadRes = (await call("POST", "/medias/upload-file", {
+  const uploadRes = (await call("POST", `/forms/upload-custom-files?${uploadQuery}`, {
     body: upload,
-  })) as { fileId?: string; url?: string };
+  })) as any;
 
-  const cvUrl = uploadRes.url;
+  // Attempt to extract the securely uploaded URL from the response
+  // GHL might return it in meta, uploadedFiles, or inside the updated contact's customFields
+  let cvUrl = null;
+  if (uploadRes.meta && uploadRes.meta[0]?.url) {
+    cvUrl = uploadRes.meta[0].url;
+  } else if (uploadRes.uploadedFiles) {
+    cvUrl = Object.values(uploadRes.uploadedFiles)[0];
+  } else if (uploadRes.contact?.customFields) {
+    const cf = uploadRes.contact.customFields.find((f: any) => f.id === cvFieldId);
+    if (cf && cf.value && Array.isArray(cf.value) && typeof cf.value[0] === "string") {
+      cvUrl = cf.value[0];
+    }
+  }
 
+  // If the endpoint didn't automatically map it, we force it using PUT
   if (cvUrl) {
-    await call("PUT", `/contacts/${contact.id}`, {
-      json: {
-        customFields: [
-          {
-            id: cvFieldId,
-            key: settings.cvFieldKey,
-            field_value: [cvUrl],
-          },
-        ],
-      },
-    });
+    try {
+      await call("PUT", `/contacts/${contact.id}`, {
+        json: {
+          customFields: [
+            {
+              id: cvFieldId,
+              key: settings.cvFieldKey,
+              value: [cvUrl],
+            },
+          ],
+        },
+      });
+    } catch (putError) {
+      console.warn("Failed to explicitly map CV URL to contact custom field, but upload succeeded:", putError);
+    }
   }
 
   /* Tags go through their own call, which adds to the contact's tags; the
