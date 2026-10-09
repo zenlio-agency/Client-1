@@ -198,11 +198,34 @@ async function fileApplication(
 
   const upload = new FormData();
   upload.append(`${cvFieldId}_${crypto.randomUUID()}`, cv, cv.name);
-  const query = new URLSearchParams({
+  const uploadQuery = new URLSearchParams({
     contactId: contact.id,
-    locationId: settings.locationId,
   });
-  await call("POST", `/forms/upload-custom-files?${query}`, { body: upload });
+  
+  const uploadRes = (await call(
+    "POST",
+    `/locations/${settings.locationId}/customFields/upload?${uploadQuery}`,
+    { body: upload }
+  )) as { uploadedFiles?: Record<string, string>; meta?: any[] };
+
+  const cvUrl =
+    uploadRes.meta?.[0]?.url ||
+    (uploadRes.uploadedFiles ? Object.values(uploadRes.uploadedFiles)[0] : null);
+
+  if (cvUrl) {
+    await call("PUT", `/contacts/${contact.id}`, {
+      json: {
+        customFields: [
+          {
+            id: cvFieldId,
+            key: settings.cvFieldKey,
+            value: [cvUrl],
+            field_value: [cvUrl],
+          },
+        ],
+      },
+    });
+  }
 
   /* Tags go through their own call, which adds to the contact's tags; the
      upsert's tags would replace them. */
