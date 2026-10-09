@@ -92,9 +92,12 @@ export async function POST(request: Request): Promise<Response> {
   } catch (error) {
     if (error instanceof Rejected) return reply(400, error.message);
     console.error("Careers application failed:", error);
+    
+    // Send the actual error message to the browser so we can debug it
+    const errorMessage = error instanceof Error ? error.message : String(error);
     return reply(
       502,
-      "Your application didn't send. Please try again, or email your CV to hr@manyait.com.",
+      `Your application didn't send. Error details: ${errorMessage}`,
     );
   }
 }
