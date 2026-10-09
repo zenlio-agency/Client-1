@@ -200,33 +200,18 @@ async function fileApplication(
   if (!contact?.id) throw new Error("HighLevel returned no contact id.");
 
   const upload = new FormData();
+  // For the dedicated custom field upload endpoint, GHL expects 'id' and 'file'
+  upload.append("id", cvFieldId);
   upload.append("file", cv, cv.name);
-  upload.append("hosted", "false");
-  upload.append("name", cv.name);
 
-  const uploadRes = (await call("POST", "/medias/upload-file", {
-    body: upload,
-  })) as { fileId?: string; url?: string };
-
-  const cvUrl = uploadRes.url;
-
-  // If the endpoint didn't automatically map it, we force it using PUT
-  if (cvUrl) {
-    try {
-      await call("PUT", `/contacts/${contact.id}`, {
-        json: {
-          customFields: [
-            {
-              id: cvFieldId,
-              key: settings.cvFieldKey,
-              value: [cvUrl],
-            },
-          ],
-        },
-      });
-    } catch (putError) {
-      console.warn("Failed to explicitly map CV URL to contact custom field, but upload succeeded:", putError);
-    }
+  try {
+    await call(
+      "POST",
+      `/locations/${settings.locationId}/customFields/upload?contactId=${contact.id}`,
+      { body: upload },
+    );
+  } catch (uploadError) {
+    console.warn("Failed to upload CV to custom field:", uploadError);
   }
 
   /* Tags go through their own call, which adds to the contact's tags; the
