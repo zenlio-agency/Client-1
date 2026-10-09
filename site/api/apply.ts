@@ -204,15 +204,11 @@ async function fileApplication(
   upload.append("id", cvFieldId);
   upload.append("file", cv, cv.name);
 
-  try {
-    await call(
-      "POST",
-      `/locations/${settings.locationId}/customFields/upload?contactId=${contact.id}`,
-      { body: upload },
-    );
-  } catch (uploadError) {
-    console.warn("Failed to upload CV to custom field:", uploadError);
-  }
+  await call(
+    "POST",
+    `/locations/${settings.locationId}/customFields/upload?contactId=${contact.id}`,
+    { body: upload },
+  );
 
   /* Tags go through their own call, which adds to the contact's tags; the
      upsert's tags would replace them. */
