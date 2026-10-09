@@ -197,20 +197,15 @@ async function fileApplication(
   if (!contact?.id) throw new Error("HighLevel returned no contact id.");
 
   const upload = new FormData();
-  upload.append(`${cvFieldId}_${crypto.randomUUID()}`, cv, cv.name);
-  const uploadQuery = new URLSearchParams({
-    contactId: contact.id,
-  });
-  
-  const uploadRes = (await call(
-    "POST",
-    `/locations/${settings.locationId}/customFields/upload?${uploadQuery}`,
-    { body: upload }
-  )) as { uploadedFiles?: Record<string, string>; meta?: any[] };
+  upload.append("file", cv, cv.name);
+  upload.append("hosted", "false");
+  upload.append("name", cv.name);
 
-  const cvUrl =
-    uploadRes.meta?.[0]?.url ||
-    (uploadRes.uploadedFiles ? Object.values(uploadRes.uploadedFiles)[0] : null);
+  const uploadRes = (await call("POST", "/medias/upload-file", {
+    body: upload,
+  })) as { fileId?: string; url?: string };
+
+  const cvUrl = uploadRes.url;
 
   if (cvUrl) {
     await call("PUT", `/contacts/${contact.id}`, {
@@ -219,7 +214,6 @@ async function fileApplication(
           {
             id: cvFieldId,
             key: settings.cvFieldKey,
-            value: [cvUrl],
             field_value: [cvUrl],
           },
         ],
