@@ -27,7 +27,7 @@ export const clientLogo = defineType({
       type: "string",
       options: {
         list: [
-          { title: "Banking & Financial Services", value: "banking" },
+          { title: "Banking & Finance", value: "banking" },
           {
             title: "Telecommunications, Healthcare and Energy",
             value: "telecom-healthcare-energy",

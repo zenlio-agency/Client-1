@@ -12,16 +12,9 @@ import Fieldset from "@/components/form/Fieldset.astro";
 import Choice from "@/components/form/Choice.astro";
 import SocialLinks from "@/components/global/SocialLinks.astro";
 import arrow from "@/assets/icons/ui-arrow.svg";
-import {
-  CAPABILITIES,
-  INDUSTRIES,
-  CTA,
-  HUBS,
-  COMPANY_CONTACT,
-  CONTACT_TRACKER,
-  tbc,
-} from "@/data/site.ts";
+import { CONTACT_TRACKER, tbc } from "@/data/site.ts";
 import { LEGAL } from "@/data/legal.ts";
+import * as content from "@/sanity/content.ts";
 
 interface Props {
   /** Set to `false` to omit the component. */
@@ -38,6 +31,26 @@ interface Props {
 const { render = true, headingTag = "h1", variant = "page" } = Astro.props;
 const cardTag = headingTag === "h1" ? "h2" : "h3";
 const isHome = variant === "home";
+
+const [CAPABILITIES, INDUSTRIES, HUBS, settingsDoc, homeDoc, contactPage] =
+  await Promise.all([
+    content.capabilities(),
+    content.industries(),
+    content.hubs(),
+    content.settings(),
+    content.home(),
+    content.page("page-contact"),
+  ]);
+const { cta: CTA, contact: COMPANY_CONTACT } = settingsDoc;
+
+/* The homepage keeps its own wording for this section. */
+const intro = isHome
+  ? homeDoc.sections.contact
+  : {
+      eyebrow: contactPage.hero.eyebrow,
+      heading: contactPage.hero.title,
+      intro: contactPage.hero.lede,
+    };
 
 /* Every answer submits its label, so HighLevel shows readable text. `value`
    is the id a link's ?topic= uses to preselect one. Field names match the
@@ -71,10 +84,6 @@ const roles = [
   { value: "media", label: "Media or an analyst" },
   { value: "other", label: "Something else" },
 ];
-
-const lede = isHome
-  ? "Brief us on your goals and we'll match you with the right team. Expect a reply within 1 business day."
-  : "Share your objectives and we'll bring the right architects and domain leads to the first conversation. Expect a reply within 1 business day.";
 
 const industries = [
   ...INDUSTRIES.map((industry) => ({
@@ -120,7 +129,7 @@ const direct = [
       data-tracker-id={CONTACT_TRACKER.trackingId}
     >
       <div class="contact_intro">
-        <Eyebrow data-reveal>Start a conversation</Eyebrow>
+        <Eyebrow data-reveal>{intro.eyebrow}</Eyebrow>
         <Heading
           tag={headingTag}
           variant={headingTag}
@@ -128,7 +137,7 @@ const direct = [
           data-reveal
           style="--reveal-order: 1"
         >
-          Tell us what you want to build.
+          {intro.heading}
         </Heading>
         <Paragraph
           variant="large"
@@ -136,7 +145,7 @@ const direct = [
           data-reveal
           style="--reveal-order: 2"
         >
-          <Fragment set:html={tbc(lede)} />
+          <Fragment set:html={tbc(intro.intro)} />
         </Paragraph>
         <ol class="contact_next" data-reveal style="--reveal-order: 3">
           {next.map((step, index) => (

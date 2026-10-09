@@ -1,7 +1,8 @@
 ---
 import SectionHeader from "@/components/content/SectionHeader.astro";
 import dots from "@/data/world-dots.json";
-import { HUBS, tbc } from "@/data/site.ts";
+import { tbc } from "@/data/site.ts";
+import { hubs } from "@/sanity/content.ts";
 
 interface Props {
   /** Set to `false` to omit the component. */
@@ -9,6 +10,8 @@ interface Props {
 }
 
 const { render = true } = Astro.props;
+
+const HUBS = await hubs();
 
 /* Same equirectangular grid the dot map was generated on. */
 const project = (lat: number, lon: number) => ({

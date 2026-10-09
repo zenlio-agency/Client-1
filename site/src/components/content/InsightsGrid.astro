@@ -1,14 +1,8 @@
 ---
 import SectionHeader from "@/components/content/SectionHeader.astro";
 import PhotoTile from "@/components/item/PhotoTile.astro";
-import { getCollection } from "astro:content";
-import {
-  byOrder,
-  categorySlug,
-  insightHref,
-  insightPhoto,
-  readMinutes,
-} from "@/utils/insights.ts";
+import { insightHref } from "@/utils/insights.ts";
+import { articles as allArticles, categories, home } from "@/sanity/content.ts";
 
 interface Props {
   /** Set to `false` to omit the component. */
@@ -17,29 +11,24 @@ interface Props {
   intro?: string;
 }
 
-const {
-  render = true,
-  intro = "Field notes from the teams building and running enterprise platforms.",
-} = Astro.props;
+const [articles, topics, { sections }] = await Promise.all([
+  allArticles(),
+  categories(),
+  home(),
+]);
+const header = sections.insights;
 
-const filters = [
-  "All",
-  "AI",
-  "Data",
-  "SAP",
-  "Digital Engineering",
-  "Enterprise Technology",
-];
+const { render = true, intro = header.intro } = Astro.props;
 
-const articles = (await getCollection("insights")).sort(byOrder);
+const filters = [{ title: "All", slug: "all" }, ...topics];
 ---
 
 {
   render && (
     <div class="insights_wrap" data-insights>
       <SectionHeader
-        eyebrow="Insights"
-        heading="Ideas shaping technology, data and AI."
+        eyebrow={header.eyebrow}
+        heading={header.heading}
         intro={intro}
       >
         <div
@@ -53,9 +42,9 @@ const articles = (await getCollection("insights")).sort(byOrder);
               class="insights_filter"
               type="button"
               aria-pressed={index === 0 ? "true" : "false"}
-              data-filter={filter === "All" ? "all" : categorySlug(filter)}
+              data-filter={filter.slug}
             >
-              {filter}
+              {filter.title}
             </button>
           ))}
         </div>
@@ -64,39 +53,37 @@ const articles = (await getCollection("insights")).sort(byOrder);
       <div class="insights_grid">
         {articles.map((article, index) => (
           <article
-            class:list={[
-              "insights_item",
-              article.data.featured && "is-featured",
-            ]}
-            data-category={categorySlug(article.data.category)}
+            class:list={["insights_item", article.featured && "is-featured"]}
+            data-category={article.categorySlug}
             data-reveal
             style={`--reveal-order: ${index % 3}`}
           >
             <PhotoTile
               href={insightHref(article)}
-              photo={insightPhoto(article)}
+              photo={article.photo.src}
+              photoPosition={article.photo.position}
               class="insights_tile"
             >
               {/* Small tiles keep just the category so the line never wraps. */}
               <span class="photo-tile_eyebrow insights_meta" slot="top">
-                <span>{article.data.category}</span>
-                {article.data.featured && (
+                <span>{article.category}</span>
+                {article.featured && (
                   <Fragment>
-                    <span>{article.data.type}</span>
-                    <span>{readMinutes(article)} min read</span>
+                    <span>{article.type}</span>
+                    <span>{article.minutes} min read</span>
                   </Fragment>
                 )}
               </span>
               <h3
                 class:list={[
                   "photo-tile_title",
-                  article.data.featured ? "is-large" : "is-small",
+                  article.featured ? "is-large" : "is-small",
                 ]}
               >
-                {article.data.title}
+                {article.title}
               </h3>
               <Fragment slot="reveal">
-                <p class="photo-tile_text">{article.data.summary}</p>
+                <p class="photo-tile_text">{article.summary}</p>
                 <span class="insights_more">Read article →</span>
               </Fragment>
             </PhotoTile>

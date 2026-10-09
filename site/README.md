@@ -49,21 +49,20 @@ src/
                     [slug]), legal/ (hub, [slug] and privacy-requests)
                     (no CSS)
   content/legal/    one Markdown file per policy (see "Legal pages")
-  content/insights/ one Markdown file per article (see "Insights articles")
-  sanity/           reading content from Sanity (see "Content from Sanity")
+  sanity/           reading content from Sanity (see "Content from Sanity");
+                    content.ts hands each page its words and photos
   components/
     global/         Nav (mega menu and mobile drawer), Footer, Logo
     content/        one component per section, listed below
-  data/site.ts      capabilities, client logos, industries, hubs, nav, CTAs,
-                    the shared team steps and the page-link helpers
-  data/capability-pages.ts, data/industry-pages.ts
-                    copy for each capability and industry page
+  data/site.ts      the fixed sets and their order (capabilities with their
+                    icons, industries, logo rows), nav, button links, the
+                    shared team steps and the page-link helpers
   data/legal.ts     facts every legal page shares, and the footer's legal links
-  data/photos.ts    which photo each tile uses
+  data/photos.ts    photos for the sections whose words are still in code
   styles/base.css   brand tokens, type scale, themes, motion
   assets/           fonts, logo mark and icons
-public/             favicon, social share image, logos/ for client logos,
-                    images/ for photos, and _redirects
+public/             favicon, fallback social image, images/ for the photos in
+                    data/photos.ts, and _redirects
 ```
 
 | #   | Section                       | Component                    | Theme |
@@ -101,13 +100,12 @@ section components, so a new page is mostly copy.
 | `/legal/[slug]` (×6)        | `LegalDocument` (with `LegalHeader`, `LegalToc`, `LegalBody`), `LegalStrip`                                                                                           |
 | `/legal/privacy-requests`   | `LegalHeader`, `PrivacyRequestForm`                                                                                                                                   |
 
-Capability and industry names, lines and slugs come from `src/data/site.ts`,
-so the nav, the bento, the industry cards and pages, the footer and the
-contact form's topic list all stay in step. Each page's longer copy lives in
-`src/data/capability-pages.ts` or `src/data/industry-pages.ts`, keyed by the
-same `id`. `capabilityHref` and `industryHref` build the page links, and
-`TEAM_STEPS` holds the four steps from skills brief to Build-Operate-Transfer
-shown on the About and capability pages.
+Capability and industry names, lines, photos and page copy are edited in
+Sanity, so the nav, the bento, the industry cards and pages, the footer and
+the contact form's topic list all stay in step. Which capabilities and
+industries exist, and their order, is fixed in `src/data/site.ts`;
+`capabilityHref` and `industryHref` build the page links, and `TEAM_STEPS`
+holds the delivery lifecycle shown on the About page.
 
 ## Legal pages
 
@@ -147,30 +145,41 @@ reveals, and they print without the nav, footer or contents list.
 
 ## Insights articles
 
-Each article is a Markdown file in `src/content/insights/`, served at
-`/insights/<file name>`, and the Insights grid on the homepage and on
-`/insights` lists them in `order`. The front matter (schema in
-`src/content.config.ts`) sets the title, the one-line summary, the
-category (which must match a grid filter), the type, the photo from
-`public/images/`, the publish date, the "In short" points and the
-capability the closing call to action links to. The read time is worked
-out from the text. Articles follow the copy rules below: no client names,
-statistics or partner claims until they're confirmed.
-
-To add an article, copy an existing file, change the front matter and
-write the body with `##` headings. Tables and numbered steps work as
-normal Markdown.
+Articles are written in the Studio (Insights), served at
+`/insights/<address>`, and the Insights grid on the homepage and on
+`/insights` lists them in their set order, with a filter per category. Each
+has a title, a one-line summary, a category, a type, a photo, a publish
+date, the "In short" points, the body (headings, lists, tables and
+callouts) and the capability the closing call to action links to. The read
+time is worked out from the text. Articles follow the copy rules below: no
+client names, statistics or partner claims until they're confirmed.
 
 ## Content from Sanity
 
 HR and marketing edit content in the Sanity Studio (`../studio`). The site
 reads it at build time from project `n3hghywr`, dataset `production`.
-Visitors never load anything from Sanity: images are copied into the build.
+Visitors never load anything from Sanity: photos are copied into the build,
+and SVG logos are checked and served from `/media/`.
 
-Pages move from the data files and Markdown to Sanity one area at a time.
-Until an area moves, its Sanity content is fetched but not shown, and the
-pages build exactly as before.
+**What comes from Sanity:** site settings (contacts, button labels, social
+profiles, footer line, default description and social image), the homepage,
+the header, questions and search text of About, Careers, Contact and the
+Capabilities, Industries and Insights pages, the five capabilities, the five
+industries, the two offices, the Insights articles and categories, the job
+openings, the client logos and the ecosystem company. **What stays in code:**
+the design and layout, the fixed sets and their order, and the sections the
+Studio has no fields for, such as About's story and commitments, the
+operating models, the career tracks and the legal pages.
 
+**Publishing:** a Sanity webhook calls the host's deploy hook whenever
+something is published, so the site rebuilds and the change is live in
+about two minutes. Setting it up is described in `../studio/README.md`
+("Publishing updates the site").
+
+- `src/sanity/content.ts` reads each collection once per build and shapes it
+  for the components. Something the design can't do without, such as one of
+  the five capabilities, stops the build if it's missing, so the live site
+  stays as it was.
 - `src/sanity/queries.ts` holds every query. After changing a query or a
   Studio schema, run `npm run typegen` in `studio/` to regenerate
   `src/sanity/types.ts`.
@@ -183,15 +192,16 @@ pages build exactly as before.
   was.
 - Images: `<SanityImg>` gives a responsive image and `sanityPhoto()` a
   single file for components that take a plain path. Both copy the image
-  into the build with the editor's crop and hotspot.
+  into the build with the editor's crop and hotspot. `svgFile()` copies an
+  SVG as it is, and stops the build if the file could run a script or load
+  anything else.
 - Rich text: `portableTextToHtml()` gives the same HTML Astro makes from
-  Markdown, so `ArticleText`, `RichText` and `FaqList` take it unchanged.
-- `npm run seed:build` (after `npm run build`) regenerates
-  `studio/seed/production.ndjson`, the import of today's content, from the
-  data files, the Markdown articles and the page files. Copy typed into
-  component markup lives in `scripts/seed/page-copy.mjs`. It stops if any
-  word doesn't match the built pages, an image is missing or a claim is
-  marked confirmed. `npm run seed` in `studio/` imports it.
+  Markdown, so `ArticleText` and `RichText` take it unchanged;
+  `inlineHtml()` gives the shorter form `FaqList` answers use.
+- `studio/seed/production.ndjson` (with its photos in `studio/seed/files/`)
+  is the content as it was when the pages moved to Sanity. It's only used
+  to fill an empty dataset or to restore that starting point; see
+  `../studio/README.md`.
 - `npm run build` ends with `scripts/check-dist.mjs`, which fails the build
   if any page links to Sanity or contains the read token.
 - Every build also runs the content check
@@ -219,11 +229,11 @@ so there are no requests to Google Fonts.
 
 - Sections fade and rise into view as they scroll in, in a short stagger.
 - Pages cross-fade with native view transitions, and the nav stays still.
-- The hero reel scrolls five captioned photos (`src/assets/photos/reel-*`)
-  and lifts one at a time. It sits at the fold, so it fades in on load rather
-  than on scroll, and the hero copy is sized so the top quarter of its cards
-  always shows above the fold. To change a photo, replace the file and keep
-  its name, or edit the `photos` list in `CapabilityReel.astro`.
+- The hero reel scrolls five captioned photos and lifts one at a time. It
+  sits at the fold, so it fades in on load rather than on scroll, and the
+  hero copy is sized so the top quarter of its cards always shows above the
+  fold. The photos and captions are edited in the Studio (Homepage → Photo
+  reel).
 - The reel and the two client-logo rows scroll as marquees. They pause on
   hover, a tap or click stops or restarts them, and each has a pause button
   that shows only when the keyboard reaches it.
@@ -263,14 +273,15 @@ build.
 
 The open items:
 
-- **Figures.** Years, enterprises served, talent network size, weeks to a
-  productive team, countries, industry percentages and the reply time. Each
-  capability and industry page also has four "Outcomes to expect" figures.
-- **Hero photos.** The five reel photos in `src/assets/photos/` were
-  supplied for the redesign; confirm the licence covers use on the live site.
-  The other photos, in `public/images/`, are free Unsplash photos saved as
-  WebP so no page loads anything from another company's servers. Replace
-  them with ManyaIT's own photography when it's ready.
+- **Figures.** The six homepage figures (Homepage → Figures in the Studio)
+  stay unconfirmed until someone records who confirmed each one, when, and
+  the evidence. An industry's headline figure shows on the Industries page
+  once one is entered.
+- **Hero photos.** The five reel photos were supplied for the redesign;
+  confirm the licence covers use on the live site. The other photos are free
+  Unsplash photos saved as WebP. Replace them with ManyaIT's own photography
+  when it's ready: in the Studio for capabilities, industries, articles,
+  page headers and the reel, and in `public/images/` for the rest.
 - **Inner-page facts.** On the About page, the founding year and early
   milestones. On the careers page, health and wellbeing benefits, the length
   of the joining process and the careers email. The platforms, tools and
@@ -278,27 +289,25 @@ The open items:
   partnerships; check each list reflects the teams ManyaIT can field. The
   healthcare FAQ says business associate agreements are put in place where
   needed; confirm that holds.
-- **Hub details.** The Dallas phone and email, and the company email,
-  careers email and phone shown beside the contact form (`COMPANY_CONTACT`),
-  come from the contact page on manyait.com. Hyderabad's phone and email are
-  still placeholders (`HUBS` in `src/data/site.ts`).
-- **Client logos.** `CLIENT_LOGO_ROWS` in `src/data/site.ts` sets the two
-  marquee rows: banking and financial services first, then telecom,
-  healthcare and energy. The files in `public/logos/` are the companies'
-  official logos from Wikimedia Commons. Logos are trademarks, so get written
-  permission from each company before launch and remove any that can't be
-  cleared. To add one, put the file in `public/logos/` and add its `name` and
-  `src` to a row. Logos show in grey and turn to full colour on hover.
-- **Ecosystem.** The homepage band shows one company, Siri Data Analytics
-  (`ECOSYSTEM` in `src/data/site.ts`), with the logo from its website in
-  `public/logos/`. Confirm the listing, its one-line description and the
-  logo in writing before launch. To add a company, add an entry to
-  `ECOSYSTEM`; cards stack in the right-hand column.
+- **Office details.** The phones and emails of both offices, and the
+  company email, careers email and phone beside the contact form, are in the
+  Studio (Locations, and Site settings). An empty phone or email shows as a
+  placeholder.
+- **Client logos.** Two marquee rows, set in the Studio (Proof & claims →
+  Client logos): banking and finance first, then telecom, healthcare and
+  energy. The logos are the companies' official logos from Wikimedia
+  Commons. Logos are trademarks, so get written permission from each company
+  before launch, record it in the Studio, and remove any that can't be
+  cleared. Logos show in grey and turn to full colour on hover.
+- **Ecosystem.** The homepage band shows one company, Siri Data Analytics,
+  with the logo from its website (Proof & claims → Ecosystem). Confirm the
+  listing, its one-line description and the logo in writing before launch.
 - **Forms.** The contact form (on `/contact` and at the foot of the homepage,
   both from `ContactConversation`) and the role finder are not connected to
   anything, and each one says so when used. Give the contact `Form` an
-  `action` endpoint, which covers both pages, and replace the sample roles in
-  `CareersOpenings` with the live job feed. The privacy request form on
+  `action` endpoint, which covers both pages. The job openings are the ten
+  sample roles, now in the Studio (Careers): replace them with real roles,
+  each with its reference code and posting date. The privacy request form on
   `/legal/privacy-requests` needs an endpoint too.
 - **Legal pages.** The six policies are drafts written from the legal pack
   design. Counsel in the US and India must write or approve the final
@@ -308,13 +317,14 @@ The open items:
   governing law, which tools receive form data, and Cloudflare's cookies).
   Before release, load the site in a fresh browser and confirm no cookie or
   third-party request appears that the Cookie Notice doesn't mention.
-- **Insights.** The five articles are drafts. Each shows `[Publish date]`
-  until `published` is set, and all are credited to "The ManyaIT team". The
-  SAP article cites SAP's public maintenance dates (end of 2027, extended to
-  end of 2030); confirm before launch.
-- **Links.** In `SOCIAL`, Instagram links to the account on manyait.com;
-  LinkedIn, X, Facebook and YouTube are `#` until their addresses arrive.
-  The footer, the menu and the contact section all read from `SOCIAL`.
+- **Insights.** The five articles are drafts, all credited to "The ManyaIT
+  team". An article without a publish date shows `[Publish date]`. The SAP
+  article cites SAP's public maintenance dates (end of 2027, extended to end
+  of 2030); confirm before launch.
+- **Links.** In Site settings, Instagram links to the account on
+  manyait.com; LinkedIn, X, Facebook and YouTube have no address yet, so
+  their icons show without a link. The footer, the menu and the contact
+  section all read the same list.
 - **Domain.** `SITE_URL` in `src/consts.ts` is `https://manyait.com`.
   Sitemap and canonical URLs use it.
 

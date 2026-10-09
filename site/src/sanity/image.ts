@@ -50,8 +50,9 @@ export function imageSource(image: SanityImage, aspectRatio?: number) {
   const croppedWidth = asset.width * (1 - left - right);
   const croppedHeight = asset.height * (1 - top - bottom);
   const ratio = aspectRatio ?? croppedWidth / croppedHeight;
+  /* The small allowance stops float error from losing a pixel. */
   const width = Math.floor(
-    Math.min(MAX_WIDTH, croppedWidth, croppedHeight * ratio),
+    Math.min(MAX_WIDTH, croppedWidth, croppedHeight * ratio) + 1e-6,
   );
   const height = Math.round(width / ratio);
   const url = builder.image(image).width(width).height(height).quality(90);
@@ -109,4 +110,96 @@ export async function sanityPhoto(
     alt: altText(image),
     position: objectPosition(image),
   };
+}
+
+/* ---------------------------------------------------------------------------
+ * SVG files, such as client logos, are copied into the build as they are,
+ * since there is nothing to resize. A logo file is shown with <img> but can
+ * also be opened on its own, so anything that could run or load something
+ * stops the build instead.
+ */
+const UNSAFE_SVG: [RegExp, string][] = [
+  [/<script\b/i, "a script"],
+  [/\son[a-z]+\s*=/i, "an event handler"],
+  [/<foreignObject\b/i, "embedded HTML"],
+  [/javascript:/i, "a javascript: link"],
+  [/<(?:iframe|embed|object)\b/i, "an embedded document"],
+  [/\bhref\s*=\s*["'](?!#|data:image\/)/i, "a link to another file"],
+  [/url\(\s*["']?\s*(?!#|data:image\/)/i, "a link to another file"],
+  [/@import\b/i, "an imported style sheet"],
+];
+
+/**
+ * Removes the DOCTYPE that design tools add, filling in its entities when
+ * they are plain text (Illustrator declares its namespaces this way).
+ */
+function resolveDoctype(svg: string, id: string): string {
+  const doctype = svg.match(/<!DOCTYPE[^[>]*(?:\[([\s\S]*?)\])?\s*>/i);
+  if (!doctype) return svg;
+  let text = svg.replace(doctype[0], "");
+  for (const [, name, value] of (doctype[1] ?? "").matchAll(
+    /<!ENTITY\s+([\w.-]+)\s+"([^"]*)"\s*>/g,
+  )) {
+    if (/[&<%]/.test(value)) {
+      throw new Error(`SVG ${id}: entity "${name}" isn't plain text.`);
+    }
+    text = text.replaceAll(`&${name};`, value);
+  }
+  if (/<!ENTITY/i.test(text)) {
+    throw new Error(`SVG ${id}: it declares entities the site can't check.`);
+  }
+  return text;
+}
+
+export type SvgFile = {
+  /** Where the file is served on this site. */
+  path: string;
+  /** The file name under `/media/`. */
+  file: string;
+  /** The file itself, checked. */
+  text: string;
+  /** Width ÷ height, from the viewBox, else the width and height. */
+  ratio?: number;
+};
+
+const svgFiles = new Map<string, Promise<SvgFile>>();
+
+/** An SVG from Sanity, fetched once and checked, to serve from `/media/`. */
+export function svgFile(asset: NonNullable<SanityImage["asset"]>) {
+  const { _id: id, url } = asset;
+  if (!url) throw new Error(`SVG ${id} has no file.`);
+  if (!svgFiles.has(id)) {
+    svgFiles.set(
+      id,
+      (async () => {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`SVG ${id}: Sanity answered ${response.status}.`);
+        }
+        const text = resolveDoctype(await response.text(), id);
+        for (const [pattern, what] of UNSAFE_SVG) {
+          if (pattern.test(text)) {
+            throw new Error(
+              `SVG ${id} contains ${what}, which the site doesn't allow. Upload it again without it, or as a PNG.`,
+            );
+          }
+        }
+        const box = text
+          .match(/viewBox\s*=\s*"([^"]+)"/)?.[1]
+          .split(/[\s,]+/)
+          .map(Number);
+        const width = box?.[2] ?? Number(text.match(/\bwidth="([\d.]+)/)?.[1]);
+        const height =
+          box?.[3] ?? Number(text.match(/\bheight="([\d.]+)/)?.[1]);
+        const file = `${id.replace(/^image-/, "").replace(/-svg$/, "")}.svg`;
+        return {
+          path: `/media/${file}`,
+          file,
+          text,
+          ratio: width && height ? width / height : undefined,
+        };
+      })(),
+    );
+  }
+  return svgFiles.get(id)!;
 }

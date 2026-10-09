@@ -6,7 +6,8 @@ import Icon from "@/components/media/Icon.astro";
 import Accordion from "@/components/interactive/Accordion.astro";
 import AccordionItem from "@/components/interactive/AccordionItem.astro";
 import arrow from "@/assets/icons/ui-arrow.svg";
-import { CTA, tbc } from "@/data/site.ts";
+import { tbc } from "@/data/site.ts";
+import { settings } from "@/sanity/content.ts";
 
 interface Props {
   /** Set to `false` to omit the component. */
@@ -29,7 +30,7 @@ const {
   heading = "Questions we hear often",
   intro = "Can't find what you're looking for? Ask us directly.",
   items = [],
-  link = CTA.primary,
+  link = (await settings()).cta.primary,
 } = Astro.props;
 ---
 

@@ -9,12 +9,12 @@ import IndustryCards from "@/components/content/IndustryCards.astro";
 import InsightsGrid from "@/components/content/InsightsGrid.astro";
 import EcosystemCards from "@/components/content/EcosystemCards.astro";
 import ContactConversation from "@/components/content/ContactConversation.astro";
+import { home } from "@/sanity/content.ts";
+
+const { seo } = await home();
 ---
 
-<Layout
-  title="Technology & Talent Partners"
-  description="ManyaIT is a technology and talent partner that helps global enterprises build and scale capability centers with AI-ready engineering teams."
->
+<Layout title={seo.title} description={seo.description}>
   {/* Hero */}
   <Section paddingTop="none" paddingBottom="small">
     <HeroHome />

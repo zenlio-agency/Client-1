@@ -2,12 +2,12 @@
 import Layout from "@/layouts/BaseLayout.astro";
 import Section from "@/components/wrapper/Section.astro";
 import ContactConversation from "@/components/content/ContactConversation.astro";
+import { page } from "@/sanity/content.ts";
+
+const { seo } = await page("page-contact");
 ---
 
-<Layout
-  title="Start a Conversation"
-  description="Tell ManyaIT what you want to build. We'll bring the right architects to the first conversation and map the route from strategy to production."
->
+<Layout title={seo.title} description={seo.description}>
   {/* Conversation */}
   <Section paddingTop="small">
     <ContactConversation />

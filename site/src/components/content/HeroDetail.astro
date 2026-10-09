@@ -31,6 +31,8 @@ interface Props {
   photo?: string;
   /** Photo alt text. Omit for decorative photos. */
   photoAlt?: string;
+  /** The photo's focal point, as a CSS `object-position`. */
+  photoPosition?: string;
   /** Icon badge over the photo. */
   icon?: SvgComponent;
 }
@@ -46,6 +48,7 @@ const {
   secondary,
   photo,
   photoAlt = "",
+  photoPosition,
   icon,
 } = Astro.props;
 ---
@@ -126,6 +129,7 @@ const {
           <img
             src={photo}
             alt={photoAlt}
+            style={photoPosition && `object-position: ${photoPosition}`}
             loading="eager"
             fetchpriority="high"
             decoding="async"

@@ -9,29 +9,30 @@ import ProcessSteps from "@/components/content/ProcessSteps.astro";
 import GlobalPresence from "@/components/content/GlobalPresence.astro";
 import FaqList from "@/components/content/FaqList.astro";
 import CtaFinal from "@/components/content/CtaFinal.astro";
-import { CTA, TEAM_STEPS } from "@/data/site.ts";
+import { TEAM_STEPS } from "@/data/site.ts";
 import { ABOUT_PHOTOS } from "@/data/photos.ts";
+import { page, settings } from "@/sanity/content.ts";
+
+const [{ hero, faqIntro, faq, seo }, { cta: CTA }] = await Promise.all([
+  page("page-about"),
+  settings(),
+]);
 ---
 
-<Layout
-  title="About ManyaIT | Technology, Data & AI Engineering Partner"
-  description="ManyaIT brings architecture, data and product engineering together in one accountable team, taking enterprise programs from strategy to production."
->
+<Layout title={seo.title} description={seo.description}>
   {/* Hero */}
   <Section paddingTop="small">
     <HeroDetail
       crumbs={[{ label: "Home", href: "/" }, { label: "About" }]}
-      eyebrow="About ManyaIT"
-      title="The engineering partner behind platforms that perform."
-      lede="ManyaIT is a technology, data and AI engineering partner. We bring architecture discipline, data depth and product engineering together in one accountable team, taking enterprise programs from strategy to production and running them with the rigor regulated industries demand."
-      points={[
-        "Architecture-led from day one",
-        "Data at the core of every program",
-        "Accountable from strategy to run",
-      ]}
+      eyebrow={hero.eyebrow}
+      title={hero.title}
+      lede={hero.lede}
+      points={hero.points}
       primary={CTA.primary}
       secondary={{ label: "Explore Capabilities", href: "/capabilities" }}
-      photo={ABOUT_PHOTOS.hero}
+      photo={hero.photo?.src}
+      photoAlt={hero.photo?.alt}
+      photoPosition={hero.photo?.position}
     />
   </Section>
 
@@ -246,45 +247,9 @@ import { ABOUT_PHOTOS } from "@/data/photos.ts";
   {/* FAQ */}
   <Section theme="tint">
     <FaqList
-      heading="About ManyaIT, answered"
-      intro="Can't find what you're looking for? Ask us directly."
-      items={[
-        {
-          question: "What does ManyaIT do?",
-          answer:
-            "ManyaIT is a technology, data and AI engineering partner. We design, build, modernize and run critical platforms across data and analytics, SAP and enterprise data, applied AI, agentic automation and digital product engineering, with one team accountable from strategy to production.",
-        },
-        {
-          question: "How can we work with ManyaIT?",
-          answer:
-            "Start with a strategy and readiness assessment, commission a defined initiative delivered against agreed outcomes, give a product or platform roadmap to a persistent team that owns it, or have us run platforms under service levels with a path to bring operations in-house.",
-        },
-        {
-          question: "Can your teams work inside our engineering organization?",
-          answer:
-            "Yes. Our teams work inside your repositories, toolchains and ceremonies, follow your definition of done and report through your governance, while ManyaIT stays accountable for delivery quality and continuity.",
-        },
-        {
-          question: "Can you take a program from strategy to production?",
-          answer:
-            "Yes. We cover assessment, roadmap, architecture, engineering, testing, deployment and ongoing operations, with one accountable team and clear governance throughout.",
-        },
-        {
-          question: "How do you ensure quality and security?",
-          answer:
-            "Architecture reviews, code reviews, automated testing and DevSecOps practices are built into every sprint. Teams work within your security, privacy and compliance controls and report against the measures you define.",
-        },
-        {
-          question: "How do your teams work across time zones?",
-          answer:
-            "Client leadership works in your business hours, and engineering carries the work forward around the clock. A daily overlap window is reserved for decisions, and every handover follows a set format. Office addresses are listed at the foot of every page.",
-        },
-        {
-          question: "Which industries do you serve?",
-          answer:
-            "Banking and financial services, telecommunications, healthcare, energy and retail. Our teams understand the regulation, core systems and operating pressures of each sector.",
-        },
-      ]}
+      heading={faqIntro.heading || undefined}
+      intro={faqIntro.intro || undefined}
+      items={faq}
     />
   </Section>
 

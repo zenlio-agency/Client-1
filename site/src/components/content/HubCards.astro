@@ -2,7 +2,8 @@
 import Button from "@/components/Button.astro";
 import Icon from "@/components/media/Icon.astro";
 import arrow from "@/assets/icons/ui-arrow.svg";
-import { HUBS, tbc } from "@/data/site.ts";
+import { tbc } from "@/data/site.ts";
+import { hubs } from "@/sanity/content.ts";
 
 interface Props {
   /** Set to `false` to omit the component. */
@@ -10,6 +11,8 @@ interface Props {
 }
 
 const { render = true } = Astro.props;
+
+const HUBS = await hubs();
 ---
 
 {

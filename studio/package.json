@@ -15,7 +15,8 @@
     "validate": "sanity schema validate",
     "check": "tsc --noEmit",
     "preflight": "sanity exec scripts/preflight.ts --with-user-token",
-    "seed": "sanity exec scripts/preflight.ts --with-user-token && sanity datasets import seed/production.ndjson --dataset production --missing"
+    "seed": "sanity exec scripts/preflight.ts --with-user-token && sanity datasets import seed/production.ndjson --dataset production --missing",
+    "refresh": "sanity exec scripts/preflight.ts --with-user-token && sanity datasets import seed/production.ndjson --dataset production --replace && sanity exec scripts/clear-old-drafts.ts --with-user-token"
   },
   "dependencies": {
     "@sanity/icons": "^5.2.3",

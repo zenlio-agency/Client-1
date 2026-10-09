@@ -1,8 +1,8 @@
 ---
-import { readFileSync } from "node:fs";
 import Heading from "@/components/typography/Heading.astro";
 import Button from "@/components/Button.astro";
-import { CLIENT_LOGO_ROWS, tbc } from "@/data/site.ts";
+import { tbc } from "@/data/site.ts";
+import { home, logoRows } from "@/sanity/content.ts";
 
 interface Props {
   /** Set to `false` to omit the component. */
@@ -14,30 +14,19 @@ const { render = true } = Astro.props;
 /* One row per entry, moving in alternate directions. Each panel repeats its
    logos until it is wider than a large screen, so the loop never shows a
    gap. */
-const rows = CLIENT_LOGO_ROWS.filter((row) => row.logos.length);
+const [allRows, { logosHeading }] = await Promise.all([logoRows(), home()]);
+const rows = allRows.filter((row) => row.logos.length);
 const fill = (logos: (typeof rows)[number]["logos"]) =>
   Array.from({ length: Math.ceil(12 / logos.length) }, () => logos).flat();
 
 /* Logos of very different shapes read as the same size when they cover about
-   the same area, so each height comes from the SVG's own aspect ratio. A file
-   that can't be read keeps the default height. */
+   the same area, so each height comes from the file's own aspect ratio. A
+   logo whose shape isn't known keeps the default height. */
 const AREA = 14.5;
-const heightOf = (src?: string) => {
-  try {
-    const svg = readFileSync(`${process.cwd()}/public${src}`, "utf8");
-    const box = svg
-      .match(/viewBox="([^"]+)"/)?.[1]
-      .split(/[\s,]+/)
-      .map(Number);
-    if (!box || !box[2] || !box[3]) return undefined;
-    const rem = Math.min(
-      Math.max(Math.sqrt(AREA / (box[2] / box[3])), 1.1),
-      2.75,
-    );
-    return `--_logo-height: ${rem.toFixed(2)}rem`;
-  } catch {
-    return undefined;
-  }
+const heightOf = (ratio?: number) => {
+  if (!ratio) return undefined;
+  const rem = Math.min(Math.max(Math.sqrt(AREA / ratio), 1.1), 2.75);
+  return `--_logo-height: ${rem.toFixed(2)}rem`;
 };
 ---
 
@@ -52,7 +41,9 @@ const heightOf = (src?: string) => {
           maxWidth={30}
           data-reveal
         >
-          Trusted by global enterprises. <strong>Powered by our talent.</strong>
+          {/* The space sits in the text: Astro drops one between tags. */}
+          {`${logosHeading.start} `}
+          <strong>{logosHeading.emphasis}</strong>
         </Heading>
         <Button
           variant="play"
@@ -87,7 +78,7 @@ const heightOf = (src?: string) => {
                           class="client-logos_img"
                           src={logo.src}
                           alt={logo.name}
-                          style={heightOf(logo.src)}
+                          style={heightOf(logo.ratio)}
                           loading="lazy"
                           decoding="async"
                         />

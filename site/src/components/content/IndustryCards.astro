@@ -4,8 +4,8 @@ import Button from "@/components/Button.astro";
 import Icon from "@/components/media/Icon.astro";
 import PhotoTile from "@/components/item/PhotoTile.astro";
 import arrow from "@/assets/icons/ui-arrow.svg";
-import { INDUSTRIES, industryHref } from "@/data/site.ts";
-import { INDUSTRY_PHOTOS } from "@/data/photos.ts";
+import { industryHref } from "@/data/site.ts";
+import { home, industries } from "@/sanity/content.ts";
 
 interface Props {
   /** Set to `false` to omit the component. */
@@ -13,14 +13,18 @@ interface Props {
 }
 
 const { render = true } = Astro.props;
+
+const [INDUSTRIES, { sections }] = await Promise.all([industries(), home()]);
+const intro = sections.industries;
 ---
 
 {
   render && (
     <div class="industry-cards_wrap">
       <SectionHeader
-        eyebrow="Industries"
-        heading="Talent that already knows your industry."
+        eyebrow={intro.eyebrow}
+        heading={intro.heading}
+        intro={intro.intro || undefined}
       >
         <Button
           slot="action"
@@ -42,7 +46,8 @@ const { render = true } = Astro.props;
           >
             <PhotoTile
               href={industryHref(industry)}
-              photo={INDUSTRY_PHOTOS[industry.id]}
+              photo={industry.photo?.src}
+              photoPosition={industry.photo?.position}
               class="industry-cards_tile"
             >
               <span class="photo-tile_eyebrow" slot="top">

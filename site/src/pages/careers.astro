@@ -6,9 +6,14 @@ import FeatureGrid from "@/components/content/FeatureGrid.astro";
 import ProcessSteps from "@/components/content/ProcessSteps.astro";
 import FaqList from "@/components/content/FaqList.astro";
 import CtaFinal from "@/components/content/CtaFinal.astro";
-import { CAPABILITIES, capabilityHref } from "@/data/site.ts";
-import { LEGAL, mailLink } from "@/data/legal.ts";
+import { capabilityHref } from "@/data/site.ts";
 import { JOIN_STEPS, TALENT_NETWORK, applyHref } from "@/data/careers.ts";
+import { capabilities, page } from "@/sanity/content.ts";
+
+const [CAPABILITIES, { faqIntro, faq, seo }] = await Promise.all([
+  capabilities(),
+  page("page-careers"),
+]);
 
 /* One line per career track, keyed by capability id. */
 const tracks: Record<string, string> = {
@@ -25,10 +30,7 @@ const tracks: Record<string, string> = {
 };
 ---
 
-<Layout
-  title="Careers"
-  description="Engineer the data, AI and enterprise platforms leading organizations run on, with real ownership and a path from engineer to lead and architect."
->
+<Layout title={seo.title} description={seo.description}>
   {/* Openings */}
   <Section paddingTop="small" id="careers">
     <CareersOpenings />
@@ -69,42 +71,13 @@ const tracks: Record<string, string> = {
   {/* FAQ */}
   <Section id="faq">
     <FaqList
-      heading="Careers, answered"
-      intro="Still curious? Our people team is happy to help."
+      heading={faqIntro.heading || undefined}
+      intro={faqIntro.intro || undefined}
       link={{
         label: "Register Your Interest",
         href: applyHref(TALENT_NETWORK.slug),
       }}
-      items={[
-        {
-          question: "Does ManyaIT charge a fee to apply?",
-          answer: `Never. ManyaIT does not charge a fee at any stage. If anyone asks you for money in our name, report it to ${mailLink(LEGAL.careersEmail)}. Our <a href="/legal/job-offer-fraud">Job Offer Fraud Notice</a> explains how to check an offer.`,
-        },
-        {
-          question: "Do I need experience in a specific industry?",
-          answer:
-            "No. Strong engineering fundamentals matter most. You'll learn the industry alongside your team, with mentors who know it well.",
-        },
-        {
-          question: "Are roles remote, hybrid or on-site?",
-          answer:
-            "It depends on the team and the program. Every opening lists its working mode.",
-        },
-        {
-          question: "What happens when I register my interest?",
-          answer: `You stay on our radar without applying for a specific role. Our people team reaches out when a relevant role opens. We keep your profile for ${LEGAL.talentRetention} unless you renew it; our <a href="/legal/applicant-privacy">Applicant Privacy Notice</a> has the details.`,
-        },
-        {
-          question: "Can I apply for more than one role?",
-          answer:
-            "Yes. Apply for every role that fits, or register your interest and we'll contact you as relevant roles open.",
-        },
-        {
-          question: "How long does the process take?",
-          answer:
-            "It depends on the role and the team. We agree the next steps with you after your first conversation and keep you updated at every step.",
-        },
-      ]}
+      items={faq}
     />
   </Section>
 

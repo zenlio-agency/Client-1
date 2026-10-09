@@ -1,13 +1,8 @@
 ---
 import Logo from "@/components/global/Logo.astro";
 import SocialLinks from "@/components/global/SocialLinks.astro";
-import {
-  CAPABILITIES,
-  INDUSTRIES,
-  HUBS,
-  capabilityHref,
-  industryHref,
-} from "@/data/site.ts";
+import { capabilityHref, industryHref } from "@/data/site.ts";
+import { capabilities, hubs, industries, settings } from "@/sanity/content.ts";
 import { LEGAL_LINKS } from "@/data/legal.ts";
 import { SITE_NAME } from "@/consts.ts";
 
@@ -17,6 +12,13 @@ interface Props {
 }
 
 const { render = true } = Astro.props;
+
+const [CAPABILITIES, INDUSTRIES, HUBS, { footerLine }] = await Promise.all([
+  capabilities(),
+  industries(),
+  hubs(),
+  settings(),
+]);
 
 const company = [
   { label: "About", href: "/about" },
@@ -35,10 +37,7 @@ const company = [
             <a class="footer_logo" href="/" aria-label={SITE_NAME}>
               <Logo />
             </a>
-            <p class="footer_line">
-              Technology, data and AI engineering partner for global
-              enterprises, from strategy to production.
-            </p>
+            <p class="footer_line">{footerLine}</p>
           </div>
 
           <nav class="footer_cols" aria-label="Footer">

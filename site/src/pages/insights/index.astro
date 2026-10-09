@@ -5,28 +5,33 @@ import HeroDetail from "@/components/content/HeroDetail.astro";
 import InsightsGrid from "@/components/content/InsightsGrid.astro";
 import FeatureGrid from "@/components/content/FeatureGrid.astro";
 import CtaFinal from "@/components/content/CtaFinal.astro";
-import { CAPABILITIES, CTA, capabilityHref } from "@/data/site.ts";
-import { INSIGHT_PHOTOS } from "@/data/photos.ts";
+import { capabilityHref } from "@/data/site.ts";
+import { capabilities, page, settings } from "@/sanity/content.ts";
+
+const [CAPABILITIES, { hero, seo }, { cta: CTA }] = await Promise.all([
+  capabilities(),
+  page("page-insights"),
+  settings(),
+]);
 
 const capability = (id: string) =>
   capabilityHref(CAPABILITIES.find((cap) => cap.id === id)!);
 ---
 
-<Layout
-  title="Insights"
-  description="Perspectives, guides and field notes on architecture, data, SAP, AI and engineering from the teams building and running enterprise platforms."
->
+<Layout title={seo.title} description={seo.description}>
   {/* Hero */}
   <Section paddingTop="small">
     <HeroDetail
       crumbs={[{ label: "Home", href: "/" }, { label: "Insights" }]}
-      eyebrow="Insights"
-      title="Field notes from the teams doing the work."
-      lede="Perspectives, guides and explainers on architecture, data, AI and engineering, written by the people who build and run enterprise platforms."
-      points={["Perspectives", "Guides", "Field notes"]}
+      eyebrow={hero.eyebrow}
+      title={hero.title}
+      lede={hero.lede}
+      points={hero.points}
       primary={{ label: "Read the articles", href: "#articles" }}
       secondary={CTA.primary}
-      photo={INSIGHT_PHOTOS[0]}
+      photo={hero.photo?.src}
+      photoAlt={hero.photo?.alt}
+      photoPosition={hero.photo?.position}
     />
   </Section>
 

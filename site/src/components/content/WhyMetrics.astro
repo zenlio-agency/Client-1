@@ -7,7 +7,8 @@ import ButtonWrapper from "@/components/wrapper/ButtonWrapper.astro";
 import Icon from "@/components/media/Icon.astro";
 import arrow from "@/assets/icons/ui-arrow.svg";
 import check from "@/assets/icons/check.svg";
-import { COMPANY_FIGURES, tbc } from "@/data/site.ts";
+import { tbc } from "@/data/site.ts";
+import { home } from "@/sanity/content.ts";
 
 interface Props {
   /** Set to `false` to omit the component. */
@@ -26,33 +27,17 @@ interface Props {
   standards?: { title: string; items: string[] };
 }
 
+/* By default, the homepage's "Why ManyaIT" panel as edited in Sanity. */
+const { why, stats: figures, standards: practices } = await home();
+
 const {
   render = true,
-  eyebrow = "Why ManyaIT",
-  heading = "Data-led outcomes, engineered end to end.",
-  lede = "From data foundations to production-grade AI, we architect, implement and scale the platforms your Global Capability Center runs on. Specialist capacity aligned to your technology landscape, governed delivery and a defined build-operate-transfer path to full ownership.",
-  /* TODO: the Testimonials destination is to be confirmed. */
-  buttons = [
-    { label: "Explore Careers", href: "/careers" },
-    { label: "Testimonials", href: "#" },
-  ],
-  stats = [
-    COMPANY_FIGURES.programs,
-    COMPANY_FIGURES.products,
-    COMPANY_FIGURES.onSchedule,
-    COMPANY_FIGURES.testCoverage,
-    COMPANY_FIGURES.enterprises,
-    COMPANY_FIGURES.years,
-  ],
-  standards = {
-    title: "Engineering standards on every program",
-    items: [
-      "Peer-reviewed code",
-      "Data quality checks in every pipeline",
-      "Security and quality gates",
-      "CI/CD on every release",
-    ],
-  },
+  eyebrow = why.eyebrow,
+  heading = why.heading,
+  lede = why.statement,
+  buttons = why.buttons,
+  stats = figures,
+  standards = practices,
 } = Astro.props;
 
 /* The number is set large; any sign or unit around it ("<", "+", "%",

@@ -14,6 +14,8 @@ type Props = HTMLAttributes<"div"> & {
   photo?: string;
   /** Photo alt text. Omit for decorative photos. */
   photoAlt?: string;
+  /** The photo's focal point, as a CSS `object-position`. */
+  photoPosition?: string;
   /** Ground when there is no photo. */
   tone?: "photo" | "brand" | "ink";
 };
@@ -23,6 +25,7 @@ const {
   href,
   photo,
   photoAlt = "",
+  photoPosition,
   tone = photo ? "photo" : "ink",
   class: className,
   ...rest
@@ -48,6 +51,7 @@ const Tag = href ? "a" : "div";
           class="photo-tile_photo"
           src={photo}
           alt={photoAlt}
+          style={photoPosition && `object-position: ${photoPosition}`}
           loading="lazy"
           decoding="async"
         />
