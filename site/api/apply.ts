@@ -200,50 +200,27 @@ async function fileApplication(
   if (!contact?.id) throw new Error("HighLevel returned no contact id.");
 
   const upload = new FormData();
-  upload.append("file", cv, cv.name);
-  upload.append("hosted", "false");
-  upload.append("name", cv.name);
+  
+  // The guide specifies formatting the key exactly as <custom_field_id>_<random_id>
+  // We use a simple alphanumeric random string (e.g. resume01 style) instead of a UUID with hyphens
+  // to prevent potential 500 server errors on GoHighLevel's end.
+  const randomId = Math.random().toString(36).substring(2, 10);
+  const fileKey = `${cvFieldId}_${randomId}`;
+  
+  upload.append(fileKey, cv, cv.name);
 
-  let uploadRes: any = {};
+  const uploadQuery = new URLSearchParams({
+    contactId: contact.id,
+    locationId: settings.locationId,
+  });
+
   try {
-    uploadRes = await call("POST", "/medias/upload-file", {
+    await call("POST", `/forms/upload-custom-files?${uploadQuery}`, {
       body: upload,
     });
   } catch (uploadError) {
-    console.warn("Media upload failed:", uploadError);
-  }
-
-  const cvUrl = uploadRes.url;
-
-  if (cvUrl) {
-    try {
-      await call("PUT", `/contacts/${contact.id}`, {
-        json: {
-          customFields: [
-            {
-              id: cvFieldId,
-              key: settings.cvFieldKey,
-              field_value: [
-                {
-                  url: cvUrl,
-                  deleted: false,
-                  meta: {
-                    fieldname: "file",
-                    originalname: cv.name,
-                    encoding: "7bit",
-                    mimetype: cv.type,
-                    size: cv.size,
-                    url: cvUrl,
-                  }
-                }
-              ],
-            },
-          ],
-        },
-      });
-    } catch (putError) {
-      console.warn("Failed to explicitly map CV metadata to contact custom field:", putError);
-    }
+    // If it fails, we throw the error so the frontend can display it in the network tab.
+    throw uploadError;
   }
 
   /* Tags go through their own call, which adds to the contact's tags; the
