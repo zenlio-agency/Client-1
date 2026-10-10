@@ -195,6 +195,17 @@ async function fileApplication(
       email: fields.email,
       phone: fields.phone,
       source: "Careers application",
+      customFields: [
+        { id: "role_applied_for", value: fields["role-title"] || "" },
+        { id: "current_location", value: fields.location || "" },
+        { id: "linkedin_profile", value: fields.linkedin || "" },
+        { id: "years_of_experience", value: fields.experience || "" },
+        { id: "availability_to_start", value: fields.availability || "" },
+        { id: "portfolio_or_github_link", value: fields.portfolio || "" },
+        { id: "additional_information", value: fields.note || "" },
+        { id: "work_authorization", value: fields.authorized || "" },
+        { id: "visa_sponsorship_required", value: fields.sponsorship || "" },
+      ],
     },
   })) as { contact?: { id?: string } };
   if (!contact?.id) throw new Error("HighLevel returned no contact id.");
