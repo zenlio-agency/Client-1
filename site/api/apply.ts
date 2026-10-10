@@ -153,7 +153,7 @@ async function readApplication(form: FormData): Promise<Application> {
   fields["role-title"] ||= fields.role;
   fields["full-name"] = `${fields["first-name"]} ${fields["last-name"]}`;
 
-  const tags = ["careers application", `applied: ${fields["role-title"]}`];
+  const tags = ["careers application", "Career Form", `applied: ${fields["role-title"]}`];
   if (network) tags.push("talent network");
 
   return { fields, cv, tags };
